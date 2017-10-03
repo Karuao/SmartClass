@@ -1,8 +1,12 @@
 package team.qdu.smartclass.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.BundleCompat;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 
 /**
@@ -13,9 +17,37 @@ import team.qdu.smartclass.R;
 
 public class LoginActivity extends BaseActivity {
 
+    private EditText emailEdt;
+    private EditText passwordEdt;
+    private Button loginBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        initView();
+    }
+
+    //初始化View
+    private void initView() {
+        emailEdt = (EditText) findViewById(R.id.edt_email);
+        passwordEdt = (EditText) findViewById(R.id.edt_password);
+        loginBtn = (Button) findViewById(R.id.btn_login);
+    }
+
+    public void toLogin(View view) {
+        String email = emailEdt.getText().toString();
+        String password = passwordEdt.getText().toString();
+        this.appAction.login(email, password, new ActionCallbackListener<Void>() {
+            @Override
+            public void onSuccess(Void data) {
+                Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

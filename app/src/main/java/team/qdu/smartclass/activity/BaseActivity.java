@@ -2,13 +2,10 @@ package team.qdu.smartclass.activity;
 
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.BundleCompat;
-import android.support.v4.app.FragmentActivity;
 
+import team.qdu.core.AppAction;
 import team.qdu.smartclass.SApplication;
 
 /**
@@ -18,15 +15,18 @@ import team.qdu.smartclass.SApplication;
  */
 
 public abstract class BaseActivity extends Activity {
-    // 上下文实例
+    //上下文实例
     public Context context;
-    // 应用全局的实例
+    //应用全局的实例
     public SApplication application;
+    //核心层的Action实例
+    public AppAction appAction;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         context = getApplicationContext();
         application = (SApplication) this.getApplication();
+        appAction = application.getAppAction();
     }
 }
