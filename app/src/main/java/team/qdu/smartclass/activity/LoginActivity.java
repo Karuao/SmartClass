@@ -1,5 +1,6 @@
 package team.qdu.smartclass.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +16,7 @@ import team.qdu.smartclass.R;
  * Created by Rock on 2017/4/23.
  */
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends SBaseActivity {
 
     private EditText emailEdt;
     private EditText passwordEdt;
@@ -40,8 +41,9 @@ public class LoginActivity extends BaseActivity {
         String password = passwordEdt.getText().toString();
         this.appAction.login(email, password, new ActionCallbackListener<Void>() {
             @Override
-            public void onSuccess(Void data) {
-                Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
+            public void onSuccess(Void data, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
 
             @Override

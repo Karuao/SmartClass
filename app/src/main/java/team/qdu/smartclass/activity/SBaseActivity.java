@@ -14,7 +14,7 @@ import team.qdu.smartclass.SApplication;
  * Created by Rock on 2017/4/23.
  */
 
-public abstract class BaseActivity extends Activity {
+public abstract class SBaseActivity extends Activity {
     //上下文实例
     public Context context;
     //应用全局的实例

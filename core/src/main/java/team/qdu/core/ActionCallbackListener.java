@@ -11,7 +11,7 @@ public interface ActionCallbackListener<T> {
      *
      * @param data 返回的数据
      */
-    public void onSuccess(T data);
+    public void onSuccess(T data, String message);
 
     /**
      * 失败时调用

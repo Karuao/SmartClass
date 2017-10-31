@@ -54,6 +54,5 @@ public class ApiResponse<T> {
 
     public boolean isSuccess() {
         return event.equals("0");
-
     }
 }

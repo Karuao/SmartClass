@@ -52,7 +52,7 @@ public class AppActionImpl implements AppAction {
             protected  void onPostExecute(ApiResponse<Void> response) {
                 if (listener != null && response != null) {
                     if (response.isSuccess()) {
-                        listener.onSuccess(null);
+                        listener.onSuccess(null, response.getMsg());
                     } else {
                         listener.onFailure(response.getEvent(), response.getMsg());
                     }
