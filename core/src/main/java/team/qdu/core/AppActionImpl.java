@@ -28,16 +28,16 @@ public class AppActionImpl implements AppAction {
     public void login(final String email, final String password, final ActionCallbackListener<Void> listener) {
         //参数检查
         if (TextUtils.isEmpty(email)) {
-            if (listener != null) {
-                listener.onFailure(ErrorEvent.PARAM_NULL, "登录名为空");
+                if (listener != null) {
+                    listener.onFailure(ErrorEvent.PARAM_NULL, "登录名为空");
+                }
+                return;
             }
-            return;
-        }
-        if (TextUtils.isEmpty(password)) {
-            if (listener != null) {
-                listener.onFailure(ErrorEvent.PARAM_NULL, "密码为空");
-            }
-            return;
+            if (TextUtils.isEmpty(password)) {
+                if (listener != null) {
+                    listener.onFailure(ErrorEvent.PARAM_NULL, "密码为空");
+                }
+                return;
         }
 
         //请求Api

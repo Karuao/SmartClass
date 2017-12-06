@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
 
     <RelativeLayout
         android:id="@+id/rlayout_topbar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/topbar_height"
         android:background="@color/bg_rlayout_topbar">
 
         <TextView
@@ -17,27 +19,27 @@
             android:gravity="center"
             android:text="@string/title_class"
             android:textColor="@color/text_topbar"
-            android:textSize="18sp" />
+            android:textSize="@dimen/large_text" />
 
         <View
+            android:id="@+id/view_topbar_div"
             android:layout_width="match_parent"
-            android:layout_height="2px"
+            android:layout_height="@dimen/div_height"
             android:layout_alignParentBottom="true"
-            android:background="@color/div_white"
-            android:id="@+id/view" />
+            android:background="@color/div_white" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/view"></FrameLayout>
+            android:layout_alignTop="@+id/view_topbar_div"></FrameLayout>
     </RelativeLayout>
 
     <RadioGroup
         android:id="@+id/group_tabbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/tabbar_height"
         android:layout_alignParentBottom="true"
         android:background="@color/bg_white"
         android:orientation="horizontal">
@@ -58,7 +60,7 @@
     <View
         android:id="@+id/view_tabbar_div"
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="@dimen/div_height"
         android:layout_above="@id/group_tabbar"
         android:background="@color/div_white" />
 

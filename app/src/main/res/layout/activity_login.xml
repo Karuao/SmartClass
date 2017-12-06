@@ -3,30 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    tools:context=".activity.LoginActivity">
 
     <EditText
         android:id="@+id/edt_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.05"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/edt_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.05"
-        android:ems="10"
-        android:inputType="textPassword" />
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.05"
-        android:text="Login"
+        android:text="登陆"
         android:onClick="toLogin" />
 
 </LinearLayout>

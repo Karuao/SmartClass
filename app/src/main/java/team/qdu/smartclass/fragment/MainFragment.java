@@ -14,25 +14,16 @@ import team.qdu.smartclass.R;
 
 public class MainFragment extends SBaseFragment {
 
-    TextView contentTxt;
+    String content;
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        contentTxt = (TextView) getActivity().findViewById(R.id.txt_content);
-//    }
+    public MainFragment(String content) {
+        this.content = content;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        contentTxt = (TextView) getActivity().findViewById(R.id.txt_content);
+        ((TextView) view.findViewById(R.id.txt_content)).setText(content);
         return view;
-    }
-
-    public void setContent(String content) {
-//        if (contentTxt == null) {
-//            contentTxt = (TextView) getActivity().findViewById(R.id.txt_content);
-//        }
-        this.contentTxt.setText(content);
     }
 }

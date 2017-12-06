@@ -52,13 +52,11 @@ public class MainActivity extends SBaseActivity implements RadioGroup.OnCheckedC
                 }
                 //第一次初始化fg1后，添加到fragmentTransaction中，之后将隐藏对象显示
                 if (fg1 == null) {
-                    fg1 = new MainFragment();
+                    fg1 = new MainFragment("班课");
                     fragmentTransaction.add(R.id.frame_content, fg1);
                 } else {
                     fragmentTransaction.show(fg1);
                 }
-                fragmentTransaction.commit();
-                fg1.setContent("班课");
                 break;
             case R.id.rbtn_tab_me:
                 topbarTitleTxt.setText("我的");
@@ -66,15 +64,14 @@ public class MainActivity extends SBaseActivity implements RadioGroup.OnCheckedC
                     fragmentTransaction.hide(fg1);
                 }
                 if (fg2 == null) {
-                    fg2 = new MainFragment();
+                    fg2 = new MainFragment("我的");
 
                     fragmentTransaction.add(R.id.frame_content, fg2);
                 } else {
                     fragmentTransaction.show(fg2);
                 }
-                fragmentTransaction.commit();
-                fg2.setContent("我的");
                 break;
         }
+        fragmentTransaction.commit();
     }
 }
