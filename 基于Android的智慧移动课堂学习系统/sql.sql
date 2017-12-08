@@ -1,4 +1,4 @@
-create database smartclass;
+ create database smartclass;
 use smartclass;
 
 
