@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_centerVertical="true">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="25dp"
+            android:src="@drawable/back"/>
+
+    </RelativeLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/head2"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="8dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_box"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <EditText
+            android:id="@+id/edt_regId"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:ems="15"
+            android:hint="用户名"
+            android:textColorHint="@color/hint"
+            android:textCursorDrawable="@color/hint"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_box"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <EditText
+            android:id="@+id/edt_regPass"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:ems="15"
+            android:hint="密码"
+            android:textColorHint="@color/hint"
+            android:textCursorDrawable="@color/hint"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_box"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <EditText
+            android:id="@+id/edt_regPassConfirm"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:ems="15"
+            android:hint="确认密码"
+            android:textColorHint="@color/hint"
+            android:textCursorDrawable="@color/hint"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_box"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spin_question"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:entries="@array/user_question"
+            />
+
+        <EditText
+            android:id="@+id/edt_regAnswer"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/spin_question"
+            android:layout_marginTop="15dp"
+            android:background="@null"
+            android:ems="15"
+            android:hint="回答"
+            android:textColorHint="@color/hint"
+            android:textCursorDrawable="@color/hint"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal">
+
+        <CheckBox
+            android:id="@+id/chk_protocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:buttonTint="@color/title"
+            android:checked="false"
+            android:duplicateParentState="false"
+            android:text="已阅读并同意《用户协议》"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="221dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape_button"
+
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="注册"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+</LinearLayout>

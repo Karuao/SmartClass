@@ -9,4 +9,11 @@
     <dimen name="topbar_height">48dp</dimen>
     <dimen name="div_height">2dp</dimen>
     <dimen name="tabbar_height">56dp</dimen>
+
+    <string-array name="user_question">
+        <item>最爱的人是谁？</item>
+        <item>最难忘的一件事/东西？</item>
+        <item>最爱吃的食物？</item>
+        <item>最爱喝的饮料？</item>
+    </string-array>
 </resources>
