@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 
 /**
@@ -37,18 +39,18 @@ public class LoginActivity extends SBaseActivity {
     public void toLogin(View view) {
         String email = emailEdt.getText().toString();
         String password = passwordEdt.getText().toString();
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//        this.appAction.login(email, password, new ActionCallbackListener<Void>() {
-//            @Override
-//            public void onSuccess(Void data, String message) {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//            }
-//
-//            @Override
-//            public void onFailure(String errorEvent, String message) {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-//            }
-//        });
+//        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        this.appAction.login(email, password, new ActionCallbackListener<Void>() {
+            @Override
+            public void onSuccess(Void data, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
