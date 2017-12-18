@@ -23,7 +23,8 @@ import java.util.Map;
 public class HttpEngine {
 
     private final static String TAG = "HttpEngine";
-    private final static String SERVER_URL = "http://10.0.2.2:8080/login";
+    private final static String SERVER_URL = "http://10.0.2.2:8080";
+//    private final static String SERVER_URL = "http://192.168.42.230:8080/login";
     private final static String REQUEST_METHOD = "POST";
     private final static String ENCODE_TYPE = "UTF-8";
     private final static int TIME_OUT = 8000;
@@ -40,11 +41,11 @@ public class HttpEngine {
         return instance;
     }
 
-    public <T> T postHandle(Map<String, String> paramsMap, Type typeofT) throws IOException {
+    public <T> T postHandle(Map<String, String> paramsMap, Type typeofT,String urlTail) throws IOException {
         String data = joinParams(paramsMap);
         //打印出请求
         Log.i(TAG, "request: " + data);
-        HttpURLConnection connection = getConnection();
+        HttpURLConnection connection = getConnection(urlTail);
         connection.setRequestProperty("Content-Length", String.valueOf(data.getBytes().length));
         connection.connect();
         OutputStream os = connection.getOutputStream();
@@ -81,12 +82,12 @@ public class HttpEngine {
     }
 
     // 获取connection
-    private HttpURLConnection getConnection() {
+    private HttpURLConnection getConnection(String urlTail) {
         HttpURLConnection connection = null;
        //初始化connection
         try {
             //根据抵制创建URL对象
-            URL url = new URL(SERVER_URL);
+            URL url = new URL(SERVER_URL + urlTail);
             //根据URL对象打开连接
             connection = (HttpURLConnection) url.openConnection();
             //设置请求的方法
