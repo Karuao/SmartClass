@@ -1,4 +1,4 @@
-package team.qdu.api;
+package team.qdu.model;
 
 /**
  * Created by Rock on 2017/9/3.

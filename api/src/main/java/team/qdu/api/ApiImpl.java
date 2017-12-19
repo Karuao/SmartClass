@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import team.qdu.api.net.HttpEngine;
+import team.qdu.model.ApiResponse;
 
 /**
  * Created by Rock on 2017/9/3.
@@ -34,11 +35,13 @@ public class ApiImpl implements Api {
 
         Type type = new TypeToken<ApiResponse<Void>>(){}.getType();
         try {
-            return httpEngine.postHandle(paramMap, type);
+            return httpEngine.postHandle(paramMap, type, "/login");
         } catch (IOException e) {
             e.printStackTrace();
             Log.println(Log.DEBUG,"DEBUG",e.getMessage());
+            //返回连接服务器失败
             return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
         }
     }
+
 }
