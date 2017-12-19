@@ -26,7 +26,7 @@ public class LoginActivity extends SBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
+        initView();
     }
 
     //初始化View
