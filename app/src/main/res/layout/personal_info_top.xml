@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:id="@+id/personal_top"
+    android:layout_height="46dp"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/title"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:src="@drawable/head2"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="8dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="个人信息"
+                android:textSize="21sp"
+                android:textColor="@color/bg_white"
+                android:textStyle="normal"
+                android:layout_marginLeft="5dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_personal_set"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="设置"
+                android:textSize="18sp"
+                android:gravity="right"
+                android:layout_marginRight="10dp"
+                android:onClick="toSet"
+                android:textColor="@color/bg_white"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

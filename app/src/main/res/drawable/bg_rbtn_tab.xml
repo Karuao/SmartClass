@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true">
-        <shape>
-            <solid android:color="#FFC4C4C4" />
-        </shape>
-    </item>
     <item>
         <shape>
-            <solid android:color="@color/transparent" />
+            <solid android:color="#006edb" />
         </shape>
     </item>
 </selector>
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:startColor="#e6e6e6"
+        android:centerX="1"
+        android:centerColor="#f7f7f7"
+        android:type="linear"
+        android:angle="90"></gradient>
+</shape>

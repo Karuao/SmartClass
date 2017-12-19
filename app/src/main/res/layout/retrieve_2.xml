@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_centerVertical="true">
+    android:layout_height="match_parent"
+    android:layout_centerVertical="true"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:layout_marginLeft="25dp"
-            android:src="@drawable/back"/>
+            android:layout_marginTop="25dp"
+            android:onClick="toBack"
+            android:src="@drawable/back" />
 
     </RelativeLayout>
 
@@ -36,10 +35,9 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/shape_box"
         android:layout_gravity="center_horizontal"
-        >
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_box">
 
         <!--（口令信息应从数据库中获取，这里所列只做展示）-->
         <TextView
@@ -73,8 +71,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp">
 
         <Button
             android:id="@+id/btn_retrieve_2"
@@ -82,8 +80,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="@drawable/shape_button"
-
             android:gravity="center"
+            android:onClick="toNext_two"
             android:padding="2dp"
             android:text="下一步"
             android:textColor="#fff"

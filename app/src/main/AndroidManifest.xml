@@ -19,8 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity">
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.Retrieve_one"></activity>
+        <activity android:name=".activity.Retrieve_three"></activity>
+        <activity android:name=".activity.Retrieve_two"></activity>
+        <activity android:name=".activity.ChangeInfoActivity"></activity>
+        <activity android:name=".activity.SetActivity"></activity>
     </application>
 
 </manifest>

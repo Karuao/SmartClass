@@ -1,77 +1,159 @@
 package team.qdu.smartclass.activity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.fragment.MainFragment;
 
 /**
- * Created by 11602 on 2017/10/20.
+ * 主页
+ *
+ * Created by Rock on 2017/4/23.
  */
 
-public class MainActivity extends SBaseActivity implements RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends SBaseActivity implements View.OnClickListener {
 
-    //activity_main对象
-    private TextView topbarTitleTxt;
-    private RadioGroup tabbarGroup;
-    private RadioButton tabClassRbtn;
 
-    //Fragment对象
-    private MainFragment fg1, fg2, fg3, fg4;
-    private FragmentManager fragmentManager;
+    private ViewPager viewPager;
+
+    private PagerAdapter mAdapter;
+    private List<View> Views=new ArrayList<>();
+    //tab
+    private LinearLayout tabClass;
+    private LinearLayout tabUser;
+    private LinearLayout personal_top;
+    private ImageButton imgClass;
+    private ImageButton imgUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        fragmentManager = getFragmentManager();
-        topbarTitleTxt = (TextView) findViewById(R.id.txt_topbar_title);
-        //对tabbarGroup设置监听器
-        tabbarGroup = (RadioGroup) findViewById(R.id.group_tabbar);
-        tabbarGroup.setOnCheckedChangeListener(this);
-        //获取第一个单选按钮，并设置为选中状态
-        tabClassRbtn = (RadioButton) findViewById(R.id.rbtn_tab_class);
-        tabClassRbtn.setChecked(true);
+        setContentView(R.layout.mainpage);
+        initView();
+
+        initEvents();
     }
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //隐藏之前fragment,显示当前fragment
-        switch (checkedId) {
-            case R.id.rbtn_tab_class:
-                //设置顶部topbarTitleTxt文本
-                topbarTitleTxt.setText("班课");
-                if (fg2 != null) {
-                    fragmentTransaction.hide(fg2);
-                }
-                //第一次初始化fg1后，添加到fragmentTransaction中，之后将隐藏对象显示
-                if (fg1 == null) {
-                    fg1 = new MainFragment("班课");
-                    fragmentTransaction.add(R.id.frame_content, fg1);
-                } else {
-                    fragmentTransaction.show(fg1);
-                }
-                break;
-            case R.id.rbtn_tab_me:
-                topbarTitleTxt.setText("我的");
-                if (fg1 != null) {
-                    fragmentTransaction.hide(fg1);
-                }
-                if (fg2 == null) {
-                    fg2 = new MainFragment("我的");
+    private void initEvents() {
+        //点击效果
+        tabClass.setOnClickListener(this);
+        tabUser.setOnClickListener(this);
 
-                    fragmentTransaction.add(R.id.frame_content, fg2);
-                } else {
-                    fragmentTransaction.show(fg2);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                int currentItem = viewPager.getCurrentItem();
+                resetImg();
+                switch (currentItem){
+                    case 0:
+                        imgClass.setImageResource(R.drawable.class_select);
+                        break;
+                    case 1:
+                        imgUser.setImageResource(R.drawable.user_select);
+                        break;
+
                 }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    //初始化View
+    private void initView() {
+
+        //页面切换
+        viewPager =(ViewPager) findViewById(R.id.viewpager);
+        tabClass =(LinearLayout) findViewById(R.id.tab01);
+        tabUser =(LinearLayout) findViewById(R.id.tab02);
+
+        imgClass =(ImageButton) findViewById(R.id.class_img);
+        imgUser =(ImageButton) findViewById(R.id.user_img);
+
+        LayoutInflater mInflater=LayoutInflater.from(this);
+        View tab01=mInflater.inflate(R.layout.main_tab_01,null);
+        View tab02=mInflater.inflate(R.layout.main_tab_02,null);
+
+        Views.add(tab01);
+        Views.add(tab02);
+
+        mAdapter=new PagerAdapter() {
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                View view=Views.get(position);
+                container.addView(view);
+                return view;
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView(Views.get(position));
+
+            }
+
+            @Override
+            public int getCount() {
+                return Views.size();
+            }
+
+            @Override
+            public boolean isViewFromObject(View view, Object object) {
+                return view==object;
+            }
+        };
+
+        viewPager.setAdapter(mAdapter);
+
+        //
+    }
+
+
+
+    @Override
+    public void onClick(View view) {
+        resetImg();
+        switch (view.getId()){
+            case R.id.tab01:
+                imgClass.setImageResource(R.drawable.class_select);
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.tab02:
+                imgUser.setImageResource(R.drawable.user_select);
+                viewPager.setCurrentItem(1);
                 break;
         }
-        fragmentTransaction.commit();
+    }
+    //切换图片颜色
+    private void resetImg() {
+
+        imgClass.setImageResource(R.drawable.class_notselect);
+        imgUser.setImageResource(R.drawable.user_notselect);
+    }
+
+    public void toChangeInfo(View view) {
+        startActivity(new Intent(MainActivity.this, ChangeInfoActivity.class));
+    }
+
+    public void toSet(View view) {
+        startActivity(new Intent(MainActivity.this, SetActivity.class));
     }
 }
