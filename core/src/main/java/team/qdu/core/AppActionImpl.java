@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 import team.qdu.api.Api;
 import team.qdu.api.ApiImpl;
-import team.qdu.api.ApiResponse;
+import team.qdu.model.ApiResponse;
 
 /**
  * Created by Rock on 2017/9/5.

@@ -43,5 +43,4 @@ public class ApiImpl implements Api {
             return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
         }
     }
-
 }
