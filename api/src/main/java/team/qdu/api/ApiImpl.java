@@ -11,6 +11,7 @@ import java.util.Map;
 
 import team.qdu.api.net.HttpEngine;
 import team.qdu.model.ApiResponse;
+import team.qdu.model.User;
 
 /**
  * Created by Rock on 2017/9/3.
@@ -43,4 +44,21 @@ public class ApiImpl implements Api {
             return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
         }
     }
+
+    @Override
+    public ApiResponse<User> searchByAccount(String email) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("email",email);
+
+        Type type = new TypeToken<ApiResponse<User>>(){}.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/findPass_one");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG,"DEBUG",e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
 }
