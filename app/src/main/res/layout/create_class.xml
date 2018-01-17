@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:onClick="toBack"
+                    android:src="@drawable/back"/>
+
+            </RelativeLayout>
+
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/add_class_img"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="8dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-20dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="班课封面"
+                />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_box">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="班级"
+                    android:textSize="16sp"
+                    android:textColor="@color/bg_black"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+                    <EditText
+                        android:layout_width="200dp"
+                        android:layout_height="fill_parent"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:ems="15"
+                        android:textCursorDrawable="@color/bg_black"
+                        android:textSize="16sp"
+                        android:gravity="right"/>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_box">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="课程"
+                    android:textSize="16sp"
+                    android:textColor="@color/bg_black"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+                    <EditText
+                        android:layout_width="200dp"
+                        android:layout_height="fill_parent"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:ems="15"
+                        android:textCursorDrawable="@color/bg_black"
+                        android:textSize="16sp"
+                        android:gravity="right"/>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="221dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/shape_button"
+                    android:onClick="finishCreate"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="创建班课"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>
