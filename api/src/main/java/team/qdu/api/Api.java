@@ -1,6 +1,7 @@
 package team.qdu.api;
 
 import team.qdu.model.ApiResponse;
+import team.qdu.model.User;
 
 /**
  * Created by Rock on 2017/9/3.
@@ -19,4 +20,5 @@ public interface Api {
 
 
     public ApiResponse<Void> loginByApp(String loginName, String password);
+    public ApiResponse<User> searchByAccount(String account);
 }

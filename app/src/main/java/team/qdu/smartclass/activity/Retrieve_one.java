@@ -3,6 +3,11 @@ package team.qdu.smartclass.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import team.qdu.core.ActionCallbackListener;
+import team.qdu.model.User;
 import team.qdu.smartclass.R;
 
 /**
@@ -13,17 +18,38 @@ import team.qdu.smartclass.R;
 
 public class Retrieve_one extends SBaseActivity {
 
+    private EditText emailEdt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.retrieve_1);
+        initView();
+    }
 
+    public void initView() {
+        emailEdt = (EditText) findViewById(R.id.edt_retrieveId);
     }
 
 
     public void toNext_one(View view) {
-        startActivity(new Intent(Retrieve_one.this, Retrieve_two.class));
+        final String email = emailEdt.getText().toString();
+        this.appAction.checkAccount(email,new ActionCallbackListener<User>(){
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(User user, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Retrieve_one.this, Retrieve_two.class);
+                Bundle b1=new Bundle();
+                b1.putString("question",user.getSecurity_question());
+                intent.putExtras(b1);
+                startActivity(intent);
+            }
+        });
     }
 
     public void toBack(View view) {
