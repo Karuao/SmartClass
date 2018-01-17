@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:id="@+id/class_top"
+    android:layout_height="46dp"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/title"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:src="@drawable/head2"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="8dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="班课"
+                android:textSize="21sp"
+                android:textColor="@color/bg_white"
+                android:textStyle="normal"
+                android:layout_marginLeft="5dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.8"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageButton
+                android:id="@+id/iv_add_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="0dp"
+                android:onClick="toCreateList"
+                android:background="#00000000"
+                android:src="@drawable/add"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
