@@ -20,6 +20,7 @@ public interface Api {
 
 
     public ApiResponse<Void> loginByApp(String loginName, String password);
+    public ApiResponse<Void> registerByApp(String email, String password,String question,String answer);
     public ApiResponse<User> searchByAccount(String account);
     public ApiResponse<Void> updatePassword(int id,String newPass);
 }

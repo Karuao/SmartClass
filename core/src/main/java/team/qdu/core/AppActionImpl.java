@@ -64,6 +64,58 @@ public class AppActionImpl implements AppAction {
 
     //找回密码时检验账号是否存在
     @Override
+    public void register(final String email, final String password,final String passwordConfirm, final String question,final String answer,final boolean check,final ActionCallbackListener<Void> listener) {
+        //参数检查
+        if (TextUtils.isEmpty(email)) {
+            if (listener != null) {
+                listener.onFailure(ErrorEvent.PARAM_NULL, "登录名为空");
+            }
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            if (listener != null) {
+                listener.onFailure(ErrorEvent.PARAM_NULL, "密码为空");
+            }
+            return;
+        }
+        if(!password.equals(passwordConfirm)){
+            listener.onFailure(ErrorEvent.PARAM_NULL, "请确认密码一致");
+            return;
+        }
+        if (TextUtils.isEmpty(answer)) {
+            if (listener != null) {
+                listener.onFailure(ErrorEvent.PARAM_NULL, "回答为空");
+            }
+            return;
+        }
+        if (!check) {
+            listener.onFailure(ErrorEvent.PARAM_NULL, "请点击同意协议");
+            return;
+        }
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return api.registerByApp(email, password,question,answer);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (listener != null && response != null) {
+                    if (response.isSuccess()) {
+                        listener.onSuccess(null, response.getMsg());
+                    } else {
+                        listener.onFailure(response.getEvent(), response.getMsg());
+                    }
+                }
+            }
+        }.execute();
+    }
+
+
+
+
+    @Override
     public void checkAccount(final String account, final ActionCallbackListener<User> listener) {
         //判断是否为空
         if (TextUtils.isEmpty(account)) {

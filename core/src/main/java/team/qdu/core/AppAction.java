@@ -16,6 +16,7 @@ public interface AppAction {
      * @param listener  回调监听器
      */
     public void login(String loginName, String password, ActionCallbackListener<Void> listener);
+    public void register(String email, String password, String passwordConfirm,String question,String answer,boolean check,ActionCallbackListener<Void> actionCallbackListener);
     public void checkAccount(String account, ActionCallbackListener<User> listener);
     public void checkSecurityAnswer(String inputAnswer,String answer,ActionCallbackListener<Void> listener);
     public void modifyPass(String newPass,String newPassConfirm,int userId,ActionCallbackListener<Void> listener);
