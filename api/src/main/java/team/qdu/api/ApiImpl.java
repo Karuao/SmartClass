@@ -46,6 +46,25 @@ public class ApiImpl implements Api {
     }
 
     @Override
+    public ApiResponse<Void> registerByApp(String email, String password,String question, String answer) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("email", email);
+        paramMap.put("password", password);
+        paramMap.put("question",question);
+        paramMap.put("answer",answer);
+
+        Type type = new TypeToken<ApiResponse<Void>>(){}.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/register");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG,"DEBUG",e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
     public ApiResponse<User> searchByAccount(String email) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("email",email);
