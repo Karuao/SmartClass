@@ -52,7 +52,7 @@ public class ApiImpl implements Api {
 
         Type type = new TypeToken<ApiResponse<User>>(){}.getType();
         try {
-            return httpEngine.postHandle(paramMap, type, "/findPass_one");
+            return httpEngine.postHandle(paramMap, type, "/findPassOne");
         } catch (IOException e) {
             e.printStackTrace();
             Log.println(Log.DEBUG,"DEBUG",e.getMessage());
@@ -61,4 +61,19 @@ public class ApiImpl implements Api {
         }
     }
 
+    @Override
+    public ApiResponse<Void> updatePassword(int id,String newPass) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("id",Integer.toString(id));
+        paramMap.put("newPass",newPass);
+        Type type = new TypeToken<ApiResponse<Void>>(){}.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/updatePass");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG,"DEBUG",e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
 }

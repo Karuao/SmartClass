@@ -41,7 +41,29 @@ public class Retrieve_two extends SBaseActivity {
     }
 
     public void toNext_two(View view) {
-        startActivity(new Intent(Retrieve_two.this, Retrieve_three.class));
+        final String inputAnswer = answerEdt.getText().toString();
+        Intent intent3=getIntent();
+        Bundle b3=intent3.getExtras();
+        String answer=b3.getString("answer");
+        Intent intent4=getIntent();
+        Bundle b4=intent4.getExtras();
+        final int id=b4.getInt("id");
+        this.appAction.checkSecurityAnswer(inputAnswer,answer,new ActionCallbackListener<Void>(){
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(Void data, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Retrieve_two.this, Retrieve_three.class);
+                Bundle b5=new Bundle();
+                b5.putInt("id",id);
+                intent.putExtras(b5);
+                startActivity(intent);
+            }
+        });
     }
 
     public void toBack(View view) {

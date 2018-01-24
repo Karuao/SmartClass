@@ -64,7 +64,8 @@
             android:hint="请输入密保口令"
             android:textColorHint="@color/hint"
             android:textCursorDrawable="@color/hint"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:maxLength="20"/>
 
     </RelativeLayout>
 

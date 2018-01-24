@@ -38,14 +38,18 @@ public class LoginActivity extends SBaseActivity {
     }
 
     public void toLogin(View view) {
-        String email = emailEdt.getText().toString();
+        final String email = emailEdt.getText().toString();
         String password = passwordEdt.getText().toString();
 //        startActivity(new Intent(LoginActivity.this, MainActivity.class));
         this.appAction.login(email, password, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+                Bundle b1=new Bundle();
+                b1.putString("account",email);
+                intent.putExtras(b1);
+                startActivity(intent);
             }
 
             @Override

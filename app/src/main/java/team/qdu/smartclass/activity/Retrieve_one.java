@@ -45,8 +45,14 @@ public class Retrieve_one extends SBaseActivity {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Retrieve_one.this, Retrieve_two.class);
                 Bundle b1=new Bundle();
+                Bundle b2=new Bundle();
+                Bundle b3=new Bundle();
                 b1.putString("question",user.getSecurity_question());
+                b2.putString("answer",user.getSecurity_answer());
+                b3.putInt("id",user.getUser_id());
                 intent.putExtras(b1);
+                intent.putExtras(b2);
+                intent.putExtras(b3);
                 startActivity(intent);
             }
         });

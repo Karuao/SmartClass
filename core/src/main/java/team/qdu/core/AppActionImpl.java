@@ -62,6 +62,7 @@ public class AppActionImpl implements AppAction {
         }.execute();
     }
 
+    //找回密码时检验账号是否存在
     @Override
     public void checkAccount(final String account, final ActionCallbackListener<User> listener) {
         //判断是否为空
@@ -92,4 +93,59 @@ public class AppActionImpl implements AppAction {
         }.execute();
     }
 
-}
+    //判断密保问题的答案是否正确
+    @Override
+    public void checkSecurityAnswer(final String inputAnswer,final String answer, final ActionCallbackListener listener) {
+        //判断是否为空
+        if (TextUtils.isEmpty(inputAnswer)) {
+            if (listener != null) {
+                listener.onFailure(ErrorEvent.PARAM_NULL, "请输入答案");
+            }
+            return;
+        }else{
+            if(inputAnswer.equals(answer)){
+                listener.onSuccess(null,"验证成功");
+            }else{
+                listener.onFailure(ErrorEvent.PARAM_NULL, "验证失败");
+            }
+        }
+    }
+
+    @Override
+    public void modifyPass(final String pass,final String passConfirm,final int userId, final ActionCallbackListener<Void> listener) {
+        //判断是否为空
+        if (TextUtils.isEmpty(pass)) {
+            if (listener != null) {
+                listener.onFailure(ErrorEvent.PARAM_NULL, "请输入新密码");
+                return;
+            }
+        }
+        if (TextUtils.isEmpty(passConfirm)) {
+            if (listener != null) {
+                listener.onFailure(ErrorEvent.PARAM_NULL, "请再次确认新密码");
+            }
+        }else if(pass.equals(passConfirm)){
+            //请求Api
+            new AsyncTask<Void, Void, ApiResponse<Void>>() {
+                @Override
+                protected ApiResponse<Void> doInBackground(Void... params) {
+                    return api.updatePassword(userId,passConfirm);
+                }
+
+                @Override
+                protected void onPostExecute(ApiResponse<Void> response) {
+                    if (listener != null && response != null) {
+                        if (response.isSuccess()) {
+                            listener.onSuccess(null, response.getMsg());
+                        } else {
+                            listener.onFailure(response.getEvent(), response.getMsg());
+                        }
+                    }
+                }
+            }.execute();
+            }else{
+            listener.onFailure(ErrorEvent.PARAM_NULL, "两次请输入相同的密码");
+            }
+        }
+    }
+

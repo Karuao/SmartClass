@@ -21,4 +21,5 @@ public interface Api {
 
     public ApiResponse<Void> loginByApp(String loginName, String password);
     public ApiResponse<User> searchByAccount(String account);
+    public ApiResponse<Void> updatePassword(int id,String newPass);
 }

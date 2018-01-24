@@ -49,7 +49,8 @@
             android:hint="请重新输入密码"
             android:textColorHint="@color/hint"
             android:textCursorDrawable="@color/hint"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:maxLength="20"/>
 
     </RelativeLayout>
 
@@ -70,7 +71,8 @@
             android:hint="确认密码"
             android:textColorHint="@color/hint"
             android:textCursorDrawable="@color/hint"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:maxLength="20"/>
 
     </RelativeLayout>
 

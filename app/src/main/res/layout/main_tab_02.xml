@@ -44,11 +44,13 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
+
                     <TextView
+                        android:id="@+id/userId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="登录用户"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 
@@ -73,11 +75,13 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
+
                     <TextView
+                        android:id="@+id/userName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="null"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 
@@ -102,11 +106,13 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
+
                     <TextView
+                        android:id="@+id/userGender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="null"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 
@@ -130,11 +136,13 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
+
                     <TextView
+                        android:id="@+id/userSchool"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="null"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 
@@ -159,11 +167,13 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
+
                     <TextView
+                        android:id="@+id/userInstitute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="null"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -188,11 +198,13 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:layout_marginLeft="80dp">
+
                     <TextView
+                        android:id="@+id/userMotto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="null"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 

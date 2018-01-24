@@ -17,4 +17,6 @@ public interface AppAction {
      */
     public void login(String loginName, String password, ActionCallbackListener<Void> listener);
     public void checkAccount(String account, ActionCallbackListener<User> listener);
+    public void checkSecurityAnswer(String inputAnswer,String answer,ActionCallbackListener<Void> listener);
+    public void modifyPass(String newPass,String newPassConfirm,int userId,ActionCallbackListener<Void> listener);
 }
