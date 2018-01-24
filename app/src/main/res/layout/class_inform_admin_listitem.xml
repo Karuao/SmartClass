@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--管理员消息的listviewitem-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_class_inform_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:text="发布时间"
+        android:textColor="@color/bg_black"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="15dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_class_inform_people"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:text="查阅人数"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/hinter"
+        android:layout_marginRight="15dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_class_inform_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textSize="16sp"
+        android:width="120dp"
+        android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        android:layout_below="@+id/tv_class_inform_time"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textColor="@color/hinter"/>
+
+
+
+
+
+</RelativeLayout>

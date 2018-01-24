@@ -19,12 +19,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.ClassMainActivity"></activity>
         <activity android:name=".activity.RegisterActivity"></activity>
-        <activity android:name=".activity.Retrieve_one"></activity>
-        <activity android:name=".activity.Retrieve_three"></activity>
-        <activity android:name=".activity.Retrieve_two"></activity>
+        <activity android:name=".activity.RetrieveOneActivity"></activity>
+        <activity android:name=".activity.RetrieveThreeActivity"></activity>
+        <activity android:name=".activity.RetrieveTwoActivity"></activity>
         <activity android:name=".activity.ChangeInfoActivity"></activity>
         <activity android:name=".activity.SetActivity"></activity>
+        <activity android:name=".activity.CreateClassActivity"></activity>
+        <activity android:name=".activity.TestActivity"></activity>
+        <activity android:name=".activity.SigninActivity"></activity>
+        <activity android:name=".activity.ClassHomeworkMainActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,51 @@
+<!--签到时间的lsitviewitem-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="3dp">
+
+
+    <TextView
+        android:id="@+id/tv_class_sign_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:singleLine="true"
+        android:text="考勤时间"
+        android:textColor="#444"
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:id="@+id/tv_class_membernum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_class_sign_time"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:text="签到时间"
+        android:textColor="#898989"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
+        <TextView
+            android:id="@+id/tv_class_sign_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:text="考勤状态"
+            android:textColor="@color/text_yellow"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

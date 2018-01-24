@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--已查阅学生或未查阅学生的listviewitem-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_white"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_class_copy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="学生姓名"
+        android:textColor="@color/bg_black"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="15dp"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="201540704891"
+        android:textSize="18sp"
+        android:textColor="@color/bg_black"
+        />
+
+
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<!--班课作业页面的二级导航栏-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="vertical" >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal" >
+
+
+        <LinearLayout
+            android:id="@+id/ll_class_homework_underway"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+
+            <TextView
+                android:id="@+id/tv_class_homework_underway"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="进行中"
+                android:textColor="@color/classbottom" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_class_homework_finish"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+
+            <TextView
+                android:id="@+id/tv_class_homework_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已结束"
+                android:textColor="@color/classbottom" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View  android:layout_height="2px"
+        android:layout_width="match_parent"
+        android:background="#d6d6d6"
+        />
+</LinearLayout>

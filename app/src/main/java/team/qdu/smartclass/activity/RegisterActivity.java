@@ -14,12 +14,13 @@ import team.qdu.smartclass.R;
 
 /**
  * 注册页面
- *
+ * <p>
  * Created by Rock on 2017/4/23.
  */
 
 public class RegisterActivity extends SBaseActivity {
-    EditText emailEdt;
+
+    EditText accountEdt;
     EditText passwordEdt;
     EditText passwordEdtConfirm;
     AppCompatSpinner spinQues;
@@ -27,38 +28,33 @@ public class RegisterActivity extends SBaseActivity {
     CheckBox checkEdt;
     Button registerBtn;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
         initView();
-
     }
+
     private void initView() {
-        emailEdt = (EditText) findViewById(R.id.edt_regId);
+        accountEdt = (EditText) findViewById(R.id.edt_regId);
         passwordEdt = (EditText) findViewById(R.id.edt_regPass);
-        passwordEdtConfirm= (EditText) findViewById(R.id.edt_regPassConfirm);
-        spinQues= (AppCompatSpinner) findViewById(R.id.spin_question);
-        ansEdt= (EditText) findViewById(R.id.edt_regAnswer);
-        checkEdt= (CheckBox) findViewById(R.id.chk_protocol);
-        registerBtn= (Button) findViewById(R.id.btn_register);
+        passwordEdtConfirm = (EditText) findViewById(R.id.edt_regPassConfirm);
+        spinQues = (AppCompatSpinner) findViewById(R.id.spin_question);
+        ansEdt = (EditText) findViewById(R.id.edt_regAnswer);
+        checkEdt = (CheckBox) findViewById(R.id.chk_protocol);
+        registerBtn = (Button) findViewById(R.id.btn_register);
     }
 
 
     public void toRegister(View view) {
-        String email=emailEdt.getText().toString();
-        String password=passwordEdt.getText().toString();
-        String  passwordConfirm=passwordEdtConfirm.getText().toString();
-        String  question=spinQues.getSelectedItem().toString();
-        boolean check=checkEdt.isChecked();
-        String answer=ansEdt.getText().toString();
+        String account = accountEdt.getText().toString();
+        String password = passwordEdt.getText().toString();
+        String passwordConfirm = passwordEdtConfirm.getText().toString();
+        String question = spinQues.getSelectedItem().toString();
+        boolean check = checkEdt.isChecked();
+        String answer = ansEdt.getText().toString();
 
-        this.appAction.register(email, password,passwordConfirm,question,answer,check,new ActionCallbackListener<Void>() {
-
-
+        this.userAppAction.register(account, password, passwordConfirm, question, answer, check, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -72,10 +68,7 @@ public class RegisterActivity extends SBaseActivity {
         });
     }
 
-
-    public void toBack(View view)
-    {
+    public void toBack(View view) {
         finish();
     }
-
 }

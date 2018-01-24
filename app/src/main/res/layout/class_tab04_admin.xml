@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--管理员的班课消息页面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <include android:id="@+id/top" layout="@layout/class_tab04_admin_top" />
+
+    <include android:id="@+id/top" layout="@layout/class_inform_admin_listitem" />
+</LinearLayout>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--管理员点击通知后显示的通知细节-->
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+
+    <include android:id="@+id/top" layout="@layout/class_tab01_top" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="通知"
+        android:layout_gravity="center"
+        android:textColor="@color/bg_black"
+        android:textSize="30sp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_class_inform_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加android:gravity=‘ android:layout_gravity=center’属性。
+（android:gravity用于设置View组件的对齐方式，而android:layout_gravity用于设置Container组件的对齐方式）
+比如把一组button放在一个Linearlayout里面，然后给该Linearlayout添加android:gravity=‘center’
+android:layout_gravity=。"
+        android:textColor="@color/bg_black"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#d6d6d6"
+        android:layout_marginTop="30dp"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/bg_white"
+        android:padding="8dp">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发布时间"
+            android:textSize="18sp"
+            android:textColor="@color/bg_black"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/bg_black"
+                android:text="2017-12-15"
+                android:textSize="18sp"
+                android:gravity="right"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#d6d6d6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#d6d6d6" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/bg_white"
+        android:padding="8dp">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查阅人数"
+            android:textSize="18sp"
+            android:textColor="@color/bg_black"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/classbottom"
+                android:text="18"
+                android:textSize="18sp"
+                android:layout_marginTop="-2dp"
+                android:gravity="right"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/right_goview_black"
+                />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#d6d6d6" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#d6d6d6" />
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/bg_white"
+        android:padding="8dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未查阅人数"
+            android:textSize="18sp"
+            android:textColor="@color/bg_black"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_yellow"
+                android:text="8"
+                android:textSize="18sp"
+                android:layout_marginTop="-2dp"
+                android:gravity="right"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/right_goview_black"
+                />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#d6d6d6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#d6d6d6" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="221dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape_button_warn"
+            android:onClick="toDeleteInform"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="删除通知"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            />
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
+
+    </ScrollView>

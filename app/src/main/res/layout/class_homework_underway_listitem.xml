@@ -1,0 +1,79 @@
+<!--正在进行的作业的listviewitem-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iv_class_homework"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/add_class_img" />
+
+    <TextView
+        android:id="@+id/tv_class_homework_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/iv_class_homework"
+        android:singleLine="true"
+        android:text="作业名"
+        android:textColor="#444"
+        android:textSize="18sp" />
+
+
+
+    <TextView
+        android:id="@+id/tv_class_homework_exp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_class_homework_name"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/iv_class_homework"
+        android:maxLines="2"
+        android:minLines="1"
+        android:text="经验值"
+        android:textColor="#898989"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_class_homework_people"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_class_homework_name"
+        android:layout_alignLeft="@+id/tv_class_homework_exp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/iv_class_homework"
+        android:maxLines="2"
+        android:minLines="1"
+        android:text="参与人数"
+        android:textColor="#898989"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
+
+        <TextView
+            android:id="@+id/tv_class_fileexp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/tv_class_homework_exp"
+            android:text="进行中"
+            android:textColor="@color/text_yellow"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

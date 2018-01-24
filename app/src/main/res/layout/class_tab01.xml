@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--对应班课界面的第一个页面————也就是班课资源页面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include android:id="@+id/top" layout="@layout/class_tab01_top" />
+
+    <include android:id="@+id/top" layout="@layout/class_resource_listitem" />
+</LinearLayout>

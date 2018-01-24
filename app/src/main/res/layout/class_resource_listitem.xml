@@ -1,0 +1,120 @@
+<!--班课资源的listviewitem-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iv_class_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/add_class_img" />
+
+    <TextView
+        android:id="@+id/tv_class_filename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/iv_class_file"
+        android:singleLine="true"
+        android:text="文件名"
+        android:textColor="#444"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_class_filetype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_class_filename"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/iv_class_file"
+        android:maxLines="2"
+        android:minLines="1"
+        android:text="文件类型"
+        android:textColor="#898989"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_class_filetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_class_filename"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/iv_class_file"
+        android:maxLines="2"
+        android:minLines="1"
+        android:text="发布时间"
+        android:textColor="#898989"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_class_filetype">
+
+        <TextView
+            android:id="@+id/tv_class_filesize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_class_filetype"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/tv_class_filetime"
+            android:maxLines="2"
+            android:minLines="1"
+            android:text="文件大小"
+            android:textColor="#898989"
+            android:textSize="12sp" />
+
+        <View
+            android:id="@+id/view_class_file"
+            android:layout_width="2dp"
+            android:layout_height="16dp"
+            android:layout_below="@+id/tv_class_filetype"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/tv_class_filesize"
+            android:background="#c4c4c4" />
+
+        <TextView
+            android:id="@+id/tv_class_fileexp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_class_filetype"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/view_class_file"
+            android:maxLines="2"
+            android:minLines="1"
+            android:text="经验"
+            android:textColor="#898989"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_class_filename">
+
+        <TextView
+            android:id="@+id/tv_class_filepeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:maxLines="2"
+            android:minLines="1"
+            android:text="人数"
+            android:textColor="#898989"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

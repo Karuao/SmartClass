@@ -12,19 +12,23 @@ import java.util.List;
 
 /**
  * Adapter抽象基类
- *
+ * <p>
  * Created by 11602 on 2017/10/19.
  */
 
 public abstract class SBaseAdapter<T> extends BaseAdapter {
 
     protected Context context;
-    protected LayoutInflater inflater;
+    protected LayoutInflater layoutInflater;
     protected List<T> itemList = new ArrayList<T>();
+
+//    public SBaseAdapter() {
+//
+//    }
 
     public SBaseAdapter(Context context) {
         this.context = context;
-        inflater = LayoutInflater.from(context);
+        layoutInflater = LayoutInflater.from(context);
     }
 
     /**

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--对应班课界面的第三个页面————也就是班课作业页面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include android:id="@+id/top" layout="@layout/class_tab01_top" />
+
+    <include android:id="@+id/top" layout="@layout/class_tab03_bottom" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/class_tab03_viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </android.support.v4.view.ViewPager>
+</LinearLayout>

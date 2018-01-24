@@ -12,13 +12,13 @@ import team.qdu.smartclass.R;
 
 /**
  * 登陆
- *
+ * <p>
  * Created by Rock on 2017/4/23.
  */
 
 public class LoginActivity extends SBaseActivity {
 
-    private EditText emailEdt;
+    private EditText accountEdt;
     private EditText passwordEdt;
     private Button loginBtn;
 
@@ -31,22 +31,22 @@ public class LoginActivity extends SBaseActivity {
 
     //初始化View
     private void initView() {
-        emailEdt = (EditText) findViewById(R.id.edt_id);
+        accountEdt = (EditText) findViewById(R.id.edt_id);
         passwordEdt = (EditText) findViewById(R.id.edt_pass);
         loginBtn = (Button) findViewById(R.id.btn_login);
     }
 
     public void toLogin(View view) {
-        final String email = emailEdt.getText().toString();
+        final String account = accountEdt.getText().toString();
         String password = passwordEdt.getText().toString();
 //        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        this.appAction.login(email, password, new ActionCallbackListener<Void>() {
+        this.userAppAction.login(account, password, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(LoginActivity.this, MainActivity.class);
-                Bundle b1=new Bundle();
-                b1.putString("account",email);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Bundle b1 = new Bundle();
+                b1.putString("account", account);
                 intent.putExtras(b1);
                 startActivity(intent);
             }
@@ -63,6 +63,6 @@ public class LoginActivity extends SBaseActivity {
     }
 
     public void toFindPass(View view) {
-        startActivity(new Intent(LoginActivity.this,Retrieve_one.class));
+        startActivity(new Intent(LoginActivity.this, RetrieveOneActivity.class));
     }
 }

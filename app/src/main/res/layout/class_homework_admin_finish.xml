@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--点击一个已经结束的作业后进入的页面-->
+<ScrollView android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout android:orientation="vertical"
+            android:id="@+id/class_top"
+            android:layout_height="45dp"
+            android:layout_width="match_parent">
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:background="@color/title"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="5"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+                    <ImageButton
+                        android:id="@+id/iv_class_top1_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:onClick="toBack"
+                        android:background="#00000000"
+                        android:src="@drawable/left_goback"/>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="30dp"
+                        android:layout_height="fill_parent"
+                        android:src="@drawable/head2"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="5dp"
+                        />
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="已结束作业"
+                        android:textSize="21sp"
+                        android:textColor="@color/bg_white"
+                        android:textStyle="normal"
+                        android:layout_marginLeft="5dp"
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/tv_class_homework_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:singleLine="true"
+                android:text="作业名"
+                android:textColor="#444"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_class_homework_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:width="120dp"
+                android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                android:layout_below="@+id/tv_class_homework_name"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/little_black"/>
+
+
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#d6d6d6" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+
+            <ImageView
+                android:id="@+id/iv_class_homework_admin_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/add_class_img" />
+
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#d6d6d6" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="已提交"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="人"
+                android:layout_marginRight="5dp"/>
+
+
+
+        </RelativeLayout>
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#d6d6d6" />
+
+        <include
+            layout="@layout/class_homework_admin_evaluate_evaluated_listitem"/>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#d6d6d6" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="未提交"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="人"
+                android:layout_marginRight="5dp"/>
+
+
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#d6d6d6" />
+
+        <include
+            layout="@layout/class_homework_admin_underway_notcommit_listitem"/>
+
+
+
+    </LinearLayout>
+
+</ScrollView>

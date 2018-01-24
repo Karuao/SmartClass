@@ -2,26 +2,35 @@ package team.qdu.smartclass;
 
 import android.app.Application;
 
-import team.qdu.core.AppAction;
-import team.qdu.core.AppActionImpl;
+import team.qdu.core.ClassAppAction;
+import team.qdu.core.ClassAppActionImpl;
+import team.qdu.core.UserAppAction;
+import team.qdu.core.UserAppActionImpl;
 
 /**
  * Application类，应用级别的操作都放这里
- *
+ * <p>
  * Created by Rock on 2017/4/23.
  */
 
 public class SApplication extends Application {
 
-    private AppAction appAction;
+    private UserAppAction userAppAction;
+
+    private ClassAppAction classAppAction;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        appAction = new AppActionImpl(this);
+        userAppAction = new UserAppActionImpl(this);
+        classAppAction = new ClassAppActionImpl(this);
     }
 
-    public AppAction getAppAction() {
-        return appAction;
+    public UserAppAction getUserAppAction() {
+        return userAppAction;
+    }
+
+    public ClassAppAction getClassAppAction() {
+        return classAppAction;
     }
 }
