@@ -1,0 +1,8 @@
+班课数据库表设计v1.3
+1.class_user（班课用户关系表）添加字段unread_information_num（未读消息数目），用来保存该班课下该用户有多少条消息未读
+2.新建inform_user(通知对应班课下用户表），用来保存班课下用户所有接受的通知信息
+3.inform（通知表）添加字段read_num(通知已读人数），用来保存该通知有多少学生已查阅
+4.class_user(班课用户关系表）添加字段if_in_class（用户是否在班课内），用户退出班课后修改该字段
+5.homework（作业表）添加字段homework_status、deadline
+6.homework_answer（学生提交作业表）添加字段class_id
+7.materail（教学资源表）删除字段if_publish、publish_date_time
