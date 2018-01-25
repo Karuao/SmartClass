@@ -84,9 +84,9 @@ public class UserApiImpl implements UserApi {
     }
 
     @Override
-    public ApiResponse<Void> updatePassword(int id, String newPass) {
+    public ApiResponse<Void> updatePassword(String account, String newPass) {
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("id", Integer.toString(id));
+        paramMap.put("account",account);
         paramMap.put("newPass", newPass);
         Type type = new TypeToken<ApiResponse<Void>>() {
         }.getType();

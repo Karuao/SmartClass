@@ -23,5 +23,8 @@ public interface UserAppAction {
 
     public void checkSecurityAnswer(String inputAnswer, String answer, ActionCallbackListener<Void> listener);
 
-    public void modifyPass(String newPass, String newPassConfirm, int userId, ActionCallbackListener<Void> listener);
+    public void modifyPass(String newPass, String newPassConfirm, String account, ActionCallbackListener<Void> listener);
+
+    //获得用户信息
+    public User getUserInfor(String account,ActionCallbackListener<User> listener);
 }

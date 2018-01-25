@@ -20,9 +20,9 @@ public class User implements Serializable {
 
     private Date birthday;
 
-    private Short university;
+    private String university;
 
-    private Short department;
+    private String department;
 
     private String if_show_closed_classes;
 
@@ -116,19 +116,19 @@ public class User implements Serializable {
         this.birthday = birthday;
     }
 
-    public Short getUniversity() {
+    public String getUniversity() {
         return university;
     }
 
-    public void setUniversity(Short university) {
+    public void setUniversity(String university) {
         this.university = university;
     }
 
-    public Short getDepartment() {
+    public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(Short department) {
+    public void setDepartment(String department) {
         this.department = department;
     }
 
