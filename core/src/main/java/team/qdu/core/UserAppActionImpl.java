@@ -9,6 +9,7 @@ import team.qdu.api.UserApiImpl;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.User;
 
+
 /**
  * Created by Rock on 2017/9/5.
  */
@@ -17,6 +18,7 @@ public class UserAppActionImpl implements UserAppAction {
 
     private Context context;
     private UserApi userApi;
+    private String reg= "^[a-z0-9A-Z]{6,18}$";
 
     public UserAppActionImpl(Context context) {
         this.context = context;
@@ -28,6 +30,14 @@ public class UserAppActionImpl implements UserAppAction {
         //参数检查
         if (TextUtils.isEmpty(account)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "登录名为空");
+            return;
+        }
+        if(!account.matches(reg) ){
+            listener.onFailure(ErrorEvent.PARAM_NULL, "登录名为6-18位字母或数字");
+            return;
+        }
+        if(!password.matches(reg)){
+            listener.onFailure(ErrorEvent.PARAM_NULL, "密码为6-18位字母或数字");
             return;
         }
         if (TextUtils.isEmpty(password)) {
@@ -64,8 +74,16 @@ public class UserAppActionImpl implements UserAppAction {
             listener.onFailure(ErrorEvent.PARAM_NULL, "登录名为空");
             return;
         }
+        if(!account.matches(reg) ){
+            listener.onFailure(ErrorEvent.PARAM_NULL, "登录名为6-18位字母或数字");
+            return;
+        }
         if (TextUtils.isEmpty(password)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "密码为空");
+            return;
+        }
+        if(!password.matches(reg)){
+            listener.onFailure(ErrorEvent.PARAM_NULL, "密码为6-18位字母或数字");
             return;
         }
         if (!password.equals(passwordConfirm)) {

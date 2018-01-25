@@ -118,13 +118,19 @@
             android:textSize="20sp"
             />
 
-        <ImageView
-            android:id="@+id/iv_showpass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="230dp"
-            android:src="@drawable/eye"/>
+        <ToggleButton
+            android:id="@+id/tb_password_visibility"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignEnd="@+id/edt_pass"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/edt_pass"
+            android:background="@drawable/button_visibility_bg"
+            android:minHeight="@null"
+            android:minWidth="@null"
+            android:text="@null"
+            android:textOff="@null"
+            android:textOn="@null" />
 
     </RelativeLayout>
 
