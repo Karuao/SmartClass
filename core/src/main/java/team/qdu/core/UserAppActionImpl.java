@@ -45,13 +45,11 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
-                if (listener != null && response != null) {
                     if (response.isSuccess()) {
                         listener.onSuccess(null, response.getMsg());
                     } else {
                         listener.onFailure(response.getEvent(), response.getMsg());
                     }
-                }
             }
         }.execute();
     }
@@ -89,13 +87,11 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
-                if (listener != null && response != null) {
                     if (response.isSuccess()) {
                         listener.onSuccess(null, response.getMsg());
                     } else {
                         listener.onFailure(response.getEvent(), response.getMsg());
                     }
-                }
             }
         }.execute();
     }
@@ -118,13 +114,11 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<User> response) {
-                if (listener != null && response != null) {
                     if (response.isSuccess()) {
                         listener.onSuccess(response.getObj(), response.getMsg());
                     } else {
                         listener.onFailure(response.getEvent(), response.getMsg());
                     }
-                }
             }
         }.execute();
     }
@@ -164,13 +158,11 @@ public class UserAppActionImpl implements UserAppAction {
 
                 @Override
                 protected void onPostExecute(ApiResponse<Void> response) {
-                    if (listener != null && response != null) {
                         if (response.isSuccess()) {
                             listener.onSuccess(null, response.getMsg());
                         } else {
                             listener.onFailure(response.getEvent(), response.getMsg());
                         }
-                    }
                 }
             }.execute();
         } else {
