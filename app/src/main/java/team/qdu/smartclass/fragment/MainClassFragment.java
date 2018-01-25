@@ -5,7 +5,9 @@ package team.qdu.smartclass.fragment;
  * Created by rjmgc on 2017/12/11.
  */
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +35,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(new ClassAdapter(getActivity(), getData()));
         listView.setOnItemClickListener(this);
+        System.out.println(getAccount());
         return view;
     }
 
@@ -51,5 +54,12 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         startActivity(new Intent(getContext(), ClassMainActivity.class));
+    }
+
+    //从SharedPreferences获取account
+    public String getAccount() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user",
+                Activity.MODE_PRIVATE);
+        return  sharedPreferences.getString("account", null);
     }
 }

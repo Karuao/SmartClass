@@ -1,6 +1,8 @@
 package team.qdu.smartclass.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +50,7 @@ public class LoginActivity extends SBaseActivity {
                 Bundle b1 = new Bundle();
                 b1.putString("account", account);
                 intent.putExtras(b1);
+                storeAccount(account);
                 startActivity(intent);
             }
 
@@ -64,5 +67,13 @@ public class LoginActivity extends SBaseActivity {
 
     public void toFindPass(View view) {
         startActivity(new Intent(LoginActivity.this, RetrieveOneActivity.class));
+    }
+
+    //将登录的用户的用户名存储进SharedPreferences
+    public void storeAccount(String account) {
+        SharedPreferences mySharedPreferences = getSharedPreferences("user", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString("account", account);
+        editor.commit();
     }
 }
