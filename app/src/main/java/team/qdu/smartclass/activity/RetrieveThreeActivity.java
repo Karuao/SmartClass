@@ -1,6 +1,8 @@
 package team.qdu.smartclass.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -35,10 +37,10 @@ public class RetrieveThreeActivity extends SBaseActivity {
     public void toNext_three(View view) {
         String pass=newPass.getText().toString();
         String passConfirm=newPassConfirm.getText().toString();
-        Intent intent1=getIntent();
-        Bundle b1=intent1.getExtras();
-        int id=b1.getInt("id");
-        this.userAppAction.modifyPass(pass,passConfirm,id,new ActionCallbackListener<Void>(){
+        SharedPreferences sharedPreferences = this.getSharedPreferences("user", Activity.MODE_PRIVATE);
+        String account = sharedPreferences.getString("account", null);
+        //修改用户密码
+        this.userAppAction.modifyPass(pass,passConfirm,account,new ActionCallbackListener<Void>(){
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

@@ -1,6 +1,8 @@
 package team.qdu.smartclass.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import team.qdu.core.ActionCallbackListener;
+import team.qdu.model.User;
 import team.qdu.smartclass.R;
 
 
@@ -31,34 +34,46 @@ public class RetrieveTwoActivity extends SBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.retrieve_2);
         initView();
-        Intent intent2 = getIntent();
-        Bundle b2 = intent2.getExtras();
-        String question = b2.getString("question");
-        quesView.setText(question);
-    }
+        SharedPreferences sharedPreferences = this.getSharedPreferences("user",Activity.MODE_PRIVATE);
+        String account = sharedPreferences.getString("account", null);
+        this.userAppAction.getUserInfor(account,new ActionCallbackListener<User>() {
+            @Override
+            public void onSuccess(User user, String message) {
+                quesView.setText(user.getSecurity_question());
+            }
 
-    public void toNext_two(View view) {
-        final String inputAnswer = answerEdt.getText().toString();
-        Intent intent3 = getIntent();
-        Bundle b3 = intent3.getExtras();
-        String answer = b3.getString("answer");
-        Intent intent4 = getIntent();
-        Bundle b4 = intent4.getExtras();
-        final int id = b4.getInt("id");
-        this.userAppAction.checkSecurityAnswer(inputAnswer, answer, new ActionCallbackListener<Void>() {
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
+        });
+    }
+
+    public void toNext_two(View view) {
+        final String inputAnswer = answerEdt.getText().toString();
+        SharedPreferences sharedPreferences = this.getSharedPreferences("user",Activity.MODE_PRIVATE);
+        String account = sharedPreferences.getString("account", null);
+        this.userAppAction.getUserInfor(account,new ActionCallbackListener<User>() {
+            @Override
+            public void onSuccess(User user, String message) {
+                String answer=user.getSecurity_answer();
+                userAppAction.checkSecurityAnswer(inputAnswer, answer, new ActionCallbackListener<Void>() {
+                    @Override
+                    public void onFailure(String errorEvent, String message) {
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(Void data, String message) {
+                        Intent intent = new Intent(RetrieveTwoActivity.this, RetrieveThreeActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
 
             @Override
-            public void onSuccess(Void data, String message) {
+            public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RetrieveTwoActivity.this, RetrieveThreeActivity.class);
-                Bundle b5 = new Bundle();
-                b5.putInt("id", id);
-                intent.putExtras(b5);
-                startActivity(intent);
             }
         });
     }

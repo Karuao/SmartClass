@@ -1,6 +1,8 @@
 package team.qdu.smartclass.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -41,20 +43,22 @@ public class RetrieveOneActivity extends SBaseActivity {
 
             @Override
             public void onSuccess(User user, String message) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RetrieveOneActivity.this, RetrieveTwoActivity.class);
                 Bundle b1=new Bundle();
-                Bundle b2=new Bundle();
-                Bundle b3=new Bundle();
-                b1.putString("question",user.getSecurity_question());
-                b2.putString("answer",user.getSecurity_answer());
-                b3.putInt("id",user.getUser_id());
+                b1.putString("account",user.getAccount());
                 intent.putExtras(b1);
-                intent.putExtras(b2);
-                intent.putExtras(b3);
+                storeAccount(user.getAccount());
                 startActivity(intent);
             }
         });
+    }
+
+    //将登录的用户的用户名存储进SharedPreferences
+    public void storeAccount(String account) {
+        SharedPreferences mySharedPreferences = getSharedPreferences("user", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString("account", account);
+        editor.commit();
     }
 
     public void toBack(View view) {

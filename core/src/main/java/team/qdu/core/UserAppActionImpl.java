@@ -55,18 +55,15 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
-                if (listener != null && response != null) {
                     if (response.isSuccess()) {
                         listener.onSuccess(null, response.getMsg());
                     } else {
                         listener.onFailure(response.getEvent(), response.getMsg());
                     }
-                }
             }
         }.execute();
     }
 
-    //找回密码时检验账号是否存在
     @Override
     public void register(final String account, final String password, final String passwordConfirm, final String question, final String answer, final boolean check, final ActionCallbackListener<Void> listener) {
         //参数检查
@@ -107,18 +104,17 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
-                if (listener != null && response != null) {
                     if (response.isSuccess()) {
                         listener.onSuccess(null, response.getMsg());
                     } else {
                         listener.onFailure(response.getEvent(), response.getMsg());
                     }
-                }
             }
         }.execute();
     }
 
 
+    //找回密码时判断该用户是否存在
     @Override
     public void checkAccount(final String account, final ActionCallbackListener<User> listener) {
         //判断是否为空
@@ -136,13 +132,11 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<User> response) {
-                if (listener != null && response != null) {
                     if (response.isSuccess()) {
                         listener.onSuccess(response.getObj(), response.getMsg());
                     } else {
                         listener.onFailure(response.getEvent(), response.getMsg());
                     }
-                }
             }
         }.execute();
     }
@@ -158,42 +152,67 @@ public class UserAppActionImpl implements UserAppAction {
             if (inputAnswer.equals(answer)) {
                 listener.onSuccess(null, "验证成功");
             } else {
-                listener.onFailure(ErrorEvent.PARAM_NULL, "验证失败");
+                listener.onFailure(ErrorEvent.PARAM_NULL, "请输入正确的答案");
             }
         }
     }
 
+    //找回密码时修改密码
     @Override
-    public void modifyPass(final String pass, final String passConfirm, final int userId, final ActionCallbackListener<Void> listener) {
+    public void modifyPass(final String pass, final String passConfirm, final String account, final ActionCallbackListener<Void> listener) {
         //判断是否为空
         if (TextUtils.isEmpty(pass)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "请输入新密码");
             return;
         }
-        if (TextUtils.isEmpty(passConfirm)) {
-            listener.onFailure(ErrorEvent.PARAM_NULL, "请再次确认新密码");
-        } else if (pass.equals(passConfirm)) {
-            //请求Api
-            new AsyncTask<Void, Void, ApiResponse<Void>>() {
-                @Override
-                protected ApiResponse<Void> doInBackground(Void... params) {
-                    return userApi.updatePassword(userId, passConfirm);
-                }
+        if(!pass.matches("^[a-z0-9A-Z]{6,18}$")){
+            listener.onFailure(ErrorEvent.PARAM_NULL, "密码为6-18位字母或数字");
+        }else {
+            if (TextUtils.isEmpty(passConfirm)) {
+                listener.onFailure(ErrorEvent.PARAM_NULL, "请再次确认新密码");
+            } else if (pass.equals(passConfirm)) {
+                //请求Api
+                new AsyncTask<Void, Void, ApiResponse<Void>>() {
+                    @Override
+                    protected ApiResponse<Void> doInBackground(Void... params) {
+                        return userApi.updatePassword(account, passConfirm);
+                    }
 
-                @Override
-                protected void onPostExecute(ApiResponse<Void> response) {
-                    if (listener != null && response != null) {
+                    @Override
+                    protected void onPostExecute(ApiResponse<Void> response) {
                         if (response.isSuccess()) {
                             listener.onSuccess(null, response.getMsg());
                         } else {
                             listener.onFailure(response.getEvent(), response.getMsg());
                         }
                     }
-                }
-            }.execute();
-        } else {
-            listener.onFailure(ErrorEvent.PARAM_NULL, "两次请输入相同的密码");
+                }.execute();
+            } else {
+                listener.onFailure(ErrorEvent.PARAM_NULL, "两次请输入相同的密码");
+            }
         }
+    }
+
+    //获取用户信息
+    @Override
+    public User getUserInfor(final String account, final ActionCallbackListener<User> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<User>>() {
+            @Override
+            protected ApiResponse<User> doInBackground(Void... params) {
+                return userApi.searchByAccount(account);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<User> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObj(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+        return null;
     }
 }
 
