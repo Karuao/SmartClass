@@ -51,7 +51,7 @@ public class RetrieveTwoActivity extends SBaseActivity {
 
     public void toNext_two(View view) {
         final String inputAnswer = answerEdt.getText().toString();
-        SharedPreferences sharedPreferences = this.getSharedPreferences("user",Activity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("user", Activity.MODE_PRIVATE);
         String account = sharedPreferences.getString("account", null);
         this.userAppAction.getUserInfor(account,new ActionCallbackListener<User>() {
             @Override

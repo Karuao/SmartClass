@@ -33,6 +33,7 @@
         tools:layout_editor_absoluteY="8dp" />
 
     <TextView
+        android:id="@+id/set_userAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -51,6 +52,7 @@
         android:layout_marginTop="50dp">
 
         <Button
+            android:id="@+id/logout"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
