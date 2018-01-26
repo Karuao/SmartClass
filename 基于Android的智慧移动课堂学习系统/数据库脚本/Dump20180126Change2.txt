@@ -1,0 +1,4 @@
+ALTER TABLE `smartclass`.`class` 
+ADD COLUMN `avatar` VARCHAR(32) NULL DEFAULT NULL AFTER `name`,
+ADD COLUMN `course` VARCHAR(32) NULL DEFAULT NULL AFTER `avatar`;
+
