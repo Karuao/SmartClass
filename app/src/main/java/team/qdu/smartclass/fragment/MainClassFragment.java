@@ -20,8 +20,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import team.qdu.core.ActionCallbackListener;
+import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.ClassMainActivity;
+import team.qdu.smartclass.activity.MainActivity;
 import team.qdu.smartclass.adapter.ClassAdapter;
 
 
@@ -35,7 +38,6 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(new ClassAdapter(getActivity(), getData()));
         listView.setOnItemClickListener(this);
-        System.out.println(getAccount());
         return view;
     }
 
@@ -51,15 +53,34 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
         return list;
     }
 
+    //获取登录用户加入的班课列表
+    private List<Map<String, Object>> getJoinedClasses() {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        MainActivity parentActivity = (MainActivity) getActivity();
+        parentActivity.classAppAction.getJoinedClasses(getUserId(), new ActionCallbackListener<List<Class>>() {
+            @Override
+            public void onSuccess(List<Class> data, String message) {
+
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+
+            }
+        });
+
+        return null;
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         startActivity(new Intent(getContext(), ClassMainActivity.class));
     }
 
-    //从SharedPreferences获取account
-    public String getAccount() {
+    //从SharedPreferences获取userId
+    public String getUserId() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user",
                 Activity.MODE_PRIVATE);
-        return  sharedPreferences.getString("account", null);
+        return  sharedPreferences.getString("userId", null);
     }
 }

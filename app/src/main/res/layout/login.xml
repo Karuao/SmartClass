@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--登录页面-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -118,19 +117,13 @@
             android:textSize="20sp"
             />
 
-        <ToggleButton
-            android:id="@+id/tb_password_visibility"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignEnd="@+id/edt_pass"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/edt_pass"
-            android:background="@drawable/button_visibility_bg"
-            android:minHeight="@null"
-            android:minWidth="@null"
-            android:text="@null"
-            android:textOff="@null"
-            android:textOn="@null" />
+        <ImageView
+            android:id="@+id/iv_showpass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="230dp"
+            android:src="@drawable/eye"/>
 
     </RelativeLayout>
 
@@ -144,10 +137,12 @@
             android:id="@+id/btn_login"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:background="@drawable/shape_button"
-            android:onClick="toLogin"
             android:gravity="center"
+            android:onClick="toLogin"
             android:padding="10dp"
             android:text="登录"
             android:textColor="#fff"

@@ -1,9 +1,14 @@
 package team.qdu.core;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
-import team.qdu.api.UserApi;
-import team.qdu.api.UserApiImpl;
+import java.util.List;
+
+import team.qdu.api.ClassApi;
+import team.qdu.api.ClassApiImpl;
+import team.qdu.model.ApiResponse;
+import team.qdu.model.Class;
 
 /**
  * Created by 11602 on 2018/1/24.
@@ -12,10 +17,31 @@ import team.qdu.api.UserApiImpl;
 public class ClassAppActionImpl implements ClassAppAction {
 
     private Context context;
-    private UserApi userApi;
+    private ClassApi classApi;
 
     public ClassAppActionImpl(Context context) {
         this.context = context;
-        this.userApi = new UserApiImpl();
+        this.classApi = new ClassApiImpl();
+    }
+
+    //获取登录用户加入的班课列表
+    @Override
+    public void getJoinedClasses(final String userId, final ActionCallbackListener<List<Class>> listener) {
+        new AsyncTask<Void, Void, ApiResponse<List<Class>>>() {
+
+            @Override
+            protected ApiResponse<List<Class>> doInBackground(Void... params) {
+                return classApi.getJoinedClasses(userId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<List<Class>> response) {
+                    if (response.isSuccess()) {
+                        listener.onSuccess(response.getObjList(), response.getMsg());
+                    } else {
+                        listener.onFailure(response.getEvent(), response.getMsg());
+                    }
+            }
+        }.execute();
     }
 }

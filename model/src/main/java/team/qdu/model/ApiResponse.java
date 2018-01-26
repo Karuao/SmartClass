@@ -20,13 +20,6 @@ public class ApiResponse<T> {
         this.msg = msg;
     }
 
-    public ApiResponse(T user,String event, String msg) {
-        this.event = event;
-        this.msg = msg;
-        this.obj = user;
-        this.objList = null;
-    }
-
     public String getEvent() {
         return event;
     }
