@@ -70,8 +70,7 @@ public class LoginActivity extends SBaseActivity {
                 Bundle b1 = new Bundle();
                 b1.putString("account", account);
                 intent.putExtras(b1);
-                editorMain.putBoolean("main",true);
-                editorMain.commit();
+                
                 storeAccount(account);
                 startActivity(intent);
             }
