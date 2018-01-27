@@ -33,12 +33,30 @@ public class ClassApiImpl implements ClassApi {
     @Override
     public ApiResponse<List<Class>> getJoinedClasses(String userId) {
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("UserId", userId);
+        paramMap.put("userId", userId);
 
         Type type = new TypeToken<ApiResponse<List<Class>>>() {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/getJoinedClasses");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<Void> jumpClass(String classId, String userId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("classId", classId);
+        paramMap.put("userId", userId);
+
+        Type type = new TypeToken<ApiResponse<Void>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/jumpClass");
         } catch (IOException e) {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());

@@ -26,7 +26,7 @@ public class UserAppActionImpl implements UserAppAction {
     }
 
     @Override
-    public void login(final String account, final String password, final ActionCallbackListener<Void> listener) {
+    public void login(final String account, final String password, final ActionCallbackListener<String> listener) {
         //参数检查
         if (TextUtils.isEmpty(account)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "登录名为空");
@@ -46,17 +46,17 @@ public class UserAppActionImpl implements UserAppAction {
         }
 
         //请求Api
-        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+        new AsyncTask<Void, Void, ApiResponse<String>>() {
 
             @Override
-            protected ApiResponse<Void> doInBackground(Void... params) {
+            protected ApiResponse<String> doInBackground(Void... params) {
                 return userApi.loginByApp(account, password);
             }
 
             @Override
-            protected void onPostExecute(ApiResponse<Void> response) {
+            protected void onPostExecute(ApiResponse<String> response) {
                     if (response.isSuccess()) {
-                        listener.onSuccess(null, response.getMsg());
+                        listener.onSuccess(response.getObj(), response.getMsg());
                     } else {
                         listener.onFailure(response.getEvent(), response.getMsg());
                     }

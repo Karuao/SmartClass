@@ -62,9 +62,9 @@ public class LoginActivity extends SBaseActivity {
         final String account = accountEdt.getText().toString();
         String password = passwordEdt.getText().toString();
 //        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        this.userAppAction.login(account, password, new ActionCallbackListener<Void>() {
+        this.userAppAction.login(account, password, new ActionCallbackListener<String>() {
             @Override
-            public void onSuccess(Void data, String message) {
+            public void onSuccess(String data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 Bundle b1 = new Bundle();
@@ -72,7 +72,7 @@ public class LoginActivity extends SBaseActivity {
                 intent.putExtras(b1);
                 editorMain.putBoolean("main",true);
                 editorMain.commit();
-                storeAccount(account);
+                storeUserIdAndAccount(data, account);
                 startActivity(intent);
             }
 
@@ -109,11 +109,11 @@ public class LoginActivity extends SBaseActivity {
         }
     }
     //将登录的用户的用户名存储进SharedPreferences
-    public void storeAccount(String account) {
+    public void storeUserIdAndAccount(String userId, String account) {
         SharedPreferences mySharedPreferences = getSharedPreferences("user", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
         editor.putString("account", account);
-        editor.putString("userId", "4");
+        editor.putString("userId", userId);
         editor.commit();
     }
 }

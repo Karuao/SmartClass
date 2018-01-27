@@ -3,38 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    >
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_class_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/img_class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/add_class_img"
         android:layout_marginLeft="5dp"
-        />
+        android:src="@drawable/add_class_img" />
+
     <TextView
         android:id="@+id/titleTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/img_class"
         android:singleLine="true"
         android:text="课程名"
         android:textColor="#444"
-        android:textSize="18sp"
-        android:layout_toRightOf="@+id/img_class"
-        android:layout_marginLeft="15dp"/>
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_classname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleTv"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/img_class"
         android:maxLines="2"
         android:minLines="1"
-        android:layout_toRightOf="@+id/img_class"
         android:text="班级"
         android:textColor="#898989"
-        android:layout_marginLeft="15dp"
         android:textSize="15sp" />
 
     <TextView
@@ -42,15 +47,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleTv"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/img_class"
         android:maxLines="2"
         android:minLines="1"
-        android:layout_toRightOf="@+id/img_class"
         android:text="老师"
-        android:layout_marginTop="20dp"
         android:textColor="#898989"
-        android:layout_marginLeft="15dp"
         android:textSize="15sp" />
-
 
 
 </RelativeLayout>

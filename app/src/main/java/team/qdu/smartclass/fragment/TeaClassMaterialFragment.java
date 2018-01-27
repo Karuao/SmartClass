@@ -11,10 +11,11 @@ import team.qdu.smartclass.R;
  * Created by rjmgc on 2018/1/17.
  */
 
-public class ClassDetailFragment extends SBaseFragment {
+public class TeaClassMaterialFragment extends SBaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.class_tab05, container, false);
+        System.out.println("Teacher Material");
+        return inflater.inflate(R.layout.class_tab01_admin, container, false);
     }
 }

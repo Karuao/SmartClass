@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.adapter.ClassFragmentPagerAdapter;
+import team.qdu.smartclass.adapter.StuClassFragmentPagerAdapter;
 
 /**
  * 班课主页
@@ -16,11 +16,11 @@ import team.qdu.smartclass.adapter.ClassFragmentPagerAdapter;
  * Created by Rock on 2017/4/23.
  */
 
-public class ClassMainActivity extends SBaseActivity implements View.OnClickListener,
+public class StuClassMainActivity extends SBaseActivity implements View.OnClickListener,
         ViewPager.OnPageChangeListener {
 
     private ViewPager classVpager;
-    private ClassFragmentPagerAdapter classFragmentPagerAdapter;
+    private StuClassFragmentPagerAdapter stuClassFragmentPagerAdapter;
     //tab
     private LinearLayout tabResource;
     private LinearLayout tabMember;
@@ -45,7 +45,7 @@ public class ClassMainActivity extends SBaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_mainpage);
-        classFragmentPagerAdapter = new ClassFragmentPagerAdapter(getSupportFragmentManager());
+        stuClassFragmentPagerAdapter = new StuClassFragmentPagerAdapter(getSupportFragmentManager());
         initView();
         initEvents();
     }
@@ -76,7 +76,7 @@ public class ClassMainActivity extends SBaseActivity implements View.OnClickList
         imgInform = (ImageView) findViewById(R.id.iv_class_inform);
         imgClassinfo = (ImageView) findViewById(R.id.iv_class_classinfo);
 
-        classVpager.setAdapter(classFragmentPagerAdapter);
+        classVpager.setAdapter(stuClassFragmentPagerAdapter);
         classVpager.setCurrentItem(0);
         classVpager.addOnPageChangeListener(this);
     }
@@ -91,7 +91,7 @@ public class ClassMainActivity extends SBaseActivity implements View.OnClickList
     }
 
     public void toSignIn(View view) {
-        startActivity(new Intent(ClassMainActivity.this, SigninActivity.class));
+        startActivity(new Intent(StuClassMainActivity.this, SigninActivity.class));
     }
 
 

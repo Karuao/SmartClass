@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,20 +25,23 @@ import java.util.Map;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.ClassMainActivity;
 import team.qdu.smartclass.activity.MainActivity;
+import team.qdu.smartclass.activity.StuClassMainActivity;
+import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.ClassAdapter;
 
 
 public class MainClassFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
 
     ListView listView;
+    MainActivity parentActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_class, container, false);
+        parentActivity = (MainActivity) getActivity();
         listView = (ListView) view.findViewById(R.id.listView);
-        listView.setAdapter(new ClassAdapter(getActivity(), getData()));
+        getJoinedClasses();
         listView.setOnItemClickListener(this);
         return view;
     }
@@ -46,7 +51,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("title", "G1");
-        map.put("info", "google 1");
+        map.put(" ", "google 1");
         map.put("teacher", "teacher 1");
         map.put("img", R.drawable.add_class_img);
         list.add(map);
@@ -54,27 +59,40 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
     }
 
     //获取登录用户加入的班课列表
-    private List<Map<String, Object>> getJoinedClasses() {
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        MainActivity parentActivity = (MainActivity) getActivity();
+    private void getJoinedClasses() {
         parentActivity.classAppAction.getJoinedClasses(getUserId(), new ActionCallbackListener<List<Class>>() {
             @Override
             public void onSuccess(List<Class> data, String message) {
-
+                listView.setAdapter(new ClassAdapter(getActivity(), data));
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
-
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             }
         });
-
-        return null;
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(getContext(), ClassMainActivity.class));
+        String classId = ((TextView)view.findViewById(R.id.tv_class_id)).getText().toString();
+        //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
+        parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<Void>() {
+            @Override
+            public void onSuccess(Void data, String message) {
+                System.out.println(message);
+                if ("teacher".equals(message)) {
+                    startActivity(new Intent(getContext(), TeaClassMainActivity.class));
+                } else {
+                    startActivity(new Intent(getContext(), StuClassMainActivity.class));
+                }
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //从SharedPreferences获取userId

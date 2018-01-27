@@ -1,27 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--管理员对应班课界面的第一个页面————也就是班课资源页面-->
+<?xml version="1.0" encoding="utf-8"?><!--管理员对应班课界面的第一个页面————也就是班课资源页面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/top"
+        layout="@layout/class_tab01_top" />
 
-    <include android:id="@+id/top" layout="@layout/class_tab01_top" />
-
-    <include android:id="@+id/top" layout="@layout/class_resource_listitem" />
+    <include
+        android:id="@+id/top"
+        layout="@layout/class_resource_listitem" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:background="#d6d6d6" />
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
         android:background="@color/bg_white"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/tv_class_finishclass"
@@ -35,10 +36,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:text="1864589"
-            android:textSize="16sp"
             android:textColor="@color/text_yellow"
-            android:layout_alignParentRight="true"/>
+            android:textSize="16sp" />
 
     </RelativeLayout>
 
@@ -46,8 +47,9 @@
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:background="#d6d6d6" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="只能通过PC端上传文件，上传码为班课邀请码"/>
+        android:text="只能通过PC端上传文件，上传码为班课邀请码" />
 </LinearLayout>

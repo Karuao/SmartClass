@@ -29,12 +29,12 @@ public class UserApiImpl implements UserApi {
     }
 
     @Override
-    public ApiResponse<Void> loginByApp(String account, String password) {
+    public ApiResponse<String> loginByApp(String account, String password) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("account", account);
         paramMap.put("password", password);
 
-        Type type = new TypeToken<ApiResponse<Void>>() {
+        Type type = new TypeToken<ApiResponse<String>>() {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/login");

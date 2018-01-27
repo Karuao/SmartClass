@@ -44,4 +44,24 @@ public class ClassAppActionImpl implements ClassAppAction {
             }
         }.execute();
     }
+
+    @Override
+    public void jumpClass(final String classId, final String userId, final ActionCallbackListener<Void> listener) {
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return classApi.jumpClass(classId, userId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
 }

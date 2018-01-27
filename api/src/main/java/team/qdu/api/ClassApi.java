@@ -12,4 +12,6 @@ import team.qdu.model.Class;
 public interface ClassApi {
 
     public ApiResponse<List<Class>> getJoinedClasses(String userId);
+
+    public ApiResponse<Void> jumpClass(String classId, String userId);
 }

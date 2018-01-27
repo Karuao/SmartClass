@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name=".activity.ClassMainActivity"></activity>
+        <activity android:name=".activity.StuClassMainActivity"></activity>
+        <activity android:name=".activity.TeaClassMainActivity"></activity>
         <activity android:name=".activity.RegisterActivity"></activity>
         <activity android:name=".activity.RetrieveOneActivity"></activity>
         <activity android:name=".activity.RetrieveThreeActivity"></activity>

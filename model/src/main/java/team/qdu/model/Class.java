@@ -10,6 +10,10 @@ public class Class implements Serializable {
 
     private String name;
 
+    private String avatar;
+
+    private String course;
+
     private String university;
 
     private String department;
@@ -31,6 +35,8 @@ public class Class implements Serializable {
     private Date create_date_time;
 
     private Date modify_date_time;
+
+    private String teacher;
 
     private static final long serialVersionUID = 1L;
 
@@ -56,6 +62,22 @@ public class Class implements Serializable {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar == null ? null : avatar.trim();
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course == null ? null : course.trim();
     }
 
     public String getUniversity() {
@@ -144,5 +166,13 @@ public class Class implements Serializable {
 
     public void setModify_date_time(Date modify_date_time) {
         this.modify_date_time = modify_date_time;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
     }
 }

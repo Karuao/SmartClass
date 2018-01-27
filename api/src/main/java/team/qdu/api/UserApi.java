@@ -9,7 +9,7 @@ import team.qdu.model.User;
 
 public interface UserApi {
 
-    public ApiResponse<Void> loginByApp(String loginName, String password);
+    public ApiResponse<String> loginByApp(String loginName, String password);
 
     public ApiResponse<Void> registerByApp(String account, String password, String question, String answer);
 

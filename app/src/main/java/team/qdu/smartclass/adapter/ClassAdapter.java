@@ -7,14 +7,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Map;
 
+import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 
 /**
  * Created by rjmgc on 2018/1/17.
  */
-public class ClassAdapter extends SBaseAdapter<Map<String, Object>> {
+public class ClassAdapter extends SBaseAdapter<Class> {
 
     public ClassAdapter(Context context, List itemList) {
         super(context);
@@ -26,7 +26,8 @@ public class ClassAdapter extends SBaseAdapter<Map<String, Object>> {
      *
      * @author Administrator
      */
-    public final class Zujian {
+    public final class Compo {
+        public TextView classIdTxt;
         public TextView titleTxt;
         public TextView classNameTxt;
         public TextView teacherTxt;
@@ -35,24 +36,26 @@ public class ClassAdapter extends SBaseAdapter<Map<String, Object>> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Zujian zujian = null;
+        Compo compo = null;
         if (convertView == null) {
-            zujian = new Zujian();
+            compo = new Compo();
             //获得组件，实例化组件
             convertView = layoutInflater.inflate(R.layout.item_listview, null);
-            zujian.titleTxt = (TextView) convertView.findViewById(R.id.titleTv);
-            zujian.classNameTxt = (TextView) convertView.findViewById(R.id.tv_classname);
-            zujian.teacherTxt = (TextView) convertView.findViewById(R.id.tv_teacher);
-            zujian.classImg = (ImageView) convertView.findViewById(R.id.img_class);
-            convertView.setTag(zujian);
+            compo.classIdTxt = (TextView) convertView.findViewById(R.id.tv_class_id);
+            compo.titleTxt = (TextView) convertView.findViewById(R.id.titleTv);
+            compo.classNameTxt = (TextView) convertView.findViewById(R.id.tv_classname);
+            compo.teacherTxt = (TextView) convertView.findViewById(R.id.tv_teacher);
+            compo.classImg = (ImageView) convertView.findViewById(R.id.img_class);
+            convertView.setTag(compo);
         } else {
-            zujian = (Zujian) convertView.getTag();
+            compo = (Compo) convertView.getTag();
         }
         //绑定数据
-        zujian.titleTxt.setText((String) itemList.get(position).get("title"));
-        zujian.classNameTxt.setText((String) itemList.get(position).get("info"));
-        zujian.teacherTxt.setText((String) itemList.get(position).get("teacher"));
-        zujian.classImg.setImageDrawable(context.getResources().getDrawable((int) itemList.get(position).get("img")));
+        compo.classIdTxt.setText(Integer.toString(itemList.get(position).getClass_id()));
+        compo.titleTxt.setText((String) itemList.get(position).getCourse());
+        compo.classNameTxt.setText((String) itemList.get(position).getName());
+        compo.teacherTxt.setText((String) itemList.get(position).getTeacher());
+//        compo.classImg.setImageDrawable(context.getResources().getDrawable((int) itemList.get(position).get("img")));
         return convertView;
     }
 }

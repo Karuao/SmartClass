@@ -15,7 +15,7 @@ public interface UserAppAction {
      * @param password  密码
      * @param listener  回调监听器
      */
-    public void login(String loginName, String password, ActionCallbackListener<Void> listener);
+    public void login(String loginName, String password, ActionCallbackListener<String> listener);
 
     public void register(String account, String password, String passwordConfirm, String question, String answer, boolean check, ActionCallbackListener<Void> actionCallbackListener);
 
