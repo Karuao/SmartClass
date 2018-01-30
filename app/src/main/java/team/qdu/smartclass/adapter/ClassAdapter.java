@@ -1,6 +1,8 @@
 package team.qdu.smartclass.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -8,8 +10,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.activity.MainActivity;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -40,7 +44,7 @@ public class ClassAdapter extends SBaseAdapter<Class> {
         if (convertView == null) {
             compo = new Compo();
             //获得组件，实例化组件
-            convertView = layoutInflater.inflate(R.layout.item_listview, null);
+            convertView = layoutInflater.inflate(R.layout.item_list_mainclass, null);
             compo.classIdTxt = (TextView) convertView.findViewById(R.id.tv_class_id);
             compo.titleTxt = (TextView) convertView.findViewById(R.id.titleTv);
             compo.classNameTxt = (TextView) convertView.findViewById(R.id.tv_classname);
@@ -52,9 +56,21 @@ public class ClassAdapter extends SBaseAdapter<Class> {
         }
         //绑定数据
         compo.classIdTxt.setText(Integer.toString(itemList.get(position).getClass_id()));
-        compo.titleTxt.setText((String) itemList.get(position).getCourse());
-        compo.classNameTxt.setText((String) itemList.get(position).getName());
-        compo.teacherTxt.setText((String) itemList.get(position).getTeacher());
+        compo.titleTxt.setText(itemList.get(position).getCourse());
+        compo.classNameTxt.setText(itemList.get(position).getName());
+        compo.teacherTxt.setText(itemList.get(position).getTeacher());
+        final Compo finalCompo = compo;
+        //从服务器获取图片绑定到班课封面上
+        ((MainActivity) context).classAppAction.getBitmap(itemList.get(position).getAvatar(), new ActionCallbackListener<Bitmap>() {
+            @Override
+            public void onSuccess(Bitmap data, String message) {
+                finalCompo.classImg.setImageDrawable(new BitmapDrawable(data));
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+            }
+        });
 //        compo.classImg.setImageDrawable(context.getResources().getDrawable((int) itemList.get(position).get("img")));
         return convertView;
     }

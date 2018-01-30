@@ -40,7 +40,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_class, container, false);
         parentActivity = (MainActivity) getActivity();
-        listView = (ListView) view.findViewById(R.id.listView);
+        listView = (ListView) view.findViewById(R.id.list_mainclass);
         getJoinedClasses();
         listView.setOnItemClickListener(this);
         return view;

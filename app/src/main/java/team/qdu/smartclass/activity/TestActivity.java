@@ -26,7 +26,7 @@ public class TestActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.item_listview,
+        SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.item_list_mainclass,
                 new String[]{"title", "info", "teacher", "img"},
                 new int[]{R.id.titleTv, R.id.tv_classname, R.id.tv_teacher, R.id.img_class});
         setListAdapter(adapter);
@@ -47,7 +47,7 @@ public class TestActivity extends ListActivity {
     }
 
     public void toSet(View view) {
-        SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.item_listview,
+        SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.item_list_mainclass,
                 new String[]{"title", "info", "teacher", "img"},
                 new int[]{R.id.titleTv, R.id.tv_classname, R.id.tv_teacher, R.id.img_class});
         setListAdapter(adapter);

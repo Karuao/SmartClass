@@ -1,5 +1,7 @@
 package team.qdu.api;
 
+import android.graphics.Bitmap;
+
 import java.util.List;
 
 import team.qdu.model.ApiResponse;
@@ -14,4 +16,6 @@ public interface ClassApi {
     public ApiResponse<List<Class>> getJoinedClasses(String userId);
 
     public ApiResponse<Void> jumpClass(String classId, String userId);
+
+    public Bitmap getBitmap(String urlTail);
 }

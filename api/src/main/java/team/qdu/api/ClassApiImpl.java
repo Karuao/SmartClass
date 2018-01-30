@@ -1,5 +1,6 @@
 package team.qdu.api;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import team.qdu.api.net.HttpEngine;
+import team.qdu.api.net.ImgHttpEngine;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.Class;
 
@@ -24,9 +26,11 @@ public class ClassApiImpl implements ClassApi {
     private final static String TIME_OUT_EVENT_MSG = "连接服务器失败";
 
     private HttpEngine httpEngine;
+    private ImgHttpEngine imgHttpEngine;
 
     public ClassApiImpl() {
         httpEngine = HttpEngine.getInstance();
+        imgHttpEngine = ImgHttpEngine.getInstance();
     }
 
     //获取登录用户加入的班课列表
@@ -62,6 +66,17 @@ public class ClassApiImpl implements ClassApi {
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());
             //返回连接服务器失败
             return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public Bitmap getBitmap(String urlTail) {
+        try {
+            return imgHttpEngine.getImg(urlTail);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            return null;
         }
     }
 }

@@ -1,6 +1,7 @@
 package team.qdu.core;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import java.util.List;
@@ -60,6 +61,26 @@ public class ClassAppActionImpl implements ClassAppAction {
                     listener.onSuccess(null, response.getMsg());
                 } else {
                     listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void getBitmap(final String urlTail, final ActionCallbackListener<Bitmap> listener) {
+        new AsyncTask<Void, Void, Bitmap>() {
+
+            @Override
+            protected Bitmap doInBackground(Void... params) {
+                return classApi.getBitmap(urlTail);
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap bitmap) {
+                if (bitmap != null) {
+                    listener.onSuccess(bitmap, "success");
+                } else {
+                    listener.onFailure(null, "fail");
                 }
             }
         }.execute();

@@ -1,5 +1,7 @@
 package team.qdu.core;
 
+import android.graphics.Bitmap;
+
 import java.util.List;
 
 import team.qdu.model.Class;
@@ -13,5 +15,9 @@ public interface ClassAppAction {
     //获取登录用户加入的班课列表
     public void getJoinedClasses(String userId, ActionCallbackListener<List<Class>> listener);
 
+    //跳转老师班课/学生班课
     public void jumpClass(String classId, String userId, ActionCallbackListener<Void> listener);
+
+    //获取图片
+    public void getBitmap(String urlTail, ActionCallbackListener<Bitmap> listener);
 }
