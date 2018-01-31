@@ -6,6 +6,7 @@ package team.qdu.smartclass.fragment;
  */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -43,13 +44,13 @@ public class MainUserFragment extends SBaseFragment {
         parentActivity.userAppAction.getUserInfor(account,new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
-            userAccount.setText(user.getAccount());
-            userName.setText(user.getName());
-            userGender.setText(user.getGender());
-            userUniversity.setText(user.getUniversity());
-            userDepartment.setText(user.getDepartment());
-            userMotto.setText(user.getStatus_message());
-            }
+                    userAccount.setText(user.getAccount());
+                    userName.setText(user.getName());
+                    userGender.setText(user.getGender());
+                    userUniversity.setText(user.getUniversity());
+                    userDepartment.setText(user.getDepartment());
+                    userMotto.setText(user.getStatus_message());
+                }
 
             @Override
             public void onFailure(String errorEvent, String message) {

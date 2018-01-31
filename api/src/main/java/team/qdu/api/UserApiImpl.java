@@ -99,4 +99,27 @@ public class UserApiImpl implements UserApi {
             return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
         }
     }
+
+    @Override
+    public ApiResponse<Void> updateUserInformation(String oldAccount,String newAccount, String name,String gender,String university,String department,
+                                                   String motto){
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("oldAccount",oldAccount);
+        paramMap.put("newAccount",newAccount);
+        paramMap.put("name", name);
+        paramMap.put("gender",gender);
+        paramMap.put("university",university);
+        paramMap.put("department",department);
+        paramMap.put("motto",motto);
+        Type type = new TypeToken<ApiResponse<Void>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/updateUserInformation");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
 }

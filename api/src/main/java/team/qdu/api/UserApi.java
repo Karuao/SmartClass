@@ -16,4 +16,7 @@ public interface UserApi {
     public ApiResponse<User> searchByAccount(String account);
 
     public ApiResponse<Void> updatePassword(String account, String newPass);
+
+    public ApiResponse<Void> updateUserInformation(String oldAccount,String newAccount, String name,String gender,String university,String department,
+                                                   String motto);
 }

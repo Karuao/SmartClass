@@ -214,5 +214,37 @@ public class UserAppActionImpl implements UserAppAction {
         }.execute();
         return null;
     }
+
+    //修改个人信息
+    @Override
+    public void modifyUserInformation(final String oldAccount,final String newAccount,final String name,final String gender,final String university,
+                                      final String department,final String motto,final ActionCallbackListener<Void> listener){
+
+        if(TextUtils.isEmpty(newAccount)){
+            listener.onFailure(ErrorEvent.PARAM_NULL, "请输入用户名");
+            return;
+        }
+        if(TextUtils.isEmpty(name)){
+            listener.onFailure(ErrorEvent.PARAM_NULL, "请输入姓名");
+            return;
+        }
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return userApi.updateUserInformation(oldAccount,newAccount,name,gender,university,department,motto);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
 }
 
