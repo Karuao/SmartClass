@@ -101,11 +101,10 @@ public class UserApiImpl implements UserApi {
     }
 
     @Override
-    public ApiResponse<Void> updateUserInformation(String oldAccount,String newAccount, String name,String gender,String university,String department,
+    public ApiResponse<Void> updateUserInformation(String account, String name,String gender,String university,String department,
                                                    String motto){
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("oldAccount",oldAccount);
-        paramMap.put("newAccount",newAccount);
+        paramMap.put("account",account);
         paramMap.put("name", name);
         paramMap.put("gender",gender);
         paramMap.put("university",university);

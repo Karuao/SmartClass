@@ -29,6 +29,6 @@ public interface UserAppAction {
     public User getUserInfor(String account,ActionCallbackListener<User> listener);
 
     //修改用户个人信息
-    public void modifyUserInformation(String oldAccount,String newAccount,String name,String gender,String university,String department
+    public void modifyUserInformation(String account,String name,String gender,String university,String department
                                       ,String motto,ActionCallbackListener<Void> listener);
 }

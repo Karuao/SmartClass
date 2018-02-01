@@ -217,13 +217,9 @@ public class UserAppActionImpl implements UserAppAction {
 
     //修改个人信息
     @Override
-    public void modifyUserInformation(final String oldAccount,final String newAccount,final String name,final String gender,final String university,
+    public void modifyUserInformation(final String account,final String name,final String gender,final String university,
                                       final String department,final String motto,final ActionCallbackListener<Void> listener){
 
-        if(TextUtils.isEmpty(newAccount)){
-            listener.onFailure(ErrorEvent.PARAM_NULL, "请输入用户名");
-            return;
-        }
         if(TextUtils.isEmpty(name)){
             listener.onFailure(ErrorEvent.PARAM_NULL, "请输入姓名");
             return;
@@ -233,7 +229,7 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
-                return userApi.updateUserInformation(oldAccount,newAccount,name,gender,university,department,motto);
+                return userApi.updateUserInformation(account,name,gender,university,department,motto);
             }
 
             @Override
