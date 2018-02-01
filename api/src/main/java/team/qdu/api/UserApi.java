@@ -17,6 +17,6 @@ public interface UserApi {
 
     public ApiResponse<Void> updatePassword(String account, String newPass);
 
-    public ApiResponse<Void> updateUserInformation(String oldAccount,String newAccount, String name,String gender,String university,String department,
+    public ApiResponse<Void> updateUserInformation(String account, String name,String gender,String university,String department,
                                                    String motto);
 }
