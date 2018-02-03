@@ -23,6 +23,7 @@ public abstract class SBaseFragment extends Fragment {
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("classId", userId);
+        editor.commit();
     }
 
     //从SharedPreferences获取userId
@@ -37,5 +38,6 @@ public abstract class SBaseFragment extends Fragment {
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("classId", classId);
+        editor.commit();
     }
 }
