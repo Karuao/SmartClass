@@ -5,12 +5,14 @@ import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import team.qdu.api.net.FileHttpEngine;
 import team.qdu.api.net.HttpEngine;
 import team.qdu.api.net.ImgHttpEngine;
 import team.qdu.model.ApiResponse;
@@ -27,10 +29,12 @@ public class ClassApiImpl implements ClassApi {
 
     private HttpEngine httpEngine;
     private ImgHttpEngine imgHttpEngine;
+    private FileHttpEngine fileHttpEngine;
 
     public ClassApiImpl() {
         httpEngine = HttpEngine.getInstance();
         imgHttpEngine = ImgHttpEngine.getInstance();
+        fileHttpEngine = FileHttpEngine.getInstance();
     }
 
     //获取登录用户加入的班课列表
@@ -77,6 +81,27 @@ public class ClassApiImpl implements ClassApi {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());
             return null;
+        }
+    }
+
+    @Override
+    public ApiResponse<String> createClass(File avatar, String name, String course, String userId) {
+        Map<String, String> paramMap = new HashMap<>();
+        Map<String, File> fileMap = new HashMap<>();
+        paramMap.put("name", name);
+        paramMap.put("course", course);
+        paramMap.put("userId", userId);
+        fileMap.put("avatar", avatar);
+
+        Type type = new TypeToken<ApiResponse<String>>() {
+        }.getType();
+        try {
+            return fileHttpEngine.postHandle(paramMap, fileMap, type, "/createClass");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
         }
     }
 }

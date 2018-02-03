@@ -1,6 +1,7 @@
 package team.qdu.smartclass;
 
 import android.app.Application;
+import android.os.StrictMode;
 
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.ClassAppActionImpl;
@@ -22,6 +23,8 @@ public class SApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
         userAppAction = new UserAppActionImpl(this);
         classAppAction = new ClassAppActionImpl(this);
     }

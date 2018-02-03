@@ -2,7 +2,6 @@ package team.qdu.smartclass.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -64,7 +63,7 @@ public class ClassAdapter extends SBaseAdapter<Class> {
         ((MainActivity) context).classAppAction.getBitmap(itemList.get(position).getAvatar(), new ActionCallbackListener<Bitmap>() {
             @Override
             public void onSuccess(Bitmap data, String message) {
-                finalCompo.classImg.setImageDrawable(new BitmapDrawable(data));
+                finalCompo.classImg.setImageBitmap(data);
             }
 
             @Override

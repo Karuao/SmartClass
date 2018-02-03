@@ -3,35 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/llayout_addbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/top"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/btn_create_class"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:background="@color/bg_white"
-            android:onClick="toCreateClass"
-            android:text="创建班课"
-            android:textColor="@color/bg_black"
-            android:textSize="16sp" />
-
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:background="@color/bg_white"
-            android:onClick="toAddClass"
-            android:text="加入班课"
-            android:textColor="@color/bg_black"
-            android:textSize="16sp" />
-    </LinearLayout>
-
     <ListView
         android:id="@+id/list_mainclass"
         android:layout_width="match_parent"

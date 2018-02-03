@@ -3,6 +3,8 @@
     package="team.qdu.smartclass">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".SApplication"
@@ -11,7 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,10 +29,16 @@
         <activity android:name=".activity.RetrieveTwoActivity"></activity>
         <activity android:name=".activity.ChangeInfoActivity"></activity>
         <activity android:name=".activity.SetActivity"></activity>
-        <activity android:name=".activity.CreateClassActivity"></activity>
+        <activity
+            android:name=".activity.CreateClassActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.TestActivity"></activity>
         <activity android:name=".activity.SigninActivity"></activity>
         <activity android:name=".activity.ClassHomeworkMainActivity"></activity>
+        <activity android:name=".activity.JoinClassActivity"></activity>
+        <activity android:name=".activity.PrepareClassActivity"></activity>
+        <activity android:name=".activity.CropActivity"></activity>
+        <activity android:name=".activity.ShowInviteCode"></activity>
     </application>
 
 </manifest>

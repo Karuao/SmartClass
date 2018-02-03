@@ -2,6 +2,7 @@ package team.qdu.api;
 
 import android.graphics.Bitmap;
 
+import java.io.File;
 import java.util.List;
 
 import team.qdu.model.ApiResponse;
@@ -18,4 +19,6 @@ public interface ClassApi {
     public ApiResponse<Void> jumpClass(String classId, String userId);
 
     public Bitmap getBitmap(String urlTail);
+
+    public ApiResponse<String> createClass(File avatar, String name, String course, String userId);
 }

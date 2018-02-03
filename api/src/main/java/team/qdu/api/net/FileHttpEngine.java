@@ -43,12 +43,12 @@ public class FileHttpEngine {
      * 通过拼接的方式构造请求内容，实现参数传输以及文件传输
      *
      * @param urlTail Service net address
-     * @param params text content
-     * @param files pictures
+     * @param params  text content
+     * @param files   pictures
      * @return String result of Service response
      * @throws IOException
      */
-    public String postHandle(Map<String, String> params, Map<String, File> files, Type typeofT, String urlTail)
+    public <T> T postHandle(Map<String, String> params, Map<String, File> files, Type typeofT, String urlTail)
             throws IOException {
         HttpURLConnection conn = getConnection(urlTail);
         // 首先组拼文本类型的参数
@@ -104,7 +104,7 @@ public class FileHttpEngine {
         outStream.close();
         conn.disconnect();
         //返回字符串
-        final String result =  sb2.toString();
+        final String result = sb2.toString();
         //打印出结果
         Log.i(TAG, "response:" + result);
         Gson gson = new Gson();
@@ -116,6 +116,7 @@ public class FileHttpEngine {
         //初始化connection
         try {
             URL url = new URL(SERVER_URL + urlTail);
+            conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(TIME_OUT);
             conn.setReadTimeout(TIME_OUT); // 缓存的最长时间
             conn.setDoInput(true);// 允许输入

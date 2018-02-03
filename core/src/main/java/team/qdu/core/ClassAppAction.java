@@ -2,6 +2,7 @@ package team.qdu.core;
 
 import android.graphics.Bitmap;
 
+import java.io.File;
 import java.util.List;
 
 import team.qdu.model.Class;
@@ -20,4 +21,7 @@ public interface ClassAppAction {
 
     //获取图片
     public void getBitmap(String urlTail, ActionCallbackListener<Bitmap> listener);
+
+    //创建班课
+    public void createClass(File avatar, String name, String course, String userId, ActionCallbackListener<String> listener);
 }

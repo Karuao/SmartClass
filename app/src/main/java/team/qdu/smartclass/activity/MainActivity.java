@@ -3,9 +3,13 @@ package team.qdu.smartclass.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.MainFragmentPagerAdapter;
@@ -19,6 +23,7 @@ import team.qdu.smartclass.adapter.MainFragmentPagerAdapter;
 public class MainActivity extends SBaseActivity implements View.OnClickListener,
         ViewPager.OnPageChangeListener {
 
+    PopupWindow popupWindow;
     private ViewPager mainVpager;
     private MainFragmentPagerAdapter mainFragmentPagerAdapter;
     //tab
@@ -26,6 +31,9 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
     private LinearLayout tabUser;
     private ImageButton imgClass;
     private ImageButton imgUser;
+    private TextView userGender;
+    private TextView userUniversity;
+    private TextView userDepartment;
 
     private boolean isClick = true;
     private LinearLayout create;
@@ -37,7 +45,7 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mainpage);
+        setContentView(R.layout.activity_mainpage);
         mainFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager());
         initView();
         initEvents();
@@ -77,19 +85,39 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
 
     //点击右上角加号显示或隐藏创建加入班课按钮
     public void toCreateList(View view) {
-        create = (LinearLayout) findViewById(R.id.llayout_addbtn);
-        if (isClick) {
-            create.setVisibility(View.GONE);
-            isClick = false;
-        } else {
-            create.setVisibility(View.VISIBLE);
-            isClick = true;
-        }
+        View contentView = LayoutInflater.from(MainActivity.this).inflate(R.layout.popup_addclass, null);
+        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.showAsDropDown(findViewById(R.id.llayout_addibtn));
     }
 
     //创建班课点击事件
     public void toCreateClass(View view) {
-        startActivity(new Intent(MainActivity.this, CreateClassActivity.class));
+        userGender = (TextView) findViewById(R.id.userGender);
+        userUniversity = (TextView) findViewById(R.id.userUniversity);
+        userDepartment = (TextView) findViewById(R.id.userDepartment);
+        popupWindow.dismiss();
+        if (userGender.getText().toString().isEmpty() || userDepartment.getText().toString().isEmpty()
+                || userUniversity.toString().isEmpty()) {
+            startActivity(new Intent(MainActivity.this, PrepareClassActivity.class));
+        } else {
+            startActivity(new Intent(MainActivity.this, CreateClassActivity.class));
+        }
+    }
+
+    //加入班课点击事件
+    public void toJoinClass(View view) {
+        userGender = (TextView) findViewById(R.id.userGender);
+        userUniversity = (TextView) findViewById(R.id.userUniversity);
+        userDepartment = (TextView) findViewById(R.id.userDepartment);
+        popupWindow.dismiss();
+        if (userGender.getText().toString().isEmpty() || userDepartment.getText().toString().isEmpty()
+                || userUniversity.toString().isEmpty()) {
+            startActivity(new Intent(MainActivity.this, PrepareClassActivity.class));
+        } else {
+            startActivity(new Intent(MainActivity.this, JoinClassActivity.class));
+        }
+        startActivity(new Intent(MainActivity.this, JoinClassActivity.class));
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
+import java.io.File;
 import java.util.List;
 
 import team.qdu.api.ClassApi;
@@ -81,6 +82,26 @@ public class ClassAppActionImpl implements ClassAppAction {
                     listener.onSuccess(bitmap, "success");
                 } else {
                     listener.onFailure(null, "fail");
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void createClass(final File avatar, final String name, final String course, final String userId, final ActionCallbackListener<String> listener) {
+        new AsyncTask<Void, Void, ApiResponse<String>>() {
+
+            @Override
+            protected ApiResponse<String> doInBackground(Void... params) {
+                return classApi.createClass(avatar, name, course, userId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<String> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObj(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
                 }
             }
         }.execute();
