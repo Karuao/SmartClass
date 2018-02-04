@@ -20,18 +20,39 @@
         android:id="@+id/tv_class_inform_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:textSize="16sp"
-        android:width="120dp"
-        android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        android:layout_alignLeft="@+id/tv_class_inform_time"
+        android:layout_alignStart="@+id/tv_class_inform_time"
         android:layout_below="@+id/tv_class_inform_time"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:textColor="@color/hinter"/>
+        android:width="120dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        android:textColor="@color/hinter"
+        android:textSize="16sp" />
 
+    <TextView
+        android:id="@+id/tv_if_read"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_class_inform_details"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:text="TextView" />
 
-
+    <TextView
+        android:id="@+id/tv_inform_user_id"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_if_read"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_toLeftOf="@+id/tv_if_read"
+        android:layout_toStartOf="@+id/tv_if_read"
+        android:text="TextView" />
 
 
 </RelativeLayout>

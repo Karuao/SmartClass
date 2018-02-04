@@ -25,7 +25,7 @@
         android:layout_marginTop="20dp"/>
 
     <TextView
-        android:id="@+id/tv_class_inform_details"
+        android:id="@+id/tv_class_teainform_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="添加android:gravity=‘ android:layout_gravity=center’属性。
@@ -66,13 +66,15 @@ android:layout_gravity=。"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right">
+
             <TextView
+                android:id="@+id/tv_class_inform_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/bg_black"
+                android:gravity="right"
                 android:text="2017-12-15"
-                android:textSize="18sp"
-                android:gravity="right"/>
+                android:textColor="@color/bg_black"
+                android:textSize="18sp" />
         </LinearLayout>
 
 
@@ -114,14 +116,16 @@ android:layout_gravity=。"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right">
+
             <TextView
+                android:id="@+id/tv_class_inform_readnumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/classbottom"
-                android:text="18"
-                android:textSize="18sp"
                 android:layout_marginTop="-2dp"
-                android:gravity="right"/>
+                android:gravity="right"
+                android:text="18"
+                android:textColor="@color/classbottom"
+                android:textSize="18sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -171,13 +175,14 @@ android:layout_gravity=。"
             android:gravity="right">
 
             <TextView
+                android:id="@+id/tv_class_inform_unreadnumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_yellow"
-                android:text="8"
-                android:textSize="18sp"
                 android:layout_marginTop="-2dp"
-                android:gravity="right"/>
+                android:gravity="right"
+                android:text="8"
+                android:textColor="@color/text_yellow"
+                android:textSize="18sp" />
 
             <ImageView
                 android:layout_width="wrap_content"

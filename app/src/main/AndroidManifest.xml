@@ -29,11 +29,12 @@
         <activity android:name=".activity.RetrieveTwoActivity"></activity>
         <activity android:name=".activity.ChangeInfoActivity"></activity>
         <activity android:name=".activity.SetActivity"></activity>
-        <activity
-            android:name=".activity.CreateClassActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        <activity android:name=".activity.CreateClassActivity"></activity>
         <activity android:name=".activity.TestActivity"></activity>
         <activity android:name=".activity.SigninActivity"></activity>
+        <activity android:name=".activity.TeaInformDetailActivity"></activity>
+        <activity android:name=".activity.StuInformDetailActivity"></activity>
+        <activity android:name=".activity.CreateInformActivity"></activity>
         <activity android:name=".activity.ClassHomeworkMainActivity"></activity>
         <activity android:name=".activity.JoinClassActivity"></activity>
         <activity android:name=".activity.PrepareClassActivity"></activity>

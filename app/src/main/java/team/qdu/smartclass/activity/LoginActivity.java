@@ -95,7 +95,7 @@ public class LoginActivity extends SBaseActivity {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
             //5、判断事件源的选中状态
-            if (!isChecked) {
+            if (isChecked) {
                 //显示密码
                 //etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                 passwordEdt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
@@ -103,6 +103,7 @@ public class LoginActivity extends SBaseActivity {
                 // 隐藏密码
                 //etPassword.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 passwordEdt.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
             }
             //6、每次显示或者关闭时，密码显示编辑的线不统一在最后，下面是为了统一
             passwordEdt.setSelection(passwordEdt.length());

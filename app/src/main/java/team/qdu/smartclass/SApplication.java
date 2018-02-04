@@ -5,6 +5,8 @@ import android.os.StrictMode;
 
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.ClassAppActionImpl;
+import team.qdu.core.InformAppAction;
+import team.qdu.core.InformAppActionImpl;
 import team.qdu.core.UserAppAction;
 import team.qdu.core.UserAppActionImpl;
 
@@ -20,6 +22,8 @@ public class SApplication extends Application {
 
     private ClassAppAction classAppAction;
 
+    private InformAppAction informAppAction;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -27,6 +31,7 @@ public class SApplication extends Application {
         StrictMode.setVmPolicy(builder.build());
         userAppAction = new UserAppActionImpl(this);
         classAppAction = new ClassAppActionImpl(this);
+        informAppAction = new InformAppActionImpl(this);
     }
 
     public UserAppAction getUserAppAction() {
@@ -35,5 +40,8 @@ public class SApplication extends Application {
 
     public ClassAppAction getClassAppAction() {
         return classAppAction;
+    }
+    public InformAppAction getInformAppAction() {
+        return informAppAction;
     }
 }

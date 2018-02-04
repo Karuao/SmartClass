@@ -41,6 +41,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     public static final int PAGE_FOUR = 3;
     public static final int PAGE_FIVE = 4;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +94,14 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     public void toSignIn(View view) {
         startActivity(new Intent(TeaClassMainActivity.this, SigninActivity.class));
     }
+
+
+    public void toCreateInform(View view) {
+        Intent intent = new Intent(TeaClassMainActivity.this, CreateInformActivity.class);
+        intent.putExtra("classId", getIntent().getStringExtra("classId"));
+        startActivity(intent);
+    }
+
 
 
     @Override

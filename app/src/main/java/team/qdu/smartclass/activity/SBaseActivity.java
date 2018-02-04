@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import team.qdu.core.ClassAppAction;
+import team.qdu.core.InformAppAction;
 import team.qdu.core.UserAppAction;
 import team.qdu.smartclass.SApplication;
 
@@ -29,7 +30,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
 
     public ClassAppAction classAppAction;
 
-
+    public InformAppAction informAppAction;
 
 
     @Override
@@ -39,6 +40,8 @@ public abstract class SBaseActivity extends AppCompatActivity {
         application = (SApplication) this.getApplication();
         userAppAction = application.getUserAppAction();
         classAppAction = application.getClassAppAction();
+        informAppAction = application.getInformAppAction();
+
     }
 
     //从SharedPreferences获取userId
