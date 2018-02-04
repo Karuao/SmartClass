@@ -33,6 +33,7 @@ import java.net.URISyntaxException;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.fragment.MainClassFragment;
 
 
 /**
@@ -55,6 +56,8 @@ public class CreateClassActivity extends SBaseActivity {
     private String mTempPhotoPath;
     // 剪切后图像文件
     private Uri mDestinationUri;
+    //判断是否使用默认头像
+    private boolean isDefaultAvatar = true;
 
     private static final int GALLERY_REQUEST_CODE = 0;    // 相册选图标记
     private static final int CAMERA_REQUEST_CODE = 1;    // 相机拍照标记
@@ -81,13 +84,20 @@ public class CreateClassActivity extends SBaseActivity {
 
     //创建班课按钮点击事件
     public void finishCreate(View view) throws URISyntaxException {
-        File file = new File(new URI(mDestinationUri.toString()));
+        File file = null;
+        if (isDefaultAvatar) {
+//            file = new File();
+        } else {
+            Uri uri = Uri.parse("android.resource://"+"team.qdu.smartclass"+"/"+R.mipmap.ic_classavatar_def);
+            file = new File(new URI(mDestinationUri.toString()));
+        }
         String name = classnameEdt.getText().toString();
         String course = courseEdt.getText().toString();
         String userId = getUserId();
         classAppAction.createClass(file, name, course, userId, new ActionCallbackListener<String>() {
             @Override
             public void onSuccess(String data, String message) {
+                MainClassFragment.refreshflag = true;
                 setClassId(data);
                 Intent intent = new Intent(CreateClassActivity.this, ShowInviteCode.class);
                 intent.putExtra("avatarUri", mDestinationUri);
@@ -265,6 +275,7 @@ public class CreateClassActivity extends SBaseActivity {
                     break;
                 case UCrop.REQUEST_CROP:    // 裁剪图片结果
                     handleCropResult(data);
+                    isDefaultAvatar = false;
                     break;
                 case UCrop.RESULT_ERROR:    // 裁剪图片错误
                     handleCropError(data);

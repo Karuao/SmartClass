@@ -31,8 +31,9 @@ import team.qdu.smartclass.adapter.ClassAdapter;
 
 public class MainClassFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
 
-    ListView listView;
-    MainActivity parentActivity;
+    private ListView listView;
+    private MainActivity parentActivity;
+    public static boolean refreshflag = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +43,14 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
         getJoinedClasses();
         listView.setOnItemClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (refreshflag) {
+            getJoinedClasses();
+        }
     }
 
     //获取ListView中一行的示例数据

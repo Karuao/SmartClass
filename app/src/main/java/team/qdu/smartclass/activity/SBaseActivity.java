@@ -29,9 +29,6 @@ public abstract class SBaseActivity extends AppCompatActivity {
 
     public ClassAppAction classAppAction;
 
-
-
-
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
