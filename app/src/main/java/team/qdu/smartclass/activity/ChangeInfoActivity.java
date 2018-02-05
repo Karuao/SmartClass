@@ -88,13 +88,18 @@ public class ChangeInfoActivity extends SBaseActivity {
         });
     }
 
+
     public void setSpinnerItemSelectedByValue(AppCompatSpinner spinner,String value){
         SpinnerAdapter spinnerAdapter=spinner.getAdapter();
         int k=spinnerAdapter.getCount();
-        for(int i=0;i<k;i++){
-            if(value.equals(spinnerAdapter.getItem(i).toString())){
-                spinner.setSelection(i,true);
-                break;
+        if(value==null){
+            spinner.setSelection(0,true);
+        }else {
+            for (int i = 0; i < k; i++) {
+                if (value.equals(spinnerAdapter.getItem(i).toString())) {
+                    spinner.setSelection(i, true);
+                    break;
+                }
             }
         }
     }
