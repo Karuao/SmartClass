@@ -3,6 +3,7 @@ package team.qdu.core;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 
 import java.io.File;
 import java.util.List;
@@ -89,6 +90,14 @@ public class ClassAppActionImpl implements ClassAppAction {
 
     @Override
     public void createClass(final File avatar, final String name, final String course, final String userId, final ActionCallbackListener<String> listener) {
+        if (TextUtils.isEmpty(name)) {
+            listener.onFailure(ErrorEvent.PARAM_NULL, "班级不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(course)) {
+            listener.onFailure(ErrorEvent.PARAM_NULL, "课程不能为空");
+            return;
+        }
         new AsyncTask<Void, Void, ApiResponse<String>>() {
 
             @Override
@@ -100,6 +109,54 @@ public class ClassAppActionImpl implements ClassAppAction {
             protected void onPostExecute(ApiResponse<String> response) {
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void joinClass(final String classId, final String userId, final ActionCallbackListener<Class> listener) {
+        if (TextUtils.isEmpty(classId) || classId.length() < 6) {
+            listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "邀请码长度大于6位");
+            return;
+        }
+        new AsyncTask<Void, Void, ApiResponse<Class>>() {
+
+            @Override
+            protected ApiResponse<Class> doInBackground(Void... params) {
+                return classApi.joinClass(classId, userId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Class> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObj(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void confirmJoinClass(final String classId, final String userId, final ActionCallbackListener<Void> listener) {
+        if (TextUtils.isEmpty(classId) || classId.length() < 6) {
+            listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "邀请码长度大于6位");
+            return;
+        }
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return classApi.confirmJoinClass(classId, userId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
                 } else {
                     listener.onFailure(response.getEvent(), response.getMsg());
                 }

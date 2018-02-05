@@ -1,7 +1,11 @@
 package team.qdu.smartclass;
 
+import android.app.Activity;
 import android.app.Application;
 import android.os.StrictMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.ClassAppActionImpl;
@@ -20,6 +24,8 @@ public class SApplication extends Application {
 
     private ClassAppAction classAppAction;
 
+    private static List<Activity> lists = new ArrayList<>();
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -35,5 +41,21 @@ public class SApplication extends Application {
 
     public ClassAppAction getClassAppAction() {
         return classAppAction;
+    }
+
+    //向list中添加Activity
+    public static void addActivity(Activity activity) {
+        lists.add(activity);
+    }
+
+    //finish list中的所有的Activity
+    public static void clearActivity() {
+        if (lists != null) {
+            for (Activity activity : lists) {
+                activity.finish();
+            }
+
+            lists.clear();
+        }
     }
 }

@@ -1,9 +1,12 @@
 package team.qdu.smartclass.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -25,8 +28,10 @@ import android.widget.Toast;
 
 import com.kevin.crop.UCrop;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -52,15 +57,21 @@ public class CreateClassActivity extends SBaseActivity {
     public static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 102;
     protected static final int REQUEST_STORAGE_READ_ACCESS_PERMISSION = 101;
 
-    // 拍照临时图片
+    //拍照临时图片
     private String mTempPhotoPath;
-    // 剪切后图像文件
+    //剪切后图像文件
     private Uri mDestinationUri;
     //判断是否使用默认头像
     private boolean isDefaultAvatar = true;
 
-    private static final int GALLERY_REQUEST_CODE = 0;    // 相册选图标记
-    private static final int CAMERA_REQUEST_CODE = 1;    // 相机拍照标记
+    //相册选图标记
+    private static final int GALLERY_REQUEST_CODE = 0;
+    //相机拍照标记
+    private static final int CAMERA_REQUEST_CODE = 1;
+
+    //对话框
+    private AlertDialog.Builder alert;
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +87,10 @@ public class CreateClassActivity extends SBaseActivity {
         classnameEdt = (EditText) findViewById(R.id.edt_classname);
         courseEdt = (EditText) findViewById(R.id.edt_course);
         AvatarImg = (ImageView) findViewById(R.id.img_avatar);
+        builder = new AlertDialog.Builder(this);
+        alert = builder.setTitle("权限被禁用")
+                .setMessage("需要读写手机存储权限才能正常工作")
+                .setNeutralButton("确定", null);
     }
 
     public void toBack(View view) {
@@ -86,9 +101,19 @@ public class CreateClassActivity extends SBaseActivity {
     public void finishCreate(View view) throws URISyntaxException {
         File file = null;
         if (isDefaultAvatar) {
-//            file = new File();
+            //将mipmap中的默认头像转成File
+            Resources r = this.getResources();
+            Bitmap bmp = BitmapFactory.decodeResource(r, R.mipmap.ic_classavatar_def);
+            file = new File(Environment.getExternalStorageDirectory() + File.separator + "defClassAvatar.png");//将要保存图片的路径
+            try {
+                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+                bmp.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+                bos.flush();
+                bos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
-            Uri uri = Uri.parse("android.resource://"+"team.qdu.smartclass"+"/"+R.mipmap.ic_classavatar_def);
             file = new File(new URI(mDestinationUri.toString()));
         }
         String name = classnameEdt.getText().toString();
@@ -97,7 +122,7 @@ public class CreateClassActivity extends SBaseActivity {
         classAppAction.createClass(file, name, course, userId, new ActionCallbackListener<String>() {
             @Override
             public void onSuccess(String data, String message) {
-                MainClassFragment.refreshflag = true;
+                MainClassFragment.refreshFlag = true;
                 setClassId(data);
                 Intent intent = new Intent(CreateClassActivity.this, ShowInviteCode.class);
                 intent.putExtra("avatarUri", mDestinationUri);
@@ -122,15 +147,9 @@ public class CreateClassActivity extends SBaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
-            //权限为获取，检查用户是否被询问过并且拒绝了，如果是这样的话，给予更多
-            //解释
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                //在界面上展示为什么需要该权限
-                Toast.makeText(this, "需要访问外部存储才能正常工作", Toast.LENGTH_LONG).show();
-            }
-            //发起请求获得用户许可,可以在此请求多个权限
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_STORAGE_WRITE_ACCESS_PERMISSION);
+            Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_LONG).show();
         } else {
             Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             //下面这句指定调用相机拍照后的照片存储的路径
@@ -145,13 +164,7 @@ public class CreateClassActivity extends SBaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
-            //权限为获取，检查用户是否被询问过并且拒绝了，如果是这样的话，给予更多
-            //解释
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                //在界面上展示为什么需要读取联系人
-                Toast.makeText(this, "需要访问外部存储才能正常工作", Toast.LENGTH_LONG).show();
-            }
-            //发起请求获得用户许可,可以在此请求多个权限
+            Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_LONG).show();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     REQUEST_STORAGE_READ_ACCESS_PERMISSION);
         } else {
@@ -161,7 +174,6 @@ public class CreateClassActivity extends SBaseActivity {
             pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
             startActivityForResult(pickIntent, GALLERY_REQUEST_CODE);
         }
-        Toast.makeText(this, "Pick From Gallery", Toast.LENGTH_SHORT).show();
     }
 
     //取消点击事件

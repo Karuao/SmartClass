@@ -1,7 +1,6 @@
 package team.qdu.smartclass.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.fragment.MainUserFragment;
 
 /**
  * 修改个人信息
@@ -78,7 +78,9 @@ public class ChangeInfoActivity extends SBaseActivity {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(ChangeInfoActivity.this,MainActivity.class));
+                //MainUserFragment的刷新标志设为true，下次进入该页面将刷新
+                MainUserFragment.refreshFlag = true;
+                finish();
             }
 
             @Override

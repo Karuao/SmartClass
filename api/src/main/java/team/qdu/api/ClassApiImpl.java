@@ -104,4 +104,38 @@ public class ClassApiImpl implements ClassApi {
             return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
         }
     }
+
+    @Override
+    public ApiResponse<Class> joinClass(String classId, String userId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("classId", classId);
+        paramMap.put("userId", userId);
+
+        Type type = new TypeToken<ApiResponse<Class>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/joinClass");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    public ApiResponse<Void> confirmJoinClass(String classId, String userId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("classId", classId);
+        paramMap.put("userId", userId);
+
+        Type type = new TypeToken<ApiResponse<Void>>(){
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/confirmJoinClass");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
 }

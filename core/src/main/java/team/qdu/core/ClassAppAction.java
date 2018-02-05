@@ -24,4 +24,10 @@ public interface ClassAppAction {
 
     //创建班课
     public void createClass(File avatar, String name, String course, String userId, ActionCallbackListener<String> listener);
+
+    //加入班课
+    public void joinClass(String classId, String userId, ActionCallbackListener<Class> listener);
+
+    //确认加入班课
+    public void confirmJoinClass(String classId, String userId, ActionCallbackListener<Void> listener);
 }

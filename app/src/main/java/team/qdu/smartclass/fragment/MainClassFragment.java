@@ -33,7 +33,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
     private ListView listView;
     private MainActivity parentActivity;
-    public static boolean refreshflag = false;
+    public static boolean refreshFlag = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,11 +45,13 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
         return view;
     }
 
+    //页面从后台返回到前台运行
     @Override
     public void onResume() {
         super.onResume();
-        if (refreshflag) {
+        if (refreshFlag) {
             getJoinedClasses();
+            refreshFlag = false;
         }
     }
 

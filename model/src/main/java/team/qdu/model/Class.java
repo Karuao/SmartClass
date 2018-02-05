@@ -22,8 +22,6 @@ public class Class implements Serializable {
 
     private Short population;
 
-    private String if_open;
-
     private String if_allow_to_join;
 
     private Integer user_id;
@@ -106,14 +104,6 @@ public class Class implements Serializable {
 
     public void setPopulation(Short population) {
         this.population = population;
-    }
-
-    public String getIf_open() {
-        return if_open;
-    }
-
-    public void setIf_open(String if_open) {
-        this.if_open = if_open == null ? null : if_open.trim();
     }
 
     public String getIf_allow_to_join() {

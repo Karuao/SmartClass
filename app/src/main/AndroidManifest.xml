@@ -39,6 +39,7 @@
         <activity android:name=".activity.PrepareClassActivity"></activity>
         <activity android:name=".activity.CropActivity"></activity>
         <activity android:name=".activity.ShowInviteCode"></activity>
+        <activity android:name=".activity.ConfirmJoinClassActivity"></activity>
     </application>
 
 </manifest>
