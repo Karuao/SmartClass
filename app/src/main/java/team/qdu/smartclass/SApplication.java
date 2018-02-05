@@ -24,7 +24,7 @@ public class SApplication extends Application {
 
     private ClassAppAction classAppAction;
 
-    private static List<Activity> lists = new ArrayList<>();
+    private static List<Activity> activityList = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -45,17 +45,16 @@ public class SApplication extends Application {
 
     //向list中添加Activity
     public static void addActivity(Activity activity) {
-        lists.add(activity);
+        activityList.add(activity);
     }
 
     //finish list中的所有的Activity
     public static void clearActivity() {
-        if (lists != null) {
-            for (Activity activity : lists) {
+        if (activityList != null) {
+            for (Activity activity : activityList) {
                 activity.finish();
             }
-
-            lists.clear();
+            activityList.clear();
         }
     }
 }
