@@ -92,10 +92,12 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                 System.out.println(message);
                 if ("teacher".equals(message)) {
                     Intent intent = new Intent(getContext(), TeaClassMainActivity.class);
+                    setClassId(classId);
                     intent.putExtra("classId", classId);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(getContext(), StuClassMainActivity.class);
+                    setClassId(classId);
                     intent.putExtra("classId", classId);
                     startActivity(intent);
                 }
