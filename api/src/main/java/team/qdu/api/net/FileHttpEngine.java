@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,7 +51,7 @@ public class FileHttpEngine {
      */
     public <T> T postHandle(Map<String, String> params, Map<String, File> files, Type typeofT, String urlTail)
             throws IOException {
-        HttpURLConnection conn = getConnection(urlTail);
+        HttpURLConnection connection = getConnection(urlTail);
         // 首先组拼文本类型的参数
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -64,7 +65,7 @@ public class FileHttpEngine {
             sb.append(entry.getValue());
             sb.append(LINEND);
         }
-        DataOutputStream outStream = new DataOutputStream(conn.getOutputStream());
+        DataOutputStream outStream = new DataOutputStream(connection.getOutputStream());
         outStream.write(sb.toString().getBytes());
         // 发送文件数据
         if (files != null)
@@ -92,23 +93,51 @@ public class FileHttpEngine {
         outStream.write(end_data);
         outStream.flush();
         // 得到响应码
-        int res = conn.getResponseCode();
-        InputStream in = conn.getInputStream();
-        StringBuilder sb2 = new StringBuilder();
-        if (res == 200) {
-            int ch;
-            while ((ch = in.read()) != -1) {
-                sb2.append((char) ch);
+//        int res = connection.getResponseCode();
+//        InputStream in = connection.getInputStream();
+//        StringBuilder sb2 = new StringBuilder();
+//        if (res == 200) {
+//            int ch;
+//            while ((ch = in.read()) != -1) {
+//                sb2.append((char) ch);
+//            }
+//        }
+//        outStream.close();
+//        connection.disconnect();
+//        //返回字符串
+//        final String result = sb2.toString();
+//        //打印出结果
+//        Log.i(TAG, "response:" + result);
+//        Gson gson = new Gson();
+//        return gson.fromJson(result, typeofT);
+        if (connection.getResponseCode() == 200) {
+            //获取相应的输入流对象
+            InputStream is = connection.getInputStream();
+            //创建字节输出流对象
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            //定义读取的长度
+            int len = 0;
+            //定义缓冲区
+            byte buffer[] = new byte[1024];
+            //按照缓冲区的大小，循环读取
+            while ((len = is.read(buffer)) != -1) {
+                //根据读取的长度写入到os对象中
+                baos.write(buffer, 0, len);
             }
+            //释放资源
+            is.close();
+            baos.close();
+            connection.disconnect();
+            //返回字符串
+            final String result = new String(baos.toByteArray());
+            //打印出结果
+            Log.i(TAG, "response:" + result);
+            Gson gson = new Gson();
+            return gson.fromJson(result, typeofT);
+        } else {
+            connection.disconnect();
+            return null;
         }
-        outStream.close();
-        conn.disconnect();
-        //返回字符串
-        final String result = sb2.toString();
-        //打印出结果
-        Log.i(TAG, "response:" + result);
-        Gson gson = new Gson();
-        return gson.fromJson(result, typeofT);
     }
 
     private HttpURLConnection getConnection(String urlTail) {
