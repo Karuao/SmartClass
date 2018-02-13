@@ -38,7 +38,7 @@ public class PrepareClassActivity extends SBaseActivity {
         initView();
         SharedPreferences sharedPreferences = this.getSharedPreferences("user", Activity.MODE_PRIVATE);
         String account = sharedPreferences.getString("account", null);
-        this.userAppAction.getUserInfor(account, new ActionCallbackListener<User>() {
+        this.userAppAction.getUserInforByAccount(account, new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
                 modifyUserAccount.setText(user.getAccount());

@@ -25,4 +25,17 @@ public interface ClassApi {
     public ApiResponse<Class> joinClass(String classId, String userId);
 
     public ApiResponse<Void> confirmJoinClass(String classId, String userId);
+
+    public ApiResponse<Void> notAllowToJoin(String classId);
+
+    public ApiResponse<Void> allowToJoin(String classId);
+
+    public ApiResponse<Class> searchByClassId(String classId);
+
+    public ApiResponse<Void> finishClass(String classId);
+
+    public ApiResponse<Void> deleteClass(String classId);
+
+    public ApiResponse<String> modifyClass(String classId,File avatar,String className,String course,String university,String department,String goal,String exam);
+
 }

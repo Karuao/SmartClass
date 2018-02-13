@@ -1,12 +1,22 @@
 package team.qdu.smartclass.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import team.qdu.api.ClassApi;
+import team.qdu.core.ActionCallbackListener;
+import team.qdu.core.ClassAppAction;
+import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.TeaClassFragmentPagerAdapter;
 
@@ -40,6 +50,11 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     public static final int PAGE_THREE = 2;
     public static final int PAGE_FOUR = 3;
     public static final int PAGE_FIVE = 4;
+
+    TextView allow;
+    CheckBox ifAllowTojoin;
+    TextView hint;
+    View hint2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +94,14 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         classVpager.setAdapter(teaClassFragmentPagerAdapter);
         classVpager.setCurrentItem(0);
         classVpager.addOnPageChangeListener(this);
+    }
+
+    //初始化View2
+    public void initView2(){
+        allow=(TextView)findViewById(R.id.tv_join);
+        ifAllowTojoin=(CheckBox)findViewById(R.id.chk_join);
+        hint=(TextView)findViewById(R.id.hint);
+        hint2=(View)findViewById(R.id.hint2);
     }
 
     //切换图片颜色
@@ -157,5 +180,123 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     @Override
     public void onPageScrollStateChanged(int i) {
     }
+
+
+    //结束班课按钮
+    public void finishClass(final View view){
+        this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
+            @Override
+            public void onSuccess(Class data, String message) {
+                if(data.getIf_allow_to_join().equals("已结束")){
+                    new AlertDialog.Builder(TeaClassMainActivity.this)
+                            .setTitle("提示")
+                            .setMessage("此班课已结束！")
+                            .setPositiveButton("确定",null)
+                            .show();
+                }else{
+                    initView2();
+                    new AlertDialog.Builder(TeaClassMainActivity.this)
+                            .setTitle("提示")
+                            .setMessage("确定要结束此班课？")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String classId=getClassId();
+                                    TeaClassMainActivity.this.classAppAction.finishClass(classId, new ActionCallbackListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void data, String message) {
+                                            allow.setVisibility(View.GONE);
+                                            ifAllowTojoin.setVisibility(View.GONE);
+                                            hint.setVisibility(View.GONE);
+                                            hint2.setVisibility(View.GONE);
+                                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onFailure(String errorEvent, String message) {
+                                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            })
+                            .setNegativeButton("取消",null)
+                            .show();
+                }
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //删除班课按钮
+  public void deleteClass(View view){
+        this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
+            @Override
+            public void onSuccess(Class data, String message) {
+                if(!data.getIf_allow_to_join().equals("已结束")){
+                    new AlertDialog.Builder(TeaClassMainActivity.this)
+                            .setTitle("提示")
+                            .setMessage("您还未结束此班课！")
+                            .setPositiveButton("确定",null)
+                            .show();
+                }else {
+                    new AlertDialog.Builder(TeaClassMainActivity.this)
+                            .setTitle("提示")
+                            .setMessage("确定要删除此班课？")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    TeaClassMainActivity.this.classAppAction.deleteClass(getClassId(), new ActionCallbackListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void data, String message) {
+                                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(TeaClassMainActivity.this,MainActivity.class));
+                                        }
+
+                                        @Override
+                                        public void onFailure(String errorEvent, String message) {
+                                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            })
+                            .setNegativeButton("取消",null)
+                            .show();
+                }
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+  }
+
+
+  //编辑班课按钮
+  public void compileClass(View view){
+      this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
+          @Override
+          public void onSuccess(Class data, String message) {
+              if(data.getIf_allow_to_join().equals("已结束")){
+                  new AlertDialog.Builder(TeaClassMainActivity.this)
+                          .setTitle("提示")
+                          .setMessage("班课结束后不允许编辑！")
+                          .show();
+              }else{
+                  startActivity(new Intent(TeaClassMainActivity.this,ModifyClassActivity.class));
+              }
+          }
+
+          @Override
+          public void onFailure(String errorEvent, String message) {
+              Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+          }
+      });
+  }
+
 }
 

@@ -156,5 +156,6 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
     @Override
     public void onPageScrollStateChanged(int i) {
     }
+
 }
 

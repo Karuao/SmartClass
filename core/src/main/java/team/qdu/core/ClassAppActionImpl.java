@@ -89,6 +89,107 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
+    public void notAllowToJoin(final String classId,final ActionCallbackListener<Void> listener){
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return classApi.notAllowToJoin(classId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void allowToJoin(final String classId,final ActionCallbackListener<Void> listener){
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return classApi.allowToJoin(classId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public Class getClassInfor(final String classId, final ActionCallbackListener<Class> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<Class>>() {
+            @Override
+            protected ApiResponse<Class> doInBackground(Void... params) {
+                return classApi.searchByClassId(classId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Class> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObj(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+        return null;
+    }
+
+    @Override
+    public void finishClass(final String classId,final ActionCallbackListener<Void> listener){
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return classApi.finishClass(classId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void deleteClass(final String classId,final ActionCallbackListener<Void> listener){
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return classApi.deleteClass(classId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
     public void createClass(final File avatar, final String name, final String course, final String userId, final ActionCallbackListener<String> listener) {
         if (TextUtils.isEmpty(name)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "班级不能为空");
@@ -103,6 +204,34 @@ public class ClassAppActionImpl implements ClassAppAction {
             @Override
             protected ApiResponse<String> doInBackground(Void... params) {
                 return classApi.createClass(avatar, name, course, userId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<String> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObj(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void compileClass(final String classId,final File avatar,final String className,final String course,final String university,final String department,final String goal,final String exam, final ActionCallbackListener<String> listener){
+        if (TextUtils.isEmpty(className)) {
+            listener.onFailure(ErrorEvent.PARAM_NULL, "班级不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(course)) {
+            listener.onFailure(ErrorEvent.PARAM_NULL, "课程不能为空");
+            return;
+        }
+        new AsyncTask<Void, Void, ApiResponse<String>>() {
+
+            @Override
+            protected ApiResponse<String> doInBackground(Void... params) {
+                return classApi.modifyClass(classId,avatar,className,course,university,department,goal,exam);
             }
 
             @Override

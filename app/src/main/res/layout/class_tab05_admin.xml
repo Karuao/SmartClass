@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/img_class"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:src="@drawable/add_class_img"
             />
         <TextView
@@ -143,29 +143,128 @@
         android:background="#d6d6d6" />
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_white">
+
+        <TextView
+            android:id="@+id/tv_class_goal_admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:text="学习目标"
+            android:textColor="@color/bg_black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_class_goal_details_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_class_goal_admin"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:width="120dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            android:textColor="@color/little_black"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#d6d6d6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#d6d6d6" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_white">
+
+        <TextView
+            android:id="@+id/tv_class_exam_admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:text="考试安排"
+            android:textColor="@color/bg_black"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/tv_class_exam_details_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_class_exam_admin"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:width="120dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            android:textColor="@color/little_black"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+
+        <View
+            android:id="@+id/hint2"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#d6d6d6" />
+
+        <TextView
+            android:id="@+id/hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#d6d6d6" />
+
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/bg_white">
 
         <TextView
+            android:id="@+id/tv_join"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="允许加入"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:text="允许加入"
             android:textColor="@color/bg_black"
-            />
+            android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/chk_join"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:background="@null"
             android:buttonTint="@color/title"
-            android:checked="true"
             android:duplicateParentState="false"
-            android:layout_alignParentRight="true"
             android:textColor="#000000"
             android:textSize="15sp" />
 
@@ -189,7 +288,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/bg_white"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:onClick="compileClass">
 
         <TextView
             android:id="@+id/tv_class_copy"
@@ -199,12 +299,14 @@
             android:textColor="@color/classbottom"
             android:layout_alignParentLeft="true"
             android:layout_marginRight="15dp"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:onClick="compileClass"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:src="@drawable/right_goview"
+            android:onClick="compileClass"
             />
 
 
@@ -239,7 +341,8 @@
             android:text="结束班课"
             android:textColor="@color/text_yellow"
             android:textSize="16sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            android:onClick="finishClass"/>
 
     </LinearLayout>
 
@@ -276,7 +379,8 @@
             android:text="删除班课"
             android:textColor="@color/colorRank"
             android:textSize="16sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            android:onClick="deleteClass"/>
 
     </LinearLayout>
 

@@ -49,8 +49,8 @@ public class RetrieveThreeActivity extends SBaseActivity {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RetrieveThreeActivity.this, LoginActivity.class);
-                startActivity(intent);
+                finish();
+                application.clearActivity();
             }
         });
     }

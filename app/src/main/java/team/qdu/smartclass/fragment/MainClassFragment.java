@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,8 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
     private ListView listView;
     private MainActivity parentActivity;
+    TextView allow;
+    CheckBox ifAllowTojoin;
     public static boolean refreshFlag = false;
 
     @Override
@@ -40,6 +43,8 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
         View view = inflater.inflate(R.layout.fragment_main_class, container, false);
         parentActivity = (MainActivity) getActivity();
         listView = (ListView) view.findViewById(R.id.list_mainclass);
+        allow=(TextView)view.findViewById(R.id.tv_join);
+        ifAllowTojoin=(CheckBox)view.findViewById(R.id.chk_join);
         getJoinedClasses();
         listView.setOnItemClickListener(this);
         return view;
@@ -81,6 +86,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
             }
         });
     }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

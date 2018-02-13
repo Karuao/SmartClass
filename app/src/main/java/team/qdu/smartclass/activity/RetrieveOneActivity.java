@@ -48,6 +48,7 @@ public class RetrieveOneActivity extends SBaseActivity {
                 b1.putString("account",user.getAccount());
                 intent.putExtras(b1);
                 storeAccount(user.getAccount());
+                application.addActivity(RetrieveOneActivity.this);
                 startActivity(intent);
             }
         });

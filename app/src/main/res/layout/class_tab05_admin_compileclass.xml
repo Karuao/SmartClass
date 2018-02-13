@@ -66,10 +66,12 @@
 
 
             <ImageView
+                android:id="@+id/modifyClassAvatar"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
+                android:onClick="showSelectPopup"
                 android:src="@drawable/add_class_img" />
 
             <TextView
@@ -108,6 +110,7 @@
                     android:gravity="right">
 
                     <EditText
+                        android:id="@+id/modifyClassName"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -115,7 +118,10 @@
                         android:ems="15"
                         android:gravity="right"
                         android:textCursorDrawable="@color/bg_black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="32"/>
                 </LinearLayout>
 
 
@@ -157,6 +163,7 @@
                     android:gravity="right">
 
                     <EditText
+                        android:id="@+id/modifyCourse"
                         android:layout_width="200dp"
                         android:layout_height="fill_parent"
                         android:layout_centerVertical="true"
@@ -164,7 +171,10 @@
                         android:ems="15"
                         android:gravity="right"
                         android:textCursorDrawable="@color/bg_black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="20"/>
                 </LinearLayout>
 
 
@@ -205,6 +215,7 @@
                     android:gravity="right">
 
                     <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/modifyClassUniversity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:entries="@array/school"
@@ -248,6 +259,7 @@
                     android:gravity="right">
 
                     <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/modifyClassDepartment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:entries="@array/department"
@@ -259,7 +271,15 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
-                android:layout_marginTop="20dp"
+                android:background="#d6d6d6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
                 android:background="#d6d6d6" />
 
 
@@ -284,6 +304,7 @@
                     android:gravity="right">
 
                     <EditText
+                        android:id="@+id/modifyClassGoal"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -291,7 +312,10 @@
                         android:ems="15"
                         android:gravity="right"
                         android:textCursorDrawable="@color/bg_black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="200"/>
                 </LinearLayout>
 
 
@@ -334,6 +358,7 @@
                     android:gravity="right">
 
                     <EditText
+                        android:id="@+id/modifyClassExam"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -341,7 +366,10 @@
                         android:ems="15"
                         android:gravity="right"
                         android:textCursorDrawable="@color/bg_black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="200"/>
                 </LinearLayout>
 
 
@@ -361,12 +389,13 @@
                 android:layout_marginTop="15dp">
 
                 <Button
+                    android:id="@+id/modifyFinished"
                     android:layout_width="221dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/shape_button"
                     android:gravity="center"
-                    android:onClick="finishCreate"
+                    android:onClick="finishModify"
                     android:padding="10dp"
                     android:text="完成修改"
                     android:textColor="#fff"

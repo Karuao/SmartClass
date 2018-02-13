@@ -58,7 +58,7 @@ public class MainUserFragment extends SBaseFragment {
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("user", Activity.MODE_PRIVATE);
         String account=sharedPreferences.getString("account",null);
         MainActivity parentActivity= (MainActivity) getActivity();
-        parentActivity.userAppAction.getUserInfor(account,new ActionCallbackListener<User>() {
+        parentActivity.userAppAction.getUserInforByAccount(account,new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
                 userAccount.setText(user.getAccount());

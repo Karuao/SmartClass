@@ -84,6 +84,22 @@ public class UserApiImpl implements UserApi {
     }
 
     @Override
+    public ApiResponse<User> searchById(String userId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("userId", userId);
+
+        Type type = new TypeToken<ApiResponse<User>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/searchById");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+    @Override
     public ApiResponse<Void> updatePassword(String account, String newPass) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("account",account);
