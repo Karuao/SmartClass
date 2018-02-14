@@ -70,4 +70,9 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
             }
         });
     }
+
+    //左上角返回点击事件
+    public void toBack(View view) {
+        finish();
+    }
 }

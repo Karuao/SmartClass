@@ -77,6 +77,14 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
         parentActivity.classAppAction.getJoinedClasses(getUserId(), new ActionCallbackListener<List<Class>>() {
             @Override
             public void onSuccess(List<Class> data, String message) {
+                //将已结束班课放到List末端
+                for (int i = 0; i < data.size();) {
+                    if ("已结束".equals(data.get(0))) {
+                        data.add(data.remove(i));
+                    } else {
+                        i++;
+                    }
+                }
                 listView.setAdapter(new ClassAdapter(getActivity(), data));
             }
 
@@ -90,7 +98,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final String classId = ((TextView)view.findViewById(R.id.tv_class_id)).getText().toString();
+        final String classId = ((TextView) view.findViewById(R.id.tv_class_id)).getText().toString();
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
         parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<Void>() {
             @Override

@@ -41,8 +41,6 @@ import java.net.URISyntaxException;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.adapter.ClassAdapter;
-import team.qdu.smartclass.fragment.MainClassFragment;
 import team.qdu.smartclass.fragment.TeaClassDetailFragment;
 
 /**
@@ -88,10 +86,10 @@ public class ModifyClassActivity extends SBaseActivity{
         this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
             @Override
             public void onSuccess(Class data, String message) {
-           classnameEdt.setText(data.getName());
-           courseEdt.setText(data.getCourse());
-           goalEdt.setText(data.getDetail());
-           examEdt.setText(data.getExam_shedule());
+                classnameEdt.setText(data.getName());
+                courseEdt.setText(data.getCourse());
+                goalEdt.setText(data.getDetail());
+                examEdt.setText(data.getExam_shedule());
                 //从服务器获取图片
                 ModifyClassActivity.this.classAppAction.getBitmap(data.getAvatar(), new ActionCallbackListener<Bitmap>() {
                     @Override
@@ -103,8 +101,8 @@ public class ModifyClassActivity extends SBaseActivity{
                     public void onFailure(String errorEvent, String message) {
                     }
                 });
-           setSpinnerItemSelectedByValue(universitySpin,data.getUniversity());
-           setSpinnerItemSelectedByValue(departmentSpin,data.getDepartment());
+                setSpinnerItemSelectedByValue(universitySpin,data.getUniversity());
+                setSpinnerItemSelectedByValue(departmentSpin,data.getDepartment());
             }
 
             @Override
