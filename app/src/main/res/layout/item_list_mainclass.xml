@@ -16,7 +16,6 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginLeft="5dp"
-
         android:src="@drawable/add_class_img" />
 
     <TextView
