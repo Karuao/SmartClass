@@ -37,7 +37,7 @@ public class SApplication extends Application {
         //初始化JPush SDK
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
-        //StrictMode忘了干什么用了-.-
+        //配置StrictMode忘了干什么用了-.-
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         userAppAction = new UserAppActionImpl(this);

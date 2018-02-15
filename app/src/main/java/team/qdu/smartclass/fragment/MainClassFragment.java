@@ -78,9 +78,11 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
             @Override
             public void onSuccess(List<Class> data, String message) {
                 //将已结束班课放到List末端
-                for (int i = 0; i < data.size();) {
-                    if ("已结束".equals(data.get(0))) {
+                int size = data.size();
+                for (int i = 0; i < size;) {
+                    if ("已结束".equals(data.get(i).getIf_allow_to_join())) {
                         data.add(data.remove(i));
+                        size--;
                     } else {
                         i++;
                     }

@@ -2,6 +2,10 @@ package team.qdu.smartclass.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -38,7 +42,7 @@ public class ClassAdapter extends SBaseAdapter<Class> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         Compo compo = null;
         if (convertView == null) {
             compo = new Compo();
@@ -63,7 +67,14 @@ public class ClassAdapter extends SBaseAdapter<Class> {
         ((MainActivity) context).classAppAction.getBitmap(itemList.get(position).getAvatar(), new ActionCallbackListener<Bitmap>() {
             @Override
             public void onSuccess(Bitmap data, String message) {
-                finalCompo.classImg.setImageBitmap(data);
+                //已结束班课班课封面在图片之上加一层灰色图层
+                if ("已结束".equals(itemList.get(position).getIf_allow_to_join())) {
+                    Drawable drawable = new BitmapDrawable(data);
+                    drawable.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+                    finalCompo.classImg.setImageDrawable(drawable);
+                } else {
+                    finalCompo.classImg.setImageBitmap(data);
+                }
             }
 
             @Override
