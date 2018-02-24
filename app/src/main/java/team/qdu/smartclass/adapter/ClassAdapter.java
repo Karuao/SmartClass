@@ -48,9 +48,9 @@ public class ClassAdapter extends SBaseAdapter<Class> {
             compo = new Compo();
             //获得组件，实例化组件
             convertView = layoutInflater.inflate(R.layout.item_list_mainclass, null);
-            compo.classIdTxt = (TextView) convertView.findViewById(R.id.tv_class_id);
-            compo.titleTxt = (TextView) convertView.findViewById(R.id.titleTv);
-            compo.classNameTxt = (TextView) convertView.findViewById(R.id.tv_classname);
+            compo.classIdTxt = (TextView) convertView.findViewById(R.id.txt_classId);
+            compo.titleTxt = (TextView) convertView.findViewById(R.id.txt_title);
+            compo.classNameTxt = (TextView) convertView.findViewById(R.id.txt_className);
             compo.teacherTxt = (TextView) convertView.findViewById(R.id.tv_teacher);
             compo.classImg = (ImageView) convertView.findViewById(R.id.img_class);
             convertView.setTag(compo);

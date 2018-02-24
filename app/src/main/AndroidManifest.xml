@@ -39,7 +39,7 @@
         <activity android:name=".activity.CropActivity"></activity>
         <activity android:name=".activity.ShowInviteCode"></activity>
         <activity android:name=".activity.ConfirmJoinClassActivity"></activity>
-        <!--<activity android:name=".activity.PublishHomeworkActivity"></activity>-->
+        <activity android:name=".activity.PublishHomeworkActivity"></activity>
         <activity android:name=".activity.ModifyClassActivity"></activity>
     </application>
 

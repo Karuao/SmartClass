@@ -5,10 +5,12 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 
 import java.io.File;
+import java.util.List;
 
 import team.qdu.api.HomeworkApi;
 import team.qdu.api.HomeworkApiImpl;
 import team.qdu.model.ApiResponse;
+import team.qdu.model.Homework;
 
 /**
  * Created by 11602 on 2018/2/8.
@@ -46,6 +48,26 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
             protected void onPostExecute(ApiResponse<Void> response) {
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void getHomeworkList(final String classId, final String userId, final String userTitle, final String requestStatus, final ActionCallbackListener<List<Homework>> listener) {
+        new AsyncTask<Void, Void, ApiResponse<List<Homework>>>() {
+
+            @Override
+            protected ApiResponse<List<Homework>> doInBackground(Void... params) {
+                return homeworkApi.getHomeworkList(classId, userId, userTitle, requestStatus);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<List<Homework>> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {
                     listener.onFailure(response.getEvent(), response.getMsg());
                 }

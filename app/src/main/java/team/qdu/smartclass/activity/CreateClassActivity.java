@@ -115,6 +115,7 @@ public class CreateClassActivity extends SBaseActivity {
             public void onSuccess(String data, String message) {
                 MainClassFragment.refreshFlag = true;
                 setClassId(data);
+                setUserTitle("teacher");
                 Intent intent = new Intent(CreateClassActivity.this, ShowInviteCode.class);
                 intent.putExtra("avatarUri", mDestinationUri);
                 finish();

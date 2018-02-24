@@ -58,6 +58,7 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
             public void onSuccess(Void data1, String message) {
                 Toast.makeText(ConfirmJoinClassActivity.this, message, Toast.LENGTH_SHORT).show();
                 setClassId(data.getClass_id().toString());
+                setUserTitle("student");
                 MainClassFragment.refreshFlag = true;
                 application.clearActivity();
                 finish();

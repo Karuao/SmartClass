@@ -59,12 +59,12 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
         tabUser = (LinearLayout) findViewById(R.id.tab02);
         imgClass = (ImageButton) findViewById(R.id.class_img);
         imgUser = (ImageButton) findViewById(R.id.user_img);
-        mainVpager.setAdapter(mainFragmentPagerAdapter);
-        mainVpager.addOnPageChangeListener(this);
     }
 
     //点击效果
     private void initEvents() {
+        mainVpager.setAdapter(mainFragmentPagerAdapter);
+        mainVpager.addOnPageChangeListener(this);
         tabClass.setOnClickListener(this);
         tabUser.setOnClickListener(this);
     }

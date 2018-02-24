@@ -100,7 +100,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final String classId = ((TextView) view.findViewById(R.id.tv_class_id)).getText().toString();
+        final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
         parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<Void>() {
             @Override
@@ -109,11 +109,13 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                 if ("teacher".equals(message)) {
                     Intent intent = new Intent(getContext(), TeaClassMainActivity.class);
                     setClassId(classId);
+                    setUserTitle("teacher");
                     intent.putExtra("classId", classId);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(getContext(), StuClassMainActivity.class);
                     setClassId(classId);
+                    setUserTitle("student");
                     intent.putExtra("classId", classId);
                     startActivity(intent);
                 }

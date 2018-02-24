@@ -40,4 +40,19 @@ public abstract class SBaseFragment extends Fragment {
         editor.putString("classId", classId);
         editor.commit();
     }
+
+    //从SharedPreferences获取title老师/学生
+    public String getUserTitle() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user",
+                Activity.MODE_PRIVATE);
+        return  sharedPreferences.getString("userTitle", null);
+    }
+
+    public void setUserTitle(String userTitle) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user",
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userTitle", userTitle);
+        editor.commit();
+    }
 }
