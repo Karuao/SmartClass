@@ -195,12 +195,34 @@ public class UserAppActionImpl implements UserAppAction {
 
     //获取用户信息
     @Override
-    public User getUserInfor(final String account, final ActionCallbackListener<User> listener) {
+    public User getUserInforByAccount(final String account, final ActionCallbackListener<User> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<User>>() {
             @Override
             protected ApiResponse<User> doInBackground(Void... params) {
                 return userApi.searchByAccount(account);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<User> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObj(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+        return null;
+    }
+
+    //获取用户信息
+    @Override
+    public User getUserInforById(final String userId, final ActionCallbackListener<User> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<User>>() {
+            @Override
+            protected ApiResponse<User> doInBackground(Void... params) {
+                return userApi.searchById(userId);
             }
 
             @Override

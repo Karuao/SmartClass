@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/img_class"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:src="@drawable/add_class_img" />
 
         <TextView
@@ -81,6 +81,16 @@
 
     </RelativeLayout>
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#d6d6d6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
@@ -118,6 +128,15 @@
             android:textSize="16sp" />
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#d6d6d6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="match_parent"

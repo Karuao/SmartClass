@@ -59,12 +59,12 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
         tabUser = (LinearLayout) findViewById(R.id.tab02);
         imgClass = (ImageButton) findViewById(R.id.class_img);
         imgUser = (ImageButton) findViewById(R.id.user_img);
-        mainVpager.setAdapter(mainFragmentPagerAdapter);
-        mainVpager.addOnPageChangeListener(this);
     }
 
     //点击效果
     private void initEvents() {
+        mainVpager.setAdapter(mainFragmentPagerAdapter);
+        mainVpager.addOnPageChangeListener(this);
         tabClass.setOnClickListener(this);
         tabUser.setOnClickListener(this);
     }
@@ -99,7 +99,9 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
         popupWindow.dismiss();
         if (userGender.getText().toString().isEmpty() || userDepartment.getText().toString().isEmpty()
                 || userUniversity.toString().isEmpty()) {
-            startActivity(new Intent(MainActivity.this, PrepareClassActivity.class));
+            Intent intent = new Intent(MainActivity.this, PrepareClassActivity.class);
+            intent.putExtra("do", "create");
+            startActivity(intent);
         } else {
             startActivity(new Intent(MainActivity.this, CreateClassActivity.class));
         }
@@ -113,11 +115,12 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
         popupWindow.dismiss();
         if (userGender.getText().toString().isEmpty() || userDepartment.getText().toString().isEmpty()
                 || userUniversity.toString().isEmpty()) {
-            startActivity(new Intent(MainActivity.this, PrepareClassActivity.class));
+            Intent intent = new Intent(MainActivity.this, PrepareClassActivity.class);
+            intent.putExtra("do", "join");
+            startActivity(intent);
         } else {
             startActivity(new Intent(MainActivity.this, JoinClassActivity.class));
         }
-        startActivity(new Intent(MainActivity.this, JoinClassActivity.class));
     }
 
     @Override

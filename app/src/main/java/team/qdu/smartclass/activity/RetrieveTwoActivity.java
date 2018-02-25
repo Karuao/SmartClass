@@ -36,7 +36,7 @@ public class RetrieveTwoActivity extends SBaseActivity {
         initView();
         SharedPreferences sharedPreferences = this.getSharedPreferences("user",Activity.MODE_PRIVATE);
         String account = sharedPreferences.getString("account", null);
-        this.userAppAction.getUserInfor(account,new ActionCallbackListener<User>() {
+        this.userAppAction.getUserInforByAccount(account,new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
                 quesView.setText(user.getSecurity_question());
@@ -53,7 +53,7 @@ public class RetrieveTwoActivity extends SBaseActivity {
         final String inputAnswer = answerEdt.getText().toString();
         SharedPreferences sharedPreferences = this.getSharedPreferences("user", Activity.MODE_PRIVATE);
         String account = sharedPreferences.getString("account", null);
-        this.userAppAction.getUserInfor(account,new ActionCallbackListener<User>() {
+        this.userAppAction.getUserInforByAccount(account,new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
                 String answer=user.getSecurity_answer();
@@ -66,6 +66,7 @@ public class RetrieveTwoActivity extends SBaseActivity {
                     @Override
                     public void onSuccess(Void data, String message) {
                         Intent intent = new Intent(RetrieveTwoActivity.this, RetrieveThreeActivity.class);
+                        application.addActivity(RetrieveTwoActivity.this);
                         startActivity(intent);
                     }
                 });

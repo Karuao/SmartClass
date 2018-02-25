@@ -22,6 +22,30 @@ public interface ClassAppAction {
     //获取图片
     public void getBitmap(String urlTail, ActionCallbackListener<Bitmap> listener);
 
+    //不允许加入班课
+    public void notAllowToJoin(String classId,ActionCallbackListener<Void> listener);
+
+    //允许加入班课
+    public void allowToJoin(String classId,ActionCallbackListener<Void> listener);
+
+    //获得课程信息
+    public  Class getClassInfor(String classId,ActionCallbackListener<Class> listener);
+
+    //结束班课
+    public void finishClass(String classId,ActionCallbackListener<Void> listener);
+
+    //删除班课
+    public void deleteClass(String classId,ActionCallbackListener<Void> listener);
+
+    //编辑班课
+    public void compileClass(String classId,File avatar,String className,String course,String university,String department,String goal,String exam,ActionCallbackListener<String> listener);
+
     //创建班课
     public void createClass(File avatar, String name, String course, String userId, ActionCallbackListener<String> listener);
+
+    //加入班课
+    public void joinClass(String classId, String userId, ActionCallbackListener<Class> listener);
+
+    //确认加入班课
+    public void confirmJoinClass(String classId, String userId, ActionCallbackListener<Void> listener);
 }

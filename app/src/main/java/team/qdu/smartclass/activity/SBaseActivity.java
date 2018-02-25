@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.InformAppAction;
+import team.qdu.core.HomeworkAppAction;
 import team.qdu.core.UserAppAction;
 import team.qdu.smartclass.SApplication;
 
@@ -32,6 +33,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
 
     public InformAppAction informAppAction;
 
+    public HomeworkAppAction homeworkAppAction;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -42,6 +44,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
         classAppAction = application.getClassAppAction();
         informAppAction = application.getInformAppAction();
 
+        homeworkAppAction = application.getHomeworkAppAction();
     }
 
     //从SharedPreferences获取userId
@@ -71,6 +74,21 @@ public abstract class SBaseActivity extends AppCompatActivity {
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("classId", classId);
+        editor.commit();
+    }
+
+    //从SharedPreferences获取title老师/学生
+    public String getUserTitle() {
+        SharedPreferences sharedPreferences = getSharedPreferences("user",
+                Activity.MODE_PRIVATE);
+        return  sharedPreferences.getString("userTitle", null);
+    }
+
+    public void setUserTitle(String userTitle) {
+        SharedPreferences sharedPreferences = getSharedPreferences("user",
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userTitle", userTitle);
         editor.commit();
     }
 }

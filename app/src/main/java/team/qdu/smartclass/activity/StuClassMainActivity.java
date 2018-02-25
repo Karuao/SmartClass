@@ -94,6 +94,10 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         startActivity(new Intent(StuClassMainActivity.this, SigninActivity.class));
     }
 
+    //左上角返回点击事件
+    public void toBack(View view) {
+        finish();
+    }
 
     @Override
     public void onClick(View view) {
@@ -152,5 +156,6 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
     @Override
     public void onPageScrollStateChanged(int i) {
     }
+
 }
 

@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -31,6 +32,9 @@
         <activity android:name=".activity.SetActivity"></activity>
         <activity android:name=".activity.CreateClassActivity"></activity>
         <activity android:name=".activity.TestActivity"></activity>
+        <activity
+            android:name=".activity.CreateClassActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.SigninActivity"></activity>
         <activity android:name=".activity.TeaInformDetailActivity"></activity>
         <activity android:name=".activity.StuInformDetailActivity"></activity>
@@ -40,6 +44,9 @@
         <activity android:name=".activity.PrepareClassActivity"></activity>
         <activity android:name=".activity.CropActivity"></activity>
         <activity android:name=".activity.ShowInviteCode"></activity>
+        <activity android:name=".activity.ConfirmJoinClassActivity"></activity>
+        <activity android:name=".activity.PublishHomeworkActivity"></activity>
+        <activity android:name=".activity.ModifyClassActivity"></activity>
     </application>
 
 </manifest>

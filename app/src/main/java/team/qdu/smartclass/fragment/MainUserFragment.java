@@ -6,7 +6,6 @@ package team.qdu.smartclass.fragment;
  */
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +28,9 @@ public class MainUserFragment extends SBaseFragment {
     TextView userDepartment;
     TextView userMotto;
 
+    //刷新页面标志
+    public static boolean refreshFlag = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_main_user, container, false);
@@ -38,25 +40,39 @@ public class MainUserFragment extends SBaseFragment {
         userUniversity=(TextView) view.findViewById(R.id.userUniversity);
         userDepartment=(TextView) view.findViewById(R.id.userDepartment);
         userMotto=(TextView) view.findViewById(R.id.userMotto);
+        initView();
+        return view;
+    }
+
+    //页面从后台返回到前台运行
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (refreshFlag) {
+            initView();
+            refreshFlag = false;
+        }
+    }
+
+    private void initView() {
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("user", Activity.MODE_PRIVATE);
         String account=sharedPreferences.getString("account",null);
         MainActivity parentActivity= (MainActivity) getActivity();
-        parentActivity.userAppAction.getUserInfor(account,new ActionCallbackListener<User>() {
+        parentActivity.userAppAction.getUserInforByAccount(account,new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
-                    userAccount.setText(user.getAccount());
-                    userName.setText(user.getName());
-                    userGender.setText(user.getGender());
-                    userUniversity.setText(user.getUniversity());
-                    userDepartment.setText(user.getDepartment());
-                    userMotto.setText(user.getStatus_message());
-                }
+                userAccount.setText(user.getAccount());
+                userName.setText(user.getName());
+                userGender.setText(user.getGender());
+                userUniversity.setText(user.getUniversity());
+                userDepartment.setText(user.getDepartment());
+                userMotto.setText(user.getStatus_message());
+            }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             }
         });
-        return view;
     }
 }

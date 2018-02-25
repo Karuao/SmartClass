@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--编辑班课页面-->
+<?xml version="1.0" encoding="utf-8"?><!--编辑班课页面-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -14,49 +13,51 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <LinearLayout android:orientation="vertical"
-                android:id="@+id/class_top"
-                android:layout_height="45dp"
-                android:layout_width="match_parent"
-                >
 
-                <LinearLayout android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/class_top"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:orientation="horizontal"
                     android:background="@color/title"
-                    >
+                    android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:layout_weight="5"
-                        android:orientation="horizontal"
                         android:gravity="center"
-                        >
+                        android:orientation="horizontal">
+
                         <ImageButton
                             android:id="@+id/iv_class_top1_back"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="5dp"
-                            android:onClick="toBack"
                             android:background="#00000000"
-                            android:src="@drawable/left_goback"/>
+                            android:onClick="toBack"
+                            android:src="@drawable/left_goback" />
+
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="30dp"
                             android:layout_height="fill_parent"
-                            android:src="@drawable/head2"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="5dp"
-                            />
+                            android:src="@drawable/head2" />
+
                         <TextView
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:text="编辑班课"
-                            android:textSize="21sp"
-                            android:textColor="@color/bg_white"
-                            android:textStyle="normal"
                             android:layout_marginLeft="5dp"
-                            />
+                            android:text="编辑班课"
+                            android:textColor="@color/bg_white"
+                            android:textSize="21sp"
+                            android:textStyle="normal" />
                     </LinearLayout>
 
 
@@ -65,26 +66,27 @@
 
 
             <ImageView
+                android:id="@+id/modifyClassAvatar"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/add_class_img"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                />
+                android:onClick="showSelectPopup"
+                android:src="@drawable/add_class_img" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:text="班课封面"
-                />
+                android:text="班课封面" />
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
-                android:background="#d6d6d6"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:background="#d6d6d6" />
 
 
             <RelativeLayout
@@ -99,22 +101,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="班级"
-                    android:textSize="18sp"
-                    android:textColor="@color/bg_black"/>
+                    android:textColor="@color/bg_black"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
+
                     <EditText
+                        android:id="@+id/modifyClassName"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:ems="15"
+                        android:gravity="right"
                         android:textCursorDrawable="@color/bg_black"
                         android:textSize="18sp"
-                        android:gravity="right"/>
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="32"/>
                 </LinearLayout>
 
 
@@ -125,6 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="#d6d6d6" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -146,22 +154,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="课程"
-                    android:textSize="18sp"
-                    android:textColor="@color/bg_black"/>
+                    android:textColor="@color/bg_black"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
+
                     <EditText
+                        android:id="@+id/modifyCourse"
                         android:layout_width="200dp"
                         android:layout_height="fill_parent"
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:ems="15"
+                        android:gravity="right"
                         android:textCursorDrawable="@color/bg_black"
                         android:textSize="18sp"
-                        android:gravity="right"/>
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="20"/>
                 </LinearLayout>
 
 
@@ -171,6 +184,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="#d6d6d6" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -192,19 +206,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="学校"
-                    android:textSize="18sp"
-                    android:textColor="@color/bg_black"/>
+                    android:textColor="@color/bg_black"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
+
                     <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/modifyClassUniversity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
                         android:entries="@array/school"
-                        />
+                        android:gravity="right" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -213,6 +228,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="#d6d6d6" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -234,19 +250,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="院系"
-                    android:textSize="18sp"
-                    android:textColor="@color/bg_black"/>
+                    android:textColor="@color/bg_black"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
+
                     <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/modifyClassDepartment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:entries="@array/department"
-                        android:gravity="right"
-                        />
+                        android:gravity="right" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -254,8 +271,16 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
-                android:background="#d6d6d6"
-                android:layout_marginTop="20dp"/>
+                android:background="#d6d6d6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="#d6d6d6" />
 
 
             <RelativeLayout
@@ -270,22 +295,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="学习目标"
-                    android:textSize="18sp"
-                    android:textColor="@color/bg_black"/>
+                    android:textColor="@color/bg_black"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
+
                     <EditText
+                        android:id="@+id/modifyClassGoal"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:ems="15"
+                        android:gravity="right"
                         android:textCursorDrawable="@color/bg_black"
                         android:textSize="18sp"
-                        android:gravity="right"/>
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="200"/>
                 </LinearLayout>
 
 
@@ -296,6 +326,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="#d6d6d6" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -304,8 +335,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="#d6d6d6" />
-
-
 
 
             <RelativeLayout
@@ -320,22 +349,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="考试安排"
-                    android:textSize="18sp"
-                    android:textColor="@color/bg_black"/>
+                    android:textColor="@color/bg_black"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
+
                     <EditText
+                        android:id="@+id/modifyClassExam"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:ems="15"
+                        android:gravity="right"
                         android:textCursorDrawable="@color/bg_black"
                         android:textSize="18sp"
-                        android:gravity="right"/>
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="200"/>
                 </LinearLayout>
 
 
@@ -348,27 +382,24 @@
                 android:background="#d6d6d6" />
 
 
-
-
-
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp">
 
                 <Button
+                    android:id="@+id/modifyFinished"
                     android:layout_width="221dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/shape_button"
-                    android:onClick="finishCreate"
                     android:gravity="center"
+                    android:onClick="finishModify"
                     android:padding="10dp"
                     android:text="完成修改"
                     android:textColor="#fff"
-                    android:textSize="18sp"
-                    />
+                    android:textSize="18sp" />
 
             </RelativeLayout>
 

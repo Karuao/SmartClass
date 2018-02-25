@@ -6,8 +6,6 @@ import java.util.Date;
 public class Class implements Serializable {
     private Integer class_id;
 
-    private Integer invite_code;
-
     private String name;
 
     private String avatar;
@@ -18,15 +16,11 @@ public class Class implements Serializable {
 
     private String department;
 
-    private String textbook;
-
     private String detail;
 
     private String exam_shedule;
 
     private Short population;
-
-    private String if_open;
 
     private String if_allow_to_join;
 
@@ -46,14 +40,6 @@ public class Class implements Serializable {
 
     public void setClass_id(Integer class_id) {
         this.class_id = class_id;
-    }
-
-    public Integer getInvite_code() {
-        return invite_code;
-    }
-
-    public void setInvite_code(Integer invite_code) {
-        this.invite_code = invite_code;
     }
 
     public String getName() {
@@ -96,14 +82,6 @@ public class Class implements Serializable {
         this.department = department == null ? null : department.trim();
     }
 
-    public String getTextbook() {
-        return textbook;
-    }
-
-    public void setTextbook(String textbook) {
-        this.textbook = textbook == null ? null : textbook.trim();
-    }
-
     public String getDetail() {
         return detail;
     }
@@ -126,14 +104,6 @@ public class Class implements Serializable {
 
     public void setPopulation(Short population) {
         this.population = population;
-    }
-
-    public String getIf_open() {
-        return if_open;
-    }
-
-    public void setIf_open(String if_open) {
-        this.if_open = if_open == null ? null : if_open.trim();
     }
 
     public String getIf_allow_to_join() {

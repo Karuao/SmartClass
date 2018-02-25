@@ -6,3 +6,11 @@
 5.homework（作业表）添加字段homework_status、deadline
 6.homework_answer（学生提交作业表）添加字段class_id
 7.materail（教学资源表）删除字段if_publish、publish_date_time
+
+班课数据库表设计v1.4
+1.class（班课表）添加字段avatar、course
+2.class_user（班课用户关系表）添加字段title
+3.material（教学资源表）url数据类型varchar(32)改为tinytext
+4.user（用户表） avatar数据类型varchar(32)改为tinytext
+5.class（班课表）avatar数据类型varchar(32)改为tinytext
+7.class（班课表）删除字段invite_code、textbook
