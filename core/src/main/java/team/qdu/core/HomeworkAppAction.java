@@ -16,4 +16,7 @@ public interface HomeworkAppAction {
 
     //获取班课列表
     public void getHomeworkList(String classId, String userId, String userTitle, String requestStatus, ActionCallbackListener<List<Homework>> listener);
+
+    //更改作业状态
+    public void changeHomeworkStatus(String homeworkId, String homeworkStatus, ActionCallbackListener<Void> listener);
 }

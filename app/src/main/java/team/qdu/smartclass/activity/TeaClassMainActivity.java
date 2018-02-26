@@ -9,13 +9,10 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import team.qdu.api.ClassApi;
 import team.qdu.core.ActionCallbackListener;
-import team.qdu.core.ClassAppAction;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.TeaClassFragmentPagerAdapter;
@@ -97,11 +94,11 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     }
 
     //初始化View2
-    public void initView2(){
-        allow=(TextView)findViewById(R.id.tv_join);
-        ifAllowTojoin=(CheckBox)findViewById(R.id.chk_join);
-        hint=(TextView)findViewById(R.id.hint);
-        hint2=(View)findViewById(R.id.hint2);
+    public void initView2() {
+        allow = (TextView) findViewById(R.id.tv_join);
+        ifAllowTojoin = (CheckBox) findViewById(R.id.chk_join);
+        hint = (TextView) findViewById(R.id.hint);
+        hint2 = (View) findViewById(R.id.hint2);
     }
 
     //切换图片颜色
@@ -195,17 +192,17 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
 
     //结束班课按钮
-    public void finishClass(final View view){
+    public void finishClass(final View view) {
         this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
             @Override
             public void onSuccess(Class data, String message) {
-                if(data.getIf_allow_to_join().equals("已结束")){
+                if (data.getIf_allow_to_join().equals("已结束")) {
                     new AlertDialog.Builder(TeaClassMainActivity.this)
                             .setTitle("提示")
                             .setMessage("此班课已结束！")
-                            .setPositiveButton("确定",null)
+                            .setPositiveButton("确定", null)
                             .show();
-                }else{
+                } else {
                     initView2();
                     new AlertDialog.Builder(TeaClassMainActivity.this)
                             .setTitle("提示")
@@ -213,7 +210,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                             .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    String classId=getClassId();
+                                    String classId = getClassId();
                                     TeaClassMainActivity.this.classAppAction.finishClass(classId, new ActionCallbackListener<Void>() {
                                         @Override
                                         public void onSuccess(Void data, String message) {
@@ -231,7 +228,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                     });
                                 }
                             })
-                            .setNegativeButton("取消",null)
+                            .setNegativeButton("取消", null)
                             .show();
                 }
             }
@@ -244,17 +241,17 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     }
 
     //删除班课按钮
-  public void deleteClass(View view){
+    public void deleteClass(View view) {
         this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
             @Override
             public void onSuccess(Class data, String message) {
-                if(!data.getIf_allow_to_join().equals("已结束")){
+                if (!data.getIf_allow_to_join().equals("已结束")) {
                     new AlertDialog.Builder(TeaClassMainActivity.this)
                             .setTitle("提示")
                             .setMessage("您还未结束此班课！")
-                            .setPositiveButton("确定",null)
+                            .setPositiveButton("确定", null)
                             .show();
-                }else {
+                } else {
                     new AlertDialog.Builder(TeaClassMainActivity.this)
                             .setTitle("提示")
                             .setMessage("确定要删除此班课？")
@@ -265,7 +262,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                         @Override
                                         public void onSuccess(Void data, String message) {
                                             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(TeaClassMainActivity.this,MainActivity.class));
+                                            startActivity(new Intent(TeaClassMainActivity.this, MainActivity.class));
                                         }
 
                                         @Override
@@ -275,7 +272,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                     });
                                 }
                             })
-                            .setNegativeButton("取消",null)
+                            .setNegativeButton("取消", null)
                             .show();
                 }
             }
@@ -285,30 +282,92 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         });
-  }
+    }
 
+    //编辑班课按钮
+    public void compileClass(View view) {
+        this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
+            @Override
+            public void onSuccess(Class data, String message) {
+                if (data.getIf_allow_to_join().equals("已结束")) {
+                    new AlertDialog.Builder(TeaClassMainActivity.this)
+                            .setTitle("提示")
+                            .setMessage("班课结束后不允许编辑！")
+                            .show();
+                } else {
+                    startActivity(new Intent(TeaClassMainActivity.this, ModifyClassActivity.class));
+                }
+            }
 
-  //编辑班课按钮
-  public void compileClass(View view){
-      this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
-          @Override
-          public void onSuccess(Class data, String message) {
-              if(data.getIf_allow_to_join().equals("已结束")){
-                  new AlertDialog.Builder(TeaClassMainActivity.this)
-                          .setTitle("提示")
-                          .setMessage("班课结束后不允许编辑！")
-                          .show();
-              }else{
-                  startActivity(new Intent(TeaClassMainActivity.this,ModifyClassActivity.class));
-              }
-          }
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
-          @Override
-          public void onFailure(String errorEvent, String message) {
-              Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-          }
-      });
-  }
+    //更改作业状态点击事件，由进行中到评价中或由评价中到已结束
+    public void toChangeStatus(View view) {
+        AlertDialog alert;
+        final View listItem = (View) view.getParent().getParent();
+        final String homeworkStatus = ((TextView) listItem.findViewById(R.id.txt_homework_underway_status))
+                .getText().toString();
+        AlertDialog.Builder builder = new AlertDialog.Builder(TeaClassMainActivity.this);
+        if ("进行中".equals(homeworkStatus)) {
+            alert = builder.setTitle("开始评价")
+                    .setMessage("开始评价后将无法再提交作业。")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String homeworkId = ((TextView) listItem.findViewById(R.id.txt_homework_underway_id))
+                                    .getText().toString();
+                            changeHomeworkStatus(homeworkId, homeworkStatus);
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).create();
+        } else {
+            alert = builder.setTitle("结束作业")
+                    .setMessage("确认结束作业？")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String homeworkId = ((TextView) listItem.findViewById(R.id.txt_homework_underway_id))
+                                    .getText().toString();
+                            changeHomeworkStatus(homeworkId, homeworkStatus);
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).create();
+        }
+        alert.show();
+    }
 
+    //改变作业状态
+    private void changeHomeworkStatus(String homeworkId, final String homeworkStatus) {
+        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, new ActionCallbackListener<Void>() {
+            @Override
+            public void onSuccess(Void data, String message) {
+                teaClassFragmentPagerAdapter.getTeaClassHomeworkFragment().getTeaHomeworkFragmentPagerAdapter().
+                        getTeaHomeworkUnderwayFragment().setHomeworkList();
+                if ("评价中".equals(homeworkStatus)) {
+                    teaClassFragmentPagerAdapter.getTeaClassHomeworkFragment().getTeaHomeworkFragmentPagerAdapter().
+                            getTeaHomeworkFinishFragment().setHomeworkList();
+                }
+                Toast.makeText(TeaClassMainActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(TeaClassMainActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
 
