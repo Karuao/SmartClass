@@ -80,4 +80,22 @@ public class HomeworkApiImpl implements HomeworkApi {
             return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
         }
     }
+
+    @Override
+    public ApiResponse<Void> changeHomeworkStatus(String homeworkId, String homeworkStatus) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("homeworkId", homeworkId);
+        paramMap.put("homeworkStatus", homeworkStatus);
+
+        Type type = new TypeToken<ApiResponse<Void>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/changeHomeworkStatus");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
 }

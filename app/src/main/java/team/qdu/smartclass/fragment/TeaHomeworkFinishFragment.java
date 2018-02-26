@@ -13,7 +13,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Homework;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
-import team.qdu.smartclass.adapter.TeaHomeworkAdapter;
+import team.qdu.smartclass.adapter.TeaHomeworkFinishAdapter;
 
 /**
  * Created by 11602 on 2018/2/22.
@@ -44,7 +44,7 @@ public class TeaHomeworkFinishFragment extends SBaseFragment {
                 mContext.getUserTitle(), "已结束", new ActionCallbackListener<List<Homework>>() {
                     @Override
                     public void onSuccess(List<Homework> data, String message) {
-                        homeworkList.setAdapter(new TeaHomeworkAdapter(mContext, data));
+                        homeworkList.setAdapter(new TeaHomeworkFinishAdapter(mContext, data));
                     }
 
                     @Override

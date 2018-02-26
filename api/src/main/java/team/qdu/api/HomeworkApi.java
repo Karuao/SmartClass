@@ -15,4 +15,6 @@ public interface HomeworkApi {
     public ApiResponse<Void> publishHomework(String title, String deadline, String detail, File photo, String classId);
 
     public ApiResponse<List<Homework>> getHomeworkList(String classId, String userId, String userTitle, String requestStatus);
+
+    public ApiResponse<Void> changeHomeworkStatus(String homeworkId, String homeworkStatus);
 }

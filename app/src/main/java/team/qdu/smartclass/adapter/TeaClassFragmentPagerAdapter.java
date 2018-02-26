@@ -61,4 +61,8 @@ public class TeaClassFragmentPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return PAGER_COUNT;
     }
+
+    public TeaClassHomeworkFragment getTeaClassHomeworkFragment() {
+        return teaClassHomeworkFragment;
+    }
 }

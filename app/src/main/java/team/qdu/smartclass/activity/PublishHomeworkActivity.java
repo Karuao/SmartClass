@@ -28,11 +28,13 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
+import java.util.TimeZone;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
 import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.CustomDatePicker;
 
@@ -97,6 +99,7 @@ public class PublishHomeworkActivity extends SBaseActivity {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                TeaHomeworkUnderwayFragment.refreshFlag = true;
                 finish();
             }
 
@@ -128,16 +131,25 @@ public class PublishHomeworkActivity extends SBaseActivity {
 
     //初始化DatePicker截止时间时间选择器
     private void initDatePicker() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
-        String now = sdf.format(new Date());
-        homeworkDeadlineTxt.setText(now);
+        Date current = new Date();
+        Date afterOneMinute = new Date(current.getTime() + 60*1000);
+        Date afterOneDay = new Date(current.getTime() + 24*60*60*1000);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(current);
+        calendar.add(Calendar.YEAR, 1);//日期加一年
+        Date afterOneYear = calendar.getTime();
+
+        //设置作业截止日期默认时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        homeworkDeadlineTxt.setText(sdf.format(afterOneDay));
 
         customDatePicker = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
                 homeworkDeadlineTxt.setText(time);
             }
-        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        }, sdf.format(afterOneMinute), sdf.format(afterOneYear)); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker.showSpecificTime(true); // 显示时和分
         customDatePicker.setIsLoop(true); // 允许循环滚动
     }
@@ -237,5 +249,9 @@ public class PublishHomeworkActivity extends SBaseActivity {
             photoImg.setRotation(ImgUtil.getBitmapDegree(photoUri.getPath()));
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void toBack(View view) {
+        finish();
     }
 }

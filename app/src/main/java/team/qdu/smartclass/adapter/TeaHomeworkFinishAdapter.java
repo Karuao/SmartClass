@@ -11,12 +11,12 @@ import team.qdu.model.Homework;
 import team.qdu.smartclass.R;
 
 /**
- * Created by 11602 on 2018/2/22.
+ * Created by 11602 on 2018/2/25.
  */
 
-public class TeaHomeworkAdapter extends SBaseAdapter<Homework> {
+public class TeaHomeworkFinishAdapter extends SBaseAdapter<Homework> {
 
-    public TeaHomeworkAdapter(Context context, List itemList) {
+    public TeaHomeworkFinishAdapter(Context context, List itemList) {
         super(context);
         this.itemList = itemList;
     }
@@ -36,12 +36,12 @@ public class TeaHomeworkAdapter extends SBaseAdapter<Homework> {
         if (convertView == null) {
             compo = new Compo();
             //获得组件，实例化组件
-            convertView = layoutInflater.inflate(R.layout.class_homework_underway_listitem, null);
-            compo.homeworkIdTxt = (TextView) convertView.findViewById(R.id.txt_homework_id);
-            compo.homeworkNameTxt = (TextView) convertView.findViewById(R.id.txt_homework_name);
-            compo.homeworkExpTxt = (TextView) convertView.findViewById(R.id.txt_homework_exp);
-            compo.homeworkSubmitNumTxt = (TextView) convertView.findViewById(R.id.txt_homework_submitnum);
-            compo.homeworkStatusTxt = (TextView) convertView.findViewById(R.id.txt_homework_status);
+            convertView = layoutInflater.inflate(R.layout.class_homework_finish_listitem, null);
+            compo.homeworkIdTxt = (TextView) convertView.findViewById(R.id.txt_homework_finish_id);
+            compo.homeworkNameTxt = (TextView) convertView.findViewById(R.id.txt_homework_finish_name);
+            compo.homeworkExpTxt = (TextView) convertView.findViewById(R.id.txt_homework_finish_exp);
+            compo.homeworkSubmitNumTxt = (TextView) convertView.findViewById(R.id.txt_homework_finish_submitnum);
+            compo.homeworkStatusTxt = (TextView) convertView.findViewById(R.id.txt_homework_finish_status);
             convertView.setTag(compo);
         } else {
             compo = (Compo) convertView.getTag();

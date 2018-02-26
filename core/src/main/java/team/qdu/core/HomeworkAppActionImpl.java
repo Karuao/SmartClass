@@ -74,4 +74,24 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
             }
         }.execute();
     }
+
+    @Override
+    public void changeHomeworkStatus(final String homeworkId, final String homeworkStatus, final ActionCallbackListener<Void> listener) {
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return homeworkApi.changeHomeworkStatus(homeworkId, homeworkStatus);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
 }

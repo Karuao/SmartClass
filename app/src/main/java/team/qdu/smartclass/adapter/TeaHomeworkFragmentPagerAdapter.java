@@ -43,4 +43,12 @@ public class TeaHomeworkFragmentPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return PAGER_COUNT;
     }
+
+    public TeaHomeworkUnderwayFragment getTeaHomeworkUnderwayFragment() {
+        return teaHomeworkUnderwayFragment;
+    }
+
+    public TeaHomeworkFinishFragment getTeaHomeworkFinishFragment() {
+        return teaHomeworkFinishFragment;
+    }
 }
