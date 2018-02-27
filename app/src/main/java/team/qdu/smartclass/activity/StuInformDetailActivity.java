@@ -1,6 +1,7 @@
 package team.qdu.smartclass.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import team.qdu.smartclass.R;
@@ -23,5 +24,8 @@ public class StuInformDetailActivity extends SBaseActivity {
         tvDetial= (TextView) findViewById(R.id.tv_class_inform_details);
         String detail=getIntent().getStringExtra("detail");
         tvDetial.setText(detail);
+    }
+    public void toBack(View view) {
+        finish();
     }
 }

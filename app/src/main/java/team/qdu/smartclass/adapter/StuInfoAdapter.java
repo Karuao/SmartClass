@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jauker.widget.BadgeView;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -40,6 +42,16 @@ public class StuInfoAdapter extends SBaseAdapter<Inform_User> {
             compo.timeTxt = (TextView) convertView.findViewById(R.id.tv_class_inform_time);
             compo.informTxt = (TextView) convertView.findViewById(R.id.tv_class_inform_details);
             compo.readTxt= (TextView) convertView.findViewById(R.id.tv_if_read);
+
+            if(itemList.get(position).getIf_read().equals("否")){
+                BadgeView badgeView = new BadgeView(context);
+                //btn是控件
+                badgeView.setTargetView(compo.readTxt);
+                //设置相对位置
+                badgeView.setBadgeMargin(0, 5, 15, 0);
+                //设置显示未读消息条数
+                badgeView.setBadgeCount(2);
+            }
             convertView.setTag(compo);
         } else {
             compo = (Compo) convertView.getTag();
@@ -47,7 +59,10 @@ public class StuInfoAdapter extends SBaseAdapter<Inform_User> {
         Integer informId=itemList.get(position).getInform_id();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         compo.idTxt.setText(Integer.toString(itemList.get(position).getInform_user_id()));
+
         compo.readTxt.setText((String)itemList.get(position).getIf_read());
+
+
         compo.timeTxt.setText(sdf.format(itemList.get(position).getCreate_date_time()));
         compo.informTxt.setText((String) itemList.get(position).getDetail());
         return convertView;

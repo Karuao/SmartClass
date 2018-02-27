@@ -8,22 +8,23 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/tv_class_copy"
+        android:id="@+id/tv_checked_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="学生姓名"
-        android:textColor="@color/bg_black"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="15dp"
+        android:text="学生姓名"
+        android:textColor="@color/bg_black"
         android:textSize="18sp" />
+
     <TextView
+        android:id="@+id/tv_checked_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="201540704891"
-        android:textSize="18sp"
+        android:text="账号"
         android:textColor="@color/bg_black"
-        />
+        android:textSize="18sp" />
 
 
 </RelativeLayout>

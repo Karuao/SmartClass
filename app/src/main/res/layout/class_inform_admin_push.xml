@@ -53,6 +53,7 @@
 
     <EditText
         android:id="@+id/Inform_Detail"
+        android:maxLength="200"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"

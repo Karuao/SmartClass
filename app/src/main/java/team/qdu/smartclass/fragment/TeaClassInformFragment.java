@@ -24,19 +24,31 @@ import team.qdu.smartclass.adapter.TeaInfoAdapter;
  */
 
 public class TeaClassInformFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
+    private View currentPage;
     ListView listview;
     TeaClassMainActivity parentActivity;
-
+    //刷新标志
+    public static boolean refreshFlag;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.class_tab04_admin, container, false);
+        currentPage=inflater.inflate(R.layout.class_tab04_admin, container, false);
         parentActivity = (TeaClassMainActivity) getActivity();
-        listview = (ListView) view.findViewById(R.id.class_inform_listView);
+        listview = (ListView) currentPage.findViewById(R.id.class_inform_listView);
         getInform();
+        refreshFlag = false;
         listview.setOnItemClickListener(this);
-        return view;
+        return currentPage;
 
+    }
+    //页面从后台返回到前台运行
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (refreshFlag) {
+            getInform();
+            refreshFlag = false;
+        }
     }
 
     private void getInform() {

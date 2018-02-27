@@ -30,8 +30,6 @@
         <activity android:name=".activity.RetrieveTwoActivity"></activity>
         <activity android:name=".activity.ChangeInfoActivity"></activity>
         <activity android:name=".activity.SetActivity"></activity>
-        <activity android:name=".activity.CreateClassActivity"></activity>
-        <activity android:name=".activity.TestActivity"></activity>
         <activity
             android:name=".activity.CreateClassActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
@@ -44,6 +42,8 @@
         <activity android:name=".activity.PrepareClassActivity"></activity>
         <activity android:name=".activity.CropActivity"></activity>
         <activity android:name=".activity.ShowInviteCode"></activity>
+        <activity android:name=".activity.InformReadActivity"></activity>
+        <activity android:name=".activity.InformUnReadActivity"></activity>
         <activity android:name=".activity.ConfirmJoinClassActivity"></activity>
         <activity android:name=".activity.PublishHomeworkActivity"></activity>
         <activity android:name=".activity.ModifyClassActivity"></activity>

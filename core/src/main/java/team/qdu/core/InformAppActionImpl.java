@@ -10,6 +10,7 @@ import team.qdu.api.InformApiImpl;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.Inform;
 import team.qdu.model.Inform_User;
+import team.qdu.model.User;
 
 /**
  * Created by n551 on 2018/1/29.
@@ -107,6 +108,46 @@ public class InformAppActionImpl implements InformAppAction {
 
     }
 
+    @Override
+    public void getReadPeople(final String inform_id, final ActionCallbackListener<List<User>> listener) {
+        new AsyncTask<Void, Void, ApiResponse<List<User>>>() {
+
+            @Override
+            protected ApiResponse<List<User>> doInBackground(Void... params) {
+                return informApi.getReadPeople(inform_id);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<List<User>> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObjList(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void getUnReadPeople(final String inform_id, final ActionCallbackListener<List<User>> listener) {
+        new AsyncTask<Void, Void, ApiResponse<List<User>>>() {
+
+            @Override
+            protected ApiResponse<List<User>> doInBackground(Void... params) {
+                return informApi.getUnReadPeople(inform_id);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<List<User>> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObjList(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+
+    }
 
 
     @Override

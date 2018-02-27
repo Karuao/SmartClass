@@ -1,5 +1,6 @@
 package team.qdu.smartclass;
 
+import android.app.Activity;
 import android.app.Application;
 import android.os.StrictMode;
 
@@ -9,10 +10,10 @@ import java.util.List;
 import cn.jpush.android.api.JPushInterface;
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.ClassAppActionImpl;
-import team.qdu.core.InformAppAction;
-import team.qdu.core.InformAppActionImpl;
 import team.qdu.core.HomeworkAppAction;
 import team.qdu.core.HomeworkAppActionImpl;
+import team.qdu.core.InformAppAction;
+import team.qdu.core.InformAppActionImpl;
 import team.qdu.core.UserAppAction;
 import team.qdu.core.UserAppActionImpl;
 
@@ -46,6 +47,7 @@ public class SApplication extends Application {
         userAppAction = new UserAppActionImpl(this);
         classAppAction = new ClassAppActionImpl(this);
         informAppAction = new InformAppActionImpl(this);
+        homeworkAppAction = new HomeworkAppActionImpl(this);
     }
 
     public UserAppAction getUserAppAction() {

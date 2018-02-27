@@ -14,6 +14,7 @@ import team.qdu.api.net.HttpEngine;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.Inform;
 import team.qdu.model.Inform_User;
+import team.qdu.model.User;
 
 /**
  * Created by n551 on 2018/1/29.
@@ -88,6 +89,37 @@ public class InformApiImpl implements InformApi {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());
             return new ApiResponse(TIME_OUT_EVENT,TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<List<User>> getReadPeople(String inform_id) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("informId", inform_id);
+        Type type = new TypeToken<ApiResponse<List<User>>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getReadPeople");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+    @Override
+    public ApiResponse<List<User>> getUnReadPeople(String inform_id) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("informId", inform_id);
+        Type type = new TypeToken<ApiResponse<List<User>>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getUnReadPeople");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
         }
     }
 

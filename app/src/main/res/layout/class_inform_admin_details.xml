@@ -113,6 +113,8 @@ android:layout_gravity=。"
             android:textColor="@color/bg_black"/>
 
         <LinearLayout
+            android:id="@+id/ll_class_inform_readnumber"
+            android:clickable="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right">
@@ -170,6 +172,8 @@ android:layout_gravity=。"
             android:textColor="@color/bg_black"/>
 
         <LinearLayout
+            android:id="@+id/ll_class_inform_unreadnumber"
+            android:clickable="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right">
