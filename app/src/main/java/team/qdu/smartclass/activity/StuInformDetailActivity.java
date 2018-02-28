@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.fragment.StuClassInformFragment;
 
 /**
  * Created by n551 on 2018/2/2.
@@ -26,6 +27,7 @@ public class StuInformDetailActivity extends SBaseActivity {
         tvDetial.setText(detail);
     }
     public void toBack(View view) {
+        StuClassInformFragment.refreshFlag = true;
         finish();
     }
 }

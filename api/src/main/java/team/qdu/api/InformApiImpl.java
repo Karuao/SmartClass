@@ -44,6 +44,22 @@ public class InformApiImpl implements InformApi {
             return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
         }
     }
+
+    @Override
+    public ApiResponse<Void> getUnreadNum(String informid) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("informId", informid);
+        Type type = new TypeToken<ApiResponse<Void>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getUnReadNum");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
     @Override
     public ApiResponse<List<Inform_User>> getUserInform(String classid,String userid) {
         Map<String, String> paramMap = new HashMap<>();

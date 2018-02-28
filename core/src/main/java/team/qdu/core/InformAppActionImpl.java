@@ -47,6 +47,26 @@ public class InformAppActionImpl implements InformAppAction {
     }
 
     @Override
+    public void getUnreadNum(final String informid, final ActionCallbackListener<Void> listener) {
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return informApi.getUnreadNum(informid);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
     public void getUserInform(final String classId,final String userId, final ActionCallbackListener<List<Inform_User>> listener) {
         new AsyncTask<Void, Void, ApiResponse<List<Inform_User>>>() {
 

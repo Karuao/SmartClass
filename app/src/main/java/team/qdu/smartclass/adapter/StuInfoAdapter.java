@@ -1,6 +1,7 @@
 package team.qdu.smartclass.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -48,9 +49,10 @@ public class StuInfoAdapter extends SBaseAdapter<Inform_User> {
                 //btn是控件
                 badgeView.setTargetView(compo.readTxt);
                 //设置相对位置
-                badgeView.setBadgeMargin(0, 5, 15, 0);
+                badgeView.setBadgeMargin(15, 5, 0, 0);
                 //设置显示未读消息条数
-                badgeView.setBadgeCount(2);
+                badgeView.setText("2");
+                badgeView.setTextColor(Color.parseColor("#CCFF0000"));
             }
             convertView.setTag(compo);
         } else {

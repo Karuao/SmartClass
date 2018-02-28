@@ -1,6 +1,7 @@
 package team.qdu.smartclass.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -45,8 +46,12 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
         String time = getIntent().getStringExtra("time");
         String read_num = getIntent().getStringExtra("read_num");
 
+        SharedPreferences unreadNumSetting= getSharedPreferences("unreadNum", MODE_PRIVATE);
+        String unread_num=unreadNumSetting.getString("unreadNum","");
+
         tvDetial.setText(detail);
         tvRead_number.setText(read_num);
+        tvUnRead_number.setText(unread_num+"人未读");
         tvTime.setText(time);
     }
 

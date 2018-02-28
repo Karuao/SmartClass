@@ -1,6 +1,7 @@
 package team.qdu.smartclass.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.activity.TeaInformDetailActivity;
 import team.qdu.smartclass.adapter.TeaInfoAdapter;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -57,7 +60,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
 
             @Override
             public void onSuccess(List<Inform> data, String message) {
-                listview.setAdapter(new TeaInfoAdapter(getActivity(), data));
+                listview.setAdapter(new TeaInfoAdapter(getActivity(),data));
             }
 
             @Override
@@ -74,6 +77,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
         final String time=((TextView)view.findViewById(R.id.tv_class_inform_time)).getText().toString();
         final String read_num=((TextView)view.findViewById(R.id.tv_class_inform_people)).getText().toString();
         final String inform_id=((TextView)view.findViewById(R.id.tv_inform_id)).getText().toString();
+        getUnreadNum(inform_id);
         Intent intent = new Intent(getContext(), TeaInformDetailActivity.class);
         String classid = getActivity().getIntent().getStringExtra("classId");
         intent.putExtra("detail", detail);
@@ -83,6 +87,23 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
         intent.putExtra("informid",inform_id);
         startActivity(intent);
 
+    }
+    private void getUnreadNum(String informid) {
+        parentActivity.informAppAction.getUnreadNum(informid,new ActionCallbackListener<Void>() {
+
+            @Override
+            public void onSuccess(Void data, String message) {
+                SharedPreferences unreadNumSetting = parentActivity.getSharedPreferences("unreadNum",MODE_PRIVATE);
+                SharedPreferences.Editor editor = unreadNumSetting.edit();
+                editor.putString("unreadNum", message);
+                editor.commit();
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+
+            }
+        });
     }
 
 }

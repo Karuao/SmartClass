@@ -18,5 +18,6 @@ public interface InformAppAction {
     public void ClickInform(String inform_user_id,ActionCallbackListener<Void> listener);
     public void deleteInform(String inform_id,ActionCallbackListener<Void> listener);
     public void getReadPeople(String inform_id,ActionCallbackListener<List<User>> listener);
+    public void getUnreadNum(String inform_id,ActionCallbackListener<Void> listener);
     public void getUnReadPeople(String inform_id,ActionCallbackListener<List<User>> listener);
 }

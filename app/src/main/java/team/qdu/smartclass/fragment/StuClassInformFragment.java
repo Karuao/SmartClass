@@ -26,7 +26,8 @@ import team.qdu.smartclass.adapter.StuInfoAdapter;
 public class StuClassInformFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
     ListView listview;
     StuClassMainActivity parentActivity;
-
+    //刷新标志
+    public static boolean refreshFlag;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +38,14 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
         listview.setOnItemClickListener(this);
         return view;
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (refreshFlag) {
+            getInform();
+            refreshFlag = false;
+        }
     }
 
     private void getInform() {
