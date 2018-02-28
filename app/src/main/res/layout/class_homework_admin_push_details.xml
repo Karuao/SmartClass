@@ -1,56 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--管理员的作业详情页面-->
-<ScrollView android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?><!--管理员的作业详情页面-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout android:orientation="vertical"
+        <LinearLayout
             android:id="@+id/class_top"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_width="match_parent">
+            android:orientation="vertical">
 
-            <LinearLayout android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
                 android:background="@color/title"
-                >
+                android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="5"
-                    android:orientation="horizontal"
                     android:gravity="center"
-                    >
+                    android:orientation="horizontal">
+
                     <ImageButton
                         android:id="@+id/iv_class_top1_back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
-                        android:onClick="toBack"
                         android:background="#00000000"
-                        android:src="@drawable/left_goback"/>
+                        android:onClick="toBack"
+                        android:src="@drawable/left_goback" />
+
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="30dp"
                         android:layout_height="fill_parent"
-                        android:src="@drawable/head2"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="5dp"
-                        />
+                        android:src="@drawable/head2" />
+
                     <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="作业详情"
-                        android:textSize="21sp"
-                        android:textColor="@color/bg_white"
-                        android:textStyle="normal"
                         android:layout_marginLeft="5dp"
-                        />
+                        android:text="作业详情"
+                        android:textColor="@color/bg_white"
+                        android:textSize="21sp"
+                        android:textStyle="normal" />
                 </LinearLayout>
 
 
@@ -61,17 +62,15 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
+            android:background="@drawable/text_area"
             android:enabled="true"
             android:gravity="top"
-            android:minLines="8"
             android:maxLines="10"
-            android:scrollbars="vertical"
-            android:background="@drawable/text_area"
-            />
-
+            android:minLines="8"
+            android:scrollbars="vertical" />
 
 
         <View
@@ -114,13 +113,12 @@
             android:background="#d6d6d6" />
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_marginTop="40dp"
             android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginTop="40dp">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_homwork_commit"
@@ -128,8 +126,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/shape_button"
-                android:onClick="toCommit"
                 android:gravity="center"
+                android:onClick="toCommit"
                 android:padding="10dp"
                 android:text="保存"
                 android:textColor="#fff"

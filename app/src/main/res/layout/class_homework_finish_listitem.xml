@@ -1,35 +1,40 @@
 <!--已结束的作业的listviewitem-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp">
 
+    <TextView
+        android:id="@+id/txt_homework_finish_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
+
     <ImageView
         android:id="@+id/iv_class_homework"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginLeft="5dp"
-        android:src="@drawable/add_class_img" />
+        android:src="@mipmap/ic_homework_default" />
 
     <TextView
-        android:id="@+id/tv_class_homework_name"
+        android:id="@+id/txt_homework_finish_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/iv_class_homework"
+        android:layout_alignLeft="@+id/txt_homework_finish_exp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/txt_homework_finish_exp"
         android:singleLine="true"
         android:text="作业名"
         android:textColor="#444"
         android:textSize="18sp" />
 
-
-
     <TextView
-        android:id="@+id/tv_class_homework_exp"
+        android:id="@+id/txt_homework_finish_exp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_class_homework_name"
+        android:layout_below="@+id/txt_homework_finish_name"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/iv_class_homework"
@@ -40,11 +45,11 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/tv_class_homework_people"
+        android:id="@+id/txt_homework_finish_submitnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_class_homework_name"
-        android:layout_alignLeft="@+id/tv_class_homework_exp"
+        android:layout_alignLeft="@+id/txt_homework_finish_exp"
+        android:layout_below="@+id/txt_homework_finish_name"
         android:layout_marginLeft="65dp"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/iv_class_homework"
@@ -57,23 +62,20 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_alignParentRight="true">
 
-
         <TextView
-            android:id="@+id/tv_class_fileexp"
+            android:id="@+id/txt_homework_finish_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/tv_class_homework_exp"
-            android:text="已结束"
-            android:textColor="@color/colorRank"
+            android:layout_toRightOf="@+id/txt_homework_finish_exp"
+            android:text="进行中"
+            android:textColor="@color/text_yellow"
             android:textSize="17sp" />
 
     </LinearLayout>
-
-
-
 
 </RelativeLayout>

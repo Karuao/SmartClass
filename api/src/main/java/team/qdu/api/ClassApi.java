@@ -38,4 +38,5 @@ public interface ClassApi {
 
     public ApiResponse<String> modifyClass(String classId,File avatar,String className,String course,String university,String department,String goal,String exam);
 
+    public ApiResponse<Void> quitClass(String classId,String userId);
 }

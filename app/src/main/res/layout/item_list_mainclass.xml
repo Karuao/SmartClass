@@ -6,7 +6,7 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/tv_class_id"
+        android:id="@+id/txt_classId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone" />
@@ -16,10 +16,10 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginLeft="5dp"
-        android:src="@drawable/add_class_img" />
+        android:src="@mipmap/ic_classavatar_def" />
 
     <TextView
-        android:id="@+id/titleTv"
+        android:id="@+id/txt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -30,10 +30,10 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tv_classname"
+        android:id="@+id/txt_className"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/titleTv"
+        android:layout_below="@+id/txt_title"
         android:layout_marginLeft="15dp"
         android:layout_toRightOf="@+id/img_class"
         android:maxLines="2"
@@ -46,7 +46,7 @@
         android:id="@+id/tv_teacher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/titleTv"
+        android:layout_below="@+id/txt_title"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/img_class"

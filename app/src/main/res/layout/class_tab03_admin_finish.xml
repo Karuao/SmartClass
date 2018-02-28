@@ -5,6 +5,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include android:id="@+id/top" layout="@layout/class_homework_underway_listitem" />
+    <ListView
+        android:id="@+id/list_tea_finish"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
 
 </LinearLayout>

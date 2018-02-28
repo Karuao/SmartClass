@@ -1,7 +1,6 @@
 package team.qdu.smartclass.activity;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -48,10 +47,10 @@ import team.qdu.smartclass.fragment.MainClassFragment;
  */
 public class CreateClassActivity extends SBaseActivity {
 
-    EditText classnameEdt;
-    EditText courseEdt;
-    ImageView AvatarImg;
-    PopupWindow selectphotoPopup;
+    private EditText classnameEdt;
+    private EditText courseEdt;
+    private ImageView AvatarImg;
+    private PopupWindow selectphotoPopup;
 
     //权限
     public static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 102;
@@ -69,10 +68,6 @@ public class CreateClassActivity extends SBaseActivity {
     //相机拍照标记
     private static final int CAMERA_REQUEST_CODE = 1;
 
-    //对话框
-    private AlertDialog.Builder alert;
-    private AlertDialog.Builder builder;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,10 +82,6 @@ public class CreateClassActivity extends SBaseActivity {
         classnameEdt = (EditText) findViewById(R.id.edt_classname);
         courseEdt = (EditText) findViewById(R.id.edt_course);
         AvatarImg = (ImageView) findViewById(R.id.img_avatar);
-        builder = new AlertDialog.Builder(this);
-        alert = builder.setTitle("权限被禁用")
-                .setMessage("需要读写手机存储权限才能正常工作")
-                .setNeutralButton("确定", null);
     }
 
     public void toBack(View view) {
@@ -124,6 +115,7 @@ public class CreateClassActivity extends SBaseActivity {
             public void onSuccess(String data, String message) {
                 MainClassFragment.refreshFlag = true;
                 setClassId(data);
+                setUserTitle("teacher");
                 Intent intent = new Intent(CreateClassActivity.this, ShowInviteCode.class);
                 intent.putExtra("avatarUri", mDestinationUri);
                 finish();

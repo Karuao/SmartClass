@@ -55,6 +55,7 @@ public class SetActivity extends SBaseActivity {
     public void toLogout(View view) {
         resetSprfMain();
         startActivity(new Intent(SetActivity.this, LoginActivity.class));
+        application.clearActivity();
         SetActivity.this.finish();
 
     }

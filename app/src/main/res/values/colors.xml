@@ -24,4 +24,10 @@
     <color name="title">#1863dc</color>
     <color name="white_btn">#e3e3e3</color>
     <color name="classbottom">#1DB0B8</color>
+
+    <!--用于CustomDatePicker-->
+    <color name="background">#FFFFFF</color>
+    <color name="split_line">#11112233</color>
+    <color name="text1">#59B29C</color>
+    <color name="text2">#333333</color>
 </resources>

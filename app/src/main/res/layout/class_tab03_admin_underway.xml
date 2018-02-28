@@ -5,6 +5,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include android:id="@+id/top" layout="@layout/class_homework_finish_listitem" />
+    <!--<include android:id="@+id/top" layout="@layout/class_homework_finish_listitem" />-->
 
+    <ListView
+        android:id="@+id/list_tea_underway"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
 </LinearLayout>

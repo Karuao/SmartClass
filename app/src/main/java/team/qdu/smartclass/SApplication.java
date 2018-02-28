@@ -7,8 +7,11 @@ import android.os.StrictMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.ClassAppActionImpl;
+import team.qdu.core.HomeworkAppAction;
+import team.qdu.core.HomeworkAppActionImpl;
 import team.qdu.core.UserAppAction;
 import team.qdu.core.UserAppActionImpl;
 
@@ -24,15 +27,22 @@ public class SApplication extends Application {
 
     private ClassAppAction classAppAction;
 
+    private HomeworkAppAction homeworkAppAction;
+
     private static List<Activity> activityList = new ArrayList<>();
 
     @Override
     public void onCreate() {
         super.onCreate();
+        //初始化JPush SDK
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+        //配置StrictMode忘了干什么用了-.-
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         userAppAction = new UserAppActionImpl(this);
         classAppAction = new ClassAppActionImpl(this);
+        homeworkAppAction = new HomeworkAppActionImpl(this);
     }
 
     public UserAppAction getUserAppAction() {
@@ -41,6 +51,10 @@ public class SApplication extends Application {
 
     public ClassAppAction getClassAppAction() {
         return classAppAction;
+    }
+
+    public HomeworkAppAction getHomeworkAppAction() {
+        return homeworkAppAction;
     }
 
     //向list中添加Activity
