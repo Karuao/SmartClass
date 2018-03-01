@@ -7,6 +7,8 @@ public class HomeworkAnswerWithBLOBs extends HomeworkAnswer implements Serializa
 
     private String remark;
 
+    private HomeworkWithBLOBs homework;
+
     private static final long serialVersionUID = 1L;
 
     public String getDetail() {
@@ -23,5 +25,13 @@ public class HomeworkAnswerWithBLOBs extends HomeworkAnswer implements Serializa
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public HomeworkWithBLOBs getHomework() {
+        return homework;
+    }
+
+    public void setHomework(HomeworkWithBLOBs homework) {
+        this.homework = homework;
     }
 }

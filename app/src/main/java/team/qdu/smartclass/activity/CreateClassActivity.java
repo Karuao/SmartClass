@@ -50,6 +50,7 @@ public class CreateClassActivity extends SBaseActivity {
     private EditText classnameEdt;
     private EditText courseEdt;
     private ImageView AvatarImg;
+    //弹出窗口
     private PopupWindow selectphotoPopup;
 
     //权限
@@ -116,7 +117,7 @@ public class CreateClassActivity extends SBaseActivity {
                 MainClassFragment.refreshFlag = true;
                 setClassId(data);
                 setUserTitle("teacher");
-                Intent intent = new Intent(CreateClassActivity.this, ShowInviteCode.class);
+                Intent intent = new Intent(CreateClassActivity.this, ShowInviteCodeActivity.class);
                 intent.putExtra("avatarUri", mDestinationUri);
                 finish();
                 startActivity(intent);

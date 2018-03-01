@@ -10,7 +10,6 @@ import android.widget.Toast;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
-import team.qdu.model.Homework;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.TeaHomeworkUnderwayAdapter;
@@ -55,9 +54,9 @@ public class TeaHomeworkUnderwayFragment extends SBaseFragment {
     //homeworkList设置Adapter
     public void setHomeworkList() {
         mContext.homeworkAppAction.getHomeworkList(mContext.getClassId(), mContext.getUserId(),
-                mContext.getUserTitle(), "进行中", new ActionCallbackListener<List<Homework>>() {
+                mContext.getUserTitle(), "进行中", new ActionCallbackListener<List>() {
                     @Override
-                    public void onSuccess(List<Homework> data, String message) {
+                    public void onSuccess(List data, String message) {
                         homeworkList.setAdapter(new TeaHomeworkUnderwayAdapter(mContext, data));
                     }
 

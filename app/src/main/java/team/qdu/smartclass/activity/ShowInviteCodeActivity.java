@@ -17,7 +17,7 @@ import team.qdu.smartclass.R;
  * Created by 11602 on 2018/2/3.
  */
 
-public class ShowInviteCode extends SBaseActivity {
+public class ShowInviteCodeActivity extends SBaseActivity {
 
     ImageView avatarImg;
     TextView invitecodeTxt;
@@ -47,7 +47,7 @@ public class ShowInviteCode extends SBaseActivity {
     }
 
     public void accessClass(View view) {
-        Intent intent = new Intent(ShowInviteCode.this, TeaClassMainActivity.class);
+        Intent intent = new Intent(ShowInviteCodeActivity.this, TeaClassMainActivity.class);
         intent.putExtra("classId", getClassId());
         finish();
         startActivity(intent);

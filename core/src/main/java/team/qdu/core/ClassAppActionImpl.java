@@ -80,9 +80,9 @@ public class ClassAppActionImpl implements ClassAppAction {
             @Override
             protected void onPostExecute(Bitmap bitmap) {
                 if (bitmap != null) {
-                    listener.onSuccess(bitmap, "success");
+                    listener.onSuccess(bitmap, "图片获取成功");
                 } else {
-                    listener.onFailure(null, "fail");
+                    listener.onFailure(null, "图片获取失败");
                 }
             }
         }.execute();

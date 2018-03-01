@@ -313,7 +313,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            String homeworkId = ((TextView) listItem.findViewById(R.id.txt_homework_underway_id))
+                            String homeworkId = ((TextView) listItem.findViewById(R.id.txt_homeworkanswer_underway_id))
                                     .getText().toString();
                             changeHomeworkStatus(homeworkId, homeworkStatus);
                         }
@@ -329,7 +329,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            String homeworkId = ((TextView) listItem.findViewById(R.id.txt_homework_underway_id))
+                            String homeworkId = ((TextView) listItem.findViewById(R.id.txt_homeworkanswer_underway_id))
                                     .getText().toString();
                             changeHomeworkStatus(homeworkId, homeworkStatus);
                         }

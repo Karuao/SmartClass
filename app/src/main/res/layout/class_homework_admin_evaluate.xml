@@ -17,7 +17,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/tv_class_homework_name"
+                android:id="@+id/txt_homework_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -27,13 +27,13 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/tv_class_homework_details"
+                android:id="@+id/txt_homework_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:width="120dp"
                 android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                android:layout_below="@+id/tv_class_homework_name"
+                android:layout_below="@+id/txt_homework_title"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:textColor="@color/little_black"/>
@@ -53,7 +53,7 @@
 
 
             <ImageView
-                android:id="@+id/iv_class_homework_admin_file"
+                android:id="@+id/img_homework_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"

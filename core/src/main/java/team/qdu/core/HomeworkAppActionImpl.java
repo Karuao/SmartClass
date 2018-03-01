@@ -10,7 +10,7 @@ import java.util.List;
 import team.qdu.api.HomeworkApi;
 import team.qdu.api.HomeworkApiImpl;
 import team.qdu.model.ApiResponse;
-import team.qdu.model.Homework;
+import team.qdu.model.HomeworkAnswerWithBLOBs;
 
 /**
  * Created by 11602 on 2018/2/8.
@@ -56,16 +56,16 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
     }
 
     @Override
-    public void getHomeworkList(final String classId, final String userId, final String userTitle, final String requestStatus, final ActionCallbackListener<List<Homework>> listener) {
-        new AsyncTask<Void, Void, ApiResponse<List<Homework>>>() {
+    public void getHomeworkList(final String classId, final String userId, final String userTitle, final String requestStatus, final ActionCallbackListener<List> listener) {
+        new AsyncTask<Void, Void, ApiResponse<List>>() {
 
             @Override
-            protected ApiResponse<List<Homework>> doInBackground(Void... params) {
+            protected ApiResponse<List> doInBackground(Void... params) {
                 return homeworkApi.getHomeworkList(classId, userId, userTitle, requestStatus);
             }
 
             @Override
-            protected void onPostExecute(ApiResponse<List<Homework>> response) {
+            protected void onPostExecute(ApiResponse<List> response) {
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {
@@ -82,6 +82,51 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
                 return homeworkApi.changeHomeworkStatus(homeworkId, homeworkStatus);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void getStuHomeworkDetail(final String homeworkAnswerId, final ActionCallbackListener<HomeworkAnswerWithBLOBs> listener) {
+        new AsyncTask<Void, Void, ApiResponse<HomeworkAnswerWithBLOBs>>() {
+
+            @Override
+            protected ApiResponse<HomeworkAnswerWithBLOBs> doInBackground(Void... params) {
+                return homeworkApi.getStuHomeworkDetail(homeworkAnswerId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<HomeworkAnswerWithBLOBs> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObj(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void submitHomework(final String homeworkAnswerId, final String detail, final File answerPhoto, final ActionCallbackListener<Void> listener) {
+        if (TextUtils.isEmpty(detail) && answerPhoto == null) {
+            listener.onFailure(ErrorEvent.PARAM_NULL, "提交的文字和图片不能全为空");
+            return;
+        }
+
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return homeworkApi.submitHomework(homeworkAnswerId, detail, answerPhoto);
             }
 
             @Override

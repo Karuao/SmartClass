@@ -20,35 +20,37 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 
 import team.qdu.core.ActionCallbackListener;
+import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
 import team.qdu.smartclass.util.ImgUtil;
-import team.qdu.smartclass.view.CustomDatePicker;
 
 /**
- * Created by 11602 on 2018/2/6.
+ * Created by 11602 on 2018/2/26.
  */
 
-public class PublishHomeworkActivity extends SBaseActivity {
+public class DoHomeworkActivity extends SBaseActivity {
 
-    private EditText homeworkTitleEdt;
-    private TextView homeworkDeadlineTxt;
-    private EditText homeworkDetailEdt;
-    private ImageView photoImg;
-    private CustomDatePicker customDatePicker;
+    private TextView homeworkTitleTxt;
+    private TextView homeworkDetailTxt;
+    private ImageView homeworkPhotoImg;
+    private RelativeLayout homeworkPhotoRlayout;
+    private EditText answerDetailEdt;
+    private ImageView answerPhotoImg;
+    private String homeworkAnswerId;
+    private Bitmap homeworkPhoto;
+    //弹出窗口
     private PopupWindow selectphotoPopup;
     //权限
     public static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 102;
@@ -70,55 +72,105 @@ public class PublishHomeworkActivity extends SBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_tea_publishhomework);
-        ifUploadPhoto = false;
+        setContentView(R.layout.activity_stu_dowork);
         initView();
-        initDatePicker();
+        homeworkAnswerId = getIntent().getStringExtra("homeworkAnswerId");
+        setData();
         mTempPhotoPath = Environment.getExternalStorageDirectory() + File.separator + "photo.png";
     }
 
     private void initView() {
-        homeworkTitleEdt = (EditText) findViewById(R.id.edt_homework_title);
-        homeworkDeadlineTxt = (TextView) findViewById(R.id.txt_homework_deadline);
-        homeworkDetailEdt = (EditText) findViewById(R.id.edt_homework_detail);
-        photoImg = (ImageView) findViewById(R.id.img_homework_photo);
+        homeworkTitleTxt = (TextView) findViewById(R.id.txt_homework_title);
+        homeworkDetailTxt = (TextView) findViewById(R.id.txt_homework_detail);
+        homeworkPhotoImg = (ImageView) findViewById(R.id.img_homework_photo);
+        homeworkPhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_homework_photo);
+        answerDetailEdt = (EditText) findViewById(R.id.edt_answer_detail);
+        answerPhotoImg = (ImageView) findViewById(R.id.img_answer_photo);
     }
 
-    //发布作业点击事件
-    public void toPublish(View view) throws URISyntaxException {
-        String title = homeworkTitleEdt.getText().toString();
-        String deadline = homeworkDeadlineTxt.getText().toString();
-        String detail = homeworkDetailEdt.getText().toString();
-        File photo = null;
-        if (ifUploadPhoto) {
-            photo = new File(new URI(photoUri.toString()));
-        }
+    //给控件设置数据
+    private void setData() {
+        homeworkAppAction.getStuHomeworkDetail(homeworkAnswerId, new ActionCallbackListener<HomeworkAnswerWithBLOBs>() {
+            @Override
+            public void onSuccess(HomeworkAnswerWithBLOBs data, String message) {
+                homeworkTitleTxt.setText(data.getHomework().getName());
+                homeworkDetailTxt.setText(data.getHomework().getDetail());
+                answerDetailEdt.setText(data.getDetail());
+                if (data.getHomework().getUrl() != null) {
+                    setPhoto(homeworkPhotoImg, data.getHomework().getUrl(), true);
+                } else {
+                    homeworkPhotoRlayout.setVisibility(View.GONE);
+                }
+                if (data.getUrl() != null) {
+                    setPhoto(answerPhotoImg, data.getUrl(), false);
+                }
+            }
 
-        homeworkAppAction.pushHomework(title, deadline, detail, photo, getClassId(),
-                new ActionCallbackListener<Void>() {
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //ImageView设置图片
+    private void setPhoto(final ImageView imageView, String url, final boolean ifSetPhoto) {
+        classAppAction.getBitmap(url, new ActionCallbackListener<Bitmap>() {
+            @Override
+            public void onSuccess(Bitmap data, String message) {
+                imageView.setImageBitmap(data);
+                if (ifSetPhoto) {
+                    homeworkPhoto = data;
+                }
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //点击图片展示图片点击事件
+    public void toShowPhoto(View view) {
+        Intent intent = new Intent(DoHomeworkActivity.this, ShowPhotoActivity.class);
+        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "showPhoto.png");//将要保存图片的路径
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+            homeworkPhoto.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            bos.flush();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        startActivity(intent);
+    }
+
+    //提交作业点击事件
+    public void toSubmitHomework(View view) throws URISyntaxException {
+        String answerDetail = answerDetailEdt.getText().toString();
+        File answerPhoto = null;
+        if (ifUploadPhoto) {
+            answerPhoto = new File(new URI(photoUri.toString()));
+        }
+        homeworkAppAction.submitHomework(homeworkAnswerId, answerDetail, answerPhoto, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
-                Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                TeaHomeworkUnderwayFragment.refreshFlag = true;
+                Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
                 finish();
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    //截止日期点击事件
-    public void toPickDate(View view) {
-        customDatePicker.show(homeworkDeadlineTxt.getText().toString());
     }
 
     //添加图片点击事件
     public void toAddPhoto(View view) {
         if (selectphotoPopup == null) {
-            View contentView = LayoutInflater.from(PublishHomeworkActivity.this)
+            View contentView = LayoutInflater.from(DoHomeworkActivity.this)
                     .inflate(R.layout.popup_selectphoto, null);
             selectphotoPopup = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -127,31 +179,6 @@ public class PublishHomeworkActivity extends SBaseActivity {
         }
         selectphotoPopup.showAtLocation(getWindow().getDecorView(),
                 Gravity.CENTER | Gravity.BOTTOM, 0, 0);
-    }
-
-    //初始化DatePicker截止时间时间选择器
-    private void initDatePicker() {
-        Date current = new Date();
-        Date afterOneMinute = new Date(current.getTime() + 60*1000);
-        Date afterOneDay = new Date(current.getTime() + 24*60*60*1000);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(current);
-        calendar.add(Calendar.YEAR, 1);//日期加一年
-        Date afterOneYear = calendar.getTime();
-
-        //设置作业截止日期默认时间
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
-        homeworkDeadlineTxt.setText(sdf.format(afterOneDay));
-
-        customDatePicker = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
-            @Override
-            public void handle(String time) { // 回调接口，获得选中的时间
-                homeworkDeadlineTxt.setText(time);
-            }
-        }, sdf.format(afterOneMinute), sdf.format(afterOneYear)); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        customDatePicker.showSpecificTime(true); // 显示时和分
-        customDatePicker.setIsLoop(true); // 允许循环滚动
     }
 
     //拍照点击事件
@@ -238,15 +265,15 @@ public class PublishHomeworkActivity extends SBaseActivity {
             }
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-                        PublishHomeworkActivity.this.getContentResolver(), photoUri);
-                photoImg.setImageBitmap(bitmap);
+                        DoHomeworkActivity.this.getContentResolver(), photoUri);
+                answerPhotoImg.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             //图片按照ImageView大小缩放
-            photoImg.setScaleType(ImageView.ScaleType.FIT_XY);
+            answerPhotoImg.setScaleType(ImageView.ScaleType.FIT_XY);
             //解决部分自动旋转问题
-            photoImg.setRotation(ImgUtil.getBitmapDegree(photoUri.getPath()));
+            answerPhotoImg.setRotation(ImgUtil.getBitmapDegree(photoUri.getPath()));
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
