@@ -1,59 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--点击‘我的作业’按钮后进入的'我的作业'页面-->
-<ScrollView android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?><!--点击一个正在进行的作业后进入的页面-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout android:orientation="vertical"
-            android:id="@+id/class_top"
-            android:layout_height="45dp"
-            android:layout_width="match_parent">
 
-            <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/class_top"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
                 android:background="@color/title"
-                >
+                android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="5"
-                    android:orientation="horizontal"
                     android:gravity="center"
-                    >
+                    android:orientation="horizontal">
+
                     <ImageButton
                         android:id="@+id/iv_class_top1_back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
-                        android:onClick="toBack"
                         android:background="#00000000"
-                        android:src="@drawable/left_goback"/>
+                        android:onClick="toBack"
+                        android:src="@drawable/left_goback" />
+
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="30dp"
                         android:layout_height="fill_parent"
-                        android:src="@drawable/head2"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="5dp"
-                        />
+                        android:src="@drawable/head2" />
+
                     <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="我的作业"
-                        android:textSize="21sp"
-                        android:textColor="@color/bg_white"
-                        android:textStyle="normal"
                         android:layout_marginLeft="5dp"
-                        />
+                        android:text="提交作业"
+                        android:textColor="@color/bg_white"
+                        android:textSize="21sp"
+                        android:textStyle="normal" />
                 </LinearLayout>
 
-
             </LinearLayout>
+
         </LinearLayout>
 
         <RelativeLayout
@@ -69,20 +71,18 @@
                 android:singleLine="true"
                 android:text="作业名"
                 android:textColor="#444"
-                android:textSize="17sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txt_homework_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:width="120dp"
-                android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                 android:layout_below="@+id/txt_homework_title"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:textColor="@color/little_black"/>
-
+                android:layout_marginTop="5dp"
+                android:textColor="@color/little_black"
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
@@ -92,25 +92,50 @@
             android:layout_marginTop="5dp"
             android:background="#d6d6d6" />
 
-        <TextView
-            android:id="@+id/tv_homework_answer"
+        <RelativeLayout
+            android:id="@+id/rlayout_homework_photo"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@null"
-            android:ems="15"
-            android:hint="回答"
-            android:textColorHint="@color/hint"
-            android:textCursorDrawable="@color/hint"
-            android:textSize="16sp" />
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/img_homework_photo"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginLeft="5dp"
+                android:onClick="toShowPhoto"
+                android:src="@drawable/add_class_img" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_below="@+id/img_homework_photo"
+                android:layout_marginTop="5dp"
+                android:background="#d6d6d6" />
+
+        </RelativeLayout>
+
+
+        <EditText
+            android:id="@+id/edt_answer_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/text_area"
+            android:enabled="true"
+            android:gravity="top"
+            android:maxLength="1000"
+            android:maxLines="10"
+            android:minLines="8"
+            android:scrollbars="vertical" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:background="#d6d6d6" />
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -123,18 +148,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:singleLine="true"
-                android:text="我的附件"
+                android:text="添加附件"
                 android:textColor="#444"
                 android:textSize="10sp" />
 
             <ImageView
                 android:id="@+id/img_answer_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_below="@+id/tv_class_homework_file-text"
                 android:layout_marginLeft="5dp"
+                android:onClick="toAddPhoto"
                 android:src="@drawable/add_class_img" />
-
 
         </RelativeLayout>
 
@@ -144,10 +169,27 @@
             android:layout_marginTop="5dp"
             android:background="#d6d6d6" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <Button
+                android:id="@+id/btn_homwork_commit"
+                android:layout_width="221dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/shape_button"
+                android:gravity="center"
+                android:onClick="toSubmitHomework"
+                android:padding="10dp"
+                android:text="提交作业"
+                android:textColor="#fff"
+                android:textSize="18sp" />
 
-
-
+        </LinearLayout>
 
     </LinearLayout>
 

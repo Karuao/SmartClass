@@ -1,14 +1,19 @@
 package team.qdu.smartclass.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.StuClassFragmentPagerAdapter;
+import team.qdu.smartclass.fragment.MainClassFragment;
 
 /**
  * 班课主页
@@ -157,5 +162,34 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
     public void onPageScrollStateChanged(int i) {
     }
 
+    public void quitClass(View view){
+        final String classId=getClassId();
+        final String userId=getUserId();
+        new AlertDialog.Builder(this)
+                .setTitle("提示")
+                .setMessage("确定要退出此班课？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        StuClassMainActivity.this.classAppAction.quitClass(classId, userId, new ActionCallbackListener<Void>() {
+                            @Override
+                            public void onSuccess(Void data, String message) {
+                                MainClassFragment.refreshFlag=true;
+                                Intent intent = new Intent(StuClassMainActivity.this, MainActivity.class);
+                                finish();
+                                startActivity(intent);
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(String errorEvent, String message) {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("取消",null)
+                .show();
+    }
 }
 

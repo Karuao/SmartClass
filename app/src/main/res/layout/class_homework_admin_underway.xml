@@ -1,56 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--点击一个正在进行的作业后进入的页面-->
-<ScrollView android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?><!--点击一个正在进行的作业后进入的页面-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout android:orientation="vertical"
+        <LinearLayout
             android:id="@+id/class_top"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_width="match_parent">
+            android:orientation="vertical">
 
-            <LinearLayout android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
                 android:background="@color/title"
-                >
+                android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="5"
-                    android:orientation="horizontal"
                     android:gravity="center"
-                    >
+                    android:orientation="horizontal">
+
                     <ImageButton
                         android:id="@+id/iv_class_top1_back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
-                        android:onClick="toBack"
                         android:background="#00000000"
-                        android:src="@drawable/left_goback"/>
+                        android:onClick="toBack"
+                        android:src="@drawable/left_goback" />
+
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="30dp"
                         android:layout_height="fill_parent"
-                        android:src="@drawable/head2"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="5dp"
-                        />
+                        android:src="@drawable/head2" />
+
                     <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="进行中作业"
-                        android:textSize="21sp"
-                        android:textColor="@color/bg_white"
-                        android:textStyle="normal"
                         android:layout_marginLeft="5dp"
-                        />
+                        android:text="进行中作业"
+                        android:textColor="@color/bg_white"
+                        android:textSize="21sp"
+                        android:textStyle="normal" />
                 </LinearLayout>
 
 
@@ -63,7 +64,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/tv_class_homework_name"
+                android:id="@+id/txt_homework_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -73,19 +74,20 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/tv_class_homework_details"
+                android:id="@+id/txt_homework_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:width="120dp"
-                android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                android:layout_below="@+id/tv_class_homework_name"
+                android:layout_below="@+id/txt_homework_title"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:textColor="@color/little_black"/>
+                android:width="120dp"
+                android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                android:textColor="@color/little_black"
+                android:textSize="14sp" />
 
 
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2px"
@@ -99,7 +101,7 @@
 
 
             <ImageView
-                android:id="@+id/iv_class_homework_admin_file"
+                android:id="@+id/img_homework_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -117,27 +119,23 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="已提交"/>
+                android:text="已提交" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="人"
-                android:layout_marginRight="5dp"/>
-
+                android:layout_marginRight="5dp"
+                android:text="人" />
 
 
         </RelativeLayout>
-
-
 
 
         <View
@@ -145,9 +143,7 @@
             android:layout_height="2px"
             android:background="#d6d6d6" />
 
-        <include
-            layout="@layout/class_homework_admin_underway_commited_listitem"/>
-
+        <include layout="@layout/class_homework_admin_underway_commited_listitem" />
 
 
         <View
@@ -158,23 +154,20 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="未提交"/>
+                android:text="未提交" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="人"
-                android:layout_marginRight="5dp"/>
-
-
+                android:layout_marginRight="5dp"
+                android:text="人" />
 
 
         </RelativeLayout>
@@ -184,43 +177,38 @@
             android:layout_height="2px"
             android:background="#d6d6d6" />
 
-        <include
-            layout="@layout/class_homework_admin_underway_notcommit_listitem"/>
-
+        <include layout="@layout/class_homework_admin_underway_notcommit_listitem" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="80dp">
+            android:layout_marginTop="80dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="还有xx名同学没有提交作业，进入评价状态后学生将不能继续提交作业，此过程不可逆！"
-                android:textColor="@color/colorRank"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"/>
+                android:text="还有xx名同学没有提交作业，进入评价状态后学生将不能继续提交作业，此过程不可逆！"
+                android:textColor="@color/colorRank" />
 
             <Button
                 android:layout_width="221dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
                 android:background="@drawable/shape_button"
-                android:onClick="toCommit"
                 android:gravity="center"
+                android:onClick="toCommit"
                 android:padding="10dp"
                 android:text="开始评价"
                 android:textColor="#fff"
-                android:textSize="18sp"
-                android:layout_gravity="center"/>
-
-
+                android:textSize="18sp" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 

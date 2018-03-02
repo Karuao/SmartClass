@@ -80,9 +80,9 @@ public class ClassAppActionImpl implements ClassAppAction {
             @Override
             protected void onPostExecute(Bitmap bitmap) {
                 if (bitmap != null) {
-                    listener.onSuccess(bitmap, "success");
+                    listener.onSuccess(bitmap, "图片获取成功");
                 } else {
-                    listener.onFailure(null, "fail");
+                    listener.onFailure(null, "图片获取失败");
                 }
             }
         }.execute();
@@ -280,6 +280,25 @@ public class ClassAppActionImpl implements ClassAppAction {
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
                 return classApi.confirmJoinClass(classId, userId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    public void quitClass(final String classId,final String userId,final ActionCallbackListener<Void> listener){
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return classApi.quitClass(classId, userId);
             }
 
             @Override

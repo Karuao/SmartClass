@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--班课作业的二级导航的第一个页面————进行中页面,这里的listviewitem只做演示-->
+<!--班课作业的二级导航的第一个页面————进行中页面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include android:id="@+id/top" layout="@layout/class_homework_underway_listitem" />
+    <ListView
+        android:id="@+id/list_stu_underway"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
 
 </LinearLayout>

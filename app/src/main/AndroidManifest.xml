@@ -44,9 +44,13 @@
         <activity android:name=".activity.ShowInviteCode"></activity>
         <activity android:name=".activity.InformReadActivity"></activity>
         <activity android:name=".activity.InformUnReadActivity"></activity>
+        <activity android:name=".activity.ShowInviteCodeActivity"></activity>
         <activity android:name=".activity.ConfirmJoinClassActivity"></activity>
         <activity android:name=".activity.PublishHomeworkActivity"></activity>
         <activity android:name=".activity.ModifyClassActivity"></activity>
+        <activity android:name=".activity.DoHomeworkActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        <activity android:name=".activity.ShowPhotoActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--管理员作业的二级导航的第而个页面————已完成页面,这里的listviewitem只做演示-->
+<!--管理员作业的二级导航的第而个页面————已完成页面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
