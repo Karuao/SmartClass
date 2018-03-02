@@ -124,6 +124,14 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         startActivity(new Intent(TeaClassMainActivity.this, PublishHomeworkActivity.class));
     }
 
+    public void toCreateInform(View view) {
+        Intent intent = new Intent(TeaClassMainActivity.this, CreateInformActivity.class);
+        intent.putExtra("classId", getIntent().getStringExtra("classId"));
+        startActivity(intent);
+    }
+
+
+
     @Override
     public void onClick(View view) {
         resetImg();

@@ -48,6 +48,7 @@
 
         <EditText
             android:id="@+id/edt_regId"
+            android:cursorVisible="true"
             android:layout_width="230dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"
@@ -70,6 +71,8 @@
 
         <EditText
             android:id="@+id/edt_regPass"
+            android:cursorVisible="true"
+            android:inputType="textPassword"
             android:layout_width="230dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"
@@ -92,6 +95,8 @@
 
         <EditText
             android:id="@+id/edt_regPassConfirm"
+            android:cursorVisible="true"
+            android:inputType="textPassword"
             android:layout_width="230dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"
@@ -124,6 +129,7 @@
 
         <EditText
             android:id="@+id/edt_regAnswer"
+            android:cursorVisible="true"
             android:layout_width="230dp"
             android:layout_height="20dp"
             android:layout_alignParentLeft="true"

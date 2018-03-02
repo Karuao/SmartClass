@@ -12,6 +12,8 @@ import team.qdu.core.ClassAppAction;
 import team.qdu.core.ClassAppActionImpl;
 import team.qdu.core.HomeworkAppAction;
 import team.qdu.core.HomeworkAppActionImpl;
+import team.qdu.core.InformAppAction;
+import team.qdu.core.InformAppActionImpl;
 import team.qdu.core.UserAppAction;
 import team.qdu.core.UserAppActionImpl;
 
@@ -26,6 +28,8 @@ public class SApplication extends Application {
     private UserAppAction userAppAction;
 
     private ClassAppAction classAppAction;
+
+    private InformAppAction informAppAction;
 
     private HomeworkAppAction homeworkAppAction;
 
@@ -42,6 +46,7 @@ public class SApplication extends Application {
         StrictMode.setVmPolicy(builder.build());
         userAppAction = new UserAppActionImpl(this);
         classAppAction = new ClassAppActionImpl(this);
+        informAppAction = new InformAppActionImpl(this);
         homeworkAppAction = new HomeworkAppActionImpl(this);
     }
 
@@ -51,6 +56,9 @@ public class SApplication extends Application {
 
     public ClassAppAction getClassAppAction() {
         return classAppAction;
+    }
+    public InformAppAction getInformAppAction() {
+        return informAppAction;
     }
 
     public HomeworkAppAction getHomeworkAppAction() {

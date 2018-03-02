@@ -5,7 +5,9 @@ package team.qdu.smartclass.fragment;
  * Created by rjmgc on 2017/12/11.
  */
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,12 +113,14 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                     setClassId(classId);
                     setUserTitle("teacher");
                     intent.putExtra("classId", classId);
+                    intent.putExtra("userId",getUserId());
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(getContext(), StuClassMainActivity.class);
                     setClassId(classId);
                     setUserTitle("student");
                     intent.putExtra("classId", classId);
+                    intent.putExtra("userId",getUserId());
                     startActivity(intent);
                 }
             }
@@ -126,5 +130,12 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    //从SharedPreferences获取userId
+    public String getUserId() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user",
+                Activity.MODE_PRIVATE);
+        return  sharedPreferences.getString("userId", null);
     }
 }
