@@ -73,9 +73,8 @@ public class DoHomeworkActivity extends SBaseActivity {
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_stu_dowork);
-        initView();
         homeworkAnswerId = getIntent().getStringExtra("homeworkAnswerId");
-        setData();
+        initView();
         mTempPhotoPath = Environment.getExternalStorageDirectory() + File.separator + "photo.png";
     }
 
@@ -86,6 +85,7 @@ public class DoHomeworkActivity extends SBaseActivity {
         homeworkPhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_homework_photo);
         answerDetailEdt = (EditText) findViewById(R.id.edt_answer_detail);
         answerPhotoImg = (ImageView) findViewById(R.id.img_answer_photo);
+        setData();
     }
 
     //给控件设置数据

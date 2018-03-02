@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import team.qdu.model.HomeworkAnswerWithBLOBs;
+import team.qdu.model.HomeworkWithBLOBs;
 
 /**
  * Created by 11602 on 2018/2/8.
@@ -25,4 +26,7 @@ public interface HomeworkAppAction {
 
     //学生提交作业
     public void submitHomework(String homeworkAnswerId, String detail, File answerPhoto, ActionCallbackListener<Void> listener);
+
+    //获取作业详情
+    public void getHomeworkDetail(String homeworkId, ActionCallbackListener<HomeworkWithBLOBs> listener);
 }

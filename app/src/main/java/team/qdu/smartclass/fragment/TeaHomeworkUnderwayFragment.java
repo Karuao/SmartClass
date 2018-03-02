@@ -1,16 +1,20 @@
 package team.qdu.smartclass.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.activity.CheckHomworkSubmitStatusActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.TeaHomeworkUnderwayAdapter;
 
@@ -18,7 +22,7 @@ import team.qdu.smartclass.adapter.TeaHomeworkUnderwayAdapter;
  * Created by 11602 on 2018/2/22.
  */
 
-public class TeaHomeworkUnderwayFragment extends SBaseFragment {
+public class TeaHomeworkUnderwayFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
 
     private View currentPage;
     private ListView homeworkList;
@@ -65,5 +69,16 @@ public class TeaHomeworkUnderwayFragment extends SBaseFragment {
                         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String homeworkId = ((TextView)view.findViewById(R.id.txt_homework_underway_id)).getText().toString();
+        String homeworkStatus = ((TextView)view.findViewById(R.id.txt_homework_underway_status)).getText().toString();
+        if ("进行中".equals(homeworkStatus)) {
+            Intent intent = new Intent(getParentFragment().getActivity(), CheckHomworkSubmitStatusActivity.class);
+            intent.putExtra("homeworkId", homeworkId);
+            startActivity(intent);
+        }
     }
 }

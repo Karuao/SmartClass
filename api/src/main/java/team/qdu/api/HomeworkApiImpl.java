@@ -17,6 +17,7 @@ import team.qdu.api.net.ImgHttpEngine;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.Homework;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
+import team.qdu.model.HomeworkWithBLOBs;
 
 /**
  * Created by 11602 on 2018/2/8.
@@ -139,6 +140,23 @@ public class HomeworkApiImpl implements HomeworkApi {
         }.getType();
         try {
             return fileHttpEngine.postHandle(paramMap, fileMap, type, "/submitHomework");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<HomeworkWithBLOBs> getHomeworkDetail(String homeworkId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("homeworkId", homeworkId);
+
+        Type type = new TypeToken<ApiResponse<HomeworkWithBLOBs>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getHomeworkDetail");
         } catch (IOException e) {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());

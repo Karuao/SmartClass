@@ -11,6 +11,7 @@ import team.qdu.api.HomeworkApi;
 import team.qdu.api.HomeworkApiImpl;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
+import team.qdu.model.HomeworkWithBLOBs;
 
 /**
  * Created by 11602 on 2018/2/8.
@@ -133,6 +134,26 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
             protected void onPostExecute(ApiResponse<Void> response) {
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void getHomeworkDetail(final String homeworkId, final ActionCallbackListener<HomeworkWithBLOBs> listener) {
+        new AsyncTask<Void, Void, ApiResponse<HomeworkWithBLOBs>>() {
+
+            @Override
+            protected ApiResponse<HomeworkWithBLOBs> doInBackground(Void... params) {
+                return homeworkApi.getHomeworkDetail(homeworkId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<HomeworkWithBLOBs> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
                     listener.onFailure(response.getEvent(), response.getMsg());
                 }

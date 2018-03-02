@@ -53,8 +53,6 @@
                         android:textSize="21sp"
                         android:textStyle="normal" />
                 </LinearLayout>
-
-
             </LinearLayout>
         </LinearLayout>
 
@@ -85,7 +83,6 @@
                 android:textColor="@color/little_black"
                 android:textSize="14sp" />
 
-
         </RelativeLayout>
 
         <View
@@ -93,12 +90,10 @@
             android:layout_height="2px"
             android:background="#d6d6d6" />
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp">
-
 
             <ImageView
                 android:id="@+id/img_homework_photo"
@@ -107,9 +102,7 @@
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/add_class_img" />
 
-
         </RelativeLayout>
-
 
         <View
             android:layout_width="match_parent"
@@ -134,7 +127,6 @@
                 android:layout_marginRight="5dp"
                 android:text="人" />
 
-
         </RelativeLayout>
 
 
@@ -144,7 +136,6 @@
             android:background="#d6d6d6" />
 
         <include layout="@layout/class_homework_admin_underway_commited_listitem" />
-
 
         <View
             android:layout_width="match_parent"
@@ -168,7 +159,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="5dp"
                 android:text="人" />
-
 
         </RelativeLayout>
 
