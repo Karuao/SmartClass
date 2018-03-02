@@ -14,3 +14,9 @@
 4.user（用户表） avatar数据类型varchar(32)改为tinytext
 5.class（班课表）avatar数据类型varchar(32)改为tinytext
 7.class（班课表）删除字段invite_code、textbook
+
+班课数据库表设计v1.5
+1.homework（作业表）detail数据类型tinytext改为text
+2.homework_answer（学生提交作业表）添加字段if_submit
+3.homework（作业表）添加字段submit_num
+4.user（用户表）添加字段sno
