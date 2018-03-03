@@ -127,7 +127,6 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/shape_button"
                 android:gravity="center"
-                android:onClick="toCommit"
                 android:padding="10dp"
                 android:text="保存"
                 android:textColor="#fff"

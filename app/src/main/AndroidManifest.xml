@@ -49,7 +49,9 @@
         <activity android:name=".activity.DoHomeworkActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.ShowPhotoActivity"></activity>
-        <!--<activity android:name=".activity.CheckHomworkSubmitStatusActivity"></activity>-->
+        <activity android:name=".activity.CheckHomworkCommitStatusActivity"></activity>
+        <activity android:name=".activity.ShowUnderwayHomeworkDetailActivity"></activity>
+        <activity android:name=".activity.ShowEvaluateHomeworkActivity"></activity>
     </application>
 
 </manifest>

@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?><!--评价中已评价的学生的listviewitem-->
+<?xml version="1.0" encoding="utf-8"?><!--进行中未提交的学生的listviewitem-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/txt_homeworkanswer_id"
@@ -11,55 +12,36 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/img_evaluatestu_avatar"
+        android:id="@+id/img_uncommitstu_avatar"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginLeft="5dp"
         android:src="@mipmap/ic_useravatar_def" />
 
     <TextView
-        android:id="@+id/txt_evaluatestu_name"
+        android:id="@+id/txt_uncommitstu_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/img_evaluatestu_avatar"
+        android:layout_toRightOf="@+id/img_uncommitstu_avatar"
         android:text="姓名"
         android:textColor="@color/bg_black"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/txt_evaluatestu_sno"
+        android:id="@+id/txt_uncommitstu_sno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_evaluatestu_name"
+        android:layout_below="@+id/txt_uncommitstu_name"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="15dp"
-        android:layout_toRightOf="@+id/img_evaluatestu_avatar"
+        android:layout_toRightOf="@+id/img_uncommitstu_avatar"
         android:width="120dp"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="201540704891"
         android:textColor="@color/hinter"
         android:textSize="16sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="12dp"
-        android:text="85"
-        android:textColor="@color/text_yellow"
-        android:textSize="18sp" />
-
-    <ImageView
-        android:id="@+id/iv_class_homework_admin_goview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="3dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/right_goview_black" />
 </RelativeLayout>

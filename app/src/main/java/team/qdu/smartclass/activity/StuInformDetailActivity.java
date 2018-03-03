@@ -22,7 +22,7 @@ public class StuInformDetailActivity extends SBaseActivity {
     }
 
     private void initView() {
-        tvDetial= (TextView) findViewById(R.id.tv_class_inform_details);
+        tvDetial= (TextView) findViewById(R.id.txt_commitstu_sno);
         String detail=getIntent().getStringExtra("detail");
         tvDetial.setText(detail);
     }

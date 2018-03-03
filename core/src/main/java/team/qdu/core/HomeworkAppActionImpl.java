@@ -117,7 +117,7 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
     }
 
     @Override
-    public void submitHomework(final String homeworkAnswerId, final String detail, final File answerPhoto, final ActionCallbackListener<Void> listener) {
+    public void commitHomework(final String homeworkAnswerId, final String detail, final File answerPhoto, final ActionCallbackListener<Void> listener) {
         if (TextUtils.isEmpty(detail) && answerPhoto == null) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "提交的文字和图片不能全为空");
             return;
@@ -127,7 +127,7 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
-                return homeworkApi.submitHomework(homeworkAnswerId, detail, answerPhoto);
+                return homeworkApi.commitHomework(homeworkAnswerId, detail, answerPhoto);
             }
 
             @Override
@@ -154,6 +154,26 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
             protected void onPostExecute(ApiResponse<HomeworkWithBLOBs> response) {
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void getHomeworkAnswerList(final String homeworkId, final ActionCallbackListener<List<HomeworkAnswerWithBLOBs>> listener) {
+        new AsyncTask<Void, Void, ApiResponse<List<HomeworkAnswerWithBLOBs>>>() {
+
+            @Override
+            protected ApiResponse<List<HomeworkAnswerWithBLOBs>> doInBackground(Void... params) {
+                return homeworkApi.getHomeworkAnswerList(homeworkId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<List<HomeworkAnswerWithBLOBs>> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {
                     listener.onFailure(response.getEvent(), response.getMsg());
                 }

@@ -14,7 +14,8 @@ import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.CheckHomworkSubmitStatusActivity;
+import team.qdu.smartclass.activity.CheckHomworkCommitStatusActivity;
+import team.qdu.smartclass.activity.ShowEvaluateHomeworkActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.TeaHomeworkUnderwayAdapter;
 
@@ -37,6 +38,7 @@ public class TeaHomeworkUnderwayFragment extends SBaseFragment implements Adapte
         mContext = (TeaClassMainActivity) getParentFragment().getActivity();
         initView();
         setHomeworkList();
+        initEvent();
         refreshFlag = false;
         return currentPage;
     }
@@ -53,6 +55,10 @@ public class TeaHomeworkUnderwayFragment extends SBaseFragment implements Adapte
 
     private void initView() {
         homeworkList = (ListView) currentPage.findViewById(R.id.list_tea_underway);
+    }
+
+    private void initEvent() {
+        homeworkList.setOnItemClickListener(this);
     }
 
     //homeworkList设置Adapter
@@ -75,10 +81,14 @@ public class TeaHomeworkUnderwayFragment extends SBaseFragment implements Adapte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String homeworkId = ((TextView)view.findViewById(R.id.txt_homework_underway_id)).getText().toString();
         String homeworkStatus = ((TextView)view.findViewById(R.id.txt_homework_underway_status)).getText().toString();
+        Intent intent;
         if ("进行中".equals(homeworkStatus)) {
-            Intent intent = new Intent(getParentFragment().getActivity(), CheckHomworkSubmitStatusActivity.class);
-            intent.putExtra("homeworkId", homeworkId);
-            startActivity(intent);
+            intent = new Intent(getParentFragment().getActivity(), CheckHomworkCommitStatusActivity.class);
+
+        } else {
+            intent = new Intent(getParentFragment().getActivity(), ShowEvaluateHomeworkActivity.class);
         }
+        intent.putExtra("homeworkId", homeworkId);
+        startActivity(intent);
     }
 }

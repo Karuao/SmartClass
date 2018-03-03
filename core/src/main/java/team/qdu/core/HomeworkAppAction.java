@@ -15,7 +15,7 @@ public interface HomeworkAppAction {
     //上传新发布作业的信息
     public void pushHomework(String title, String deadline, String detail, File photo, String classId, ActionCallbackListener<Void> listener);
 
-    //获取班课列表
+    //获取作业列表
     public void getHomeworkList(String classId, String userId, String userTitle, String requestStatus, ActionCallbackListener<List> listener);
 
     //更改作业状态
@@ -25,8 +25,11 @@ public interface HomeworkAppAction {
     public void getStuHomeworkDetail(String homeworkAnswerId, ActionCallbackListener<HomeworkAnswerWithBLOBs> listener);
 
     //学生提交作业
-    public void submitHomework(String homeworkAnswerId, String detail, File answerPhoto, ActionCallbackListener<Void> listener);
+    public void commitHomework(String homeworkAnswerId, String detail, File answerPhoto, ActionCallbackListener<Void> listener);
 
     //获取作业详情
     public void getHomeworkDetail(String homeworkId, ActionCallbackListener<HomeworkWithBLOBs> listener);
+
+    //获取某作业学生提交情况List
+    public void getHomeworkAnswerList(String homeworkId, ActionCallbackListener<List<HomeworkAnswerWithBLOBs>> listener);
 }

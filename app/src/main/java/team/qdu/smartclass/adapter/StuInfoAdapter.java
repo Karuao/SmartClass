@@ -41,7 +41,7 @@ public class StuInfoAdapter extends SBaseAdapter<Inform_User> {
             convertView = layoutInflater.inflate(R.layout.class_inform_listitem, null);
             compo.idTxt= (TextView) convertView.findViewById(R.id.tv_inform_user_id);
             compo.timeTxt = (TextView) convertView.findViewById(R.id.tv_class_inform_time);
-            compo.informTxt = (TextView) convertView.findViewById(R.id.tv_class_inform_details);
+            compo.informTxt = (TextView) convertView.findViewById(R.id.txt_commitstu_sno);
             compo.readTxt= (TextView) convertView.findViewById(R.id.tv_if_read);
 
             if(itemList.get(position).getIf_read().equals("否")){

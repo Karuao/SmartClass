@@ -41,7 +41,7 @@ public class TeaInfoAdapter extends SBaseAdapter<Inform> {
             compo.idTxt= (TextView) convertView.findViewById(R.id.tv_inform_id);
             compo.timeTxt = (TextView) convertView.findViewById(R.id.tv_class_inform_time);
             compo.numberTxt = (TextView) convertView.findViewById(R.id.tv_class_inform_people);
-            compo.informTxt = (TextView) convertView.findViewById(R.id.tv_class_inform_details);
+            compo.informTxt = (TextView) convertView.findViewById(R.id.txt_commitstu_sno);
             convertView.setTag(compo);
         } else {
             compo = (Compo) convertView.getTag();

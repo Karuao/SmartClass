@@ -1,61 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--在评价页面点击已提交作业的学生后弹出的页面-->
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--在评价页面点击已提交作业的学生后弹出的页面-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout android:orientation="vertical"
+        <LinearLayout
             android:id="@+id/class_top"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_width="match_parent">
+            android:orientation="vertical">
 
-            <LinearLayout android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
                 android:background="@color/title"
-                >
+                android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="5"
-                    android:orientation="horizontal"
                     android:gravity="center"
-                    >
+                    android:orientation="horizontal">
+
                     <ImageButton
                         android:id="@+id/iv_class_top1_back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
-                        android:onClick="toBack"
                         android:background="#00000000"
-                        android:src="@drawable/left_goback"/>
+                        android:onClick="toBack"
+                        android:src="@drawable/left_goback" />
+
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="30dp"
                         android:layout_height="fill_parent"
-                        android:src="@drawable/head2"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="5dp"
-                        />
+                        android:src="@drawable/head2" />
+
                     <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="学生姓名"
-                        android:textSize="21sp"
-                        android:textColor="@color/bg_white"
-                        android:textStyle="normal"
                         android:layout_marginLeft="5dp"
-                        />
+                        android:text="学生姓名"
+                        android:textColor="@color/bg_white"
+                        android:textSize="21sp"
+                        android:textStyle="normal" />
                 </LinearLayout>
-
-
             </LinearLayout>
         </LinearLayout>
 
@@ -66,8 +63,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxcvzxvxczvxcvxzcvzxcvxvxvzxvxvzxvxzcvzxcvzxvzxcvzxcvzxc"
-            android:textSize="17dp"/>
-
+            android:textSize="17dp" />
 
 
         <View
@@ -107,26 +103,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="成绩"
-                android:textSize="18sp"
-                android:textColor="@color/bg_black"/>
+                android:textColor="@color/bg_black"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right">
+
                 <EditText
                     android:layout_width="200dp"
                     android:layout_height="fill_parent"
                     android:layout_centerVertical="true"
                     android:background="@null"
                     android:ems="15"
+                    android:gravity="right"
                     android:textCursorDrawable="@color/bg_black"
-                    android:textSize="18sp"
-                    android:gravity="right"/>
+                    android:textSize="18sp" />
             </LinearLayout>
 
 
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2px"
@@ -144,22 +142,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="评价"
-                android:textSize="18sp"
-                android:textColor="@color/bg_black"/>
+                android:textColor="@color/bg_black"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right">
+
                 <EditText
                     android:layout_width="200dp"
                     android:layout_height="fill_parent"
                     android:layout_centerVertical="true"
                     android:background="@null"
                     android:ems="15"
+                    android:gravity="right"
                     android:textCursorDrawable="@color/bg_black"
-                    android:textSize="18sp"
-                    android:gravity="right"/>
+                    android:textSize="18sp" />
             </LinearLayout>
 
 
@@ -174,25 +173,22 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp">
 
             <Button
                 android:layout_width="221dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/shape_button"
-                android:onClick="finishCreate"
                 android:gravity="center"
+                android:onClick="finishCreate"
                 android:padding="10dp"
                 android:text="保存"
                 android:textColor="#fff"
-                android:textSize="18sp"
-                />
+                android:textSize="18sp" />
 
         </RelativeLayout>
-
-
 
 
     </LinearLayout>

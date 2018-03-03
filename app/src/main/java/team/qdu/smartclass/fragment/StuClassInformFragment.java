@@ -68,7 +68,7 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final String detail = ((TextView) view.findViewById(R.id.tv_class_inform_details)).getText().toString();
+        final String detail = ((TextView) view.findViewById(R.id.txt_commitstu_sno)).getText().toString();
         final String time = ((TextView) view.findViewById(R.id.tv_class_inform_time)).getText().toString();
         final String inform_user_id = ((TextView) view.findViewById(R.id.tv_inform_user_id)).getText().toString();
         parentActivity.informAppAction.ClickInform(inform_user_id, new ActionCallbackListener<Void>() {

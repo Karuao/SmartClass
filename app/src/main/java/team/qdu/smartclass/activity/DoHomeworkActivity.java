@@ -79,7 +79,7 @@ public class DoHomeworkActivity extends SBaseActivity {
     }
 
     private void initView() {
-        homeworkTitleTxt = (TextView) findViewById(R.id.txt_homework_title);
+        homeworkTitleTxt = (TextView) findViewById(R.id.txt_homework_name);
         homeworkDetailTxt = (TextView) findViewById(R.id.txt_homework_detail);
         homeworkPhotoImg = (ImageView) findViewById(R.id.img_homework_photo);
         homeworkPhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_homework_photo);
@@ -153,7 +153,7 @@ public class DoHomeworkActivity extends SBaseActivity {
         if (ifUploadPhoto) {
             answerPhoto = new File(new URI(photoUri.toString()));
         }
-        homeworkAppAction.submitHomework(homeworkAnswerId, answerDetail, answerPhoto, new ActionCallbackListener<Void>() {
+        homeworkAppAction.commitHomework(homeworkAnswerId, answerDetail, answerPhoto, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();

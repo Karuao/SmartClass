@@ -19,7 +19,7 @@
         android:layout_marginTop="20dp"/>
 
     <TextView
-        android:id="@+id/tv_class_inform_details"
+        android:id="@+id/txt_commitstu_sno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="添加android:gravity=‘ android:layout_gravity=center’属性。

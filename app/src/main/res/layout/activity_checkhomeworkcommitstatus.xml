@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?><!--点击一个正在进行的作业后进入的页面-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
@@ -62,7 +62,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/txt_homework_title"
+                android:id="@+id/txt_homework_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -75,7 +75,7 @@
                 android:id="@+id/txt_homework_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_homework_title"
+                android:layout_below="@+id/txt_homework_name"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:width="120dp"
@@ -91,23 +91,29 @@
             android:background="#d6d6d6" />
 
         <RelativeLayout
+            android:id="@+id/rlayout_homework_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp">
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp">
 
             <ImageView
                 android:id="@+id/img_homework_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_marginLeft="5dp"
+                android:onClick="toShowPhoto"
                 android:src="@drawable/add_class_img" />
 
-        </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_below="@+id/img_homework_photo"
+                android:layout_marginTop="5dp"
+                android:background="#d6d6d6" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="#d6d6d6" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -121,6 +127,7 @@
                 android:text="已提交" />
 
             <TextView
+                android:id="@+id/txt_commitstu_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -135,7 +142,10 @@
             android:layout_height="2px"
             android:background="#d6d6d6" />
 
-        <include layout="@layout/class_homework_admin_underway_commited_listitem" />
+        <ListView
+            android:id="@+id/list_commithomework"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></ListView>
 
         <View
             android:layout_width="match_parent"
@@ -154,6 +164,7 @@
                 android:text="未提交" />
 
             <TextView
+                android:id="@+id/txt_uncommitstu_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -167,23 +178,16 @@
             android:layout_height="2px"
             android:background="#d6d6d6" />
 
-        <include layout="@layout/class_homework_admin_underway_notcommit_listitem" />
+        <ListView
+            android:id="@+id/list_uncommithomework"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></ListView>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="80dp"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:text="还有xx名同学没有提交作业，进入评价状态后学生将不能继续提交作业，此过程不可逆！"
-                android:textColor="@color/colorRank" />
 
             <Button
                 android:layout_width="221dp"
@@ -192,7 +196,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/shape_button"
                 android:gravity="center"
-                android:onClick="toCommit"
+                android:onClick="toEvaluate"
                 android:padding="10dp"
                 android:text="开始评价"
                 android:textColor="#fff"

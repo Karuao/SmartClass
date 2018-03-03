@@ -126,7 +126,7 @@ public class HomeworkApiImpl implements HomeworkApi {
     }
 
     @Override
-    public ApiResponse<Void> submitHomework(String homeworkAnswerId, String detail, File answerPhoto) {
+    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String detail, File answerPhoto) {
         Map<String, String> paramMap = new HashMap<>();
         Map<String, File> fileMap = null;
         paramMap.put("homeworkAnswerId", homeworkAnswerId);
@@ -139,7 +139,7 @@ public class HomeworkApiImpl implements HomeworkApi {
         Type type = new TypeToken<ApiResponse<String>>() {
         }.getType();
         try {
-            return fileHttpEngine.postHandle(paramMap, fileMap, type, "/submitHomework");
+            return fileHttpEngine.postHandle(paramMap, fileMap, type, "/commitHomework");
         } catch (IOException e) {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());
@@ -157,6 +157,23 @@ public class HomeworkApiImpl implements HomeworkApi {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/getHomeworkDetail");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<List<HomeworkAnswerWithBLOBs>> getHomeworkAnswerList(String homeworkId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("homeworkId", homeworkId);
+
+        Type type = new TypeToken<ApiResponse<List<HomeworkAnswerWithBLOBs>>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getHomeworkAnswerList");
         } catch (IOException e) {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());

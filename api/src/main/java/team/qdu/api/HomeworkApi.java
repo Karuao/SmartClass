@@ -21,7 +21,9 @@ public interface HomeworkApi {
 
     public ApiResponse<HomeworkAnswerWithBLOBs> getStuHomeworkDetail(String homeworkAnswerId);
 
-    public ApiResponse<Void> submitHomework(String homeworkAnswerId, String detail, File answerPhoto);
+    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String detail, File answerPhoto);
 
     public ApiResponse<HomeworkWithBLOBs> getHomeworkDetail(String homeworkId);
+
+    public ApiResponse<List<HomeworkAnswerWithBLOBs>> getHomeworkAnswerList(String homeworkId);
 }
