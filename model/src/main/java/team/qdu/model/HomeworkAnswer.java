@@ -16,6 +16,8 @@ public class HomeworkAnswer implements Serializable {
 
     private String remark_url;
 
+    private Integer exp;
+
     private Integer class_id;
 
     private Date create_date_time;
@@ -70,6 +72,14 @@ public class HomeworkAnswer implements Serializable {
 
     public void setRemark_url(String remark_url) {
         this.remark_url = remark_url == null ? null : remark_url.trim();
+    }
+
+    public Integer getExp() {
+        return exp;
+    }
+
+    public void setExp(Integer exp) {
+        this.exp = exp;
     }
 
     public Integer getClass_id() {
