@@ -53,7 +53,9 @@ public class ShowUnderwayHomeworkDetailActivity extends SBaseActivity {
             @Override
             public void onSuccess(HomeworkAnswerWithBLOBs data, String message) {
                 underwayHomeworkTitleTxt.setText(data.getHomework().getName());
-                underwayAnswerDetailTxt.setText(data.getDetail());
+                if (data.getDetail() != null) {
+                    underwayAnswerDetailTxt.setText(data.getDetail());
+                }
                 if (data.getUrl() != null) {
                     setPhoto(underwayAnswerPhotoImg, data.getUrl());
                 } else {

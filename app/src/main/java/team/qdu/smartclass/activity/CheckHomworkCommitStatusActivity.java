@@ -77,7 +77,9 @@ public class CheckHomworkCommitStatusActivity extends SBaseActivity implements A
             @Override
             public void onSuccess(HomeworkWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getName());
-                homeworkDetailTxt.setText(data.getDetail());
+                if (data.getDetail() != null) {
+                    homeworkDetailTxt.setText(data.getDetail());
+                }
                 if (data.getUrl() != null) {
                     setPhoto(homeworkPhotoImg, data.getUrl());
                 } else {
@@ -90,7 +92,7 @@ public class CheckHomworkCommitStatusActivity extends SBaseActivity implements A
                 Toast.makeText(CheckHomworkCommitStatusActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
-        //设置已提交和为提交人数和列表
+        //设置已提交和未提交人数和列表
         homeworkAppAction.getHomeworkAnswerList(homeworkId, new ActionCallbackListener<List<HomeworkAnswerWithBLOBs>>() {
             @Override
             public void onSuccess(List<HomeworkAnswerWithBLOBs> data, String message) {
@@ -179,6 +181,7 @@ public class CheckHomworkCommitStatusActivity extends SBaseActivity implements A
                 intent.putExtra("homeworkId", homeworkId);
                 startActivity(intent);
                 Toast.makeText(CheckHomworkCommitStatusActivity.this, message, Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override

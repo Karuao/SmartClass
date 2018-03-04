@@ -28,7 +28,6 @@ public class TeaHomeworkUnderwayFragment extends SBaseFragment implements Adapte
     private View currentPage;
     private ListView homeworkList;
     private TeaClassMainActivity mContext;
-
     //刷新标志
     public static boolean refreshFlag;
 
@@ -84,7 +83,6 @@ public class TeaHomeworkUnderwayFragment extends SBaseFragment implements Adapte
         Intent intent;
         if ("进行中".equals(homeworkStatus)) {
             intent = new Intent(getParentFragment().getActivity(), CheckHomworkCommitStatusActivity.class);
-
         } else {
             intent = new Intent(getParentFragment().getActivity(), ShowEvaluateHomeworkActivity.class);
         }

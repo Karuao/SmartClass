@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.LoginActivity"
+        <activity
+            android:name=".activity.LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,12 +47,19 @@
         <activity android:name=".activity.ConfirmJoinClassActivity"></activity>
         <activity android:name=".activity.PublishHomeworkActivity"></activity>
         <activity android:name=".activity.ModifyClassActivity"></activity>
-        <activity android:name=".activity.DoHomeworkActivity"
+        <activity
+            android:name=".activity.DoHomeworkActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.ShowPhotoActivity"></activity>
         <activity android:name=".activity.CheckHomworkCommitStatusActivity"></activity>
         <activity android:name=".activity.ShowUnderwayHomeworkDetailActivity"></activity>
         <activity android:name=".activity.ShowEvaluateHomeworkActivity"></activity>
+        <activity
+            android:name=".activity.EvaluateHomworkActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        <activity android:name=".activity.ShowMyHomeworkActivity"></activity>
+        <activity android:name=".activity.ShowFinishHomeworkActivity"></activity>
+        <activity android:name=".activity.ShowFinishHomeworkDetialActivity"></activity>
     </application>
 
 </manifest>

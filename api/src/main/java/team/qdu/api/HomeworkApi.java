@@ -26,4 +26,8 @@ public interface HomeworkApi {
     public ApiResponse<HomeworkWithBLOBs> getHomeworkDetail(String homeworkId);
 
     public ApiResponse<List<HomeworkAnswerWithBLOBs>> getHomeworkAnswerList(String homeworkId);
+
+    public ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, File evaluatePhoto);
+
+    public ApiResponse<Integer> getNotEvaluateStuNum(String homeworkId);
 }

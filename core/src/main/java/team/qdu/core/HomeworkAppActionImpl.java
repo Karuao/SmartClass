@@ -180,4 +180,48 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
             }
         }.execute();
     }
+
+    @Override
+    public void commitHomeworkEvaluation(final String homeworkAnswerId, final String exp, final String remark, final File evaluatePhoto, final ActionCallbackListener<Void> listener) {
+        if (TextUtils.isEmpty(exp) || Integer.parseInt(exp) < 0 || Integer.parseInt(exp) > 10) {
+            listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "评分应在0-10分之间");
+            return;
+        }
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return homeworkApi.commitHomeworkEvaluation(homeworkAnswerId, exp, remark, evaluatePhoto);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void getNotEvaluateStuNum(final String homeworkId, final ActionCallbackListener<Integer> listener) {
+        new AsyncTask<Void, Void, ApiResponse<Integer>>() {
+
+            @Override
+            protected ApiResponse<Integer> doInBackground(Void... params) {
+                return homeworkApi.getNotEvaluateStuNum(homeworkId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Integer> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObj(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
 }

@@ -37,19 +37,20 @@ import team.qdu.smartclass.R;
 import team.qdu.smartclass.util.ImgUtil;
 
 /**
- * Created by 11602 on 2018/2/26.
+ * Created by 11602 on 2018/3/3.
  */
 
-public class DoHomeworkActivity extends SBaseActivity {
+public class EvaluateHomworkActivity extends SBaseActivity {
 
     private TextView homeworkTitleTxt;
-    private TextView homeworkDetailTxt;
-    private ImageView homeworkPhotoImg;
-    private RelativeLayout homeworkPhotoRlayout;
-    private EditText answerDetailEdt;
+    private TextView answerDetailTxt;
     private ImageView answerPhotoImg;
+    private RelativeLayout answerPhotoRlayout;
+    private EditText answerExpEdt;
+    private EditText evaluateRemarkEdt;
+    private ImageView evaluatePhotoImg;
     private String homeworkAnswerId;
-    private Bitmap homeworkPhoto;
+    private Bitmap homeworkAnswerPhoto;
     //弹出窗口
     private PopupWindow selectphotoPopup;
     //权限
@@ -66,10 +67,9 @@ public class DoHomeworkActivity extends SBaseActivity {
     //相机拍照标记
     private static final int CAMERA_REQUEST_CODE = 1;
 
-    @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_stu_dowork);
+        setContentView(R.layout.class_homework_admin_evaluate_details);
         homeworkAnswerId = getIntent().getStringExtra("homeworkAnswerId");
         initView();
         mTempPhotoPath = Environment.getExternalStorageDirectory() + File.separator + "photo.png";
@@ -77,41 +77,51 @@ public class DoHomeworkActivity extends SBaseActivity {
 
     private void initView() {
         homeworkTitleTxt = (TextView) findViewById(R.id.txt_homework_name);
-        homeworkDetailTxt = (TextView) findViewById(R.id.txt_homework_detail);
-        homeworkPhotoImg = (ImageView) findViewById(R.id.img_homework_photo);
-        homeworkPhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_homework_photo);
-        answerDetailEdt = (EditText) findViewById(R.id.edt_answer_detail);
+        answerDetailTxt = (TextView) findViewById(R.id.txt_answer_detail);
         answerPhotoImg = (ImageView) findViewById(R.id.img_answer_photo);
+        answerPhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_answer_photo);
+        answerExpEdt = (EditText) findViewById(R.id.edt_answer_exp);
+        evaluateRemarkEdt = (EditText) findViewById(R.id.edt_evaluate_remark);
+        evaluatePhotoImg = (ImageView) findViewById(R.id.img_evaluate_photo);
+        answerExpEdt.requestFocus();
         setData();
     }
 
-    //给控件设置数据
+    //组件设置数据
     private void setData() {
         homeworkAppAction.getStuHomeworkDetail(homeworkAnswerId, new ActionCallbackListener<HomeworkAnswerWithBLOBs>() {
             @Override
             public void onSuccess(HomeworkAnswerWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getHomework().getName());
-                if (data.getHomework().getDetail() != null) {
-                    homeworkDetailTxt.setText(data.getHomework().getDetail());
-                }
-                if (data.getHomework().getUrl() != null) {
-                    setPhoto(homeworkPhotoImg, data.getHomework().getUrl(), true);
-                } else {
-                    homeworkPhotoRlayout.setVisibility(View.GONE);
-                }
                 if (data.getDetail() != null) {
-                    answerDetailEdt.setText(data.getDetail());
+                    answerDetailTxt.setText(data.getDetail());
                 }
                 if (data.getUrl() != null) {
-                    setPhoto(answerPhotoImg, data.getUrl(), false);
+                    setPhoto(answerPhotoImg, data.getUrl(), true);
+                } else {
+                    answerPhotoRlayout.setVisibility(View.GONE);
+                }
+                if (data.getExp() != null) {
+                    answerExpEdt.setText(data.getExp().toString());
+                }
+                if (data.getRemark() != null) {
+                    evaluateRemarkEdt.setText(data.getRemark());
+                }
+                if (data.getRemark_url() != null) {
+                    setPhoto(evaluatePhotoImg, data.getRemark_url(), false);
                 }
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    //经验LinerLayout点击事件,聚焦经验EditText
+    public void toFocusExp(View view) {
+        answerExpEdt.requestFocus();
     }
 
     //ImageView设置图片
@@ -121,24 +131,24 @@ public class DoHomeworkActivity extends SBaseActivity {
             public void onSuccess(Bitmap data, String message) {
                 imageView.setImageBitmap(data);
                 if (ifSetPhoto) {
-                    homeworkPhoto = data;
+                    homeworkAnswerPhoto = data;
                 }
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     //点击图片展示图片点击事件
     public void toShowPhoto(View view) {
-        Intent intent = new Intent(DoHomeworkActivity.this, ShowPhotoActivity.class);
+        Intent intent = new Intent(EvaluateHomworkActivity.this, ShowPhotoActivity.class);
         File file = new File(Environment.getExternalStorageDirectory() + File.separator + "showPhoto.png");//将要保存图片的路径
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            homeworkPhoto.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            homeworkAnswerPhoto.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             bos.flush();
             bos.close();
         } catch (IOException e) {
@@ -147,23 +157,25 @@ public class DoHomeworkActivity extends SBaseActivity {
         startActivity(intent);
     }
 
-    //提交作业点击事件
-    public void toSubmitHomework(View view) throws URISyntaxException {
-        String answerDetail = answerDetailEdt.getText().toString();
-        File answerPhoto = null;
+    //提交评价点击事件
+    public void toSubmitEvaluation(View view) throws URISyntaxException {
+        String  answerExp = answerExpEdt.getText().toString();
+        String evaluateRemark = evaluateRemarkEdt.getText().toString();
+        File evaluatePhoto = null;
         if (ifUploadPhoto) {
-            answerPhoto = new File(new URI(photoUri.toString()));
+            evaluatePhoto = new File(new URI(photoUri.toString()));
         }
-        homeworkAppAction.commitHomework(homeworkAnswerId, answerDetail, answerPhoto, new ActionCallbackListener<Void>() {
+        homeworkAppAction.commitHomeworkEvaluation(homeworkAnswerId, answerExp, evaluateRemark, evaluatePhoto, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
-                Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                ShowEvaluateHomeworkActivity.refreshFlag = true;
                 finish();
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -171,7 +183,7 @@ public class DoHomeworkActivity extends SBaseActivity {
     //添加图片点击事件
     public void toAddPhoto(View view) {
         if (selectphotoPopup == null) {
-            View contentView = LayoutInflater.from(DoHomeworkActivity.this)
+            View contentView = LayoutInflater.from(EvaluateHomworkActivity.this)
                     .inflate(R.layout.popup_selectphoto, null);
             selectphotoPopup = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -266,15 +278,15 @@ public class DoHomeworkActivity extends SBaseActivity {
             }
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-                        DoHomeworkActivity.this.getContentResolver(), photoUri);
-                answerPhotoImg.setImageBitmap(bitmap);
+                        EvaluateHomworkActivity.this.getContentResolver(), photoUri);
+                evaluatePhotoImg.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             //图片按照ImageView大小缩放
-            answerPhotoImg.setScaleType(ImageView.ScaleType.FIT_XY);
+            evaluatePhotoImg.setScaleType(ImageView.ScaleType.FIT_XY);
             //解决部分自动旋转问题
-            answerPhotoImg.setRotation(ImgUtil.getBitmapDegree(photoUri.getPath()));
+            evaluatePhotoImg.setRotation(ImgUtil.getBitmapDegree(photoUri.getPath()));
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

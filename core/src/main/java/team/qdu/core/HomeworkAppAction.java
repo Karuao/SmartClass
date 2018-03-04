@@ -32,4 +32,10 @@ public interface HomeworkAppAction {
 
     //获取某作业学生提交情况List
     public void getHomeworkAnswerList(String homeworkId, ActionCallbackListener<List<HomeworkAnswerWithBLOBs>> listener);
+
+    //提交作业评价
+    public void commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, File evaluatePhoto, ActionCallbackListener<Void> listener);
+
+    //获取作业未评价的学生人数
+    public void getNotEvaluateStuNum(String homeworkId, ActionCallbackListener<Integer> listener);
 }

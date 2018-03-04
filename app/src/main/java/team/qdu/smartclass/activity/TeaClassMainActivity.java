@@ -131,7 +131,6 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     }
 
 
-
     @Override
     public void onClick(View view) {
         resetImg();
@@ -285,21 +284,21 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     }
 
 
-  //编辑班课按钮
-  public void compileClass(View view){
-      this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
-          @Override
-          public void onSuccess(Class data, String message) {
-              if(data.getIf_allow_to_join().equals("已结束")){
-                  new AlertDialog.Builder(TeaClassMainActivity.this)
-                          .setTitle("提示")
-                          .setMessage("班课结束后不允许编辑！")
-                          .setPositiveButton("确定",null)
-                          .show();
-              }else{
-                  startActivity(new Intent(TeaClassMainActivity.this,ModifyClassActivity.class));
-              }
-          }
+    //编辑班课按钮
+    public void compileClass(View view) {
+        this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
+            @Override
+            public void onSuccess(Class data, String message) {
+                if (data.getIf_allow_to_join().equals("已结束")) {
+                    new AlertDialog.Builder(TeaClassMainActivity.this)
+                            .setTitle("提示")
+                            .setMessage("班课结束后不允许编辑！")
+                            .setPositiveButton("确定", null)
+                            .show();
+                } else {
+                    startActivity(new Intent(TeaClassMainActivity.this, ModifyClassActivity.class));
+                }
+            }
 
             @Override
             public void onFailure(String errorEvent, String message) {
@@ -314,15 +313,16 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         final View listItem = (View) view.getParent().getParent();
         final String homeworkStatus = ((TextView) listItem.findViewById(R.id.txt_homework_underway_status))
                 .getText().toString();
+        final String homeworkId = ((TextView) listItem.findViewById(R.id.txt_homework_underway_id))
+                .getText().toString();
         AlertDialog.Builder builder = new AlertDialog.Builder(TeaClassMainActivity.this);
+        //生成对话框
         if ("进行中".equals(homeworkStatus)) {
             alert = builder.setTitle("开始评价")
                     .setMessage("开始评价后将无法再提交作业。")
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            String homeworkId = ((TextView) listItem.findViewById(R.id.txt_homeworkanswer_underway_id))
-                                    .getText().toString();
                             changeHomeworkStatus(homeworkId, homeworkStatus);
                         }
                     })
@@ -337,9 +337,23 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            String homeworkId = ((TextView) listItem.findViewById(R.id.txt_homeworkanswer_underway_id))
-                                    .getText().toString();
-                            changeHomeworkStatus(homeworkId, homeworkStatus);
+                            //查询未评价人数是0，然后再结束作业，否则不能结束作业
+                            homeworkAppAction.getNotEvaluateStuNum(homeworkId, new ActionCallbackListener<Integer>() {
+                                @Override
+                                public void onSuccess(Integer data, String message) {
+                                    if (data == 0) {
+                                        changeHomeworkStatus(homeworkId, homeworkStatus);
+                                    } else {
+                                        Toast.makeText(TeaClassMainActivity.this, "仍有" + data
+                                                + "人作业未评价,请评价后再结束作业", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                @Override
+                                public void onFailure(String errorEvent, String message) {
+                                    Toast.makeText(TeaClassMainActivity.this,
+                                            "结束班课失败，请稍后再试", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     })
                     .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -350,6 +364,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         }
         alert.show();
     }
+
 
     //改变作业状态
     private void changeHomeworkStatus(String homeworkId, final String homeworkStatus) {

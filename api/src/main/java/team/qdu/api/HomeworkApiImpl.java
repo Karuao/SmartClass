@@ -181,4 +181,45 @@ public class HomeworkApiImpl implements HomeworkApi {
             return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
         }
     }
+
+    @Override
+    public ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, File evaluatePhoto) {
+        Map<String, String> paramMap = new HashMap<>();
+        Map<String, File> fileMap = null;
+        paramMap.put("homeworkAnswerId", homeworkAnswerId);
+        paramMap.put("exp", exp);
+        paramMap.put("remark", remark);
+        if (evaluatePhoto != null) {
+            fileMap = new HashMap<>();
+            fileMap.put("photo", evaluatePhoto);
+        }
+
+        Type type = new TypeToken<ApiResponse<Void>>() {
+        }.getType();
+        try {
+            return fileHttpEngine.postHandle(paramMap, fileMap, type, "/commitHomeworkEvaluation");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<Integer> getNotEvaluateStuNum(String homeworkId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("homeworkId", homeworkId);
+
+        Type type = new TypeToken<ApiResponse<Integer>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getNotEvaluateStuNum");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
 }

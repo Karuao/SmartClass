@@ -99,9 +99,10 @@
 
             <ImageView
                 android:id="@+id/img_homework_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_marginLeft="5dp"
+                android:onClick="toShowPhoto"
                 android:src="@drawable/add_class_img" />
 
             <View
@@ -137,7 +138,6 @@
             android:layout_height="2px"
             android:background="#d6d6d6" />
 
-        <include layout="@layout/class_homework_admin_evaluate_evaluated_listitem" />
         <ListView
             android:id="@+id/list_evaluatehomework"
             android:layout_width="wrap_content"
@@ -175,7 +175,6 @@
             android:layout_height="2px"
             android:background="#d6d6d6" />
 
-        <include layout="@layout/class_homework_admin_evaluate_notevaluate_listitem" />
         <ListView
             android:id="@+id/list_notevaluatehomework"
             android:layout_width="wrap_content"
@@ -205,7 +204,6 @@
                 android:layout_marginRight="5dp"
                 android:text="人" />
 
-
         </RelativeLayout>
 
         <View
@@ -213,12 +211,32 @@
             android:layout_height="2px"
             android:background="#d6d6d6" />
 
-        <include layout="@layout/class_homework_admin_underway_uncommit_listitem" />
         <ListView
             android:id="@+id/list_uncommithomework"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></ListView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_homwork_finish"
+                android:layout_width="221dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/shape_button"
+                android:gravity="center"
+                android:onClick="toFinishHomework"
+                android:padding="10dp"
+                android:text="结束作业"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>
