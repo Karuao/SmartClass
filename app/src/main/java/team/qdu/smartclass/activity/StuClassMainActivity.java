@@ -82,8 +82,12 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         imgClassinfo = (ImageView) findViewById(R.id.iv_class_classinfo);
 
         classVpager.setAdapter(stuClassFragmentPagerAdapter);
-        classVpager.setCurrentItem(0);
+        classVpager.setCurrentItem(2);
         classVpager.addOnPageChangeListener(this);
+
+        //初始化tab按钮颜色，作业为选中
+        resetImg();
+        imgHomework.setImageResource(R.drawable.class_homework_select);
     }
 
     //切换图片颜色

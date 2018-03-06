@@ -34,10 +34,6 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
     private TextView userGender;
     private TextView userUniversity;
     private TextView userDepartment;
-
-    private boolean isClick = true;
-    private LinearLayout create;
-
     //几个代表页面的常量
     public static final int PAGE_ONE = 0;
     public static final int PAGE_TWO = 1;
@@ -59,6 +55,8 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
         tabUser = (LinearLayout) findViewById(R.id.tab02);
         imgClass = (ImageButton) findViewById(R.id.class_img);
         imgUser = (ImageButton) findViewById(R.id.user_img);
+        //设置tab颜色为班课tab为选中状态
+        imgUser.setImageResource(R.drawable.user_notselect);
     }
 
     //点击效果

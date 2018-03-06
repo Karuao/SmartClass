@@ -51,6 +51,8 @@ public class StuClassHomeworkFragment extends SBaseFragment implements View.OnCl
         tvUnderway = (TextView) currentPage.findViewById(R.id.tv_class_homework_underway);
         tvFinish = (TextView) currentPage.findViewById(R.id.tv_class_homework_finish);
         stuHomeworkFragmentPagerAdapter = new StuHomeworkFragmentPagerAdapter(getChildFragmentManager());
+        //设置tab颜色为进行中作业tab为选中状态
+        tvFinish.setTextColor(getActivity().getColor(R.color.hinter));
     }
 
     private void initEvents() {
@@ -67,9 +69,9 @@ public class StuClassHomeworkFragment extends SBaseFragment implements View.OnCl
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         resetImg();
-        switch (currentPage.getId()) {
+        switch (view.getId()) {
             case R.id.ll_class_homework_underway:
                 tvUnderway.setTextColor(getActivity().getColor(R.color.classbottom));
                 stuHomeworkVpager.setCurrentItem(0);
