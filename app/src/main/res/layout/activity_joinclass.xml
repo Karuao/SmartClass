@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--加入班课页面-->
+<?xml version="1.0" encoding="utf-8"?><!--加入班课页面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -48,7 +47,8 @@
             android:background="@null"
             android:ems="15"
             android:hint="请输入邀请码"
-            android:maxLength="10"
+            android:inputType="number"
+            android:maxLength="9"
             android:textColorHint="@color/hint"
             android:textCursorDrawable="@null"
             android:textSize="16sp" />
