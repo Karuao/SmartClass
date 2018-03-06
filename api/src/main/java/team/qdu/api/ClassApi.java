@@ -16,7 +16,7 @@ public interface ClassApi {
 
     public ApiResponse<List<Class>> getJoinedClasses(String userId);
 
-    public ApiResponse<Void> jumpClass(String classId, String userId);
+    public ApiResponse<String> jumpClass(String classId, String userId);
 
     public Bitmap getBitmap(String urlTail);
 

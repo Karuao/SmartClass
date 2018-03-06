@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +16,6 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.ModifyClassActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 
 /**
@@ -26,6 +24,8 @@ import team.qdu.smartclass.activity.TeaClassMainActivity;
 
 public class TeaClassDetailFragment extends SBaseFragment {
 
+    //标题栏班课名
+    TextView titleBarClassNameTxt;
     CheckBox checkBox;
     TextView hint;
     View hint2;
@@ -46,6 +46,8 @@ public class TeaClassDetailFragment extends SBaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.class_tab05_admin, container, false);
         refreshFlag=false;
+        titleBarClassNameTxt = (TextView) view.findViewById(R.id.txt_titlebar_classname);
+        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
         checkBox=(CheckBox)view.findViewById(R.id.chk_join);
         allow=(TextView)view.findViewById(R.id.tv_join);
         className=(TextView)view.findViewById(R.id.tv_class_classname);

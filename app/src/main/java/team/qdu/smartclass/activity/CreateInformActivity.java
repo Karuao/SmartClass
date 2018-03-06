@@ -13,7 +13,7 @@ import team.qdu.smartclass.fragment.TeaClassInformFragment;
  * Created by n551 on 2018/2/1.
  */
 
-public class CreateInformActivity extends SBaseActivity{
+public class CreateInformActivity extends SBaseActivity {
     private EditText detailEdt;
 
     @Override
@@ -23,15 +23,15 @@ public class CreateInformActivity extends SBaseActivity{
         initView();
     }
 
-    private  void initView(){
-        detailEdt= (EditText) findViewById(R.id.Inform_Detail);
+    private void initView() {
+        detailEdt = (EditText) findViewById(R.id.Inform_Detail);
     }
 
-    public void toPush(View view){
-        String classid = getIntent().getStringExtra("classId");
-        String detail=detailEdt.getText().toString();
+    public void toPush(View view) {
+        String classid = getClassId();
+        String detail = detailEdt.getText().toString();
 
-        this.informAppAction.createInform(classid,detail,new ActionCallbackListener<Void>(){
+        this.informAppAction.createInform(classid, detail, new ActionCallbackListener<Void>() {
 
             @Override
             public void onSuccess(Void data, String message) {

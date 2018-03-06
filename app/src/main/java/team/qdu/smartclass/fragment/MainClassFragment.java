@@ -5,9 +5,7 @@ package team.qdu.smartclass.fragment;
  * Created by rjmgc on 2017/12/11.
  */
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +43,8 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
         View view = inflater.inflate(R.layout.fragment_main_class, container, false);
         parentActivity = (MainActivity) getActivity();
         listView = (ListView) view.findViewById(R.id.list_mainclass);
-        allow=(TextView)view.findViewById(R.id.tv_join);
-        ifAllowTojoin=(CheckBox)view.findViewById(R.id.chk_join);
+        allow = (TextView) view.findViewById(R.id.tv_join);
+        ifAllowTojoin = (CheckBox) view.findViewById(R.id.chk_join);
         getJoinedClasses();
         listView.setOnItemClickListener(this);
         return view;
@@ -81,7 +79,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
             public void onSuccess(List<Class> data, String message) {
                 //将已结束班课放到List末端
                 int size = data.size();
-                for (int i = 0; i < size;) {
+                for (int i = 0; i < size; ) {
                     if ("已结束".equals(data.get(i).getIf_allow_to_join())) {
                         data.add(data.remove(i));
                         size--;
@@ -104,23 +102,21 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
-        parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<Void>() {
+        parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<String>() {
             @Override
-            public void onSuccess(Void data, String message) {
+            public void onSuccess(String data, String message) {
                 System.out.println(message);
                 if ("teacher".equals(message)) {
                     Intent intent = new Intent(getContext(), TeaClassMainActivity.class);
                     setClassId(classId);
                     setUserTitle("teacher");
-                    intent.putExtra("classId", classId);
-                    intent.putExtra("userId",getUserId());
+                    intent.putExtra("className", data);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(getContext(), StuClassMainActivity.class);
                     setClassId(classId);
                     setUserTitle("student");
-                    intent.putExtra("classId", classId);
-                    intent.putExtra("userId",getUserId());
+                    intent.putExtra("className", data);
                     startActivity(intent);
                 }
             }
@@ -130,12 +126,5 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    //从SharedPreferences获取userId
-    public String getUserId() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user",
-                Activity.MODE_PRIVATE);
-        return  sharedPreferences.getString("userId", null);
     }
 }

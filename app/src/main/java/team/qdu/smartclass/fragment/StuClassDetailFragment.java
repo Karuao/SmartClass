@@ -22,6 +22,8 @@ import team.qdu.smartclass.activity.StuClassMainActivity;
 
 public class StuClassDetailFragment extends SBaseFragment {
 
+    //标题栏班课名
+    TextView titleBarClassNameTxt;
     ImageView stuClassDetailImg;
     TextView stuClassName;
     TextView stuClassNum;
@@ -33,32 +35,34 @@ public class StuClassDetailFragment extends SBaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.class_tab05, container, false);
-        stuClassDetailImg=(ImageView)view.findViewById(R.id.img_class);
-        stuClassName=(TextView)view.findViewById(R.id.tv_class_classname);
-        stuClassNum=(TextView)view.findViewById(R.id.tv_class_classnum);
-        stuClassTeacher=(TextView)view.findViewById(R.id.tv_class_teacher);
-        stuClassUniversity=(TextView)view.findViewById(R.id.tv_class_university);
-        stuClassDepartment=(TextView)view.findViewById(R.id.tv_class_department);
-        stuClassDetail=(TextView)view.findViewById(R.id.tv_class_goal_details);
-        stuClassExam=(TextView)view.findViewById(R.id.tv_class_exam_details);
-        final StuClassMainActivity parentActivity= (StuClassMainActivity) getActivity();
+        View view = inflater.inflate(R.layout.class_tab05, container, false);
+        titleBarClassNameTxt = (TextView) view.findViewById(R.id.txt_titlebar_classname);
+        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
+        stuClassDetailImg = (ImageView) view.findViewById(R.id.img_class);
+        stuClassName = (TextView) view.findViewById(R.id.tv_class_classname);
+        stuClassNum = (TextView) view.findViewById(R.id.tv_class_classnum);
+        stuClassTeacher = (TextView) view.findViewById(R.id.tv_class_teacher);
+        stuClassUniversity = (TextView) view.findViewById(R.id.tv_class_university);
+        stuClassDepartment = (TextView) view.findViewById(R.id.tv_class_department);
+        stuClassDetail = (TextView) view.findViewById(R.id.tv_class_goal_details);
+        stuClassExam = (TextView) view.findViewById(R.id.tv_class_exam_details);
+        final StuClassMainActivity parentActivity = (StuClassMainActivity) getActivity();
         parentActivity.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
             @Override
             public void onSuccess(Class data, String message) {
                 stuClassName.setText(data.getCourse());
                 stuClassNum.setText(data.getName());
-                if(TextUtils.isEmpty(data.getDetail())) {
+                if (TextUtils.isEmpty(data.getDetail())) {
                     stuClassDetail.setText("暂无内容");
-                }else {
+                } else {
                     stuClassDetail.setText(data.getDetail());
                 }
-                if(TextUtils.isEmpty(data.getExam_shedule())){
+                if (TextUtils.isEmpty(data.getExam_shedule())) {
                     stuClassExam.setText("暂无内容");
-                }else {
+                } else {
                     stuClassExam.setText(data.getExam_shedule());
                 }
-                final String userId=data.getUser_id().toString();
+                final String userId = data.getUser_id().toString();
                 parentActivity.userAppAction.getUserInforById(userId, new ActionCallbackListener<User>() {
                     @Override
                     public void onSuccess(User user, String message) {

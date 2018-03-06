@@ -4,63 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/title"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="5"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/iv_class_top1_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:background="#00000000"
-                android:onClick="toBack"
-                android:src="@drawable/left_goback" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="30dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/head2" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="课程名"
-                android:textColor="@color/bg_white"
-                android:textSize="21sp"
-                android:textStyle="normal" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="toPublish"
-                android:text="发布作业"
-                android:textColor="@color/bg_white"
-                android:textSize="19sp"
-                android:textStyle="normal" />
-        </LinearLayout>
-    </LinearLayout>
+    <include android:id="@+id/top" layout="@layout/class_tab03_admin_top" />
 
     <include
         android:id="@+id/top"

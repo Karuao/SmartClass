@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import team.qdu.smartclass.R;
 
@@ -13,9 +14,19 @@ import team.qdu.smartclass.R;
 
 public class TeaClassMaterialFragment extends SBaseFragment {
 
+    private View currentPage;
+    //标题栏班课名
+    private TextView titleBarClassNameTxt;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        System.out.println("Teacher Material");
-        return inflater.inflate(R.layout.class_tab01_admin, container, false);
+        currentPage = inflater.inflate(R.layout.class_tab01_admin, container, false);
+        initView();
+        return currentPage;
+    }
+
+    public void initView() {
+        titleBarClassNameTxt = (TextView) currentPage.findViewById(R.id.txt_titlebar_classname);
+        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
     }
 }

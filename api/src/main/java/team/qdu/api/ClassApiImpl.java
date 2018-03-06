@@ -56,12 +56,12 @@ public class ClassApiImpl implements ClassApi {
     }
 
     @Override
-    public ApiResponse<Void> jumpClass(String classId, String userId) {
+    public ApiResponse<String> jumpClass(String classId, String userId) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("classId", classId);
         paramMap.put("userId", userId);
 
-        Type type = new TypeToken<ApiResponse<Void>>() {
+        Type type = new TypeToken<ApiResponse<String>>() {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/jumpClass");

@@ -17,7 +17,7 @@ public interface ClassAppAction {
     public void getJoinedClasses(String userId, ActionCallbackListener<List<Class>> listener);
 
     //跳转老师班课/学生班课
-    public void jumpClass(String classId, String userId, ActionCallbackListener<Void> listener);
+    public void jumpClass(String classId, String userId, ActionCallbackListener<String> listener);
 
     //获取图片
     public void getBitmap(String urlTail, ActionCallbackListener<Bitmap> listener);

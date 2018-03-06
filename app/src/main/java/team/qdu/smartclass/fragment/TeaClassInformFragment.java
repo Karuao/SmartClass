@@ -27,7 +27,10 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class TeaClassInformFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
+
     private View currentPage;
+    //标题栏班课名
+    private TextView titleBarClassNameTxt;
     ListView listview;
     TeaClassMainActivity parentActivity;
     //刷新标志
@@ -35,8 +38,10 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        currentPage=inflater.inflate(R.layout.class_tab04_admin, container, false);
+        currentPage = inflater.inflate(R.layout.class_tab04_admin, container, false);
         parentActivity = (TeaClassMainActivity) getActivity();
+        titleBarClassNameTxt = (TextView) currentPage.findViewById(R.id.txt_titlebar_classname);
+        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
         listview = (ListView) currentPage.findViewById(R.id.class_inform_listView);
         getInform();
         refreshFlag = false;
@@ -44,6 +49,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
         return currentPage;
 
     }
+
     //页面从后台返回到前台运行
     @Override
     public void onResume() {
@@ -55,12 +61,12 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
     }
 
     private void getInform() {
-        String classid = getActivity().getIntent().getStringExtra("classId");
-        parentActivity.informAppAction.getInform(classid,new ActionCallbackListener<List<Inform>>() {
+        String classid = getClassId();
+        parentActivity.informAppAction.getInform(classid, new ActionCallbackListener<List<Inform>>() {
 
             @Override
             public void onSuccess(List<Inform> data, String message) {
-                listview.setAdapter(new TeaInfoAdapter(getActivity(),data));
+                listview.setAdapter(new TeaInfoAdapter(getActivity(), data));
             }
 
             @Override
@@ -73,27 +79,28 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final String detail = ((TextView)view.findViewById(R.id.txt_commitstu_sno)).getText().toString();
-        final String time=((TextView)view.findViewById(R.id.tv_class_inform_time)).getText().toString();
-        final String read_num=((TextView)view.findViewById(R.id.tv_class_inform_people)).getText().toString();
-        final String inform_id=((TextView)view.findViewById(R.id.tv_inform_id)).getText().toString();
+        final String detail = ((TextView) view.findViewById(R.id.txt_commitstu_sno)).getText().toString();
+        final String time = ((TextView) view.findViewById(R.id.tv_class_inform_time)).getText().toString();
+        final String read_num = ((TextView) view.findViewById(R.id.tv_class_inform_people)).getText().toString();
+        final String inform_id = ((TextView) view.findViewById(R.id.tv_inform_id)).getText().toString();
         getUnreadNum(inform_id);
         Intent intent = new Intent(getContext(), TeaInformDetailActivity.class);
-        String classid = getActivity().getIntent().getStringExtra("classId");
+        String classid = getClassId();
         intent.putExtra("detail", detail);
-        intent.putExtra("classId",classid);
+        intent.putExtra("classId", classid);
         intent.putExtra("time", time);
-        intent.putExtra("read_num",read_num);
-        intent.putExtra("informid",inform_id);
+        intent.putExtra("read_num", read_num);
+        intent.putExtra("informid", inform_id);
         startActivity(intent);
 
     }
+
     private void getUnreadNum(String informid) {
-        parentActivity.informAppAction.getUnreadNum(informid,new ActionCallbackListener<Void>() {
+        parentActivity.informAppAction.getUnreadNum(informid, new ActionCallbackListener<Void>() {
 
             @Override
             public void onSuccess(Void data, String message) {
-                SharedPreferences unreadNumSetting = parentActivity.getSharedPreferences("unreadNum",MODE_PRIVATE);
+                SharedPreferences unreadNumSetting = parentActivity.getSharedPreferences("unreadNum", MODE_PRIVATE);
                 SharedPreferences.Editor editor = unreadNumSetting.edit();
                 editor.putString("unreadNum", message);
                 editor.commit();

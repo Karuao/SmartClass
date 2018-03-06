@@ -129,11 +129,8 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     }
 
     public void toCreateInform(View view) {
-        Intent intent = new Intent(TeaClassMainActivity.this, CreateInformActivity.class);
-        intent.putExtra("classId", getIntent().getStringExtra("classId"));
-        startActivity(intent);
+        startActivity(new Intent(TeaClassMainActivity.this, CreateInformActivity.class));
     }
-
 
     @Override
     public void onClick(View view) {
@@ -352,6 +349,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                                 + "人作业未评价,请评价后再结束作业", Toast.LENGTH_SHORT).show();
                                     }
                                 }
+
                                 @Override
                                 public void onFailure(String errorEvent, String message) {
                                     Toast.makeText(TeaClassMainActivity.this,

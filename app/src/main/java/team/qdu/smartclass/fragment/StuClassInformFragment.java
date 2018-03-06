@@ -24,6 +24,9 @@ import team.qdu.smartclass.adapter.StuInfoAdapter;
  */
 
 public class StuClassInformFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
+
+    //标题栏班课名
+    TextView titleBarClassNameTxt;
     ListView listview;
     StuClassMainActivity parentActivity;
     //刷新标志
@@ -32,6 +35,8 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.class_tab04, container, false);
+        titleBarClassNameTxt = (TextView) view.findViewById(R.id.txt_titlebar_classname);
+        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
         parentActivity = (StuClassMainActivity) getActivity();
         listview = (ListView) view.findViewById(R.id.class_inform_listView);
         getInform();
@@ -39,6 +44,7 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
         return view;
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -49,8 +55,8 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
     }
 
     private void getInform() {
-        String classid = getActivity().getIntent().getStringExtra("classId");
-        String userid = getActivity().getIntent().getStringExtra("userId");
+        String classid = getClassId();
+        String userid = getUserId();
 
         parentActivity.informAppAction.getUserInform(classid, userid, new ActionCallbackListener<List<Inform_User>>() {
 
