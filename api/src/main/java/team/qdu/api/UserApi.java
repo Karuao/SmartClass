@@ -1,5 +1,9 @@
 package team.qdu.api;
 
+import android.graphics.Bitmap;
+
+import java.io.File;
+
 import team.qdu.model.ApiResponse;
 import team.qdu.model.User;
 
@@ -8,6 +12,8 @@ import team.qdu.model.User;
  */
 
 public interface UserApi {
+
+    public Bitmap getBitmap(String urlTail);
 
     public ApiResponse<String> loginByApp(String loginName, String password);
 
@@ -19,6 +25,6 @@ public interface UserApi {
 
     public ApiResponse<Void> updatePassword(String account, String newPass);
 
-    public ApiResponse<Void> updateUserInformation(String account, String name,String gender,String university,String department,
+    public ApiResponse<Void> updateUserInformation(File avatar,String account, String name, String gender, String sno,String university, String department,
                                                    String motto);
 }

@@ -134,7 +134,7 @@ public class ModifyClassActivity extends SBaseActivity{
         finish();
     }
 
-    //创建班课按钮点击事件
+    //修改班课信息按钮点击事件
     public void finishModify(View view) throws URISyntaxException {
         File file = null;
         if (isDefaultAvatar) {
