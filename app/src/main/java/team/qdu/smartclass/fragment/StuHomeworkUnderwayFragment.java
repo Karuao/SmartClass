@@ -28,6 +28,8 @@ public class StuHomeworkUnderwayFragment extends SBaseFragment implements Adapte
     private View currentPage;
     private ListView homeworkList;
     private StuClassMainActivity mContext;
+    //刷新标志
+    public static boolean refreshFlag;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +39,16 @@ public class StuHomeworkUnderwayFragment extends SBaseFragment implements Adapte
         setHomeworkList();
         initEvent();
         return currentPage;
+    }
+
+    //页面从后台返回到前台运行
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (refreshFlag) {
+            setHomeworkList();
+            refreshFlag = false;
+        }
     }
 
     private void initView() {

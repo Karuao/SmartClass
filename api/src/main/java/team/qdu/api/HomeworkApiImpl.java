@@ -126,10 +126,14 @@ public class HomeworkApiImpl implements HomeworkApi {
     }
 
     @Override
-    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String detail, File answerPhoto) {
+    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, File answerPhoto) {
         Map<String, String> paramMap = new HashMap<>();
         Map<String, File> fileMap = null;
         paramMap.put("homeworkAnswerId", homeworkAnswerId);
+        paramMap.put("homeworkId", homeworkId);
+        paramMap.put("classId", classId);
+        paramMap.put("userId", userId);
+        paramMap.put("ifSubmit", ifSubmit);
         paramMap.put("detail", detail);
         if (answerPhoto != null) {
             fileMap = new HashMap<>();

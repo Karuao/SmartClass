@@ -117,7 +117,7 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
     }
 
     @Override
-    public void commitHomework(final String homeworkAnswerId, final String detail, final File answerPhoto, final ActionCallbackListener<Void> listener) {
+    public void commitHomework(final String homeworkAnswerId, final String homeworkId, final String classId, final String userId, final String ifSubmit, final String detail, final File answerPhoto, final ActionCallbackListener<Void> listener) {
         if (TextUtils.isEmpty(detail) && answerPhoto == null) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "提交的文字和图片不能全为空");
             return;
@@ -127,7 +127,7 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
-                return homeworkApi.commitHomework(homeworkAnswerId, detail, answerPhoto);
+                return homeworkApi.commitHomework(homeworkAnswerId, homeworkId, classId, userId, ifSubmit, detail, answerPhoto);
             }
 
             @Override

@@ -34,6 +34,7 @@ import java.net.URISyntaxException;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.fragment.StuHomeworkUnderwayFragment;
 import team.qdu.smartclass.util.ImgUtil;
 
 /**
@@ -50,6 +51,10 @@ public class DoHomeworkActivity extends SBaseActivity {
     private ImageView answerPhotoImg;
     private String homeworkAnswerId;
     private Bitmap homeworkPhoto;
+    //作业id
+    private String homeworkId;
+    //是否提交过
+    private String ifSubmit;
     //弹出窗口
     private PopupWindow selectphotoPopup;
     //权限
@@ -105,6 +110,8 @@ public class DoHomeworkActivity extends SBaseActivity {
                 if (data.getUrl() != null) {
                     setPhoto(answerPhotoImg, data.getUrl(), false);
                 }
+                homeworkId = data.getHomework_id().toString();
+                ifSubmit = data.getIf_submit();
             }
 
             @Override
@@ -154,10 +161,12 @@ public class DoHomeworkActivity extends SBaseActivity {
         if (ifUploadPhoto) {
             answerPhoto = new File(new URI(photoUri.toString()));
         }
-        homeworkAppAction.commitHomework(homeworkAnswerId, answerDetail, answerPhoto, new ActionCallbackListener<Void>() {
+        homeworkAppAction.commitHomework(homeworkAnswerId, homeworkId, getClassId(), getUserId(),
+                ifSubmit, answerDetail, answerPhoto, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                StuHomeworkUnderwayFragment.refreshFlag = true;
                 finish();
             }
 

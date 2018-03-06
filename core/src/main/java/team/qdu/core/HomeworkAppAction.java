@@ -25,7 +25,7 @@ public interface HomeworkAppAction {
     public void getStuHomeworkDetail(String homeworkAnswerId, ActionCallbackListener<HomeworkAnswerWithBLOBs> listener);
 
     //学生提交作业
-    public void commitHomework(String homeworkAnswerId, String detail, File answerPhoto, ActionCallbackListener<Void> listener);
+    public void commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, File answerPhoto, ActionCallbackListener<Void> listener);
 
     //获取作业详情
     public void getHomeworkDetail(String homeworkId, ActionCallbackListener<HomeworkWithBLOBs> listener);
