@@ -29,5 +29,11 @@ public class StuInformDetailActivity extends SBaseActivity {
     public void toBack(View view) {
         StuClassInformFragment.refreshFlag = true;
         finish();
+
+    }
+    @Override
+    public void onBackPressed() {
+        StuClassInformFragment.refreshFlag = true;
+        super.onBackPressed();
     }
 }

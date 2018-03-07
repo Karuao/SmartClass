@@ -1,8 +1,11 @@
 package team.qdu.core;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+
+import java.io.File;
 
 import team.qdu.api.UserApi;
 import team.qdu.api.UserApiImpl;
@@ -109,6 +112,27 @@ public class UserAppActionImpl implements UserAppAction {
                     } else {
                         listener.onFailure(response.getEvent(), response.getMsg());
                     }
+            }
+        }.execute();
+    }
+
+    //获取头像
+    @Override
+    public void getBitmap(final String urlTail, final ActionCallbackListener<Bitmap> listener) {
+        new AsyncTask<Void, Void, Bitmap>() {
+
+            @Override
+            protected Bitmap doInBackground(Void... params) {
+                return userApi.getBitmap(urlTail);
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap bitmap) {
+                if (bitmap != null) {
+                    listener.onSuccess(bitmap, "图片获取成功");
+                } else {
+                    listener.onFailure(null, "图片获取失败");
+                }
             }
         }.execute();
     }
@@ -239,8 +263,8 @@ public class UserAppActionImpl implements UserAppAction {
 
     //修改个人信息
     @Override
-    public void modifyUserInformation(final String account,final String name,final String gender,final String university,
-                                      final String department,final String motto,final ActionCallbackListener<Void> listener){
+    public void modifyUserInformation(final File avatar,final String account, final String name, final String gender, final String sno,final String university,
+                                      final String department, final String motto, final ActionCallbackListener<Void> listener){
 
         if(TextUtils.isEmpty(name)){
             listener.onFailure(ErrorEvent.PARAM_NULL, "请输入姓名");
@@ -251,7 +275,7 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
-                return userApi.updateUserInformation(account,name,gender,university,department,motto);
+                return userApi.updateUserInformation(avatar,account,name,gender,sno,university,department,motto);
             }
 
             @Override

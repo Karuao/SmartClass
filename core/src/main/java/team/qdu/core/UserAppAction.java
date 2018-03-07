@@ -1,5 +1,9 @@
 package team.qdu.core;
 
+import android.graphics.Bitmap;
+
+import java.io.File;
+
 import team.qdu.model.User;
 
 /**
@@ -32,6 +36,9 @@ public interface UserAppAction {
     public User getUserInforById(String userId,ActionCallbackListener<User> listener);
 
     //修改用户个人信息
-    public void modifyUserInformation(String account,String name,String gender,String university,String department
-                                      ,String motto,ActionCallbackListener<Void> listener);
+    public void modifyUserInformation(File avatar,String account, String name, String gender, String sno,String university, String department
+                                      , String motto, ActionCallbackListener<Void> listener);
+
+    //获取头像
+    public void getBitmap(String urlTail, ActionCallbackListener<Bitmap> listener);
 }

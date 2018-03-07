@@ -18,6 +18,7 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userAvatar"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center_horizontal"
@@ -118,6 +119,38 @@
 
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_box">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="学号"
+                    android:textSize="16sp"
+                    android:textColor="@color/bg_black"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:id="@+id/userNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="null"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -192,13 +225,14 @@
                     android:layout_height="wrap_content"
                     android:text="个性签名"
                     android:textSize="16sp"
-                    android:textColor="@color/bg_black"/>
+                    android:textColor="@color/bg_black"
+                    />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
-                    android:gravity="left">
+                    android:gravity="right">
 
                     <TextView
                         android:id="@+id/userMotto"
