@@ -3,12 +3,15 @@ package team.qdu.smartclass.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.jauker.widget.BadgeView;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
@@ -134,38 +137,6 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         startActivity(new Intent(StuClassMainActivity.this, SigninActivity.class));
     }
 
-    //返回一个设置好属性的红点
-
-    public void quitClass(View view) {
-        final String classId = getClassId();
-        final String userId = getUserId();
-        new AlertDialog.Builder(this)
-                .setTitle("提示")
-                .setMessage("确定要退出此班课？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        StuClassMainActivity.this.classAppAction.quitClass(classId, userId, new ActionCallbackListener<Void>() {
-                            @Override
-                            public void onSuccess(Void data, String message) {
-                                MainClassFragment.refreshFlag = true;
-                                Intent intent = new Intent(StuClassMainActivity.this, MainActivity.class);
-                                finish();
-                                startActivity(intent);
-                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onFailure(String errorEvent, String message) {
-                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                })
-                .setNegativeButton("取消", null)
-                .show();
-    }
-
     //左上角返回点击事件
     public void toBack(View view) {
         finish();
@@ -242,9 +213,9 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
     public void onPageScrollStateChanged(int i) {
     }
 
-    public void quitClass(View view){
-        final String classId=getClassId();
-        final String userId=getUserId();
+    public void quitClass(View view) {
+        final String classId = getClassId();
+        final String userId = getUserId();
         new AlertDialog.Builder(this)
                 .setTitle("提示")
                 .setMessage("确定要退出此班课？")
@@ -254,7 +225,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                         StuClassMainActivity.this.classAppAction.quitClass(classId, userId, new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
-                                MainClassFragment.refreshFlag=true;
+                                MainClassFragment.refreshFlag = true;
                                 Intent intent = new Intent(StuClassMainActivity.this, MainActivity.class);
                                 finish();
                                 startActivity(intent);
@@ -268,7 +239,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                         });
                     }
                 })
-                .setNegativeButton("取消",null)
+                .setNegativeButton("取消", null)
                 .show();
     }
 
