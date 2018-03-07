@@ -16,13 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import team.qdu.core.ActionCallbackListener;
-import team.qdu.model.Class;
 import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.MainActivity;
@@ -61,33 +57,22 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
         }
     }
 
-    //获取ListView中一行的示例数据
-    private List<Map<String, Object>> getData() {
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("title", "G1");
-        map.put(" ", "google 1");
-        map.put("teacher", "teacher 1");
-        map.put("img", R.drawable.add_class_img);
-        list.add(map);
-        return list;
-    }
-
     //获取登录用户加入的班课列表
     private void getJoinedClasses() {
-        parentActivity.classAppAction.getJoinedClasses(getUserId(), new ActionCallbackListener<List<Class>>() {
+        parentActivity.classAppAction.getJoinedClasses(getUserId(), new ActionCallbackListener<List<ClassUser>>() {
             @Override
-            public void onSuccess(List<Class> data, String message) {
+            public void onSuccess(List<ClassUser> data, String message) {
+                //取消已结束班课
                 //将已结束班课放到List末端
-                int size = data.size();
-                for (int i = 0; i < size; ) {
-                    if ("已结束".equals(data.get(i).getIf_allow_to_join())) {
-                        data.add(data.remove(i));
-                        size--;
-                    } else {
-                        i++;
-                    }
-                }
+//                int size = data.size();
+//                for (int i = 0; i < size; ) {
+//                    if ("已结束".equals(data.get(i).getIf_allow_to_join())) {
+//                        data.add(data.remove(i));
+//                        size--;
+//                    } else {
+//                        i++;
+//                    }
+//                }
                 listView.setAdapter(new ClassAdapter(getActivity(), data));
             }
 
@@ -101,7 +86,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
+        final String classId = ((TextView) view.findViewById(R.id.txt_classUserId)).getText().toString();
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
         parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<ClassUser>() {
             @Override

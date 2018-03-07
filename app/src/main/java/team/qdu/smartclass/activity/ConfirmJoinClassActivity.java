@@ -39,7 +39,7 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
         data = (Class) getIntent().getSerializableExtra("data");
         classnameTxt.setText(data.getName());
         courseTxt.setText(data.getCourse());
-        teacherTxt.setText("老师：" + data.getTeacher());
+//        teacherTxt.setText("老师：" + data.getTeacher());
         classAppAction.getBitmap(data.getAvatar(), new ActionCallbackListener<Bitmap>() {
             @Override
             public void onSuccess(Bitmap data, String message) {

@@ -15,7 +15,7 @@ import team.qdu.model.ClassUser;
 public interface ClassAppAction {
 
     //获取登录用户加入的班课列表
-    public void getJoinedClasses(String userId, ActionCallbackListener<List<Class>> listener);
+    public void getJoinedClasses(String userId, ActionCallbackListener<List<ClassUser>> listener);
 
     //跳转老师班课/学生班课
     public void jumpClass(String classId, String userId, ActionCallbackListener<ClassUser> listener);

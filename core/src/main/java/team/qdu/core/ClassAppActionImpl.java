@@ -30,16 +30,16 @@ public class ClassAppActionImpl implements ClassAppAction {
 
     //获取登录用户加入的班课列表
     @Override
-    public void getJoinedClasses(final String userId, final ActionCallbackListener<List<Class>> listener) {
-        new AsyncTask<Void, Void, ApiResponse<List<Class>>>() {
+    public void getJoinedClasses(final String userId, final ActionCallbackListener<List<ClassUser>> listener) {
+        new AsyncTask<Void, Void, ApiResponse<List<ClassUser>>>() {
 
             @Override
-            protected ApiResponse<List<Class>> doInBackground(Void... params) {
+            protected ApiResponse<List<ClassUser>> doInBackground(Void... params) {
                 return classApi.getJoinedClasses(userId);
             }
 
             @Override
-            protected void onPostExecute(ApiResponse<List<Class>> response) {
+            protected void onPostExecute(ApiResponse<List<ClassUser>> response) {
                     if (response.isSuccess()) {
                         listener.onSuccess(response.getObjList(), response.getMsg());
                     } else {

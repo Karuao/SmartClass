@@ -40,11 +40,11 @@ public class ClassApiImpl implements ClassApi {
 
     //获取登录用户加入的班课列表
     @Override
-    public ApiResponse<List<Class>> getJoinedClasses(String userId) {
+    public ApiResponse<List<ClassUser>> getJoinedClasses(String userId) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("userId", userId);
 
-        Type type = new TypeToken<ApiResponse<List<Class>>>() {
+        Type type = new TypeToken<ApiResponse<List<ClassUser>>>() {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/getJoinedClasses");

@@ -28,6 +28,8 @@ public class ClassUser implements Serializable {
 
     private Class my_class;
 
+    private User user;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getClass_user_id() {
@@ -124,5 +126,13 @@ public class ClassUser implements Serializable {
 
     public void setMy_class(Class my_class) {
         this.my_class = my_class;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
