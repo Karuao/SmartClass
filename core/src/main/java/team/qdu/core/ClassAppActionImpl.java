@@ -12,6 +12,7 @@ import team.qdu.api.ClassApi;
 import team.qdu.api.ClassApiImpl;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.Class;
+import team.qdu.model.ClassUser;
 
 /**
  * Created by 11602 on 2018/1/24.
@@ -49,16 +50,16 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void jumpClass(final String classId, final String userId, final ActionCallbackListener<String> listener) {
-        new AsyncTask<Void, Void, ApiResponse<String>>() {
+    public void jumpClass(final String classId, final String userId, final ActionCallbackListener<ClassUser> listener) {
+        new AsyncTask<Void, Void, ApiResponse<ClassUser>>() {
 
             @Override
-            protected ApiResponse<String> doInBackground(Void... params) {
+            protected ApiResponse<ClassUser> doInBackground(Void... params) {
                 return classApi.jumpClass(classId, userId);
             }
 
             @Override
-            protected void onPostExecute(ApiResponse<String> response) {
+            protected void onPostExecute(ApiResponse<ClassUser> response) {
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -308,6 +309,16 @@ public class ClassAppActionImpl implements ClassAppAction {
                 } else {
                     listener.onFailure(response.getEvent(), response.getMsg());
                 }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void readNew(final String classUserId, final String whichPage) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                return classApi.readNew(classUserId, whichPage);
             }
         }.execute();
     }

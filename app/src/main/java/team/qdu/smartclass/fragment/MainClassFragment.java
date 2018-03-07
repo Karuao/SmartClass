@@ -23,6 +23,7 @@ import java.util.Map;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
+import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.MainActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
@@ -102,23 +103,23 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
-        parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<String>() {
+        parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<ClassUser>() {
             @Override
-            public void onSuccess(String data, String message) {
-                System.out.println(message);
+            public void onSuccess(ClassUser data, String message) {
+                Intent intent;
                 if ("teacher".equals(message)) {
-                    Intent intent = new Intent(getContext(), TeaClassMainActivity.class);
-                    setClassId(classId);
-                    setUserTitle("teacher");
-                    intent.putExtra("className", data);
-                    startActivity(intent);
+                    intent = new Intent(getContext(), TeaClassMainActivity.class);
                 } else {
-                    Intent intent = new Intent(getContext(), StuClassMainActivity.class);
-                    setClassId(classId);
-                    setUserTitle("student");
-                    intent.putExtra("className", data);
-                    startActivity(intent);
+                    intent = new Intent(getContext(), StuClassMainActivity.class);
                 }
+                setUserTitle(data.getTitle());
+                setClassId(classId);
+                setClassUserId(data.getClass_user_id().toString());
+                intent.putExtra("className", data.getMy_class().getName());
+                intent.putExtra("ifNewMaterial", data.getIf_new_material());
+                intent.putExtra("ifNewHomework", data.getIf_new_homework());
+                intent.putExtra("unreadInformationNum", data.getUnread_information_num());
+                startActivity(intent);
             }
 
             @Override

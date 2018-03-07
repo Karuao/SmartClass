@@ -17,6 +17,7 @@ import team.qdu.api.net.HttpEngine;
 import team.qdu.api.net.ImgHttpEngine;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.Class;
+import team.qdu.model.ClassUser;
 
 /**
  * Created by 11602 on 2018/1/24.
@@ -56,12 +57,12 @@ public class ClassApiImpl implements ClassApi {
     }
 
     @Override
-    public ApiResponse<String> jumpClass(String classId, String userId) {
+    public ApiResponse<ClassUser> jumpClass(String classId, String userId) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("classId", classId);
         paramMap.put("userId", userId);
 
-        Type type = new TypeToken<ApiResponse<String>>() {
+        Type type = new TypeToken<ApiResponse<ClassUser>>() {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/jumpClass");
@@ -258,6 +259,23 @@ public class ClassApiImpl implements ClassApi {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());
             return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public Void readNew(String classUserId, String whichPage) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("classUserId", classUserId);
+        paramMap.put("whichPage", whichPage);
+
+        Type type = new TypeToken<ApiResponse<Void>>(){
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/readNew");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            return null;
         }
     }
 }

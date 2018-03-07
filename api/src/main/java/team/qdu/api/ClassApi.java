@@ -7,6 +7,7 @@ import java.util.List;
 
 import team.qdu.model.ApiResponse;
 import team.qdu.model.Class;
+import team.qdu.model.ClassUser;
 
 /**
  * Created by 11602 on 2018/1/24.
@@ -16,7 +17,7 @@ public interface ClassApi {
 
     public ApiResponse<List<Class>> getJoinedClasses(String userId);
 
-    public ApiResponse<String> jumpClass(String classId, String userId);
+    public ApiResponse<ClassUser> jumpClass(String classId, String userId);
 
     public Bitmap getBitmap(String urlTail);
 
@@ -36,7 +37,9 @@ public interface ClassApi {
 
     public ApiResponse<Void> deleteClass(String classId);
 
-    public ApiResponse<String> modifyClass(String classId,File avatar,String className,String course,String university,String department,String goal,String exam);
+    public ApiResponse<String> modifyClass(String classId, File avatar, String className, String course, String university, String department, String goal, String exam);
 
-    public ApiResponse<Void> quitClass(String classId,String userId);
+    public ApiResponse<Void> quitClass(String classId, String userId);
+
+    public Void readNew(String classUserId, String whichPage);
 }

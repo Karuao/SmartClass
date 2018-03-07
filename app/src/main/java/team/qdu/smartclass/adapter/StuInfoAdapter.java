@@ -52,6 +52,8 @@ public class StuInfoAdapter extends SBaseAdapter<Inform_User> {
                 badgeView.setBadgeMargin(15, 5, 0, 0);
                 //设置显示未读消息条数
                 badgeView.setText("2");
+                badgeView.setMaxHeight(40);
+                badgeView.setMaxWidth(40);
                 badgeView.setTextColor(Color.parseColor("#CCFF0000"));
             }
             convertView.setTag(compo);

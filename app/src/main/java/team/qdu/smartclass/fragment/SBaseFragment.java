@@ -55,4 +55,19 @@ public abstract class SBaseFragment extends Fragment {
         editor.putString("userTitle", userTitle);
         editor.commit();
     }
+
+    //从SharedPreferences获取classUserId
+    public String getClassUserId() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user",
+                Activity.MODE_PRIVATE);
+        return  sharedPreferences.getString("classUserId", null);
+    }
+
+    public void setClassUserId(String classUserId) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user",
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("classUserId", classUserId);
+        editor.commit();
+    }
 }

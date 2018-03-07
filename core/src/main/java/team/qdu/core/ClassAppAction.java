@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.List;
 
 import team.qdu.model.Class;
+import team.qdu.model.ClassUser;
 
 /**
  * Created by 11602 on 2018/1/24.
@@ -17,28 +18,28 @@ public interface ClassAppAction {
     public void getJoinedClasses(String userId, ActionCallbackListener<List<Class>> listener);
 
     //跳转老师班课/学生班课
-    public void jumpClass(String classId, String userId, ActionCallbackListener<String> listener);
+    public void jumpClass(String classId, String userId, ActionCallbackListener<ClassUser> listener);
 
     //获取图片
     public void getBitmap(String urlTail, ActionCallbackListener<Bitmap> listener);
 
     //不允许加入班课
-    public void notAllowToJoin(String classId,ActionCallbackListener<Void> listener);
+    public void notAllowToJoin(String classId, ActionCallbackListener<Void> listener);
 
     //允许加入班课
-    public void allowToJoin(String classId,ActionCallbackListener<Void> listener);
+    public void allowToJoin(String classId, ActionCallbackListener<Void> listener);
 
     //获得课程信息
-    public  Class getClassInfor(String classId,ActionCallbackListener<Class> listener);
+    public Class getClassInfor(String classId, ActionCallbackListener<Class> listener);
 
     //结束班课
-    public void finishClass(String classId,ActionCallbackListener<Void> listener);
+    public void finishClass(String classId, ActionCallbackListener<Void> listener);
 
     //删除班课
-    public void deleteClass(String classId,ActionCallbackListener<Void> listener);
+    public void deleteClass(String classId, ActionCallbackListener<Void> listener);
 
     //编辑班课
-    public void compileClass(String classId,File avatar,String className,String course,String university,String department,String goal,String exam,ActionCallbackListener<String> listener);
+    public void compileClass(String classId, File avatar, String className, String course, String university, String department, String goal, String exam, ActionCallbackListener<String> listener);
 
     //创建班课
     public void createClass(File avatar, String name, String course, String userId, ActionCallbackListener<String> listener);
@@ -50,5 +51,8 @@ public interface ClassAppAction {
     public void confirmJoinClass(String classId, String userId, ActionCallbackListener<Void> listener);
 
     //退出班课
-    public void quitClass(String classId,String userId,ActionCallbackListener<Void> listener);
+    public void quitClass(String classId, String userId, ActionCallbackListener<Void> listener);
+
+    //查看有新推送的页面后进行操作
+    public void readNew(String classUserId, String whichPage);
 }
