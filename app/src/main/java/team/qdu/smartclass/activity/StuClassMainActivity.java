@@ -195,5 +195,6 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                 .setNegativeButton("取消",null)
                 .show();
     }
+
 }
 
