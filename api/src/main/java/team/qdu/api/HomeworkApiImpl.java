@@ -72,7 +72,7 @@ public class HomeworkApiImpl implements HomeworkApi {
         paramMap.put("requestStatus", requestStatus);
         Type type;
 
-        if ("teacher".equals(userTitle)) {
+        if ("老师".equals(userTitle)) {
             type = new TypeToken<ApiResponse<List<Homework>>>() {
             }.getType();
         } else {

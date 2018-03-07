@@ -74,6 +74,10 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //若未读小红标数字减1
+        if ("否".equals(((TextView) view.findViewById(R.id.tv_if_read)).getText().toString())) {
+            ((StuClassMainActivity) getActivity()).decrementInformBadge();
+        }
         final String detail = ((TextView) view.findViewById(R.id.txt_commitstu_sno)).getText().toString();
         final String time = ((TextView) view.findViewById(R.id.tv_class_inform_time)).getText().toString();
         final String inform_user_id = ((TextView) view.findViewById(R.id.tv_inform_user_id)).getText().toString();

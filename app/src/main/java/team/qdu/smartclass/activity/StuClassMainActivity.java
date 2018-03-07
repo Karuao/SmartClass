@@ -147,6 +147,11 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         classAppAction.readNew(getClassUserId(), whichPage);
     }
 
+    //通知tab上的小红标数字减1
+    public void decrementInformBadge() {
+        informBadgeView.decrementBadgeCount(1);
+    }
+
     @Override
     public void onClick(View view) {
         resetImg();

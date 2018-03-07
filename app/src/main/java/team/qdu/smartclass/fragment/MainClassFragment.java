@@ -107,7 +107,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
             @Override
             public void onSuccess(ClassUser data, String message) {
                 Intent intent;
-                if ("teacher".equals(message)) {
+                if ("老师".equals(data.getTitle())) {
                     intent = new Intent(getContext(), TeaClassMainActivity.class);
                 } else {
                     intent = new Intent(getContext(), StuClassMainActivity.class);
