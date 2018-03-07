@@ -56,6 +56,24 @@ public class ClassApiImpl implements ClassApi {
         }
     }
 
+    //获取加入班课成员列表
+    @Override
+    public ApiResponse<List<ClassUser>> getClassMembers(String classId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("classId", classId);
+
+        Type type = new TypeToken<ApiResponse<List<ClassUser>>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getClassMembers");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
     @Override
     public ApiResponse<ClassUser> jumpClass(String classId, String userId) {
         Map<String, String> paramMap = new HashMap<>();

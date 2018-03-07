@@ -182,7 +182,6 @@ public class TeaClassDetailFragment extends SBaseFragment {
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
-                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
             }

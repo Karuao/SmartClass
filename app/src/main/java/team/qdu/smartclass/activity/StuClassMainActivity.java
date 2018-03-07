@@ -227,7 +227,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        StuClassMainActivity.this.classAppAction.quitClass(classId, userId, new ActionCallbackListener<Void>() {
+                        StuClassMainActivity.this.classAppAction.quitClass(classId,userId, new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
                                 MainClassFragment.refreshFlag = true;

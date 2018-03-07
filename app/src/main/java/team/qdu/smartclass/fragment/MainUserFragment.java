@@ -76,7 +76,6 @@ public class MainUserFragment extends SBaseFragment {
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
-                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
                 userAccount.setText(user.getAccount());
