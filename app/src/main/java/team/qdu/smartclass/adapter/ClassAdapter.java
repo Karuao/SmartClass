@@ -2,10 +2,13 @@ package team.qdu.smartclass.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.jauker.widget.BadgeView;
 
 import java.util.List;
 
@@ -30,12 +33,13 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
      * @author Administrator
      */
     public final class Compo {
-        public TextView classUserIdTxt;
+//        public TextView classUserIdTxt;
         public TextView classIdTxt;
         public TextView titleTxt;
         public TextView classNameTxt;
         public TextView teacherTxt;
         public ImageView classImg;
+        public BadgeView badgeView;
     }
 
     @Override
@@ -45,19 +49,21 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
             compo = new Compo();
             //获得组件，实例化组件
             convertView = layoutInflater.inflate(R.layout.item_list_mainclass, null);
-            compo.classUserIdTxt = (TextView) convertView.findViewById(R.id.txt_classUserId);
+            //传递classUserId更好，不过要重构代码太多
+//            compo.classUserIdTxt = (TextView) convertView.findViewById(R.id.txt_classUserId);
             compo.classIdTxt = (TextView) convertView.findViewById(R.id.txt_classId);
             compo.titleTxt = (TextView) convertView.findViewById(R.id.txt_title);
             compo.classNameTxt = (TextView) convertView.findViewById(R.id.txt_className);
             compo.teacherTxt = (TextView) convertView.findViewById(R.id.tv_teacher);
             compo.classImg = (ImageView) convertView.findViewById(R.id.img_class);
+            compo.badgeView = new BadgeView(context);
             convertView.setTag(compo);
         } else {
             compo = (Compo) convertView.getTag();
         }
         //绑定数据
-        compo.classUserIdTxt.setText(Integer.toString(itemList.get(position).getClass_user_id()));
-        compo.classUserIdTxt.setText(Integer.toString(itemList.get(position).getMy_class().getClass_id()));
+//        compo.classUserIdTxt.setText(Integer.toString(itemList.get(position).getClass_user_id()));
+        compo.classIdTxt.setText(Integer.toString(itemList.get(position).getMy_class().getClass_id()));
         compo.titleTxt.setText(itemList.get(position).getMy_class().getCourse());
         compo.classNameTxt.setText(itemList.get(position).getMy_class().getName());
         compo.teacherTxt.setText(itemList.get(position).getUser().getName());
@@ -77,12 +83,21 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
 //                }
                 finalCompo.classImg.setImageBitmap(data);
             }
-            //设置红点
 
             @Override
             public void onFailure(String errorEvent, String message) {
             }
         });
+        //设置红点
+        if ("是".equals(itemList.get(position).getIf_new_class_thing())) {
+            compo.badgeView.setMaxHeight(40);
+            compo.badgeView.setMaxWidth(40);
+            compo.badgeView.setBadgeMargin(0, 0, 5, 0);
+            compo.badgeView.setTextColor(Color.parseColor("#CCFF0000"));
+            compo.badgeView.setText("1");
+            compo.badgeView.setTargetView(compo.teacherTxt);
+            compo.badgeView.setTag("badgeView");
+        }
         return convertView;
     }
 }

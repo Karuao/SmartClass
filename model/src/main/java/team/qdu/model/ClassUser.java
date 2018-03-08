@@ -18,6 +18,8 @@ public class ClassUser implements Serializable {
 
     private String if_new_homework;
 
+    private String if_new_class_thing;
+
     private Integer unread_information_num;
 
     private Integer exp;
@@ -86,6 +88,14 @@ public class ClassUser implements Serializable {
 
     public void setIf_new_homework(String if_new_homework) {
         this.if_new_homework = if_new_homework;
+    }
+
+    public String getIf_new_class_thing() {
+        return if_new_class_thing;
+    }
+
+    public void setIf_new_class_thing(String if_new_class_thing) {
+        this.if_new_class_thing = if_new_class_thing;
     }
 
     public Integer getUnread_information_num() {
