@@ -7,6 +7,7 @@ package team.qdu.smartclass.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,18 +31,20 @@ import team.qdu.smartclass.adapter.ClassAdapter;
 
 public class MainClassFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
 
-    private ListView listView;
+    //当前页面
+    private View currentPage;
     private MainActivity parentActivity;
+    private ListView listView;
+    private SwipeRefreshLayout swipeRefreshLayout;
     public static boolean refreshFlag = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main_class, container, false);
+        currentPage = inflater.inflate(R.layout.fragment_main_class, container, false);
         parentActivity = (MainActivity) getActivity();
-        listView = (ListView) view.findViewById(R.id.list_mainclass);
-        getJoinedClasses();
-        listView.setOnItemClickListener(this);
-        return view;
+        initView();
+        initEvent();
+        return currentPage;
     }
 
     //页面从后台返回到前台运行
@@ -52,6 +55,48 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
             getJoinedClasses();
             refreshFlag = false;
         }
+    }
+
+    private void initView() {
+        listView = (ListView) currentPage.findViewById(R.id.list_mainclass);
+        swipeRefreshLayout = (SwipeRefreshLayout) currentPage.findViewById(R.id.swipe_refresh_layout);
+        getJoinedClasses();
+    }
+
+    private void initEvent() {
+        listView.setOnItemClickListener(this);
+        // 设置颜色属性的时候一定要注意是引用了资源文件还是直接设置16进制的颜色，因为都是int值容易搞混
+        // 设置下拉进度的背景颜色，默认就是白色的
+        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(android.R.color.white);
+        // 设置下拉进度的主题颜色
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        // 下拉时触发SwipeRefreshLayout的下拉动画，动画完毕之后就会回调这个方法
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // 开始刷新，设置当前为刷新状态
+                swipeRefreshLayout.setRefreshing(true);
+                // 这里是主线程
+                // 一些比较耗时的操作，比如联网获取数据，需要放到子线程去执行
+                // TODO 获取数据
+                parentActivity.classAppAction.getJoinedClasses(getUserId(), new ActionCallbackListener<List<ClassUser>>() {
+                    @Override
+                    public void onSuccess(List<ClassUser> data, String message) {
+                        listView.setAdapter(new ClassAdapter(getActivity(), data));
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onFailure(String errorEvent, String message) {
+                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                // System.out.println(Thread.currentThread().getName());
+                // 这个不能写在外边，不然会直接收起来
+                //swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     //获取登录用户加入的班课列表
