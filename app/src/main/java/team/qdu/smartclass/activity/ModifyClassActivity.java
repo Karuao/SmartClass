@@ -1,7 +1,6 @@
 package team.qdu.smartclass.activity;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -75,10 +74,6 @@ public class ModifyClassActivity extends SBaseActivity{
     //相机拍照标记
     private static final int CAMERA_REQUEST_CODE = 1;
 
-    //对话框
-    private AlertDialog.Builder alert;
-    private AlertDialog.Builder builder;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,10 +119,6 @@ public class ModifyClassActivity extends SBaseActivity{
         departmentSpin = (AppCompatSpinner)findViewById(R.id.modifyClassDepartment);
         goalEdt = (EditText)findViewById(R.id.modifyClassGoal);
         examEdt = (EditText)findViewById(R.id.modifyClassExam);
-        builder = new AlertDialog.Builder(this);
-        alert = builder.setTitle("权限被禁用")
-                .setMessage("需要读写手机存储权限才能正常工作")
-                .setNeutralButton("确定", null);
     }
 
     public void toBack(View view) {
@@ -188,7 +179,6 @@ public class ModifyClassActivity extends SBaseActivity{
                         != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_STORAGE_WRITE_ACCESS_PERMISSION);
-            Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_LONG).show();
         } else {
             Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             //下面这句指定调用相机拍照后的照片存储的路径
@@ -203,7 +193,6 @@ public class ModifyClassActivity extends SBaseActivity{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_LONG).show();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     REQUEST_STORAGE_READ_ACCESS_PERMISSION);
         } else {
@@ -300,11 +289,15 @@ public class ModifyClassActivity extends SBaseActivity{
             case REQUEST_STORAGE_READ_ACCESS_PERMISSION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     pickFromGallery(null);
+                } else {
+                    Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case REQUEST_STORAGE_WRITE_ACCESS_PERMISSION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     takePhoto(null);
+                } else {
+                    Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:

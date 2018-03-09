@@ -206,9 +206,6 @@ public class EvaluateHomworkActivity extends SBaseActivity {
                         != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_STORAGE_WRITE_ACCESS_PERMISSION);
-            if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_LONG).show();
-            }
         } else {
             Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             //下面这句指定调用相机拍照后的照片存储的路径
@@ -223,7 +220,6 @@ public class EvaluateHomworkActivity extends SBaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_LONG).show();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     REQUEST_STORAGE_READ_ACCESS_PERMISSION);
         } else {
@@ -249,11 +245,15 @@ public class EvaluateHomworkActivity extends SBaseActivity {
             case REQUEST_STORAGE_READ_ACCESS_PERMISSION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     pickFromGallery(null);
+                } else {
+                    Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case REQUEST_STORAGE_WRITE_ACCESS_PERMISSION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     takePhoto(null);
+                } else {
+                    Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
