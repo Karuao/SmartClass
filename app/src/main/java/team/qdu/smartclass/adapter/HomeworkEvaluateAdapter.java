@@ -15,7 +15,7 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.CheckHomworkCommitStatusActivity;
+import team.qdu.smartclass.activity.ShowUnderwayHomeworkActivity;
 
 /**
  * Created by 11602 on 2018/3/2.
@@ -65,7 +65,7 @@ public class HomeworkEvaluateAdapter extends SBaseAdapter<HomeworkAnswerWithBLOB
         //从服务器获取图片绑定到班课封面上
         final Compo finalCompo = compo;
         if (!TextUtils.isEmpty(itemList.get(position).getUser().getAvatar())) {
-            ((CheckHomworkCommitStatusActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<Bitmap>() {
+            ((ShowUnderwayHomeworkActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap data, String message) {
                     finalCompo.evaluateStuAvatarImg.setImageBitmap(data);

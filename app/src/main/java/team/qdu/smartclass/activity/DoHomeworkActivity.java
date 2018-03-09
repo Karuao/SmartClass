@@ -280,8 +280,6 @@ public class DoHomeworkActivity extends SBaseActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //图片按照ImageView大小缩放
-            answerPhotoImg.setScaleType(ImageView.ScaleType.FIT_XY);
             //解决部分自动旋转问题
             answerPhotoImg.setRotation(ImgUtil.getBitmapDegree(photoUri.getPath()));
         }

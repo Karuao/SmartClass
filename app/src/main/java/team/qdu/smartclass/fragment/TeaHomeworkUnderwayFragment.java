@@ -14,7 +14,7 @@ import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.CheckHomworkCommitStatusActivity;
+import team.qdu.smartclass.activity.ShowUnderwayHomeworkActivity;
 import team.qdu.smartclass.activity.ShowEvaluateHomeworkActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.TeaHomeworkUnderwayAdapter;
@@ -82,7 +82,7 @@ public class TeaHomeworkUnderwayFragment extends SBaseFragment implements Adapte
         String homeworkStatus = ((TextView)view.findViewById(R.id.txt_homework_underway_status)).getText().toString();
         Intent intent;
         if ("进行中".equals(homeworkStatus)) {
-            intent = new Intent(getParentFragment().getActivity(), CheckHomworkCommitStatusActivity.class);
+            intent = new Intent(getParentFragment().getActivity(), ShowUnderwayHomeworkActivity.class);
         } else {
             intent = new Intent(getParentFragment().getActivity(), ShowEvaluateHomeworkActivity.class);
         }

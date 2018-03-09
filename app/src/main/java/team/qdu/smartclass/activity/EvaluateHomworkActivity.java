@@ -34,6 +34,7 @@ import java.net.URISyntaxException;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.util.ButtonUtil;
 import team.qdu.smartclass.util.ImgUtil;
 
 /**
@@ -159,25 +160,27 @@ public class EvaluateHomworkActivity extends SBaseActivity {
 
     //提交评价点击事件
     public void toSubmitEvaluation(View view) throws URISyntaxException {
-        String  answerExp = answerExpEdt.getText().toString();
-        String evaluateRemark = evaluateRemarkEdt.getText().toString();
-        File evaluatePhoto = null;
-        if (ifUploadPhoto) {
-            evaluatePhoto = new File(new URI(photoUri.toString()));
-        }
-        homeworkAppAction.commitHomeworkEvaluation(homeworkAnswerId, answerExp, evaluateRemark, evaluatePhoto, new ActionCallbackListener<Void>() {
-            @Override
-            public void onSuccess(Void data, String message) {
-                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                ShowEvaluateHomeworkActivity.refreshFlag = true;
-                finish();
+        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
+            String answerExp = answerExpEdt.getText().toString();
+            String evaluateRemark = evaluateRemarkEdt.getText().toString();
+            File evaluatePhoto = null;
+            if (ifUploadPhoto) {
+                evaluatePhoto = new File(new URI(photoUri.toString()));
             }
+            homeworkAppAction.commitHomeworkEvaluation(homeworkAnswerId, answerExp, evaluateRemark, evaluatePhoto, new ActionCallbackListener<Void>() {
+                @Override
+                public void onSuccess(Void data, String message) {
+                    Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                    ShowEvaluateHomeworkActivity.refreshFlag = true;
+                    finish();
+                }
 
-            @Override
-            public void onFailure(String errorEvent, String message) {
-                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(String errorEvent, String message) {
+                    Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     //添加图片点击事件
@@ -283,8 +286,6 @@ public class EvaluateHomworkActivity extends SBaseActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //图片按照ImageView大小缩放
-            evaluatePhotoImg.setScaleType(ImageView.ScaleType.FIT_XY);
             //解决部分自动旋转问题
             evaluatePhotoImg.setRotation(ImgUtil.getBitmapDegree(photoUri.getPath()));
         }

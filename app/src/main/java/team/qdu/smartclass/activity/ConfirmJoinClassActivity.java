@@ -12,6 +12,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.MainClassFragment;
+import team.qdu.smartclass.util.ButtonUtil;
 
 /**
  * Created by 11602 on 2018/2/4.
@@ -53,23 +54,25 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
     }
 
     public void confirmJoinClass(View view) {
-        classAppAction.confirmJoinClass(data.getClass_id().toString(), getUserId(), new ActionCallbackListener<Void>() {
-            @Override
-            public void onSuccess(Void data1, String message) {
-                Toast.makeText(ConfirmJoinClassActivity.this, message, Toast.LENGTH_SHORT).show();
-                setClassId(data.getClass_id().toString());
-                setUserTitle("student");
-                MainClassFragment.refreshFlag = true;
-                application.clearActivity();
-                finish();
-                startActivity(new Intent(ConfirmJoinClassActivity.this, StuClassMainActivity.class));
-            }
+        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
+            classAppAction.confirmJoinClass(data.getClass_id().toString(), getUserId(), new ActionCallbackListener<Void>() {
+                @Override
+                public void onSuccess(Void data1, String message) {
+                    Toast.makeText(ConfirmJoinClassActivity.this, message, Toast.LENGTH_SHORT).show();
+                    setClassId(data.getClass_id().toString());
+                    setUserTitle("student");
+                    MainClassFragment.refreshFlag = true;
+                    application.clearActivity();
+                    finish();
+                    startActivity(new Intent(ConfirmJoinClassActivity.this, StuClassMainActivity.class));
+                }
 
-            @Override
-            public void onFailure(String errorEvent, String message) {
-                Toast.makeText(ConfirmJoinClassActivity.this, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(String errorEvent, String message) {
+                    Toast.makeText(ConfirmJoinClassActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     //左上角返回点击事件
