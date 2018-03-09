@@ -290,5 +290,5 @@
 
 
 
-    <include layout="@layout/personal_info_top" />
+    <include layout="@layout/personal_info_change_top" />
 </RelativeLayout>

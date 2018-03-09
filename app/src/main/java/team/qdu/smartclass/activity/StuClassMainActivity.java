@@ -95,7 +95,8 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
             homeworkBadgeView.setText("1");
             homeworkBadgeView.setTargetView(tabHomework);
         }
-        if (((int) getIntent().getSerializableExtra("unreadInformationNum")) > 0) {
+        if (getIntent().getSerializableExtra("unreadInformationNum") != null
+                && ((int) getIntent().getSerializableExtra("unreadInformationNum")) > 0) {
             informBadgeView = new BadgeView(context);
             informBadgeView.setBadgeMargin(0, 0, 24, 0);
             informBadgeView.setText(getIntent().getSerializableExtra("unreadInformationNum").toString());

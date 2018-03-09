@@ -72,7 +72,7 @@
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/txt_homework_underway_exp"
             android:text="进行中"
-            android:textColor="@color/text_yellow"
+            android:textColor="@color/text_orange"
             android:textSize="17sp" />
 
         <ImageView
