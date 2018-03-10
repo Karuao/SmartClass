@@ -159,7 +159,8 @@
                         android:gravity="right"
                         android:textCursorDrawable="@null"
                         android:maxLength="20"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:inputType="number"/>
                 </LinearLayout>
 
 

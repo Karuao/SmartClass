@@ -15,11 +15,9 @@ import team.qdu.model.ClassUser;
 
 public interface ClassApi {
 
-    public ApiResponse<List<Class>> getJoinedClasses(String userId);
+    public ApiResponse<List<ClassUser>> getJoinedClasses(String userId);
 
-    public ApiResponse<List<ClassUser>> getClassMembers(String classId);
-
-    public ApiResponse<String> jumpClass(String classId, String userId);
+    public ApiResponse<ClassUser> jumpClass(String classId, String userId);
 
     public Bitmap getBitmap(String urlTail);
 
@@ -39,9 +37,10 @@ public interface ClassApi {
 
     public ApiResponse<Void> deleteClass(String classId);
 
-    public ApiResponse<String> modifyClass(String classId, File avatar, String className, String course, String university, String department, String goal, String exam);
+    public ApiResponse<String> modifyClass(String classId,File avatar,String className,String course,String university,String department,String goal,String exam);
 
-    public ApiResponse<Void> quitClass(String classId, String userId);
+    public ApiResponse<Void> quitClass(String classId,String userId);
 
     public Void readNew(String classUserId, String whichPage);
+
 }

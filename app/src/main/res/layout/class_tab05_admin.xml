@@ -326,7 +326,7 @@
         android:layout_height="2px"
         android:background="#d6d6d6" />
 
-
+<!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -356,7 +356,6 @@
         android:layout_height="wrap_content"
         android:text="结束班课后无法发布资源及作业，只能查看已有资源和已结束作业"/>
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -365,7 +364,7 @@
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:background="#d6d6d6" />
-
+    -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

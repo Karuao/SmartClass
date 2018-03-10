@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.InformAppAction;
 import team.qdu.core.HomeworkAppAction;
+import team.qdu.core.MemberAppAction;
 import team.qdu.core.UserAppAction;
 import team.qdu.smartclass.SApplication;
 
@@ -35,6 +36,8 @@ public abstract class SBaseActivity extends AppCompatActivity {
 
     public HomeworkAppAction homeworkAppAction;
 
+    public MemberAppAction memberAppAction;
+
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -45,6 +48,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
         informAppAction = application.getInformAppAction();
 
         homeworkAppAction = application.getHomeworkAppAction();
+        memberAppAction = application.getMemberAppAction();
     }
 
     //从SharedPreferences获取userId

@@ -6,27 +6,27 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/tv_class_member_rank"
+        android:id="@+id/tv_class_member_rank2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="?"
-        android:textSize="18sp"
         android:textColor="@color/colorRank"
-        android:layout_marginTop="20dp"/>
+        android:textSize="18sp" />
 
     <ImageView
-        android:id="@+id/iv_class_memberimg"
+        android:id="@+id/iv_class_memberimg2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
         android:src="@drawable/add_class_img" />
 
     <TextView
-        android:id="@+id/tv_class_membername"
+        android:id="@+id/tv_class_membername2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/iv_class_memberimg"
+        android:layout_toRightOf="@+id/iv_class_memberimg2"
         android:layout_marginTop="5dp"
         android:singleLine="true"
         android:text="姓名"
@@ -35,13 +35,13 @@
 
 
     <TextView
-        android:id="@+id/tv_class_membernum"
+        android:id="@+id/tv_class_membernum2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_class_membername"
+        android:layout_below="@+id/tv_class_membername2"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/iv_class_memberimg"
+        android:layout_toRightOf="@+id/iv_class_memberimg2"
         android:text="学号"
         android:textColor="#898989"
         android:textSize="15sp" />
@@ -52,7 +52,7 @@
         android:layout_alignParentRight="true">
 
         <TextView
-            android:id="@+id/tv_class_memberexp"
+            android:id="@+id/tv_class_memberexp2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -62,7 +62,7 @@
 
 
         <TextView
-            android:id="@+id/tv_class_memberexp2"
+            android:id="@+id/tv_class_memberexp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"

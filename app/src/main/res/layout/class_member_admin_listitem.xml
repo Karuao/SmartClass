@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp"/>
 
     <ImageView
-        android:id="@+id/iv_class_memberimg"
+        android:id="@+id/iv_class_memberimg2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/iv_class_memberimg"
+        android:layout_toRightOf="@+id/iv_class_memberimg2"
         android:layout_marginTop="5dp"
         android:singleLine="true"
         android:text="姓名"
@@ -41,7 +41,7 @@
         android:layout_below="@+id/tv_class_membername"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/iv_class_memberimg"
+        android:layout_toRightOf="@+id/iv_class_memberimg2"
         android:text="学号"
         android:textColor="#898989"
         android:textSize="15sp" />

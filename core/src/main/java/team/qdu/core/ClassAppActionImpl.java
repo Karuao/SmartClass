@@ -49,27 +49,6 @@ public class ClassAppActionImpl implements ClassAppAction {
         }.execute();
     }
 
-    //获取加入班课成员列表
-    @Override
-    public void getClassMembers(final String classId, final ActionCallbackListener<List<ClassUser>> listener) {
-        new AsyncTask<Void, Void, ApiResponse<List<ClassUser>>>() {
-
-            @Override
-            protected ApiResponse<List<ClassUser>> doInBackground(Void... params) {
-                return classApi.getClassMembers(classId);
-            }
-
-            @Override
-            protected void onPostExecute(ApiResponse<List<ClassUser>> response) {
-                if (response.isSuccess()) {
-                    listener.onSuccess(response.getObjList(), response.getMsg());
-                } else {
-                    listener.onFailure(response.getEvent(), response.getMsg());
-                }
-            }
-        }.execute();
-    }
-
     @Override
     public void jumpClass(final String classId, final String userId, final ActionCallbackListener<ClassUser> listener) {
         new AsyncTask<Void, Void, ApiResponse<ClassUser>>() {

@@ -1,9 +1,5 @@
 package team.qdu.model;
 
-/**
- * Created by asus on 2018/3/7.
- */
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -31,6 +27,10 @@ public class ClassUser implements Serializable {
     private Date create_date_time;
 
     private Date modify_date_time;
+
+    private Class my_class;
+
+    private User user;
 
     private static final long serialVersionUID = 1L;
 
@@ -129,5 +129,20 @@ public class ClassUser implements Serializable {
     public void setModify_date_time(Date modify_date_time) {
         this.modify_date_time = modify_date_time;
     }
-}
 
+    public Class getMy_class() {
+        return my_class;
+    }
+
+    public void setMy_class(Class my_class) {
+        this.my_class = my_class;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+}

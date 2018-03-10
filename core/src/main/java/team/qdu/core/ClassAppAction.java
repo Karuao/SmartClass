@@ -17,9 +17,6 @@ public interface ClassAppAction {
     //获取登录用户加入的班课列表
     public void getJoinedClasses(String userId, ActionCallbackListener<List<ClassUser>> listener);
 
-    //获取某个班课成员列表
-    public void getClassMembers(String classId, ActionCallbackListener<List<ClassUser>> listener);
-
     //跳转老师班课/学生班课
     public void jumpClass(String classId, String userId, ActionCallbackListener<ClassUser> listener);
 
