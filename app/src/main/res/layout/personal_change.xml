@@ -257,7 +257,7 @@
                         android:ems="15"
                         android:gravity="right"
                         android:textCursorDrawable="@null"
-                        android:maxLength="20"
+                        android:maxLength="200"
                         android:textSize="16sp" />
                 </LinearLayout>
 
