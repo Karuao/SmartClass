@@ -36,6 +36,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
     private MainActivity parentActivity;
     private ListView listView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ClassAdapter classAdapter;
     public static boolean refreshFlag = false;
 
     @Override
@@ -65,36 +66,29 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
     private void initEvent() {
         listView.setOnItemClickListener(this);
-        // 设置颜色属性的时候一定要注意是引用了资源文件还是直接设置16进制的颜色，因为都是int值容易搞混
-        // 设置下拉进度的背景颜色，默认就是白色的
-        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(android.R.color.white);
         // 设置下拉进度的主题颜色
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorSecondary);
         // 下拉时触发SwipeRefreshLayout的下拉动画，动画完毕之后就会回调这个方法
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 // 开始刷新，设置当前为刷新状态
                 swipeRefreshLayout.setRefreshing(true);
-                // 这里是主线程
-                // 一些比较耗时的操作，比如联网获取数据，需要放到子线程去执行
                 // TODO 获取数据
                 parentActivity.classAppAction.getJoinedClasses(getUserId(), new ActionCallbackListener<List<ClassUser>>() {
                     @Override
                     public void onSuccess(List<ClassUser> data, String message) {
-                        listView.setAdapter(new ClassAdapter(getActivity(), data));
+                        classAdapter.setItem(data);
+                        classAdapter.notifyDataSetChanged();
                         swipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
+                        swipeRefreshLayout.setRefreshing(false);
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                // System.out.println(Thread.currentThread().getName());
-                // 这个不能写在外边，不然会直接收起来
-                //swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
@@ -115,7 +109,8 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 //                        i++;
 //                    }
 //                }
-                listView.setAdapter(new ClassAdapter(getActivity(), data));
+                classAdapter = new ClassAdapter(getActivity(), data);
+                listView.setAdapter(classAdapter);
             }
 
             @Override
