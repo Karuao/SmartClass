@@ -30,7 +30,6 @@ import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
@@ -54,15 +53,12 @@ public class PublishHomeworkActivity extends SBaseActivity {
     //权限
     public static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 102;
     protected static final int REQUEST_STORAGE_READ_ACCESS_PERMISSION = 101;
-
     //拍照临时图片
     private String mTempPhotoPath;
-
     //获得的照片Uri
     Uri photoUri;
     //是否上传图片
     boolean ifUploadPhoto;
-
     //相册选图标记
     private static final int GALLERY_REQUEST_CODE = 0;
     //相机拍照标记
@@ -135,8 +131,8 @@ public class PublishHomeworkActivity extends SBaseActivity {
     //初始化DatePicker截止时间时间选择器
     private void initDatePicker() {
         Date current = new Date();
-        Date afterOneMinute = new Date(current.getTime() + 60*1000);
-        Date afterOneDay = new Date(current.getTime() + 24*60*60*1000);
+        Date afterOneMinute = new Date(current.getTime() + 8 * 60 * 60 * 1000 + 60 * 1000);
+        Date afterOneDay = new Date(current.getTime() + 8 * 60 * 60 * 1000 + 24 * 60 * 60 * 1000);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(current);
         calendar.add(Calendar.YEAR, 1);//日期加一年
@@ -144,7 +140,6 @@ public class PublishHomeworkActivity extends SBaseActivity {
 
         //设置作业截止日期默认时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         homeworkDeadlineTxt.setText(sdf.format(afterOneDay));
 
         customDatePicker = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {

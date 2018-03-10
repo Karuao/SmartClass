@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import team.qdu.api.HomeworkApi;
@@ -27,6 +30,14 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
         this.homeworkApi = new HomeworkApiImpl();
     }
 
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
     @Override
     public void pushHomework(final String title, final String deadline, final String detail,
                              final File photo, final String classId, final ActionCallbackListener<Void> listener) {
@@ -36,6 +47,19 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
         }
         if (TextUtils.isEmpty(detail) && photo == null) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "截止日期和上传图片不能全为空");
+            return;
+        }
+        //截至日期不能小于等于当前时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date deadlineDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
+        Date currentDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
+        try {
+            deadlineDate = sdf.parse(deadline);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if ((currentDate.getTime() - currentDate.getTime() % 60) >= deadlineDate.getTime()) {
+            listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "截至日期不能小于等于当前时间");
             return;
         }
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
