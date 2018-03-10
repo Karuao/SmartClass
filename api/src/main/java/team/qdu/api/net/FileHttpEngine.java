@@ -22,7 +22,10 @@ import java.util.Map;
 public class FileHttpEngine {
 
     private final static String TAG = "FileHttpEngine";
-    private final static String SERVER_URL = "http://10.0.2.2:8080";
+    //The development database
+    private final static String SERVER_URL = "http://10.0.2.2:80/";
+    //The official database
+//    private final static String SERVER_URL = "http://140.143.134.146:80/";
     private final static String REQUEST_METHOD = "POST";
     private final static String ENCODE_TYPE = "UTF-8";
     private final static int TIME_OUT = 2000;
