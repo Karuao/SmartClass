@@ -67,18 +67,20 @@ public class MainUserFragment extends SBaseFragment {
         parentActivity.userAppAction.getUserInforByAccount(account,new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
-                //从服务器获取图片
-                parentActivity.userAppAction.getBitmap(user.getAvatar(), new ActionCallbackListener<Bitmap>() {
-                    @Override
-                    public void onSuccess(Bitmap data, String message) {
-                        personAvatar.setImageBitmap(data);
-                    }
+                if(user.getAvatar()!=null) {
+                    //从服务器获取图片
+                    parentActivity.userAppAction.getBitmap(user.getAvatar(), new ActionCallbackListener<Bitmap>() {
+                        @Override
+                        public void onSuccess(Bitmap data, String message) {
+                            personAvatar.setImageBitmap(data);
+                        }
 
-                    @Override
-                    public void onFailure(String errorEvent, String message) {
-                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(String errorEvent, String message) {
+                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
                 userAccount.setText(user.getAccount());
                 userName.setText(user.getName());
                 userGender.setText(user.getGender());

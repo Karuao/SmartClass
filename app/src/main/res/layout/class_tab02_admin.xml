@@ -8,6 +8,12 @@
 
     <include android:id="@+id/top" layout="@layout/class_tab02_top" />
 
-    <include android:id="@+id/top" layout="@layout/class_member_listitem" />
+    <ListView
+        android:id="@+id/list_classMember"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp">
+
+    </ListView>
 
 </LinearLayout>

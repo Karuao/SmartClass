@@ -37,9 +37,10 @@ public interface ClassApi {
 
     public ApiResponse<Void> deleteClass(String classId);
 
-    public ApiResponse<String> modifyClass(String classId, File avatar, String className, String course, String university, String department, String goal, String exam);
+    public ApiResponse<String> modifyClass(String classId,File avatar,String className,String course,String university,String department,String goal,String exam);
 
-    public ApiResponse<Void> quitClass(String classId, String userId);
+    public ApiResponse<Void> quitClass(String classId,String userId);
 
     public Void readNew(String classUserId, String whichPage);
+
 }
