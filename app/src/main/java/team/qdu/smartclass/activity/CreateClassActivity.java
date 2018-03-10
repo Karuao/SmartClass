@@ -38,6 +38,7 @@ import java.net.URISyntaxException;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.MainClassFragment;
+import team.qdu.smartclass.util.ButtonUtil;
 
 
 /**
@@ -91,43 +92,45 @@ public class CreateClassActivity extends SBaseActivity {
 
     //创建班课按钮点击事件
     public void finishCreate(View view) throws URISyntaxException {
-        File file = null;
-        if (isDefaultAvatar) {
-            //将mipmap中的默认头像转成File
-            Resources r = this.getResources();
-            Bitmap bmp = BitmapFactory.decodeResource(r, R.mipmap.ic_classavatar_def);
-            file = new File(Environment.getExternalStorageDirectory() + File.separator + "defClassAvatar.png");//将要保存图片的路径
-            try {
-                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-                bmp.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-                bos.flush();
-                bos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
+            File file = null;
+            if (isDefaultAvatar) {
+                //将mipmap中的默认头像转成File
+                Resources r = this.getResources();
+                Bitmap bmp = BitmapFactory.decodeResource(r, R.mipmap.ic_classavatar_def);
+                file = new File(Environment.getExternalStorageDirectory() + File.separator + "defClassAvatar.png");//将要保存图片的路径
+                try {
+                    BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+                    bmp.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+                    bos.flush();
+                    bos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                file = new File(new URI(mDestinationUri.toString()));
             }
-        } else {
-            file = new File(new URI(mDestinationUri.toString()));
-        }
-        String name = classnameEdt.getText().toString();
-        String course = courseEdt.getText().toString();
-        String userId = getUserId();
-        classAppAction.createClass(file, name, course, userId, new ActionCallbackListener<String>() {
-            @Override
-            public void onSuccess(String data, String message) {
-                MainClassFragment.refreshFlag = true;
-                setClassId(data);
-                setUserTitle("teacher");
-                Intent intent = new Intent(CreateClassActivity.this, ShowInviteCodeActivity.class);
-                intent.putExtra("avatarUri", mDestinationUri);
-                finish();
-                startActivity(intent);
-            }
+            String name = classnameEdt.getText().toString();
+            String course = courseEdt.getText().toString();
+            String userId = getUserId();
+            classAppAction.createClass(file, name, course, userId, new ActionCallbackListener<String>() {
+                @Override
+                public void onSuccess(String data, String message) {
+                    MainClassFragment.refreshFlag = true;
+                    setClassId(data);
+                    setUserTitle("teacher");
+                    Intent intent = new Intent(CreateClassActivity.this, ShowInviteCodeActivity.class);
+                    intent.putExtra("avatarUri", mDestinationUri);
+                    finish();
+                    startActivity(intent);
+                }
 
-            @Override
-            public void onFailure(String errorEvent, String message) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(String errorEvent, String message) {
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     //拍照点击事件
@@ -142,7 +145,6 @@ public class CreateClassActivity extends SBaseActivity {
                         != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_STORAGE_WRITE_ACCESS_PERMISSION);
-            Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_LONG).show();
         } else {
             Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             //下面这句指定调用相机拍照后的照片存储的路径
@@ -157,7 +159,6 @@ public class CreateClassActivity extends SBaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_LONG).show();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     REQUEST_STORAGE_READ_ACCESS_PERMISSION);
         } else {
@@ -254,11 +255,15 @@ public class CreateClassActivity extends SBaseActivity {
             case REQUEST_STORAGE_READ_ACCESS_PERMISSION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     pickFromGallery(null);
+                } else {
+                    Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case REQUEST_STORAGE_WRITE_ACCESS_PERMISSION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     takePhoto(null);
+                } else {
+                    Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:

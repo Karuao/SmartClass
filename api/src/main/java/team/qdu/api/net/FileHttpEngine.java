@@ -25,7 +25,7 @@ public class FileHttpEngine {
     private final static String SERVER_URL = "http://10.0.2.2:8080";
     private final static String REQUEST_METHOD = "POST";
     private final static String ENCODE_TYPE = "UTF-8";
-    private final static int TIME_OUT = 8000;
+    private final static int TIME_OUT = 2000;
     private final static String BOUNDARY = java.util.UUID.randomUUID().toString();
     private final static String PREFIX = "--";
     private final static String LINEND = "\r\n";

@@ -24,7 +24,7 @@ import team.qdu.model.User;
 public class UserApiImpl implements UserApi {
 
     private final static String TIME_OUT_EVENT = "CONNECT_TIME_OUT";
-    private final static String TIME_OUT_EVENT_MSG = "连接服务器失败";
+    private final static String TIME_OUT_EVENT_MSG = "网络君似乎开小差了...";
 
     private HttpEngine httpEngine;
     private ImgHttpEngine imgHttpEngine;

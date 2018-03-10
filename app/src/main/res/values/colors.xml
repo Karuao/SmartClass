@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorSecondary">#f15a22</color>
     <color name="colorRank">#d7140f</color>
     <color name="colorSign">#DD1F54</color>
 
@@ -10,6 +11,7 @@
     <color name="text_gray">#8D7A71</color>
     <color name="text_white">#FFFFFF</color>
     <color name="text_yellow">#f19022</color>
+    <color name="text_orange">#f15a22</color>
     <color name="text_topbar">#694E42</color>
 
     <color name="bg_black">#000000</color>

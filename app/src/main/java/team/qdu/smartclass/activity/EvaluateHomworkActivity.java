@@ -34,6 +34,7 @@ import java.net.URISyntaxException;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.util.ButtonUtil;
 import team.qdu.smartclass.util.ImgUtil;
 
 /**
@@ -159,25 +160,27 @@ public class EvaluateHomworkActivity extends SBaseActivity {
 
     //提交评价点击事件
     public void toSubmitEvaluation(View view) throws URISyntaxException {
-        String  answerExp = answerExpEdt.getText().toString();
-        String evaluateRemark = evaluateRemarkEdt.getText().toString();
-        File evaluatePhoto = null;
-        if (ifUploadPhoto) {
-            evaluatePhoto = new File(new URI(photoUri.toString()));
-        }
-        homeworkAppAction.commitHomeworkEvaluation(homeworkAnswerId, answerExp, evaluateRemark, evaluatePhoto, new ActionCallbackListener<Void>() {
-            @Override
-            public void onSuccess(Void data, String message) {
-                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                ShowEvaluateHomeworkActivity.refreshFlag = true;
-                finish();
+        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
+            String answerExp = answerExpEdt.getText().toString();
+            String evaluateRemark = evaluateRemarkEdt.getText().toString();
+            File evaluatePhoto = null;
+            if (ifUploadPhoto) {
+                evaluatePhoto = new File(new URI(photoUri.toString()));
             }
+            homeworkAppAction.commitHomeworkEvaluation(homeworkAnswerId, answerExp, evaluateRemark, evaluatePhoto, new ActionCallbackListener<Void>() {
+                @Override
+                public void onSuccess(Void data, String message) {
+                    Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                    ShowEvaluateHomeworkActivity.refreshFlag = true;
+                    finish();
+                }
 
-            @Override
-            public void onFailure(String errorEvent, String message) {
-                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(String errorEvent, String message) {
+                    Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     //添加图片点击事件
@@ -206,9 +209,6 @@ public class EvaluateHomworkActivity extends SBaseActivity {
                         != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_STORAGE_WRITE_ACCESS_PERMISSION);
-            if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_LONG).show();
-            }
         } else {
             Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             //下面这句指定调用相机拍照后的照片存储的路径
@@ -223,7 +223,6 @@ public class EvaluateHomworkActivity extends SBaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_LONG).show();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     REQUEST_STORAGE_READ_ACCESS_PERMISSION);
         } else {
@@ -249,11 +248,15 @@ public class EvaluateHomworkActivity extends SBaseActivity {
             case REQUEST_STORAGE_READ_ACCESS_PERMISSION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     pickFromGallery(null);
+                } else {
+                    Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case REQUEST_STORAGE_WRITE_ACCESS_PERMISSION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     takePhoto(null);
+                } else {
+                    Toast.makeText(this, "读写手机存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
@@ -283,8 +286,6 @@ public class EvaluateHomworkActivity extends SBaseActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //图片按照ImageView大小缩放
-            evaluatePhotoImg.setScaleType(ImageView.ScaleType.FIT_XY);
             //解决部分自动旋转问题
             evaluatePhotoImg.setRotation(ImgUtil.getBitmapDegree(photoUri.getPath()));
         }

@@ -7,14 +7,16 @@ package team.qdu.smartclass.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.jauker.widget.BadgeView;
 
 import java.util.List;
 
@@ -29,22 +31,21 @@ import team.qdu.smartclass.adapter.ClassAdapter;
 
 public class MainClassFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
 
-    private ListView listView;
+    //当前页面
+    private View currentPage;
     private MainActivity parentActivity;
-    TextView allow;
-    CheckBox ifAllowTojoin;
+    private ListView listView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ClassAdapter classAdapter;
     public static boolean refreshFlag = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main_class, container, false);
+        currentPage = inflater.inflate(R.layout.fragment_main_class, container, false);
         parentActivity = (MainActivity) getActivity();
-        listView = (ListView) view.findViewById(R.id.list_mainclass);
-        allow = (TextView) view.findViewById(R.id.tv_join);
-        ifAllowTojoin = (CheckBox) view.findViewById(R.id.chk_join);
-        getJoinedClasses();
-        listView.setOnItemClickListener(this);
-        return view;
+        initView();
+        initEvent();
+        return currentPage;
     }
 
     //页面从后台返回到前台运行
@@ -55,6 +56,41 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
             getJoinedClasses();
             refreshFlag = false;
         }
+    }
+
+    private void initView() {
+        listView = (ListView) currentPage.findViewById(R.id.list_mainclass);
+        swipeRefreshLayout = (SwipeRefreshLayout) currentPage.findViewById(R.id.swipe_refresh_layout);
+        getJoinedClasses();
+    }
+
+    private void initEvent() {
+        listView.setOnItemClickListener(this);
+        // 设置下拉进度的主题颜色
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorSecondary);
+        // 下拉时触发SwipeRefreshLayout的下拉动画，动画完毕之后就会回调这个方法
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // 开始刷新，设置当前为刷新状态
+                swipeRefreshLayout.setRefreshing(true);
+                // TODO 获取数据
+                parentActivity.classAppAction.getJoinedClasses(getUserId(), new ActionCallbackListener<List<ClassUser>>() {
+                    @Override
+                    public void onSuccess(List<ClassUser> data, String message) {
+                        classAdapter.setItem(data);
+                        classAdapter.notifyDataSetChanged();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onFailure(String errorEvent, String message) {
+                        swipeRefreshLayout.setRefreshing(false);
+                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     //获取登录用户加入的班课列表
@@ -73,7 +109,8 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 //                        i++;
 //                    }
 //                }
-                listView.setAdapter(new ClassAdapter(getActivity(), data));
+                classAdapter = new ClassAdapter(getActivity(), data);
+                listView.setAdapter(classAdapter);
             }
 
             @Override
@@ -86,8 +123,8 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final String classId = ((TextView) view.findViewById(R.id.txt_classUserId)).getText().toString();
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
+        final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
         parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<ClassUser>() {
             @Override
             public void onSuccess(ClassUser data, String message) {
@@ -112,5 +149,12 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             }
         });
+
+        //取消红点显示
+        BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView");
+        if (badgeView != null) {
+            badgeView.decrementBadgeCount(1);
+            parentActivity.classAppAction.readNew(getClassUserId(), "classList");
+        }
     }
 }

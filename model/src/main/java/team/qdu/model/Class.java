@@ -30,6 +30,8 @@ public class Class implements Serializable {
 
     private Date modify_date_time;
 
+    private String teacher;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getClass_id() {
@@ -134,5 +136,13 @@ public class Class implements Serializable {
 
     public void setModify_date_time(Date modify_date_time) {
         this.modify_date_time = modify_date_time;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
     }
 }

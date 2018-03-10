@@ -35,6 +35,7 @@ import java.util.TimeZone;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
+import team.qdu.smartclass.util.ButtonUtil;
 import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.CustomDatePicker;
 
@@ -86,28 +87,30 @@ public class PublishHomeworkActivity extends SBaseActivity {
 
     //发布作业点击事件
     public void toPublish(View view) throws URISyntaxException {
-        String title = homeworkTitleEdt.getText().toString();
-        String deadline = homeworkDeadlineTxt.getText().toString();
-        String detail = homeworkDetailEdt.getText().toString();
-        File photo = null;
-        if (ifUploadPhoto) {
-            photo = new File(new URI(photoUri.toString()));
+        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
+            String title = homeworkTitleEdt.getText().toString();
+            String deadline = homeworkDeadlineTxt.getText().toString();
+            String detail = homeworkDetailEdt.getText().toString();
+            File photo = null;
+            if (ifUploadPhoto) {
+                photo = new File(new URI(photoUri.toString()));
+            }
+
+            homeworkAppAction.pushHomework(title, deadline, detail, photo, getClassId(),
+                    new ActionCallbackListener<Void>() {
+                        @Override
+                        public void onSuccess(Void data, String message) {
+                            Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                            TeaHomeworkUnderwayFragment.refreshFlag = true;
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure(String errorEvent, String message) {
+                            Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
-
-        homeworkAppAction.pushHomework(title, deadline, detail, photo, getClassId(),
-                new ActionCallbackListener<Void>() {
-            @Override
-            public void onSuccess(Void data, String message) {
-                Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                TeaHomeworkUnderwayFragment.refreshFlag = true;
-                finish();
-            }
-
-            @Override
-            public void onFailure(String errorEvent, String message) {
-                Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     //截止日期点击事件
@@ -243,8 +246,6 @@ public class PublishHomeworkActivity extends SBaseActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //图片按照ImageView大小缩放
-            photoImg.setScaleType(ImageView.ScaleType.FIT_XY);
             //解决部分自动旋转问题
             photoImg.setRotation(ImgUtil.getBitmapDegree(photoUri.getPath()));
         }

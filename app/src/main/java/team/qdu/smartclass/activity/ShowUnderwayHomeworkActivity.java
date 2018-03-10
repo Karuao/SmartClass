@@ -28,12 +28,13 @@ import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.HomeworkCommitAdapter;
 import team.qdu.smartclass.adapter.HomeworkUncommitAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
+import team.qdu.smartclass.util.ButtonUtil;
 
 /**
  * Created by 11602 on 2018/3/1.
  */
 
-public class CheckHomworkCommitStatusActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
+public class ShowUnderwayHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
 
     private TextView homeworkTitleTxt;
     private TextView homeworkDetailTxt;
@@ -89,7 +90,7 @@ public class CheckHomworkCommitStatusActivity extends SBaseActivity implements A
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(CheckHomworkCommitStatusActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShowUnderwayHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
         //设置已提交和未提交人数和列表
@@ -108,9 +109,9 @@ public class CheckHomworkCommitStatusActivity extends SBaseActivity implements A
                 commitStuNumTxt.setText(commitHomeworkAnswer.size() + "人");
                 uncommitStuNumTxt.setText(uncommitHomeworkAnswer.size() + "人");
                 commitHomeworkList.setAdapter(new HomeworkCommitAdapter(
-                        CheckHomworkCommitStatusActivity.this, commitHomeworkAnswer));
+                        ShowUnderwayHomeworkActivity.this, commitHomeworkAnswer));
                 uncommitHomeworkList.setAdapter(new HomeworkUncommitAdapter(
-                        CheckHomworkCommitStatusActivity.this, uncommitHomeworkAnswer));
+                        ShowUnderwayHomeworkActivity.this, uncommitHomeworkAnswer));
             }
 
             @Override
@@ -121,7 +122,7 @@ public class CheckHomworkCommitStatusActivity extends SBaseActivity implements A
 
     //点击图片展示图片点击事件
     public void toShowPhoto(View view) {
-        Intent intent = new Intent(CheckHomworkCommitStatusActivity.this, ShowPhotoActivity.class);
+        Intent intent = new Intent(ShowUnderwayHomeworkActivity.this, ShowPhotoActivity.class);
         File file = new File(Environment.getExternalStorageDirectory() + File.separator + "showPhoto.png");//将要保存图片的路径
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
@@ -136,39 +137,41 @@ public class CheckHomworkCommitStatusActivity extends SBaseActivity implements A
 
     //开始评价点击事件
     public void toEvaluate(View view) {
-        AlertDialog alert;
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        int uncommitStuNum = Integer.parseInt(uncommitStuNumTxt.getText().toString().substring(0, 1));
-        if (uncommitStuNum > 0) {
-            alert = builder.setTitle("开始评价")
-                    .setMessage(uncommitStuNum + "人未提交作业，开始评价后将无法再提交作业。")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            changeHomeworkStatus(homeworkId, "进行中");
-                        }
-                    })
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).create();
-        } else {
-            alert = builder.setTitle("开始评价")
-                    .setMessage("开始评价后将无法再提交作业。")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            changeHomeworkStatus(homeworkId, "进行中");
-                        }
-                    })
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).create();
+        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
+            AlertDialog alert;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            int uncommitStuNum = Integer.parseInt(uncommitStuNumTxt.getText().toString().substring(0, 1));
+            if (uncommitStuNum > 0) {
+                alert = builder.setTitle("开始评价")
+                        .setMessage(uncommitStuNum + "人未提交作业，开始评价后将无法再提交作业。")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                changeHomeworkStatus(homeworkId, "进行中");
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        }).create();
+            } else {
+                alert = builder.setTitle("开始评价")
+                        .setMessage("开始评价后将无法再提交作业。")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                changeHomeworkStatus(homeworkId, "进行中");
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        }).create();
+            }
+            alert.show();
         }
-        alert.show();
     }
 
     //改变作业状态
@@ -177,16 +180,16 @@ public class CheckHomworkCommitStatusActivity extends SBaseActivity implements A
             @Override
             public void onSuccess(Void data, String message) {
                 TeaHomeworkUnderwayFragment.refreshFlag = true;
-                Intent intent = new Intent(CheckHomworkCommitStatusActivity.this, ShowEvaluateHomeworkActivity.class);
+                Intent intent = new Intent(ShowUnderwayHomeworkActivity.this, ShowEvaluateHomeworkActivity.class);
                 intent.putExtra("homeworkId", homeworkId);
                 startActivity(intent);
-                Toast.makeText(CheckHomworkCommitStatusActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShowUnderwayHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
                 finish();
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(CheckHomworkCommitStatusActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShowUnderwayHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -202,7 +205,7 @@ public class CheckHomworkCommitStatusActivity extends SBaseActivity implements A
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(CheckHomworkCommitStatusActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShowUnderwayHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -30,6 +30,7 @@ import team.qdu.smartclass.adapter.HomeworkNotEvaluateAdapter;
 import team.qdu.smartclass.adapter.HomeworkUncommitAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkFinishFragment;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
+import team.qdu.smartclass.util.ButtonUtil;
 
 /**
  * Created by 11602 on 2018/3/3.
@@ -162,39 +163,41 @@ public class ShowEvaluateHomeworkActivity extends SBaseActivity implements Adapt
 
     //结束作业点击事件
     public void toFinishHomework(View view) {
-        String notEvaluateStuNum = notEvaluateStuNumTxt.getText().toString();
-        if ("0人".equals(notEvaluateStuNum)) {
-            //结束作业
-            AlertDialog alert;
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("结束作业")
-                    .setMessage("确认结束作业？")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            homeworkAppAction.getNotEvaluateStuNum(homeworkId, new ActionCallbackListener<Integer>() {
-                                @Override
-                                public void onSuccess(Integer data, String message) {
-                                    changeHomeworkStatus(homeworkId, "评价中");
-                                }
+        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
+            String notEvaluateStuNum = notEvaluateStuNumTxt.getText().toString();
+            if ("0人".equals(notEvaluateStuNum)) {
+                //结束作业
+                AlertDialog alert;
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("结束作业")
+                        .setMessage("确认结束作业？")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                homeworkAppAction.getNotEvaluateStuNum(homeworkId, new ActionCallbackListener<Integer>() {
+                                    @Override
+                                    public void onSuccess(Integer data, String message) {
+                                        changeHomeworkStatus(homeworkId, "评价中");
+                                    }
 
-                                @Override
-                                public void onFailure(String errorEvent, String message) {
-                                    Toast.makeText(ShowEvaluateHomeworkActivity.this,
-                                            "结束班课失败，请稍后再试", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    })
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).create().show();
-        } else {
-            //取消操作并提示n人作业未评价
-            Toast.makeText(ShowEvaluateHomeworkActivity.this, "仍有" + notEvaluateStuNum
-                    + "作业未评价,请评价后再结束作业", Toast.LENGTH_SHORT).show();
+                                    @Override
+                                    public void onFailure(String errorEvent, String message) {
+                                        Toast.makeText(ShowEvaluateHomeworkActivity.this,
+                                                "结束班课失败，请稍后再试", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        }).create().show();
+            } else {
+                //取消操作并提示n人作业未评价
+                Toast.makeText(ShowEvaluateHomeworkActivity.this, "仍有" + notEvaluateStuNum
+                        + "作业未评价,请评价后再结束作业", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

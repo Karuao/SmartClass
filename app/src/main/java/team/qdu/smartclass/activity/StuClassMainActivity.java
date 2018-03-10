@@ -62,41 +62,22 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         initEvents();
     }
 
-    private void initEvents() {
-        //点击效果
-        tabResource.setOnClickListener(this);
-        tabMember.setOnClickListener(this);
-        tabHomework.setOnClickListener(this);
-        tabInform.setOnClickListener(this);
-        tabClassinfo.setOnClickListener(this);
-    }
-
     //初始化View
     private void initView() {
         //页面切换
         classVpager = (ViewPager) findViewById(R.id.class_viewpager);
-
         tabResource = (LinearLayout) findViewById(R.id.ll_class_resource);
         tabMember = (LinearLayout) findViewById(R.id.ll_class_member);
         tabHomework = (LinearLayout) findViewById(R.id.ll_class_homework);
         tabInform = (LinearLayout) findViewById(R.id.ll_class_inform);
         tabClassinfo = (LinearLayout) findViewById(R.id.ll_class_classinfo);
-
         imgResource = (ImageView) findViewById(R.id.iv_class_resource);
         imgMember = (ImageView) findViewById(R.id.iv_class_member);
         imgHomework = (ImageView) findViewById(R.id.iv_class_homework);
         imgInform = (ImageView) findViewById(R.id.iv_class_inform);
         imgClassinfo = (ImageView) findViewById(R.id.iv_class_classinfo);
-
-        classVpager.setAdapter(stuClassFragmentPagerAdapter);
-        classVpager.setCurrentItem(2);
-        classVpager.addOnPageChangeListener(this);
-        //初始化tab按钮颜色，作业为选中
-        resetImg();
-        imgHomework.setImageResource(R.drawable.class_homework_select);
-
+        //设置红点
         if ("是".equals(getIntent().getStringExtra("ifNewMaterial"))) {
-            //设置红点
             materailBadgeView = new BadgeView(context);
             materailBadgeView.setMaxHeight(40);
             materailBadgeView.setMaxWidth(40);
@@ -106,7 +87,6 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
             materailBadgeView.setTargetView(tabResource);
         }
         if ("是".equals(getIntent().getStringExtra("ifNewHomework"))) {
-            //设置红点
             homeworkBadgeView = new BadgeView(context);
             homeworkBadgeView.setMaxHeight(40);
             homeworkBadgeView.setMaxWidth(40);
@@ -115,13 +95,29 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
             homeworkBadgeView.setText("1");
             homeworkBadgeView.setTargetView(tabHomework);
         }
-        if (((int) getIntent().getSerializableExtra("unreadInformationNum")) > 0) {
-            //设置红点
+        if (getIntent().getSerializableExtra("unreadInformationNum") != null
+                && ((int) getIntent().getSerializableExtra("unreadInformationNum")) > 0) {
             informBadgeView = new BadgeView(context);
             informBadgeView.setBadgeMargin(0, 0, 24, 0);
             informBadgeView.setText(getIntent().getSerializableExtra("unreadInformationNum").toString());
             informBadgeView.setTargetView(tabInform);
         }
+    }
+
+    private void initEvents() {
+        //点击效果
+        tabResource.setOnClickListener(this);
+        tabMember.setOnClickListener(this);
+        tabHomework.setOnClickListener(this);
+        tabInform.setOnClickListener(this);
+        tabClassinfo.setOnClickListener(this);
+        tabHomework.callOnClick();
+        classVpager.setAdapter(stuClassFragmentPagerAdapter);
+        classVpager.setCurrentItem(2);
+        classVpager.addOnPageChangeListener(this);
+        //初始化tab按钮颜色，作业为选中
+        resetImg();
+        imgHomework.setImageResource(R.drawable.class_homework_select);
     }
 
     //切换图片颜色
@@ -160,6 +156,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                 imgResource.setImageResource(R.drawable.class_resource_select);
                 classVpager.setCurrentItem(0);
                 if ("是".equals(getIntent().getStringExtra("ifNewMaterial"))) {
+                    getIntent().putExtra("ifNewMaterial", "否");
                     materailBadgeView.decrementBadgeCount(1);
                     readNew("material");
                 }
@@ -172,6 +169,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                 imgHomework.setImageResource(R.drawable.class_homework_select);
                 classVpager.setCurrentItem(2);
                 if ("是".equals(getIntent().getStringExtra("ifNewHomework"))) {
+                    getIntent().putExtra("ifNewHomework", "否");
                     homeworkBadgeView.decrementBadgeCount(1);
                     readNew("homework");
                 }
