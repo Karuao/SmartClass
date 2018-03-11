@@ -15,6 +15,7 @@ import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.SBaseActivity;
 
 /**
+ * 显示班课成员列表
  * Created by asus on 2018/3/7.
  */
 
