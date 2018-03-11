@@ -147,7 +147,10 @@ public class UserApiImpl implements UserApi {
         paramMap.put("university",university);
         paramMap.put("department",department);
         paramMap.put("motto",motto);
-        fileMap.put("avatar", avatar);
+        if (avatar != null) {
+            fileMap = new HashMap<>();
+            fileMap.put("avatar", avatar);
+        }
         Type type = new TypeToken<ApiResponse<Void>>() {
         }.getType();
         try {

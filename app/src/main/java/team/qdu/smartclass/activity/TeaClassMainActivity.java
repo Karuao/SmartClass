@@ -237,46 +237,28 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
     //删除班课按钮
     public void deleteClass(View view) {
-        this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
-            @Override
-            public void onSuccess(Class data, String message) {
-                if (!data.getIf_allow_to_join().equals("已结束")) {
-                    new AlertDialog.Builder(TeaClassMainActivity.this)
-                            .setTitle("提示")
-                            .setMessage("您还未结束此班课！")
-                            .setPositiveButton("确定", null)
-                            .show();
-                } else {
-                    new AlertDialog.Builder(TeaClassMainActivity.this)
-                            .setTitle("提示")
-                            .setMessage("确定要删除此班课？")
-                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    TeaClassMainActivity.this.classAppAction.deleteClass(getClassId(), new ActionCallbackListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void data, String message) {
-                                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(TeaClassMainActivity.this, MainActivity.class));
-                                        }
+        new AlertDialog.Builder(TeaClassMainActivity.this)
+                .setTitle("提示")
+                .setMessage("确定要删除此班课？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TeaClassMainActivity.this.classAppAction.deleteClass(getClassId(), new ActionCallbackListener<Void>() {
+                            @Override
+                            public void onSuccess(Void data, String message) {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(TeaClassMainActivity.this, MainActivity.class));
+                            }
 
-                                        @Override
-                                        public void onFailure(String errorEvent, String message) {
-                                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-                            })
-                            .setNegativeButton("取消", null)
-                            .show();
-                }
-            }
-
-            @Override
-            public void onFailure(String errorEvent, String message) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+                            @Override
+                            public void onFailure(String errorEvent, String message) {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .show();
     }
 
 

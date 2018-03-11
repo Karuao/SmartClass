@@ -62,6 +62,7 @@
         <activity android:name=".activity.ShowMyHomeworkActivity"></activity>
         <activity android:name=".activity.ShowFinishHomeworkActivity"></activity>
         <activity android:name=".activity.ShowFinishHomeworkDetialActivity"></activity>
+        <activity android:name=".activity.CropActivity2"></activity>
     </application>
 
 </manifest>

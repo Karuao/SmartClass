@@ -384,7 +384,7 @@
             android:onClick="deleteClass"/>
 
     </LinearLayout>
-
+<!--
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
@@ -393,5 +393,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="只有已结束的班课可以删除"/>
+    -->
 
 </LinearLayout>

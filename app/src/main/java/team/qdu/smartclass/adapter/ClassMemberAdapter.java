@@ -19,6 +19,10 @@ import team.qdu.smartclass.activity.SBaseActivity;
  */
 
 public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
+
+    int rank;
+    int lastExp;
+
     public ClassMemberAdapter(Context context, List itemList) {
         super(context);
         this.itemList = itemList;
