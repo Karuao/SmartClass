@@ -99,7 +99,6 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 //                    }
 //                }
                 classAdapter.setItem(data);
-                classAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
 

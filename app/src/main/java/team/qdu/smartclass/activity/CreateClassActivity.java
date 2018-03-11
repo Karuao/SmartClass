@@ -3,9 +3,7 @@ package team.qdu.smartclass.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -27,10 +25,8 @@ import android.widget.Toast;
 
 import com.kevin.crop.UCrop;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -94,20 +90,23 @@ public class CreateClassActivity extends SBaseActivity {
     public void finishCreate(View view) throws URISyntaxException {
         if (!ButtonUtil.isFastDoubleClick(view.getId())) {
             File file = null;
-            if (isDefaultAvatar) {
-                //将mipmap中的默认头像转成File
-                Resources r = this.getResources();
-                Bitmap bmp = BitmapFactory.decodeResource(r, R.mipmap.ic_classavatar_def);
-                file = new File(Environment.getExternalStorageDirectory() + File.separator + "defClassAvatar.png");//将要保存图片的路径
-                try {
-                    BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-                    bmp.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-                    bos.flush();
-                    bos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
+//            if (isDefaultAvatar) {
+//                //将mipmap中的默认头像转成File
+//                Resources r = this.getResources();
+//                Bitmap bmp = BitmapFactory.decodeResource(r, R.mipmap.ic_classavatar_def);
+//                file = new File(Environment.getExternalStorageDirectory() + File.separator + "defClassAvatar.png");//将要保存图片的路径
+//                try {
+//                    BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+//                    bmp.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+//                    bos.flush();
+//                    bos.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            } else {
+//                file = new File(new URI(mDestinationUri.toString()));
+//            }
+            if (!isDefaultAvatar) {
                 file = new File(new URI(mDestinationUri.toString()));
             }
             String name = classnameEdt.getText().toString();

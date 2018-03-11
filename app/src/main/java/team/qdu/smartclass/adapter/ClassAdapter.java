@@ -65,12 +65,13 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
         compo.classNameTxt.setText(itemList.get(position).getMy_class().getName());
         compo.teacherTxt.setText(itemList.get(position).getUser().getName());
         final Compo finalCompo = compo;
-        //从服务器获取图片绑定到班课封面上
-        ((MainActivity) context).classAppAction.getBitmap(itemList.get(position).getMy_class().getAvatar(), new ActionCallbackListener<Bitmap>() {
-            @Override
-            public void onSuccess(Bitmap data, String message) {
-                //取消已结束班课
-                //已结束班课班课封面在图片之上加一层灰色图层
+        if (itemList.get(position).getMy_class().getAvatar() != null) {
+            //从服务器获取图片绑定到班课封面上
+            ((MainActivity) context).classAppAction.getBitmap(itemList.get(position).getMy_class().getAvatar(), new ActionCallbackListener<Bitmap>() {
+                @Override
+                public void onSuccess(Bitmap data, String message) {
+                    //取消已结束班课
+                    //已结束班课班课封面在图片之上加一层灰色图层
 //                if ("已结束".equals(itemList.get(position).getIf_allow_to_join())) {
 //                    Drawable drawable = new BitmapDrawable(data);
 //                    drawable.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
@@ -78,13 +79,14 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
 //                } else {
 //                    finalCompo.classImg.setImageBitmap(data);
 //                }
-                finalCompo.classImg.setImageBitmap(data);
-            }
+                    finalCompo.classImg.setImageBitmap(data);
+                }
 
-            @Override
-            public void onFailure(String errorEvent, String message) {
-            }
-        });
+                @Override
+                public void onFailure(String errorEvent, String message) {
+                }
+            });
+        }
         //设置红点
         if ("是".equals(itemList.get(position).getIf_new_class_thing())) {
             compo.badgeView.setMaxHeight(40);

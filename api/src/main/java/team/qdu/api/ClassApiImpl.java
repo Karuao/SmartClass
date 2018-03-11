@@ -169,11 +169,14 @@ public class ClassApiImpl implements ClassApi {
     @Override
     public ApiResponse<String> createClass(File avatar, String name, String course, String userId) {
         Map<String, String> paramMap = new HashMap<>();
-        Map<String, File> fileMap = new HashMap<>();
+        Map<String, File> fileMap = null;
         paramMap.put("name", name);
         paramMap.put("course", course);
         paramMap.put("userId", userId);
-        fileMap.put("avatar", avatar);
+        if (avatar != null) {
+            fileMap = new HashMap<>();
+            fileMap.put("avatar", avatar);
+        }
 
         Type type = new TypeToken<ApiResponse<String>>() {
         }.getType();
