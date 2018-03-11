@@ -3,6 +3,7 @@ package team.qdu.smartclass.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,7 +14,7 @@ import com.jauker.widget.BadgeView;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.MainActivity;
+import team.qdu.smartclass.activity.SBaseActivity;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -65,9 +66,9 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
         compo.classNameTxt.setText(itemList.get(position).getMy_class().getName());
         compo.teacherTxt.setText(itemList.get(position).getUser().getName());
         final Compo finalCompo = compo;
-        if (itemList.get(position).getMy_class().getAvatar() != null) {
+        if (!TextUtils.isEmpty(itemList.get(position).getMy_class().getAvatar())) {
             //从服务器获取图片绑定到班课封面上
-            ((MainActivity) context).classAppAction.getBitmap(itemList.get(position).getMy_class().getAvatar(), new ActionCallbackListener<Bitmap>() {
+            ((SBaseActivity) context).classAppAction.getBitmap(itemList.get(position).getMy_class().getAvatar(), new ActionCallbackListener<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap data, String message) {
                     //取消已结束班课
