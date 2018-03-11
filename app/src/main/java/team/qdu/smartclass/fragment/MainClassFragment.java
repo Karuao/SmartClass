@@ -59,7 +59,9 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
     }
 
     private void initView() {
+        classAdapter = new ClassAdapter(getActivity());
         listView = (ListView) currentPage.findViewById(R.id.list_mainclass);
+        listView.setAdapter(classAdapter);
         swipeRefreshLayout = (SwipeRefreshLayout) currentPage.findViewById(R.id.swipe_refresh_layout);
         getJoinedClasses();
     }
@@ -75,20 +77,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                 // 开始刷新，设置当前为刷新状态
                 swipeRefreshLayout.setRefreshing(true);
                 // TODO 获取数据
-                parentActivity.classAppAction.getJoinedClasses(getUserId(), new ActionCallbackListener<List<ClassUser>>() {
-                    @Override
-                    public void onSuccess(List<ClassUser> data, String message) {
-                        classAdapter.setItem(data);
-                        classAdapter.notifyDataSetChanged();
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-
-                    @Override
-                    public void onFailure(String errorEvent, String message) {
-                        swipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                getJoinedClasses();
             }
         });
     }
@@ -109,13 +98,15 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 //                        i++;
 //                    }
 //                }
-                classAdapter = new ClassAdapter(getActivity(), data);
-                listView.setAdapter(classAdapter);
+                classAdapter.setItem(data);
+                classAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

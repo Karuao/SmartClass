@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.jauker.widget.BadgeView;
 
-import java.util.List;
-
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
@@ -22,9 +20,8 @@ import team.qdu.smartclass.activity.MainActivity;
  */
 public class ClassAdapter extends SBaseAdapter<ClassUser> {
 
-    public ClassAdapter(Context context, List itemList) {
+    public ClassAdapter(Context context) {
         super(context);
-        this.itemList = itemList;
     }
 
     /**

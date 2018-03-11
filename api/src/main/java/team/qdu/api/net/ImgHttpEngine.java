@@ -22,7 +22,7 @@ public class ImgHttpEngine {
 //    private final static String SERVER_URL = "http://140.143.134.146:80/";
     private final static String REQUEST_METHOD = "GET";
     private final static String ENCODE_TYPE = "UTF-8";
-    private final static int TIME_OUT = 2000;
+    private final static int TIME_OUT = 4000;
 
     private static ImgHttpEngine instance = null;
 

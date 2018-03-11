@@ -29,7 +29,7 @@ public class HttpEngine {
 //    private final static String SERVER_URL = "http://140.143.134.146:80/";
     private final static String REQUEST_METHOD = "POST";
     private final static String ENCODE_TYPE = "UTF-8";
-    private final static int TIME_OUT = 2000;
+    private final static int TIME_OUT = 4000;
 
     private static HttpEngine instance = null;
 
