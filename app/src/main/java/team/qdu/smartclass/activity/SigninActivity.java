@@ -1,7 +1,6 @@
 package team.qdu.smartclass.activity;
 
 import android.os.Bundle;
-import android.view.View;
 
 import team.qdu.smartclass.R;
 
@@ -17,9 +16,5 @@ public class SigninActivity extends SBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_signin);
-    }
-
-    public void toBack(View view) {
-        finish();
     }
 }

@@ -25,6 +25,7 @@ public class HttpEngine {
     private final static String TAG = "HttpEngine";
     //The development database
     private final static String SERVER_URL = "http://10.0.2.2:80/";
+//    private final static String SERVER_URL = "http://47.94.7.159:80/";
     //The official database
 //    private final static String SERVER_URL = "http://140.143.134.146:80/";
     private final static String REQUEST_METHOD = "POST";

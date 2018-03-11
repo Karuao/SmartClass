@@ -2,7 +2,6 @@ package team.qdu.smartclass.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -10,12 +9,10 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -116,10 +113,6 @@ public class PrepareClassActivity extends SBaseActivity {
         alert = builder.setTitle("权限被禁用")
                 .setMessage("需要读写手机存储权限才能正常工作")
                 .setNeutralButton("确定", null);
-    }
-
-    public void toBack(View view) {
-        finish();
     }
 
     public void confirmClick(View view) throws URISyntaxException {

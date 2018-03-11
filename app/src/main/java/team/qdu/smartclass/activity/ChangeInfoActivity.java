@@ -132,10 +132,6 @@ public class ChangeInfoActivity extends SBaseActivity {
         btn=(Button)findViewById(R.id.btn_personal_change);
     }
 
-    public void toBack(View view) {
-        finish();
-    }
-
     public void confirmClick(View view) throws URISyntaxException {
         File file = null;
         if (isDefaultAvatar) {

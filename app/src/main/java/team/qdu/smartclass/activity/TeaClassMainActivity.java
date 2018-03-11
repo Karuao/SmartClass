@@ -118,11 +118,6 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         startActivity(new Intent(TeaClassMainActivity.this, SigninActivity.class));
     }
 
-    //左上角返回点击事件
-    public void toBack(View view) {
-        finish();
-    }
-
     //TeaClassHomeworkFragment老师作业界面发布作业点击事件
     public void toPublish(View view) {
         startActivity(new Intent(TeaClassMainActivity.this, PublishHomeworkActivity.class));

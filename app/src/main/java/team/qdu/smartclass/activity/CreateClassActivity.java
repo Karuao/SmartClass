@@ -82,10 +82,6 @@ public class CreateClassActivity extends SBaseActivity {
         AvatarImg = (ImageView) findViewById(R.id.img_avatar);
     }
 
-    public void toBack(View view) {
-        finish();
-    }
-
     //创建班课按钮点击事件
     public void finishCreate(View view) throws URISyntaxException {
         if (!ButtonUtil.isFastDoubleClick(view.getId())) {

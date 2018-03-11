@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import team.qdu.core.ClassAppAction;
-import team.qdu.core.InformAppAction;
 import team.qdu.core.HomeworkAppAction;
+import team.qdu.core.InformAppAction;
 import team.qdu.core.MemberAppAction;
 import team.qdu.core.UserAppAction;
 import team.qdu.smartclass.SApplication;

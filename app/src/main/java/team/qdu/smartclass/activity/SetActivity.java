@@ -65,8 +65,4 @@ public class SetActivity extends SBaseActivity {
         editorMain.putBoolean("main",false);
         editorMain.commit();
     }
-
-    public void toBack(View view) {
-        finish();
-    }
 }

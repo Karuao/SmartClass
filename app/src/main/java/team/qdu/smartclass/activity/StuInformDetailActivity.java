@@ -22,15 +22,16 @@ public class StuInformDetailActivity extends SBaseActivity {
     }
 
     private void initView() {
-        tvDetial= (TextView) findViewById(R.id.txt_commitstu_sno);
-        String detail=getIntent().getStringExtra("detail");
+        tvDetial = (TextView) findViewById(R.id.txt_commitstu_sno);
+        String detail = getIntent().getStringExtra("detail");
         tvDetial.setText(detail);
     }
+
     public void toBack(View view) {
         StuClassInformFragment.refreshFlag = true;
         finish();
-
     }
+
     @Override
     public void onBackPressed() {
         StuClassInformFragment.refreshFlag = true;

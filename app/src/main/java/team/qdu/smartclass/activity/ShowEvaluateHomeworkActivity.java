@@ -235,10 +235,6 @@ public class ShowEvaluateHomeworkActivity extends SBaseActivity implements Adapt
         });
     }
 
-    public void toBack(View view) {
-        finish();
-    }
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String homeworkAnswerId = ((TextView) view.findViewById(R.id.txt_homeworkanswer_id)).getText().toString();

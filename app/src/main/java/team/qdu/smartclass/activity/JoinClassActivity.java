@@ -49,9 +49,4 @@ public class JoinClassActivity extends SBaseActivity {
             });
         }
     }
-
-    //返回按钮点击事件
-    public void toBack(View view) {
-        finish();
-    }
 }

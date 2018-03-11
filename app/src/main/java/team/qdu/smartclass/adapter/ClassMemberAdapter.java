@@ -12,7 +12,7 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.TeaClassMainActivity;
+import team.qdu.smartclass.activity.SBaseActivity;
 
 /**
  * Created by asus on 2018/3/7.
@@ -60,7 +60,7 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
         compo.userRank.setText(String.valueOf(position+1));
         final Compo finalCompo = compo;
         //从服务器获取图片绑定到班课成员封面上
-        ((TeaClassMainActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<Bitmap>() {
+        ((SBaseActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<Bitmap>() {
             @Override
             public void onSuccess(Bitmap data, String message) {
                 finalCompo.classMemberImg.setImageBitmap(data);

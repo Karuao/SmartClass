@@ -133,11 +133,6 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         startActivity(new Intent(StuClassMainActivity.this, SigninActivity.class));
     }
 
-    //左上角返回点击事件
-    public void toBack(View view) {
-        finish();
-    }
-
     //若某个页面有新推送，查看页面后进行的操作
     private void readNew(String whichPage) {
         classAppAction.readNew(getClassUserId(), whichPage);

@@ -100,8 +100,4 @@ public class ShowUnderwayHomeworkDetailActivity extends SBaseActivity {
         }
         startActivity(intent);
     }
-
-    public void toBack(View view) {
-        finish();
-    }
 }

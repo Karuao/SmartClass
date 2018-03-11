@@ -15,7 +15,7 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.ShowUnderwayHomeworkActivity;
+import team.qdu.smartclass.activity.SBaseActivity;
 
 /**
  * Created by 11602 on 2018/3/2.
@@ -62,7 +62,7 @@ public class HomeworkNotEvaluateAdapter extends SBaseAdapter<HomeworkAnswerWithB
         //从服务器获取图片绑定到班课封面上
         final Compo finalCompo = compo;
         if (!TextUtils.isEmpty(itemList.get(position).getUser().getAvatar())) {
-            ((ShowUnderwayHomeworkActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<Bitmap>() {
+            ((SBaseActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap data, String message) {
                     finalCompo.notEvaluateStuAvatarImg.setImageBitmap(data);

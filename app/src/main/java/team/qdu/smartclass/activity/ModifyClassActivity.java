@@ -121,10 +121,6 @@ public class ModifyClassActivity extends SBaseActivity{
         examEdt = (EditText)findViewById(R.id.modifyClassExam);
     }
 
-    public void toBack(View view) {
-        finish();
-    }
-
     //修改班课信息按钮点击事件
     public void finishModify(View view) throws URISyntaxException {
         File file = null;

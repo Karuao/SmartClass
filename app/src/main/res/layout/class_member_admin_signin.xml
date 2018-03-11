@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--管理员签到页面-->
-<ScrollView android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?><!--管理员签到页面-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
 
     <LinearLayout
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_centerVertical="true">
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,8 +38,8 @@
                     android:layout_height="fill_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="5dp"
-                    android:src="@drawable/head2"
-                    android:onClick="toBack"/>
+                    android:onClick="toBack"
+                    android:src="@drawable/head2" />
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -66,16 +65,16 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="45dp">
 
             <Button
                 android:layout_width="221dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/shape_button"
-                android:onClick="toRegister"
                 android:gravity="center"
+                android:onClick="toRegister"
                 android:padding="10dp"
                 android:text="开始签到"
                 android:textColor="#fff"
@@ -86,16 +85,16 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp">
 
             <Button
                 android:layout_width="221dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/shape_button_yellow"
-                android:onClick="toRegister"
                 android:gravity="center"
+                android:onClick="toRegister"
                 android:padding="10dp"
                 android:text="放弃签到"
                 android:textColor="#fff"
@@ -106,16 +105,16 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp">
 
             <Button
                 android:layout_width="221dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/shape_button_warn"
-                android:onClick="toRegister"
                 android:gravity="center"
+                android:onClick="toRegister"
                 android:padding="10dp"
                 android:text="结束签到"
                 android:textColor="#fff"

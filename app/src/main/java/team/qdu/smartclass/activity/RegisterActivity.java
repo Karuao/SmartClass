@@ -67,8 +67,4 @@ public class RegisterActivity extends SBaseActivity {
             }
         });
     }
-
-    public void toBack(View view) {
-        finish();
-    }
 }

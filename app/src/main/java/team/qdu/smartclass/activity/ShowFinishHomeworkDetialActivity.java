@@ -143,8 +143,4 @@ public class ShowFinishHomeworkDetialActivity extends SBaseActivity {
         }
         startActivity(intent);
     }
-
-    public void toBack(View view) {
-        finish();
-    }
 }

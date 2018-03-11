@@ -3,7 +3,6 @@ package team.qdu.smartclass.activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.View;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -31,9 +30,5 @@ public class ShowPhotoActivity extends SBaseActivity {
         Drawable drawable = Drawable.createFromPath(filePath.toString());
         showPhotoImg.setImageDrawable(drawable);
         filePath.delete();
-    }
-
-    public void toBack(View view) {
-        finish();
     }
 }

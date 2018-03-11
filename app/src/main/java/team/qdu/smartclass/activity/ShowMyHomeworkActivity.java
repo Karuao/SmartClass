@@ -140,8 +140,4 @@ public class ShowMyHomeworkActivity extends SBaseActivity {
         }
         startActivity(intent);
     }
-
-    public void toBack(View view) {
-        finish();
-    }
 }

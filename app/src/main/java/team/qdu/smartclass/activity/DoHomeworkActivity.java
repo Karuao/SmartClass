@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -28,7 +29,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import team.qdu.core.ActionCallbackListener;
@@ -63,7 +63,7 @@ public class DoHomeworkActivity extends SBaseActivity {
     //拍照临时图片
     private String mTempPhotoPath;
     //获得的照片Uri
-    Uri photoUri;
+    String photoUri;
     //是否上传图片
     boolean ifUploadPhoto;
     //相册选图标记
@@ -159,7 +159,7 @@ public class DoHomeworkActivity extends SBaseActivity {
         String answerDetail = answerDetailEdt.getText().toString();
         File answerPhoto = null;
         if (ifUploadPhoto) {
-            answerPhoto = new File(new URI(photoUri.toString()));
+            answerPhoto = new File(photoUri);
         }
         homeworkAppAction.commitHomework(homeworkAnswerId, homeworkId, getClassId(), getUserId(),
                 ifSubmit, answerDetail, answerPhoto, new ActionCallbackListener<Void>() {
@@ -265,28 +265,19 @@ public class DoHomeworkActivity extends SBaseActivity {
             switch (requestCode) {
                 case CAMERA_REQUEST_CODE:   // 调用相机拍照
                     File temp = new File(mTempPhotoPath);
-                    photoUri = Uri.fromFile(temp);
+                    photoUri = temp.getPath();
                     ifUploadPhoto = true;
                     break;
                 case GALLERY_REQUEST_CODE:  // 直接从相册获取
-                    photoUri = data.getData();
+                    photoUri = ImgUtil.getPath(context, data.getData());
                     ifUploadPhoto = true;
                     break;
             }
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-                        DoHomeworkActivity.this.getContentResolver(), photoUri);
-                answerPhotoImg.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Bitmap bitmap = BitmapFactory.decodeFile(photoUri);
+            answerPhotoImg.setImageBitmap(bitmap);
             //解决部分自动旋转问题
-            answerPhotoImg.setRotation(ImgUtil.getBitmapDegree(photoUri.getPath()));
+            answerPhotoImg.setRotation(ImgUtil.getBitmapDegree(photoUri));
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    public void toBack(View view) {
-        finish();
     }
 }

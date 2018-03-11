@@ -1,7 +1,6 @@
 package team.qdu.smartclass.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -53,9 +52,5 @@ public class RetrieveThreeActivity extends SBaseActivity {
                 application.clearActivity();
             }
         });
-    }
-
-    public void toBack(View view) {
-        finish();
     }
 }

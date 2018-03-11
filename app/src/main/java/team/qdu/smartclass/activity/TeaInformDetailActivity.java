@@ -36,8 +36,8 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
         tvDetial = (TextView) findViewById(R.id.tv_class_teainform_details);
         LoutRead_number = (LinearLayout) findViewById(R.id.ll_class_inform_readnumber);
         tvTime = (TextView) findViewById(R.id.tv_class_inform_time);
-        tvRead_number= (TextView) findViewById(R.id.tv_class_inform_readnumber);
-        tvUnRead_number= (TextView) findViewById(R.id.tv_class_inform_unreadnumber);
+        tvRead_number = (TextView) findViewById(R.id.tv_class_inform_readnumber);
+        tvUnRead_number = (TextView) findViewById(R.id.tv_class_inform_unreadnumber);
         LoutUnRead_number = (LinearLayout) findViewById(R.id.ll_class_inform_unreadnumber);
         LoutRead_number.setOnClickListener(this);
         LoutUnRead_number.setOnClickListener(this);
@@ -46,12 +46,12 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
         String time = getIntent().getStringExtra("time");
         String read_num = getIntent().getStringExtra("read_num");
 
-        SharedPreferences unreadNumSetting= getSharedPreferences("unreadNum", MODE_PRIVATE);
-        String unread_num=unreadNumSetting.getString("unreadNum","");
+        SharedPreferences unreadNumSetting = getSharedPreferences("unreadNum", MODE_PRIVATE);
+        String unread_num = unreadNumSetting.getString("unreadNum", "");
 
         tvDetial.setText(detail);
         tvRead_number.setText(read_num);
-        tvUnRead_number.setText(unread_num+"人未读");
+        tvUnRead_number.setText(unread_num + "人未读");
         tvTime.setText(time);
     }
 
@@ -71,11 +71,6 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-
-    public void toBack(View view) {
-        finish();
     }
 
     @Override

@@ -78,8 +78,4 @@ public class RetrieveTwoActivity extends SBaseActivity {
             }
         });
     }
-
-    public void toBack(View view) {
-        finish();
-    }
 }

@@ -61,8 +61,4 @@ public class RetrieveOneActivity extends SBaseActivity {
         editor.putString("account", account);
         editor.commit();
     }
-
-    public void toBack(View view) {
-        finish();
-    }
 }
