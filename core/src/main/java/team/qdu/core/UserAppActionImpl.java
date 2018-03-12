@@ -270,6 +270,7 @@ public class UserAppActionImpl implements UserAppAction {
             listener.onFailure(ErrorEvent.PARAM_NULL, "请输入姓名");
             return;
         }
+        //学号不能为空
         if(TextUtils.isEmpty(sno)){
             listener.onFailure(ErrorEvent.PARAM_NULL, "请输入学号");
             return;
