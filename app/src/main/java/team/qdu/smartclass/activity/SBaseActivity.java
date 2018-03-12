@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.HomeworkAppAction;
@@ -109,5 +110,9 @@ public abstract class SBaseActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("classUserId", classUserId);
         editor.commit();
+    }
+
+    public void toBack(View view) {
+        finish();
     }
 }
