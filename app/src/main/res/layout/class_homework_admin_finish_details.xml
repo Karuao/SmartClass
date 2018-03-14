@@ -197,7 +197,7 @@
                 android:id="@+id/img_evaluate_photo"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:layout_below="@+id/tv_class_homework_file-text"
+                android:layout_below="@+id/tv_class_homework_file_text"
                 android:layout_marginLeft="5dp"
                 android:onClick="toShowEvaluatePhoto"
                 android:src="@drawable/add_class_img" />

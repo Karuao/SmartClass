@@ -17,6 +17,7 @@ import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.ShowFinishHomeworkActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.TeaHomeworkFinishAdapter;
+import team.qdu.smartclass.util.ButtonUtil;
 
 /**
  * Created by 11602 on 2018/2/22.
@@ -76,9 +77,11 @@ public class TeaHomeworkFinishFragment extends SBaseFragment implements AdapterV
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String homeworkId = ((TextView)view.findViewById(R.id.txt_homework_finish_id)).getText().toString();
-        Intent intent = new Intent(getParentFragment().getActivity(), ShowFinishHomeworkActivity.class);
-        intent.putExtra("homeworkId", homeworkId);
-        startActivity(intent);
+        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
+            String homeworkId = ((TextView) view.findViewById(R.id.txt_homework_finish_id)).getText().toString();
+            Intent intent = new Intent(getParentFragment().getActivity(), ShowFinishHomeworkActivity.class);
+            intent.putExtra("homeworkId", homeworkId);
+            startActivity(intent);
+        }
     }
 }

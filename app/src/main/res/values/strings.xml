@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">SmartClass</string>
-    <string name="tview_helloworld">HelloWorld!</string>
+    <string name="app_name">学堂小助手</string>
 
     <string name="title_activity_main">MainActivity</string>
     <string name="title_class">班课</string>

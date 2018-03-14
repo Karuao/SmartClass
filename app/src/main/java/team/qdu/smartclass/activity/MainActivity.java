@@ -3,6 +3,7 @@ package team.qdu.smartclass.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.MainFragmentPagerAdapter;
+import team.qdu.smartclass.util.ButtonUtil;
 
 /**
  * 主页
@@ -31,6 +34,8 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
     private LinearLayout tabUser;
     private ImageButton imgClass;
     private ImageButton imgUser;
+    private TextView userName;
+    private TextView userNumber;
     private TextView userGender;
     private TextView userUniversity;
     private TextView userDepartment;
@@ -73,10 +78,12 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
         imgUser.setImageResource(R.drawable.user_notselect);
     }
 
+    //修改个人信息点击事件
     public void toChangeInfo(View view) {
         startActivity(new Intent(MainActivity.this, ChangeInfoActivity.class));
     }
 
+    //设置点击事件
     public void toSet(View view) {
         startActivity(new Intent(MainActivity.this, SetActivity.class));
     }
@@ -91,36 +98,51 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
 
     //创建班课点击事件
     public void toCreateClass(View view) {
-        userGender = (TextView) findViewById(R.id.userGender);
-        userUniversity = (TextView) findViewById(R.id.userUniversity);
-        userDepartment = (TextView) findViewById(R.id.userDepartment);
-        popupWindow.dismiss();
-        if (userGender.getText().toString().isEmpty() || userDepartment.getText().toString().isEmpty()
-                || userUniversity.toString().isEmpty()) {
-            Intent intent = new Intent(MainActivity.this, PrepareClassActivity.class);
-            intent.putExtra("do", "create");
+        if (!ButtonUtil.isFastDoubleClick()) {
+            Intent intent;
+            if (ifNeedFillProfile()) {
+                intent = new Intent(MainActivity.this, PrepareClassActivity.class);
+                intent.putExtra("do", "create");
+                Toast.makeText(context, "创建班课前，请完善个人信息", Toast.LENGTH_SHORT).show();
+            } else {
+                intent = new Intent(MainActivity.this, CreateClassActivity.class);
+            }
             startActivity(intent);
-        } else {
-            startActivity(new Intent(MainActivity.this, CreateClassActivity.class));
         }
     }
 
     //加入班课点击事件
     public void toJoinClass(View view) {
-        userGender = (TextView) findViewById(R.id.userGender);
-        userUniversity = (TextView) findViewById(R.id.userUniversity);
-        userDepartment = (TextView) findViewById(R.id.userDepartment);
-        popupWindow.dismiss();
-        if (userGender.getText().toString().isEmpty() || userDepartment.getText().toString().isEmpty()
-                || userUniversity.toString().isEmpty()) {
-            Intent intent = new Intent(MainActivity.this, PrepareClassActivity.class);
-            intent.putExtra("do", "join");
+        if (!ButtonUtil.isFastDoubleClick()) {
+            Intent intent;
+            if (ifNeedFillProfile()) {
+                intent = new Intent(MainActivity.this, PrepareClassActivity.class);
+                intent.putExtra("do", "join");
+                Toast.makeText(context, "创建班课前，请完善个人信息", Toast.LENGTH_SHORT).show();
+            } else {
+                intent = new Intent(MainActivity.this, JoinClassActivity.class);
+            }
             startActivity(intent);
-        } else {
-            startActivity(new Intent(MainActivity.this, JoinClassActivity.class));
         }
     }
 
+    //是否需要完善个人信息
+    private boolean ifNeedFillProfile() {
+        popupWindow.dismiss();
+        userName = (TextView) findViewById(R.id.userName);
+        userNumber = (TextView) findViewById(R.id.userNumber);
+        userGender = (TextView) findViewById(R.id.userGender);
+        userUniversity = (TextView) findViewById(R.id.userUniversity);
+        userDepartment = (TextView) findViewById(R.id.userDepartment);
+        if (TextUtils.isEmpty(userName.getText()) || TextUtils.isEmpty(userNumber.getText())
+                || TextUtils.isEmpty(userGender.getText()) || TextUtils.isEmpty(userGender.getText())
+                || TextUtils.isEmpty(userUniversity.toString())) {
+            return true;
+        }
+        return false;
+    }
+
+    //底部tab键点击事件
     @Override
     public void onClick(View view) {
         resetImg();
@@ -136,6 +158,7 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
         }
     }
 
+    //ViewPager重写的方法
     @Override
     public void onPageScrolled(int i, float v, int i1) {
     }

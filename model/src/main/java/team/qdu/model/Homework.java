@@ -12,6 +12,8 @@ public class Homework implements Serializable {
 
     private String url;
 
+    private Integer url_file_num;
+
     private Integer submit_num;
 
     private String if_repository;
@@ -60,6 +62,14 @@ public class Homework implements Serializable {
 
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();
+    }
+
+    public Integer getUrl_file_num() {
+        return url_file_num;
+    }
+
+    public void setUrl_file_num(Integer url_file_num) {
+        this.url_file_num = url_file_num;
     }
 
     public Integer getSubmit_num() {

@@ -8,12 +8,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import java.util.List;
+
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.HomeworkAppAction;
 import team.qdu.core.InformAppAction;
 import team.qdu.core.MemberAppAction;
 import team.qdu.core.UserAppAction;
+import team.qdu.smartclass.R;
 import team.qdu.smartclass.SApplication;
+import team.qdu.smartclass.view.SelectDialog;
 
 /**
  * Activity抽象基类
@@ -110,6 +114,17 @@ public abstract class SBaseActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("classUserId", classUserId);
         editor.commit();
+    }
+
+    //弹出Dialog
+    public SelectDialog showDialog(SelectDialog.SelectDialogListener listener, List<String> names) {
+        SelectDialog dialog = new SelectDialog(this, R.style
+                .transparentFrameWindowStyle,
+                listener, names);
+        if (!this.isFinishing()) {
+            dialog.show();
+        }
+        return dialog;
     }
 
     public void toBack(View view) {

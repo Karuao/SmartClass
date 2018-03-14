@@ -9,9 +9,9 @@
     <application
         android:name=".SApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/head2"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/head2"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
@@ -39,15 +39,17 @@
         <activity android:name=".activity.StuInformDetailActivity"></activity>
         <activity android:name=".activity.CreateInformActivity"></activity>
         <activity android:name=".activity.JoinClassActivity"></activity>
-        <activity android:name=".activity.PrepareClassActivity"></activity>
+        <activity
+            android:name=".activity.PrepareClassActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.CropActivity"></activity>
         <activity android:name=".activity.ShowInviteCodeActivity"></activity>
         <activity android:name=".activity.InformReadActivity"></activity>
         <activity android:name=".activity.InformUnReadActivity"></activity>
         <activity android:name=".activity.ConfirmJoinClassActivity"></activity>
         <activity
-            android:name=".activity.PublishHomeworkActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        android:name=".activity.PublishHomeworkActivity"
+        android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.ModifyClassActivity"></activity>
         <activity
             android:name=".activity.DoHomeworkActivity"

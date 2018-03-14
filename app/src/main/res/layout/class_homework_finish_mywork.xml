@@ -118,7 +118,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/tv_class_homework_file-text"
+                android:id="@+id/tv_class_homework_file_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -131,7 +131,7 @@
                 android:id="@+id/img_answer_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_class_homework_file-text"
+                android:layout_below="@+id/tv_class_homework_file_text"
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/add_class_img" />
 

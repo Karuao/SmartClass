@@ -35,6 +35,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.StuHomeworkUnderwayFragment;
+import team.qdu.smartclass.util.ButtonUtil;
 import team.qdu.smartclass.util.ImgUtil;
 
 /**
@@ -156,25 +157,27 @@ public class DoHomeworkActivity extends SBaseActivity {
 
     //提交作业点击事件
     public void toSubmitHomework(View view) throws URISyntaxException {
-        String answerDetail = answerDetailEdt.getText().toString();
-        File answerPhoto = null;
-        if (ifUploadPhoto) {
-            answerPhoto = new File(photoUri);
-        }
-        homeworkAppAction.commitHomework(homeworkAnswerId, homeworkId, getClassId(), getUserId(),
-                ifSubmit, answerDetail, answerPhoto, new ActionCallbackListener<Void>() {
-            @Override
-            public void onSuccess(Void data, String message) {
-                Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                StuHomeworkUnderwayFragment.refreshFlag = true;
-                finish();
+        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
+            String answerDetail = answerDetailEdt.getText().toString();
+            File answerPhoto = null;
+            if (ifUploadPhoto) {
+                answerPhoto = new File(photoUri);
             }
+            homeworkAppAction.commitHomework(homeworkAnswerId, homeworkId, getClassId(), getUserId(),
+                    ifSubmit, answerDetail, answerPhoto, new ActionCallbackListener<Void>() {
+                        @Override
+                        public void onSuccess(Void data, String message) {
+                            Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                            StuHomeworkUnderwayFragment.refreshFlag = true;
+                            finish();
+                        }
 
-            @Override
-            public void onFailure(String errorEvent, String message) {
-                Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+                        @Override
+                        public void onFailure(String errorEvent, String message) {
+                            Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 
     //添加图片点击事件

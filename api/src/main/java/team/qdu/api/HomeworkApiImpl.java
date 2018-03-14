@@ -64,6 +64,33 @@ public class HomeworkApiImpl implements HomeworkApi {
     }
 
     @Override
+    public ApiResponse<Void> publishHomework(String title, String deadline, String detail, List<File> photoList, String classId) {
+        Map<String, String> paramMap = new HashMap<>();
+        Map<String, File> fileMap = null;
+        paramMap.put("title", title);
+        paramMap.put("deadline", deadline);
+        paramMap.put("detail", detail);
+        paramMap.put("classId", classId);
+        if (photoList.size() != 0) {
+            fileMap = new HashMap<>();
+            for (Integer i = 0; i < photoList.size(); i++) {
+                fileMap.put(i.toString(), photoList.get(i));
+            }
+        }
+
+        Type type = new TypeToken<ApiResponse<String>>() {
+        }.getType();
+        try {
+            return fileHttpEngine.postHandle(paramMap, fileMap, type, "/publishHomework");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
     public ApiResponse<List> getHomeworkList(String classId, String userId, String userTitle, String requestStatus) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("classId", classId);

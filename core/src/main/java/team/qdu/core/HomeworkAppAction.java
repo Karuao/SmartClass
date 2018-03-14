@@ -14,6 +14,7 @@ public interface HomeworkAppAction {
 
     //上传新发布作业的信息
     public void pushHomework(String title, String deadline, String detail, File photo, String classId, ActionCallbackListener<Void> listener);
+    public void pushHomework(String title, String deadline, String detail, List<File> photoList, String classId, ActionCallbackListener<Void> listener);
 
     //获取作业列表
     public void getHomeworkList(String classId, String userId, String userTitle, String requestStatus, ActionCallbackListener<List> listener);

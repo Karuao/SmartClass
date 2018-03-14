@@ -46,7 +46,7 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
         if (convertView == null) {
             compo = new Compo();
             //获得组件，实例化组件
-            convertView = layoutInflater.inflate(R.layout.item_list_mainclass, null);
+            convertView = layoutInflater.inflate(R.layout.itemlist_mainclass, null);
             //传递classUserId更好，不过要重构代码太多
 //            compo.classUserIdTxt = (TextView) convertView.findViewById(R.id.txt_classUserId);
             compo.classIdTxt = (TextView) convertView.findViewById(R.id.txt_classId);

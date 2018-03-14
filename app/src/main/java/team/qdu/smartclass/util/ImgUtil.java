@@ -6,6 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Environment;
+
+import com.nanchen.compresshelper.CompressHelper;
 
 import java.io.IOException;
 
@@ -19,8 +22,7 @@ public class ImgUtil {
     /**
      * 读取图片的旋转的角度
      *
-     * @param path
-     *            图片绝对路径
+     * @param path 图片绝对路径
      * @return 图片的旋转角度
      */
     public static int getBitmapDegree(String path) {
@@ -51,10 +53,8 @@ public class ImgUtil {
     /**
      * 将图片按照某个角度进行旋转
      *
-     * @param bm
-     *            需要旋转的图片
-     * @param degree
-     *            旋转角度
+     * @param bm     需要旋转的图片
+     * @param degree 旋转角度
      * @return 旋转后的图片
      */
     public static Bitmap rotateBitmapByDegree(Bitmap bm, int degree) {
@@ -96,5 +96,18 @@ public class ImgUtil {
             return uri.getPath();
         }
         return null;
+    }
+
+
+    //获取图片压缩工具
+    public static CompressHelper getCompressHelper(Context context) {
+        return new CompressHelper.Builder(context)
+                .setMaxWidth(1920)  // 默认最大宽度为720
+                .setMaxHeight(1080) // 默认最大高度为960
+                .setQuality(80)    // 默认压缩质量为80
+                .setCompressFormat(Bitmap.CompressFormat.JPEG) // 设置默认压缩为jpg格式
+                .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                .build();
     }
 }

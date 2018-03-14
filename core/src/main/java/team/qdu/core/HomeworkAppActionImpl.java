@@ -81,6 +81,48 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
     }
 
     @Override
+    public void pushHomework(final String title, final String deadline, final String detail,
+                             final List<File> photoList, final String classId, final ActionCallbackListener<Void> listener) {
+        if (TextUtils.isEmpty(title)) {
+            listener.onFailure(ErrorEvent.PARAM_NULL, "标题不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(detail) && photoList.size() == 0) {
+            listener.onFailure(ErrorEvent.PARAM_NULL, "截止日期和上传图片不能全为空");
+            return;
+        }
+        //截至日期不能小于等于当前时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date deadlineDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
+        Date currentDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
+        try {
+            deadlineDate = sdf.parse(deadline);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if ((currentDate.getTime() - currentDate.getTime() % 60) >= deadlineDate.getTime()) {
+            listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "截至日期不能小于等于当前时间");
+            return;
+        }
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return homeworkApi.publishHomework(title, deadline, detail, photoList, classId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    @Override
     public void getHomeworkList(final String classId, final String userId, final String userTitle, final String requestStatus, final ActionCallbackListener<List> listener) {
         new AsyncTask<Void, Void, ApiResponse<List>>() {
 

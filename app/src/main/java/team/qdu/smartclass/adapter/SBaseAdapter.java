@@ -55,7 +55,7 @@ public abstract class SBaseAdapter<T> extends BaseAdapter {
      *
      * @param itemList
      */
-    public void setItem(List<T> itemList) {
+    public void setItems(List<T> itemList) {
         this.itemList.clear();
         this.itemList = itemList;
         notifyDataSetChanged();

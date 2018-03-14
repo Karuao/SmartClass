@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="72dp"
+    android:layout_height="72dp">
+    <FrameLayout
+        android:layout_width="72dp"
+        android:layout_height="72dp">
+
+        <ImageView
+            android:id="@+id/img_homework_photo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="left|bottom"
+            android:scaleType="fitXY"
+            android:src="@drawable/add_class_img" />
+
+        <ImageView
+            android:id="@+id/img_homework_delphoto"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="right|top"
+            android:src="@mipmap/btn_del_x"
+            android:visibility="invisible" />
+
+    </FrameLayout>
+</LinearLayout>

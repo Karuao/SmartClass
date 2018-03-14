@@ -12,9 +12,13 @@ public class HomeworkAnswer implements Serializable {
 
     private String url;
 
+    private Integer url_file_num;
+
     private String if_submit;
 
     private String remark_url;
+
+    private Integer remark_url_file_num;
 
     private Integer exp;
 
@@ -58,6 +62,14 @@ public class HomeworkAnswer implements Serializable {
         this.url = url == null ? null : url.trim();
     }
 
+    public Integer getUrl_file_num() {
+        return url_file_num;
+    }
+
+    public void setUrl_file_num(Integer url_file_num) {
+        this.url_file_num = url_file_num;
+    }
+
     public String getIf_submit() {
         return if_submit;
     }
@@ -72,6 +84,14 @@ public class HomeworkAnswer implements Serializable {
 
     public void setRemark_url(String remark_url) {
         this.remark_url = remark_url == null ? null : remark_url.trim();
+    }
+
+    public Integer getRemark_url_file_num() {
+        return remark_url_file_num;
+    }
+
+    public void setRemark_url_file_num(Integer remark_url_file_num) {
+        this.remark_url_file_num = remark_url_file_num;
     }
 
     public Integer getExp() {

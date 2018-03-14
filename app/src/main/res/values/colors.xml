@@ -32,4 +32,6 @@
     <color name="split_line">#11112233</color>
     <color name="text1">#59B29C</color>
     <color name="text2">#333333</color>
+
+    <color name="blue">#33b5e5</color>
 </resources>
