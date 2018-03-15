@@ -221,9 +221,7 @@
                     android:layout_height="72dp"
                     android:layout_below="@+id/tv_class_homework_file_text"
                     android:layout_marginRight="5dp"
-                    android:layout_marginLeft="7dp">
-
-                </team.qdu.smartclass.view.HorizontalListView>
+                    android:layout_marginLeft="7dp"/>
             </RelativeLayout>
 
             <View

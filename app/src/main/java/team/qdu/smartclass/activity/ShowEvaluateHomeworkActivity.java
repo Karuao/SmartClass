@@ -33,6 +33,7 @@ import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
 import team.qdu.smartclass.util.ButtonUtil;
 
 /**
+ * 展示进入的评价中作业的作业详情和提交情况
  * Created by 11602 on 2018/3/3.
  */
 

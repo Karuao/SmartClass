@@ -1,7 +1,13 @@
 package team.qdu.smartclass.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -34,6 +40,9 @@ import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.CustomDatePicker;
 import team.qdu.smartclass.view.HorizontalListView;
 import team.qdu.smartclass.view.SelectDialog;
+
+import static com.lzy.imagepicker.ui.ImageGridActivity.REQUEST_PERMISSION_CAMERA;
+import static com.lzy.imagepicker.ui.ImageGridActivity.REQUEST_PERMISSION_STORAGE;
 
 /**
  * Created by 11602 on 2018/2/6.
@@ -193,18 +202,22 @@ public class PublishHomeworkActivity extends SBaseActivity implements AdapterVie
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     switch (position) {
                         case 0: // 直接调起相机
-                            //打开选择,本次允许选择的数量
-                            ImagePicker.getInstance().setSelectLimit(maxImgCount - homeworkAddPhotoAdapter.getImagesSize());
-                            Intent intent = new Intent(context, ImageGridActivity.class);
-                            intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
-                            startActivityForResult(intent, REQUEST_CODE_SELECT);
+                            if (!(Build.VERSION.SDK_INT < Build.VERSION_CODES.M
+                                    || (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                                    && ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED))) {
+                                ActivityCompat.requestPermissions(PublishHomeworkActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CAMERA);
+                            } else {
+                                takePhoto();
+                            }
                             break;
                         case 1:
-                            //打开选择,本次允许选择的数量
-                            ImagePicker.getInstance().setSelectLimit(maxImgCount - homeworkAddPhotoAdapter.getImagesSize());
-                            Intent intent1 = new Intent(context, ImageGridActivity.class);
-//                                intent1.putExtra(ImageGridActivity.EXTRAS_IMAGES,images);
-                            startActivityForResult(intent1, REQUEST_CODE_SELECT);
+                            if (!(Build.VERSION.SDK_INT < Build.VERSION_CODES.M
+                                    || (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                                    && ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED))) {
+                                ActivityCompat.requestPermissions(PublishHomeworkActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_STORAGE);
+                            } else {
+                                pickFromGallery();
+                            }
                             break;
                         default:
                             break;
@@ -219,6 +232,25 @@ public class PublishHomeworkActivity extends SBaseActivity implements AdapterVie
             intentPreview.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
             intentPreview.putExtra(ImagePicker.EXTRA_FROM_ITEMS, true);
             startActivityForResult(intentPreview, REQUEST_CODE_PREVIEW);
+        }
+    }
+
+    //请求权限回调
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED
+                && grantResults[1] == PackageManager.PERMISSION_DENIED) {
+            Toast.makeText(context, "相机和存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_SHORT).show();
+        } else if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
+            Toast.makeText(context, "相机权限未开启，请到权限管理中开启权限", Toast.LENGTH_SHORT).show();
+        } else if (grantResults.length > 0 && grantResults[1] == PackageManager.PERMISSION_DENIED) {
+            Toast.makeText(context, "存储权限未开启，请到权限管理中开启权限", Toast.LENGTH_SHORT).show();
+        } else {
+            if (requestCode == REQUEST_PERMISSION_CAMERA) {
+                takePhoto();
+            } else  {
+                pickFromGallery();
+            }
         }
     }
 
@@ -244,6 +276,21 @@ public class PublishHomeworkActivity extends SBaseActivity implements AdapterVie
         }
     }
 
+    private void takePhoto() {
+        //打开选择,本次允许选择的数量
+        ImagePicker.getInstance().setSelectLimit(maxImgCount - homeworkAddPhotoAdapter.getImagesSize());
+        Intent intent = new Intent(context, ImageGridActivity.class);
+        intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
+        startActivityForResult(intent, REQUEST_CODE_SELECT);
+    }
+
+    private void pickFromGallery() {
+        //打开选择,本次允许选择的数量
+        ImagePicker.getInstance().setSelectLimit(maxImgCount - homeworkAddPhotoAdapter.getImagesSize());
+        Intent intent1 = new Intent(context, ImageGridActivity.class);
+//                                intent1.putExtra(ImageGridActivity.EXTRAS_IMAGES,images);
+        startActivityForResult(intent1, REQUEST_CODE_SELECT);
+    }
     //添加图片点击事件
 //    public void toAddPhoto(View view) {
 //        if (selectphotoPopup == null) {

@@ -88,6 +88,7 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
                 }
             });
         }
+
         //设置红点
         if ("是".equals(itemList.get(position).getIf_new_class_thing())) {
             compo.badgeView.setMaxHeight(40);

@@ -7,10 +7,17 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
+import android.widget.Toast;
 
 import com.nanchen.compresshelper.CompressHelper;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import team.qdu.core.ActionCallbackListener;
+import team.qdu.smartclass.SApplication;
+import team.qdu.smartclass.adapter.HomeworkShowPhotoAdapter;
 
 /**
  * 图片处理工具类
@@ -109,5 +116,23 @@ public class ImgUtil {
                 .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_PICTURES).getAbsolutePath())
                 .build();
+    }
+
+    public static void setPhotoListView(final Context context, final HomeworkShowPhotoAdapter homeworkShowPhotoAdapter, String dirUrl, int photoNum) {
+        for (int i = 0; i < photoNum; i++) {
+            ((SApplication) context).getClassAppAction().getBitmap(dirUrl + "/" + i + ".jpg", new ActionCallbackListener<Bitmap>() {
+                @Override
+                public void onSuccess(Bitmap data, String message) {
+                    List<Bitmap> photoList = new ArrayList<>();
+                    photoList.add(data);
+                    homeworkShowPhotoAdapter.addItems(photoList);
+                }
+
+                @Override
+                public void onFailure(String errorEvent, String message) {
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }
