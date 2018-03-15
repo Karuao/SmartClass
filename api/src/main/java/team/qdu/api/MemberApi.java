@@ -16,4 +16,8 @@ public interface MemberApi {
     public ApiResponse<List<ClassUser>> getClassMembers(String classId);
 
     public Bitmap getBitmap(String urlTail);
+
+    public ApiResponse<ClassUser> searchByClassUserId(String classUserId);
+
+    public ApiResponse<Void> shiftClass(String classUserId);
 }

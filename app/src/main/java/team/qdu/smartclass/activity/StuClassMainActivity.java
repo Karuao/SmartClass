@@ -129,8 +129,8 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         imgClassinfo.setImageResource(R.drawable.class_classinfo);
     }
 
-    public void toSignIn(View view) {
-        startActivity(new Intent(StuClassMainActivity.this, SigninActivity.class));
+    public void toSignInforStudent(View view) {
+        startActivity(new Intent(StuClassMainActivity.this, StuMemberSigninActivity.class));
     }
 
     //若某个页面有新推送，查看页面后进行的操作

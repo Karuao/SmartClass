@@ -44,15 +44,16 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="5dp"
                         />
+
                     <TextView
+                        android:id="@+id/class_memberDetails_student"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="学生姓名"
-                        android:textSize="21sp"
-                        android:textColor="@color/bg_white"
-                        android:textStyle="normal"
                         android:layout_marginLeft="5dp"
-                        />
+                        android:text="学生姓名"
+                        android:textColor="@color/bg_white"
+                        android:textSize="21sp"
+                        android:textStyle="normal" />
                 </LinearLayout>
 
 
@@ -67,19 +68,41 @@
 
 
 
-
+<!--
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:layout_gravity="center_horizontal">
 
+
+            <Button
+                android:layout_width="221dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/shape_button_yellow"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="查看经验明细"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                />
+
+        </RelativeLayout>
+-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_gravity="center_horizontal">
+
+
             <Button
                 android:layout_width="221dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/shape_button_warn"
-                android:onClick="finishCreate"
+                android:onClick="shiftClass"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="移出班课"
@@ -88,8 +111,6 @@
                 />
 
         </RelativeLayout>
-
-
 
 
     </LinearLayout>

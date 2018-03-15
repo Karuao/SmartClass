@@ -6,6 +6,12 @@
     android:padding="8dp">
 
     <TextView
+        android:id="@+id/member_classUserId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/tv_class_member_rank2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,9 +21,9 @@
         android:textSize="18sp" />
 
     <ImageView
-        android:id="@+id/iv_class_memberimg2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/iv_class_memberimg"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginLeft="14dp"
         android:src="@drawable/add_class_img" />
 
@@ -26,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/iv_class_memberimg2"
+        android:layout_toRightOf="@+id/iv_class_memberimg"
         android:layout_marginTop="5dp"
         android:singleLine="true"
         android:text="姓名"
@@ -41,7 +47,7 @@
         android:layout_below="@+id/tv_class_membername2"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/iv_class_memberimg2"
+        android:layout_toRightOf="@+id/iv_class_memberimg"
         android:text="学号"
         android:textColor="#898989"
         android:textSize="15sp" />

@@ -42,7 +42,8 @@
         <activity
             android:name=".activity.CreateClassActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
-        <activity android:name=".activity.SigninActivity"></activity>
+        <activity android:name=".activity.StuMemberSigninActivity"></activity>
+        <activity android:name=".activity.TeaMemberSigninActivity"></activity>
         <activity android:name=".activity.TeaInformDetailActivity"></activity>
         <activity android:name=".activity.StuInformDetailActivity"></activity>
         <activity android:name=".activity.CreateInformActivity"></activity>
@@ -73,6 +74,7 @@
         <activity android:name=".activity.ShowFinishHomeworkActivity"></activity>
         <activity android:name=".activity.ShowFinishHomeworkDetialActivity"></activity>
         <activity android:name=".activity.CropActivity2"></activity>
+        <activity android:name=".activity.ShowMemberDetailActivity"></activity>
     </application>
 
 </manifest>
