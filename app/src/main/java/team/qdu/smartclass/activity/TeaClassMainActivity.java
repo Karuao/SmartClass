@@ -114,8 +114,8 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         imgClassinfo.setImageResource(R.drawable.class_classinfo);
     }
 
-    public void toSignIn(View view) {
-        startActivity(new Intent(TeaClassMainActivity.this, SigninActivity.class));
+    public void toSignInforTeacher(View view) {
+        startActivity(new Intent(TeaClassMainActivity.this, TeaMemberSigninActivity.class));
     }
 
     //TeaClassHomeworkFragment老师作业界面发布作业点击事件

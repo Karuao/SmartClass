@@ -64,4 +64,38 @@ public class MemberApiImpl implements MemberApi {
             return null;
         }
     }
+
+    @Override
+    public ApiResponse<ClassUser> searchByClassUserId(String classUserId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("classUserId", classUserId);
+
+        Type type = new TypeToken<ApiResponse<ClassUser>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/searchByClassUserId");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<Void> shiftClass(String classUserId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("classUserId", classUserId);
+
+        Type type = new TypeToken<ApiResponse<ClassUser>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/shiftClass");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
 }

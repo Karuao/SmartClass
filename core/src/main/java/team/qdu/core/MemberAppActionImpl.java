@@ -66,4 +66,47 @@ public class MemberAppActionImpl implements MemberAppAction {
         }.execute();
     }
 
+    //获取成员信息
+    @Override
+    public ClassUser getMemberInfo(final String classUserId, final ActionCallbackListener<ClassUser> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<ClassUser>>() {
+            @Override
+            protected ApiResponse<ClassUser> doInBackground(Void... params) {
+                return memberApi.searchByClassUserId(classUserId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<ClassUser> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObj(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+        return null;
+    }
+
+    //移出班课
+    @Override
+    public void shiftClass(final String classUserId, final ActionCallbackListener<Void> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return memberApi.shiftClass(classUserId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
 }

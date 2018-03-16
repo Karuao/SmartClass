@@ -6,14 +6,19 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include android:id="@+id/top" layout="@layout/class_tab02_top" />
+    <include android:id="@+id/top" layout="@layout/class_tab02_top_teacher" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout_member_teacher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ListView
-        android:id="@+id/list_classMember"
+        android:id="@+id/list_classMember_teacher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="0dp">
 
     </ListView>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

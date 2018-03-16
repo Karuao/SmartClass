@@ -2,10 +2,12 @@ package team.qdu.smartclass.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,8 +23,8 @@ import team.qdu.smartclass.activity.SBaseActivity;
 
 public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
 
-    int rank;
-    int lastExp;
+    public int rank=1;
+    public int lastExp;
 
     public ClassMemberAdapter(Context context, List itemList) {
         super(context);
@@ -39,7 +41,9 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
         public TextView userSno;
         public TextView userExp;
         public TextView userRank;
+        public TextView classUserId;
         public ImageView classMemberImg;
+       // public TextView myRank;
     }
 
     @Override
@@ -53,7 +57,9 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
             compo.userSno = (TextView) convertView.findViewById(R.id.tv_class_membernum2);
             compo.userExp = (TextView) convertView.findViewById(R.id.tv_class_memberexp2);
             compo.userRank = (TextView) convertView.findViewById(R.id.tv_class_member_rank2) ;
-            compo.classMemberImg = (ImageView) convertView.findViewById(R.id.iv_class_memberimg2);
+            compo.classMemberImg = (ImageView) convertView.findViewById(R.id.iv_class_memberimg);
+            compo.classUserId = (TextView)convertView.findViewById(R.id.member_classUserId);
+           // compo.myRank = (TextView)convertView.findViewById(R.id.tv_class_member_rank);
             convertView.setTag(compo);
         } else {
             compo = (Compo) convertView.getTag();
@@ -62,20 +68,33 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
         compo.userName.setText(itemList.get(position).getUser().getName());
         compo.userSno.setText(itemList.get(position).getUser().getSno());
         compo.userExp.setText(itemList.get(position).getExp().toString());
-        compo.userRank.setText(String.valueOf(position+1));
+        compo.classUserId.setText(Integer.toString(itemList.get(position).getClass_user_id()));
+        if(position>0) {
+            lastExp = itemList.get(position - 1).getExp();
+            if (itemList.get(position).getExp() == lastExp) {
+                compo.userRank.setText(String.valueOf(rank));
+            } else {
+                rank++;
+                compo.userRank.setText(String.valueOf(rank));
+            }
+        }else if(position==0){
+            compo.userRank.setText(String.valueOf(rank));
+        }
         final Compo finalCompo = compo;
         //从服务器获取图片绑定到班课成员封面上
-        ((SBaseActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<Bitmap>() {
-            @Override
-            public void onSuccess(Bitmap data, String message) {
-                finalCompo.classMemberImg.setImageBitmap(data);
-            }
-            //设置红点
+        if (!TextUtils.isEmpty(itemList.get(position).getUser().getAvatar())) {
+            ((SBaseActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<Bitmap>() {
+                @Override
+                public void onSuccess(Bitmap data, String message) {
+                    finalCompo.classMemberImg.setImageBitmap(data);
+                }
 
-            @Override
-            public void onFailure(String errorEvent, String message) {
-            }
-        });
+                @Override
+                public void onFailure(String errorEvent, String message) {
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         return convertView;
     }
 }

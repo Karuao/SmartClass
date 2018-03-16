@@ -56,19 +56,23 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="55dp"
         android:background="@color/bg_white"
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_class_member_sign"
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="221dp"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape_button_yellow"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:onClick="toRegister"
+            android:padding="10dp"
             android:text="开始签到"
-            android:textColor="@color/colorSign"
-            android:textSize="20sp"
-            android:textStyle="normal" />
+            android:textColor="#fff"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -82,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:text="出勤率" />
+            android:text="历史签到记录" />
 
         <TextView
             android:id="@+id/iv_class_member_allpeople"
@@ -113,6 +117,11 @@
         android:layout_marginTop="5dp"
         android:background="#d6d6d6" />
 
-    <include
-        layout="@layout/class_signin_listitem" />
+    <ListView
+        android:id="@+id/list_signin_history_student"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp">
+
+    </ListView>
 </LinearLayout>
