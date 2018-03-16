@@ -1,10 +1,12 @@
 package team.qdu.smartclass.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.lzy.imagepicker.bean.ImageItem;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ import team.qdu.smartclass.R;
  * Created by 11602 on 2018/3/13.
  */
 
-public class HomeworkShowPhotoAdapter extends SBaseAdapter<Bitmap> {
+public class HomeworkShowPhotoAdapter extends SBaseAdapter<ImageItem> {
 
     public final class Compo {
         public ImageView homeworkPhotoImg;
@@ -24,7 +26,7 @@ public class HomeworkShowPhotoAdapter extends SBaseAdapter<Bitmap> {
         super(context);
     }
 
-    public List<Bitmap> getImages() {
+    public List<ImageItem> getImages() {
             return itemList;
     }
 
@@ -40,7 +42,7 @@ public class HomeworkShowPhotoAdapter extends SBaseAdapter<Bitmap> {
         }
 
         //设置ListView item
-        compo.homeworkPhotoImg.setImageBitmap(itemList.get(position));
+        Glide.with(context).load(itemList.get(position).path).into(compo.homeworkPhotoImg);
 
         return convertView;
     }

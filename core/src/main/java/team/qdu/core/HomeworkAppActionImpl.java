@@ -208,6 +208,11 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
     }
 
     @Override
+    public void commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, List<File> photoList, ActionCallbackListener<Void> listener) {
+
+    }
+
+    @Override
     public void getHomeworkDetail(final String homeworkId, final ActionCallbackListener<HomeworkWithBLOBs> listener) {
         new AsyncTask<Void, Void, ApiResponse<HomeworkWithBLOBs>>() {
 

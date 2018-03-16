@@ -216,7 +216,7 @@
                 <!--android:src="@drawable/add_class_img" />-->
 
                 <team.qdu.smartclass.view.HorizontalListView
-                    android:id="@+id/list_homework_photo"
+                    android:id="@+id/list_homework_addphoto"
                     android:layout_width="match_parent"
                     android:layout_height="72dp"
                     android:layout_below="@+id/tv_class_homework_file_text"

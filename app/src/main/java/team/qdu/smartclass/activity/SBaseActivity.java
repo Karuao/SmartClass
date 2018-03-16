@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.lzy.imagepicker.ImagePicker;
+
 import java.util.List;
 
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.HomeworkAppAction;
+import team.qdu.core.ImgAppAction;
 import team.qdu.core.InformAppAction;
 import team.qdu.core.MemberAppAction;
 import team.qdu.core.UserAppAction;
@@ -43,6 +46,10 @@ public abstract class SBaseActivity extends AppCompatActivity {
 
     public MemberAppAction memberAppAction;
 
+    public ImgAppAction imgAppAction;
+
+    public ImagePicker imagePicker;
+
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -51,16 +58,17 @@ public abstract class SBaseActivity extends AppCompatActivity {
         userAppAction = application.getUserAppAction();
         classAppAction = application.getClassAppAction();
         informAppAction = application.getInformAppAction();
-
         homeworkAppAction = application.getHomeworkAppAction();
         memberAppAction = application.getMemberAppAction();
+        imgAppAction = application.getImgAppAction();
+        imagePicker = application.getImagePicker();
     }
 
     //从SharedPreferences获取userId
     public String getUserId() {
         SharedPreferences sharedPreferences = getSharedPreferences("user",
                 Activity.MODE_PRIVATE);
-        return  sharedPreferences.getString("userId", null);
+        return sharedPreferences.getString("userId", null);
     }
 
     public void setUserId(String userId) {
@@ -75,7 +83,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
     public String getClassId() {
         SharedPreferences sharedPreferences = getSharedPreferences("user",
                 Activity.MODE_PRIVATE);
-        return  sharedPreferences.getString("classId", null);
+        return sharedPreferences.getString("classId", null);
     }
 
     public void setClassId(String classId) {
@@ -90,7 +98,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
     public String getUserTitle() {
         SharedPreferences sharedPreferences = getSharedPreferences("user",
                 Activity.MODE_PRIVATE);
-        return  sharedPreferences.getString("userTitle", null);
+        return sharedPreferences.getString("userTitle", null);
     }
 
     public void setUserTitle(String userTitle) {
@@ -105,7 +113,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
     public String getClassUserId() {
         SharedPreferences sharedPreferences = getSharedPreferences("user",
                 Activity.MODE_PRIVATE);
-        return  sharedPreferences.getString("classUserId", null);
+        return sharedPreferences.getString("classUserId", null);
     }
 
     public void setClassUserId(String classUserId) {

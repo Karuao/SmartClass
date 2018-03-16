@@ -1,8 +1,11 @@
-package team.qdu.smartclass.activity;
+package com.lzy.imagepicker.ui;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -11,7 +14,6 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.adapter.ImagePageAdapter;
 import com.lzy.imagepicker.bean.ImageItem;
-import com.lzy.imagepicker.ui.ImageBaseActivity;
 import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.view.ViewPagerFixed;
 
@@ -26,7 +28,7 @@ import java.util.ArrayList;
  * 修订历史：图片预览的基类
  * ================================================
  */
-public abstract class ImagePreviewActivity extends ImageBaseActivity {
+public class ImageViewActivity extends ImagePreviewBaseActivity {
 
     protected ImagePicker imagePicker;
     protected ArrayList<ImageItem> mImageItems;      //跳转进ImagePreviewFragment的图片文件夹
@@ -91,10 +93,35 @@ public abstract class ImagePreviewActivity extends ImageBaseActivity {
 
         //初始化当前页面的状态
         mTitleCount.setText(getString(R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));
+        //滑动ViewPager的时候，根据外界的数据改变当前的选中状态和当前的图片的位置描述文本
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                mCurrentPosition = position;
+                mTitleCount.setText(getString(R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));
+            }
+        });
     }
 
-    /** 单击时，隐藏头和尾 */
-    public abstract void onImageSingleTap();
+    /**
+     * 单击时，隐藏头和尾
+     */
+    @Override
+    public void onImageSingleTap() {
+        if (topBar.getVisibility() == View.VISIBLE) {
+            topBar.setAnimation(AnimationUtils.loadAnimation(this, com.lzy.imagepicker.R.anim.top_out));
+            topBar.setVisibility(View.GONE);
+            tintManager.setStatusBarTintResource(Color.TRANSPARENT);//通知栏所需颜色
+            //给最外层布局加上这个属性表示，Activity全屏显示，且状态栏被隐藏覆盖掉。
+//            if (Build.VERSION.SDK_INT >= 16) content.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        } else {
+            topBar.setAnimation(AnimationUtils.loadAnimation(this, com.lzy.imagepicker.R.anim.top_in));
+            topBar.setVisibility(View.VISIBLE);
+            tintManager.setStatusBarTintResource(R.color.ip_color_primary_dark);//通知栏所需颜色
+            //Activity全屏显示，但状态栏不会被隐藏覆盖，状态栏依然可见，Activity顶端布局部分会被状态遮住
+//            if (Build.VERSION.SDK_INT >= 16) content.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+    }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {

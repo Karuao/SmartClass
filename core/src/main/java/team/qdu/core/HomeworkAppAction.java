@@ -14,6 +14,7 @@ public interface HomeworkAppAction {
 
     //上传新发布作业的信息
     public void pushHomework(String title, String deadline, String detail, File photo, String classId, ActionCallbackListener<Void> listener);
+
     public void pushHomework(String title, String deadline, String detail, List<File> photoList, String classId, ActionCallbackListener<Void> listener);
 
     //获取作业列表
@@ -27,6 +28,8 @@ public interface HomeworkAppAction {
 
     //学生提交作业
     public void commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, File answerPhoto, ActionCallbackListener<Void> listener);
+
+    public void commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, List<File> photoList, ActionCallbackListener<Void> listener);
 
     //获取作业详情
     public void getHomeworkDetail(String homeworkId, ActionCallbackListener<HomeworkWithBLOBs> listener);
