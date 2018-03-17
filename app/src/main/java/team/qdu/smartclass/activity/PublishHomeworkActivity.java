@@ -93,7 +93,7 @@ public class PublishHomeworkActivity extends SBaseActivity implements AdapterVie
                                 new File(homeworkAddPhotoAdapter.getImages().get(i).path)));
             }
 
-            homeworkAppAction.pushHomework(title, deadline, detail, photoList, getClassId(),
+            homeworkAppAction.publishHomework(title, deadline, detail, photoList, getClassId(),
                     new ActionCallbackListener<Void>() {
                         @Override
                         public void onSuccess(Void data, String message) {
@@ -141,11 +141,11 @@ public class PublishHomeworkActivity extends SBaseActivity implements AdapterVie
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ImgUtil.responseClickHomeworkAddPhotoList(this, homeworkAddPhotoAdapter, parent, position);
+        ImgUtil.responseClickHomeworkAddPhotoListItem(this, homeworkAddPhotoAdapter, parent, position);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        ImgUtil.setHomeworkAddPhotoAdapter(homeworkAddPhotoAdapter, requestCode, resultCode, data);
+        ImgUtil.setHomeworkAddList(homeworkAddPhotoAdapter, requestCode, resultCode, data);
     }
 }

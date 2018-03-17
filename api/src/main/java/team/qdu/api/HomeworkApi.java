@@ -13,8 +13,6 @@ import team.qdu.model.HomeworkWithBLOBs;
 
 public interface HomeworkApi {
 
-    public ApiResponse<Void> publishHomework(String title, String deadline, String detail, File photo, String classId);
-
     public ApiResponse<Void> publishHomework(String title, String deadline, String detail, List<File> photoList, String classId);
 
     public ApiResponse<List> getHomeworkList(String classId, String userId, String userTitle, String requestStatus);
@@ -23,13 +21,13 @@ public interface HomeworkApi {
 
     public ApiResponse<HomeworkAnswerWithBLOBs> getStuHomeworkDetail(String homeworkAnswerId);
 
-    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, File answerPhoto);
+    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, List<File> photoList, String delPhotoesUrl);
 
     public ApiResponse<HomeworkWithBLOBs> getHomeworkDetail(String homeworkId);
 
     public ApiResponse<List<HomeworkAnswerWithBLOBs>> getHomeworkAnswerList(String homeworkId);
 
-    public ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, File evaluatePhoto);
+    public ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, List<File> photoList, String delPhotoesUrl);
 
     public ApiResponse<Integer> getNotEvaluateStuNum(String homeworkId);
 }

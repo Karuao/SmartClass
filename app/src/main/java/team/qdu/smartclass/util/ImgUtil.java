@@ -16,6 +16,7 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
+import com.lzy.imagepicker.ui.ImageViewActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +26,7 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.adapter.HomeworkAddPhotoAdapter;
+import team.qdu.smartclass.adapter.HomeworkShowPhotoAdapter;
 import team.qdu.smartclass.adapter.SBaseAdapter;
 import team.qdu.smartclass.view.SelectDialog;
 
@@ -37,6 +39,7 @@ public class ImgUtil {
     public static final int maxImgCount = 6;
     public static final int REQUEST_CODE_SELECT = 100;
     public static final int REQUEST_CODE_PREVIEW = 101;
+
     /**
      * 读取图片的旋转的角度
      *
@@ -128,7 +131,7 @@ public class ImgUtil {
 //    }
 
     //初始化作业list
-    public static void initHomeworkPhotoAdapter(final Context context, final SBaseAdapter homeworkPhotoAdapter, String dirUrl, int photoNum) {
+    public static void initHomeworkPhotoList(final Context context, final SBaseAdapter homeworkPhotoAdapter, String dirUrl, int photoNum) {
         for (int i = 0; i < photoNum; i++) {
             String urlTail = dirUrl + File.separator + i + ".jpeg";
             File photo = new File(Environment.getExternalStorageDirectory() + File.separator + urlTail);
@@ -138,7 +141,7 @@ public class ImgUtil {
                 ImageItem imageItem = new ImageItem();
                 imageItem.path = photo.getPath();
                 photoList.add(imageItem);
-                homeworkPhotoAdapter.addItems(photoList);
+                homeworkPhotoAdapter.setItems(photoList);
             } else {
                 //图片不存在从服务器获取
                 ((SBaseActivity) context).imgAppAction.cacheImg(urlTail, new ActionCallbackListener<File>() {
@@ -160,8 +163,8 @@ public class ImgUtil {
         }
     }
 
-    //点击HomeworkAddList后设置图片
-    public static void setHomeworkAddPhotoAdapter(HomeworkAddPhotoAdapter homeworkAddPhotoAdapter, int requestCode, int resultCode, Intent data) {
+    //点击HomeworkAddList选完图片后回调设置图片
+    public static void setHomeworkAddList(HomeworkAddPhotoAdapter homeworkAddPhotoAdapter, int requestCode, int resultCode, Intent data) {
         ArrayList<ImageItem> images;
         if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
             //添加图片返回
@@ -182,12 +185,13 @@ public class ImgUtil {
         }
     }
 
-    public static void responseClickHomeworkAddPhotoList(final Context context, final HomeworkAddPhotoAdapter homeworkAddPhotoAdapter, AdapterView<?> parent, int position) {
+    //响应点击HomeworkAddPhotoListItem
+    public static void responseClickHomeworkAddPhotoListItem(final Context context, final HomeworkAddPhotoAdapter homeworkAddPhotoAdapter, AdapterView<?> parent, int position) {
         if (position == parent.getChildCount() - 1 && position != maxImgCount - 1) {
             List<String> names = new ArrayList<>();
             names.add("拍照");
             names.add("相册");
-            ((SBaseActivity)context).showDialog(new SelectDialog.SelectDialogListener() {
+            ((SBaseActivity) context).showDialog(new SelectDialog.SelectDialogListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     switch (position) {
@@ -196,13 +200,13 @@ public class ImgUtil {
                             ImagePicker.getInstance().setSelectLimit(maxImgCount - homeworkAddPhotoAdapter.getImagesSize());
                             Intent intent = new Intent(context, ImageGridActivity.class);
                             intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
-                            ((SBaseActivity)context).startActivityForResult(intent, REQUEST_CODE_SELECT);
+                            ((SBaseActivity) context).startActivityForResult(intent, REQUEST_CODE_SELECT);
                             break;
                         case 1:
                             //打开选择,本次允许选择的数量
                             ImagePicker.getInstance().setSelectLimit(maxImgCount - homeworkAddPhotoAdapter.getImagesSize());
                             Intent intent1 = new Intent(context, ImageGridActivity.class);
-                            ((SBaseActivity)context).startActivityForResult(intent1, REQUEST_CODE_SELECT);
+                            ((SBaseActivity) context).startActivityForResult(intent1, REQUEST_CODE_SELECT);
                             break;
                         default:
                             break;
@@ -216,7 +220,16 @@ public class ImgUtil {
             intentPreview.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, (ArrayList<ImageItem>) homeworkAddPhotoAdapter.getImages());
             intentPreview.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
             intentPreview.putExtra(ImagePicker.EXTRA_FROM_ITEMS, true);
-            ((SBaseActivity)context).startActivityForResult(intentPreview, REQUEST_CODE_PREVIEW);
+            ((SBaseActivity) context).startActivityForResult(intentPreview, REQUEST_CODE_PREVIEW);
         }
+    }
+
+    //响应点击HomeworkShowPhotoListItem
+    public static void responseClickHomeworkShowPhotoListItem(Context context, HomeworkShowPhotoAdapter homeworkShowPhotoAdapter, int position) {
+        Intent intentView = new Intent(context, ImageViewActivity.class);
+        intentView.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, (ArrayList<ImageItem>) homeworkShowPhotoAdapter.getImages());
+        intentView.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
+        intentView.putExtra(ImagePicker.EXTRA_FROM_ITEMS, true);
+        context.startActivity(intentView);
     }
 }

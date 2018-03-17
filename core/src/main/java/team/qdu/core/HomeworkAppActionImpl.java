@@ -39,50 +39,8 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
     }
 
     @Override
-    public void pushHomework(final String title, final String deadline, final String detail,
-                             final File photo, final String classId, final ActionCallbackListener<Void> listener) {
-        if (TextUtils.isEmpty(title)) {
-            listener.onFailure(ErrorEvent.PARAM_NULL, "标题不能为空");
-            return;
-        }
-        if (TextUtils.isEmpty(detail) && photo == null) {
-            listener.onFailure(ErrorEvent.PARAM_NULL, "截止日期和上传图片不能全为空");
-            return;
-        }
-        //截至日期不能小于等于当前时间
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date deadlineDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
-        Date currentDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
-        try {
-            deadlineDate = sdf.parse(deadline);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        if ((currentDate.getTime() - currentDate.getTime() % 60) >= deadlineDate.getTime()) {
-            listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "截至日期不能小于等于当前时间");
-            return;
-        }
-        new AsyncTask<Void, Void, ApiResponse<Void>>() {
-
-            @Override
-            protected ApiResponse<Void> doInBackground(Void... params) {
-                return homeworkApi.publishHomework(title, deadline, detail, photo, classId);
-            }
-
-            @Override
-            protected void onPostExecute(ApiResponse<Void> response) {
-                if (response.isSuccess()) {
-                    listener.onSuccess(null, response.getMsg());
-                } else {
-                    listener.onFailure(response.getEvent(), response.getMsg());
-                }
-            }
-        }.execute();
-    }
-
-    @Override
-    public void pushHomework(final String title, final String deadline, final String detail,
-                             final List<File> photoList, final String classId, final ActionCallbackListener<Void> listener) {
+    public void publishHomework(final String title, final String deadline, final String detail,
+                                final List<File> photoList, final String classId, final ActionCallbackListener<Void> listener) {
         if (TextUtils.isEmpty(title)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "标题不能为空");
             return;
@@ -182,9 +140,10 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
         }.execute();
     }
 
+
     @Override
-    public void commitHomework(final String homeworkAnswerId, final String homeworkId, final String classId, final String userId, final String ifSubmit, final String detail, final File answerPhoto, final ActionCallbackListener<Void> listener) {
-        if (TextUtils.isEmpty(detail) && answerPhoto == null) {
+    public void commitHomework(final String homeworkAnswerId, final String homeworkId, final String classId, final String userId, final String ifSubmit, final String detail, final List<File> photoList, final String delPhotoesUrl, final ActionCallbackListener<Void> listener) {
+        if (TextUtils.isEmpty(detail) && photoList == null) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "提交的文字和图片不能全为空");
             return;
         }
@@ -193,7 +152,7 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
-                return homeworkApi.commitHomework(homeworkAnswerId, homeworkId, classId, userId, ifSubmit, detail, answerPhoto);
+                return homeworkApi.commitHomework(homeworkAnswerId, homeworkId, classId, userId, ifSubmit, detail, photoList, delPhotoesUrl);
             }
 
             @Override
@@ -205,11 +164,6 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
                 }
             }
         }.execute();
-    }
-
-    @Override
-    public void commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, List<File> photoList, ActionCallbackListener<Void> listener) {
-
     }
 
     @Override
@@ -253,7 +207,7 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
     }
 
     @Override
-    public void commitHomeworkEvaluation(final String homeworkAnswerId, final String exp, final String remark, final File evaluatePhoto, final ActionCallbackListener<Void> listener) {
+    public void commitHomeworkEvaluation(final String homeworkAnswerId, final String exp, final String remark, final List<File> photoList, final String delPhotoesUrl, final ActionCallbackListener<Void> listener) {
         if (TextUtils.isEmpty(exp) || Integer.parseInt(exp) < 0 || Integer.parseInt(exp) > 10) {
             listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "评分应在0-10分之间");
             return;
@@ -262,7 +216,7 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
-                return homeworkApi.commitHomeworkEvaluation(homeworkAnswerId, exp, remark, evaluatePhoto);
+                return homeworkApi.commitHomeworkEvaluation(homeworkAnswerId, exp, remark, photoList, delPhotoesUrl);
             }
 
             @Override

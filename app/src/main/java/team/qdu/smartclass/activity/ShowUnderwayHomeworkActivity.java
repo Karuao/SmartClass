@@ -4,16 +4,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.bean.ImageItem;
-import com.lzy.imagepicker.ui.ImageViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,11 +78,11 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
             @Override
             public void onSuccess(HomeworkWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getName());
-                if (data.getDetail() != null) {
+                if (!TextUtils.isEmpty(data.getDetail())) {
                     homeworkDetailTxt.setText(data.getDetail());
                 }
                 if (data.getUrl() != null) {
-                    ImgUtil.initHomeworkPhotoAdapter(ShowUnderwayHomeworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
+                    ImgUtil.initHomeworkPhotoList(ShowUnderwayHomeworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);
                 }
@@ -185,11 +182,7 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (parent == homeworkShowPhotoList) {
-            Intent intentView = new Intent(this, ImageViewActivity.class);
-            intentView.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, (ArrayList<ImageItem>) homeworkShowPhotoAdapter.getImages());
-            intentView.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
-            intentView.putExtra(ImagePicker.EXTRA_FROM_ITEMS, true);
-           startActivity(intentView);
+            ImgUtil.responseClickHomeworkShowPhotoListItem(this, homeworkShowPhotoAdapter, position);
         } else {
             //学生提交的作业点击事件
             String homeworkAnswerId = ((TextView) view.findViewById(R.id.txt_homeworkanswer_id)).getText().toString();
