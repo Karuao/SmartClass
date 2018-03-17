@@ -24,6 +24,10 @@
             android:hardwareAccelerated="false"
             android:theme="@style/ImagePickerTheme"/>
         <activity
+            android:name=".ui.ImageViewActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/ImagePickerThemeFullScreen"/>
+        <activity
             android:name=".ui.ImagePreviewActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/ImagePickerThemeFullScreen"/>

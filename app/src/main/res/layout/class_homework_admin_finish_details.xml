@@ -100,20 +100,17 @@
             android:paddingRight="5dp"
             android:paddingTop="5dp">
 
-            <ImageView
-                android:id="@+id/img_answer_photo"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:onClick="toShowAnswerPhoto"
-                android:src="@drawable/add_class_img" />
+            <team.qdu.smartclass.view.HorizontalListView
+                android:id="@+id/list_homework_showphoto"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="7dp"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
-                android:layout_below="@+id/img_answer_photo"
+                android:layout_below="@+id/list_homework_showphoto1"
                 android:layout_marginTop="5dp"
                 android:background="#d6d6d6" />
         </RelativeLayout>
@@ -193,17 +190,15 @@
             android:layout_height="match_parent"
             android:padding="5dp">
 
-            <ImageView
-                android:id="@+id/img_evaluate_photo"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_below="@+id/tv_class_homework_file_text"
-                android:layout_marginLeft="5dp"
-                android:onClick="toShowEvaluatePhoto"
-                android:src="@drawable/add_class_img" />
+            <team.qdu.smartclass.view.HorizontalListView
+                android:id="@+id/list_homework_showphoto1"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="7dp"/>
 
             <View
-                android:layout_below="@+id/img_evaluate_photo"
+                android:layout_below="@+id/list_homework_showphoto1"
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:layout_marginTop="5dp"

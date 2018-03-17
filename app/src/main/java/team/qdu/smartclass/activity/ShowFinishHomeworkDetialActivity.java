@@ -1,61 +1,67 @@
 package team.qdu.smartclass.activity;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.adapter.HomeworkShowPhotoAdapter;
+import team.qdu.smartclass.util.ImgUtil;
+import team.qdu.smartclass.view.HorizontalListView;
 
 /**
  * Created by 11602 on 2018/3/4.
  */
 
-public class ShowFinishHomeworkDetialActivity extends SBaseActivity {
+public class ShowFinishHomeworkDetialActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
 
     private TextView homeworkTitleTxt;
     private TextView answerDetailTxt;
-    private ImageView answerPhotoImg;
+    private HorizontalListView homeworkShowPhotoList;
+    private HomeworkShowPhotoAdapter homeworkShowPhotoAdapter;
     private RelativeLayout answerPhotoRlayout;
     private TextView answerExpTxt;
     private TextView evaluateRemarkTxt;
     private RelativeLayout evaluateRemarkRlayout;
-    private ImageView evaluatePhotoImg;
+    private HorizontalListView homeworkShowPhotoList1;
+    private HomeworkShowPhotoAdapter homeworkShowPhotoAdapter1;
     private RelativeLayout evaluatePhotoRlayout;
     private String homeworkAnswerId;
-    private Bitmap homeworkAnswerPhoto;
-    private Bitmap evaluatePhoto;
 
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.class_homework_admin_finish_details);
         homeworkAnswerId = getIntent().getStringExtra("homeworkAnswerId");
         initView();
+        initEvent();
     }
 
     private void initView() {
         homeworkTitleTxt = (TextView) findViewById(R.id.txt_homework_name);
         answerDetailTxt = (TextView) findViewById(R.id.txt_answer_detail);
-        answerPhotoImg = (ImageView) findViewById(R.id.img_answer_photo);
+        homeworkShowPhotoList = (HorizontalListView) findViewById(R.id.list_homework_showphoto);
         answerPhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_answer_photo);
         answerExpTxt = (TextView) findViewById(R.id.txt_answer_exp);
         evaluateRemarkTxt = (TextView) findViewById(R.id.txt_evaluate_remark);
         evaluateRemarkRlayout = (RelativeLayout) findViewById(R.id.rlayout_evaluate_remark);
-        evaluatePhotoImg = (ImageView) findViewById(R.id.img_evaluate_photo);
+        homeworkShowPhotoList1 = (HorizontalListView) findViewById(R.id.list_homework_showphoto1);
         evaluatePhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_evaluate_photo);
         setData();
+    }
+
+    private void initEvent() {
+        homeworkShowPhotoAdapter = new HomeworkShowPhotoAdapter(this);
+        homeworkShowPhotoList.setAdapter(homeworkShowPhotoAdapter);
+        homeworkShowPhotoList.setOnItemClickListener(this);
+        homeworkShowPhotoAdapter1 = new HomeworkShowPhotoAdapter(this);
+        homeworkShowPhotoList1.setAdapter(homeworkShowPhotoAdapter1);
+        homeworkShowPhotoList1.setOnItemClickListener(this);
     }
 
     //组件设置数据
@@ -64,11 +70,11 @@ public class ShowFinishHomeworkDetialActivity extends SBaseActivity {
             @Override
             public void onSuccess(HomeworkAnswerWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getHomework().getName());
-                if (data.getDetail() != null) {
+                if (!TextUtils.isEmpty(data.getDetail())) {
                     answerDetailTxt.setText(data.getDetail());
                 }
                 if (data.getUrl() != null) {
-                    setPhoto(answerPhotoImg, data.getUrl(), true);
+                    ImgUtil.initHomeworkPhotoList(ShowFinishHomeworkDetialActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     answerPhotoRlayout.setVisibility(View.GONE);
                 }
@@ -81,7 +87,7 @@ public class ShowFinishHomeworkDetialActivity extends SBaseActivity {
                     evaluateRemarkRlayout.setVisibility(View.GONE);
                 }
                 if (data.getRemark_url() != null) {
-                    setPhoto(evaluatePhotoImg, data.getRemark_url(), false);
+                    ImgUtil.initHomeworkPhotoList(ShowFinishHomeworkDetialActivity.this, homeworkShowPhotoAdapter1, data.getRemark_url(), data.getRemark_url_file_num());
                 } else {
                     evaluatePhotoRlayout.setVisibility(View.GONE);
                 }
@@ -94,53 +100,14 @@ public class ShowFinishHomeworkDetialActivity extends SBaseActivity {
         });
     }
 
-    //ImageView设置图片
-    private void setPhoto(final ImageView imageView, String url, final boolean ifAnswerPhoto) {
-        classAppAction.getBitmap(url, new ActionCallbackListener<Bitmap>() {
-            @Override
-            public void onSuccess(Bitmap data, String message) {
-                imageView.setImageBitmap(data);
-                if (ifAnswerPhoto) {
-                    homeworkAnswerPhoto = data;
-                } else {
-                    evaluatePhoto = data;
-                }
-            }
-
-            @Override
-            public void onFailure(String errorEvent, String message) {
-                Toast.makeText(ShowFinishHomeworkDetialActivity.this, message, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    //点击图片展示图片点击事件
-    public void toShowAnswerPhoto(View view) {
-        Intent intent = new Intent(ShowFinishHomeworkDetialActivity.this, ShowPhotoActivity.class);
-        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "showPhoto.png");//将要保存图片的路径
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            homeworkAnswerPhoto.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (parent == homeworkShowPhotoList) {
+            //点击上面显示作业图片的ListView中的图片执行浏览图片操作
+            ImgUtil.responseClickHomeworkShowPhotoListItem(this, homeworkShowPhotoAdapter, position);
+        } else {
+            //点击下面显示作业图片的ListView中的图片执行浏览图片操作
+            ImgUtil.responseClickHomeworkShowPhotoListItem(this, homeworkShowPhotoAdapter1, position);
         }
-        startActivity(intent);
-    }
-
-    //点击评价图片展示图片点击事件
-    public void toShowEvaluatePhoto(View view) {
-        Intent intent = new Intent(ShowFinishHomeworkDetialActivity.this, ShowPhotoActivity.class);
-        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "showPhoto.png");//将要保存图片的路径
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            evaluatePhoto.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        startActivity(intent);
     }
 }

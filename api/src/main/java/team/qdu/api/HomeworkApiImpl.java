@@ -39,31 +39,6 @@ public class HomeworkApiImpl implements HomeworkApi {
     }
 
     @Override
-    public ApiResponse<Void> publishHomework(String title, String deadline, String detail, File photo, String classId) {
-        Map<String, String> paramMap = new HashMap<>();
-        Map<String, File> fileMap = null;
-        paramMap.put("title", title);
-        paramMap.put("deadline", deadline);
-        paramMap.put("detail", detail);
-        paramMap.put("classId", classId);
-        if (photo != null) {
-            fileMap = new HashMap<>();
-            fileMap.put("photo", photo);
-        }
-
-        Type type = new TypeToken<ApiResponse<String>>() {
-        }.getType();
-        try {
-            return fileHttpEngine.postHandle(paramMap, fileMap, type, "/publishHomework");
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
-            //返回连接服务器失败
-            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
-        }
-    }
-
-    @Override
     public ApiResponse<Void> publishHomework(String title, String deadline, String detail, List<File> photoList, String classId) {
         Map<String, String> paramMap = new HashMap<>();
         Map<String, File> fileMap = null;
@@ -153,7 +128,7 @@ public class HomeworkApiImpl implements HomeworkApi {
     }
 
     @Override
-    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, File answerPhoto) {
+    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, List<File> photoList, String delPhotoesUrl) {
         Map<String, String> paramMap = new HashMap<>();
         Map<String, File> fileMap = null;
         paramMap.put("homeworkAnswerId", homeworkAnswerId);
@@ -162,12 +137,15 @@ public class HomeworkApiImpl implements HomeworkApi {
         paramMap.put("userId", userId);
         paramMap.put("ifSubmit", ifSubmit);
         paramMap.put("detail", detail);
-        if (answerPhoto != null) {
+        paramMap.put("delPhotoesUrl", delPhotoesUrl);
+        if (photoList != null) {
             fileMap = new HashMap<>();
-            fileMap.put("photo", answerPhoto);
+            for (Integer i = 0; i < photoList.size(); i++) {
+                fileMap.put(i.toString(), photoList.get(i));
+            }
         }
 
-        Type type = new TypeToken<ApiResponse<String>>() {
+        Type type = new TypeToken<ApiResponse<Void>>() {
         }.getType();
         try {
             return fileHttpEngine.postHandle(paramMap, fileMap, type, "/commitHomework");
@@ -214,15 +192,18 @@ public class HomeworkApiImpl implements HomeworkApi {
     }
 
     @Override
-    public ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, File evaluatePhoto) {
+    public ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, List<File> photoList, String delPhotoesUrl) {
         Map<String, String> paramMap = new HashMap<>();
         Map<String, File> fileMap = null;
         paramMap.put("homeworkAnswerId", homeworkAnswerId);
         paramMap.put("exp", exp);
         paramMap.put("remark", remark);
-        if (evaluatePhoto != null) {
+        paramMap.put("delPhotoesUrl", delPhotoesUrl);
+        if (photoList.size() != 0) {
             fileMap = new HashMap<>();
-            fileMap.put("photo", evaluatePhoto);
+            for (Integer i = 0; i < photoList.size(); i++) {
+                fileMap.put(i.toString(), photoList.get(i));
+            }
         }
 
         Type type = new TypeToken<ApiResponse<Void>>() {

@@ -46,6 +46,10 @@ public abstract class SBaseActivity extends AppCompatActivity {
 
     public MaterialAppAction materialAppAction;
 
+    public ImgAppAction imgAppAction;
+
+    public ImagePicker imagePicker;
+
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -54,16 +58,19 @@ public abstract class SBaseActivity extends AppCompatActivity {
         userAppAction = application.getUserAppAction();
         classAppAction = application.getClassAppAction();
         informAppAction = application.getInformAppAction();
+
         homeworkAppAction = application.getHomeworkAppAction();
         memberAppAction = application.getMemberAppAction();
         materialAppAction=application.getMaterialAppAction();
+        imgAppAction = application.getImgAppAction();
+        imagePicker = application.getImagePicker();
     }
 
     //从SharedPreferences获取userId
     public String getUserId() {
         SharedPreferences sharedPreferences = getSharedPreferences("user",
                 Activity.MODE_PRIVATE);
-        return  sharedPreferences.getString("userId", null);
+        return sharedPreferences.getString("userId", null);
     }
 
     public void setUserId(String userId) {
@@ -78,7 +85,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
     public String getClassId() {
         SharedPreferences sharedPreferences = getSharedPreferences("user",
                 Activity.MODE_PRIVATE);
-        return  sharedPreferences.getString("classId", null);
+        return sharedPreferences.getString("classId", null);
     }
 
     public void setClassId(String classId) {
@@ -93,7 +100,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
     public String getUserTitle() {
         SharedPreferences sharedPreferences = getSharedPreferences("user",
                 Activity.MODE_PRIVATE);
-        return  sharedPreferences.getString("userTitle", null);
+        return sharedPreferences.getString("userTitle", null);
     }
 
     public void setUserTitle(String userTitle) {
@@ -108,7 +115,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
     public String getClassUserId() {
         SharedPreferences sharedPreferences = getSharedPreferences("user",
                 Activity.MODE_PRIVATE);
-        return  sharedPreferences.getString("classUserId", null);
+        return sharedPreferences.getString("classUserId", null);
     }
 
     public void setClassUserId(String classUserId) {

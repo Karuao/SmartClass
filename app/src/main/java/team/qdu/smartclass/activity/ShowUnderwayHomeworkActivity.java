@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -36,14 +37,12 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
     private TextView homeworkDetailTxt;
     private TextView commitStuNumTxt;
     private TextView uncommitStuNumTxt;
-//    private ImageView homeworkPhotoImg;
-    private HorizontalListView homeworkPhotoList;
+    private HorizontalListView homeworkShowPhotoList;
     private RelativeLayout homeworkPhotoRlayout;
     private ListView commitHomeworkList;
     private ListView uncommitHomeworkList;
     private HomeworkShowPhotoAdapter homeworkShowPhotoAdapter;
     private String homeworkId;
-//    private Bitmap homeworkPhoto;
 
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
@@ -58,8 +57,7 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
         homeworkDetailTxt = (TextView) findViewById(R.id.txt_homework_detail);
         commitStuNumTxt = (TextView) findViewById(R.id.txt_commitstu_num);
         uncommitStuNumTxt = (TextView) findViewById(R.id.txt_uncommitstu_num);
-//        homeworkPhotoImg = (ImageView) findViewById(R.id.img_homework_photo);
-        homeworkPhotoList = (HorizontalListView) findViewById(R.id.list_homework_photo);
+        homeworkShowPhotoList = (HorizontalListView) findViewById(R.id.list_homework_showphoto);
         homeworkPhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_homework_photo);
         commitHomeworkList = (ListView) findViewById(R.id.list_commithomework);
         uncommitHomeworkList = (ListView) findViewById(R.id.list_uncommithomework);
@@ -67,8 +65,9 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
     }
 
     private void initEvent() {
-        homeworkShowPhotoAdapter = new HomeworkShowPhotoAdapter(context);
-        homeworkPhotoList.setAdapter(homeworkShowPhotoAdapter);
+        homeworkShowPhotoAdapter = new HomeworkShowPhotoAdapter(this);
+        homeworkShowPhotoList.setAdapter(homeworkShowPhotoAdapter);
+        homeworkShowPhotoList.setOnItemClickListener(this);
         commitHomeworkList.setOnItemClickListener(this);
     }
 
@@ -79,12 +78,11 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
             @Override
             public void onSuccess(HomeworkWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getName());
-                if (data.getDetail() != null) {
+                if (!TextUtils.isEmpty(data.getDetail())) {
                     homeworkDetailTxt.setText(data.getDetail());
                 }
                 if (data.getUrl() != null) {
-//                    setPhoto(homeworkPhotoImg, data.getUrl());
-                    ImgUtil.setPhotoListView(context, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
+                    ImgUtil.initHomeworkPhotoList(ShowUnderwayHomeworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);
                 }
@@ -121,21 +119,6 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
             }
         });
     }
-
-    //点击图片展示图片点击事件
-//    public void toShowPhoto(View view) {
-//        Intent intent = new Intent(ShowUnderwayHomeworkActivity.this, ShowPhotoActivity.class);
-//        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "showPhoto.png");//将要保存图片的路径
-//        try {
-//            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-//            homeworkPhoto.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-//            bos.flush();
-//            bos.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        startActivity(intent);
-//    }
 
     //开始评价点击事件
     public void toEvaluate(View view) {
@@ -196,27 +179,16 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
         });
     }
 
-    //ImageView设置图片
-//    private void setPhoto(final ImageView imageView, String url) {
-//        classAppAction.getBitmap(url, new ActionCallbackListener<Bitmap>() {
-//            @Override
-//            public void onSuccess(Bitmap data, String message) {
-//                imageView.setImageBitmap(data);
-//                homeworkPhoto = data;
-//            }
-//
-//            @Override
-//            public void onFailure(String errorEvent, String message) {
-//                Toast.makeText(ShowUnderwayHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String homeworkAnswerId = ((TextView) view.findViewById(R.id.txt_homeworkanswer_id)).getText().toString();
-        Intent intent = new Intent(this, ShowUnderwayHomeworkDetailActivity.class);
-        intent.putExtra("homeworkAnswerId", homeworkAnswerId);
-        startActivity(intent);
+        if (parent == homeworkShowPhotoList) {
+            ImgUtil.responseClickHomeworkShowPhotoListItem(this, homeworkShowPhotoAdapter, position);
+        } else {
+            //学生提交的作业点击事件
+            String homeworkAnswerId = ((TextView) view.findViewById(R.id.txt_homeworkanswer_id)).getText().toString();
+            Intent intent = new Intent(this, ShowUnderwayHomeworkDetailActivity.class);
+            intent.putExtra("homeworkAnswerId", homeworkAnswerId);
+            startActivity(intent);
+        }
     }
 }
