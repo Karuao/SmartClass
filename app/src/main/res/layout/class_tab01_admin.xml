@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!--管理员对应班课界面的第一个页面————也就是班课资源页面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -8,9 +9,11 @@
         android:id="@+id/top"
         layout="@layout/class_tab01_top" />
 
-    <include
-        android:id="@+id/top"
-        layout="@layout/class_resource_listitem" />
+    <ListView
+        android:id="@+id/class_material_listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ListView>
 
     <View
         android:layout_width="match_parent"
@@ -28,7 +31,7 @@
             android:id="@+id/tv_class_finishclass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="上传码"
+            android:text="上传地址"
             android:textColor="@color/bg_black"
             android:textSize="16sp"
             android:textStyle="normal" />
@@ -37,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="1864589"
+            android:text="localhost"
             android:textColor="@color/text_yellow"
             android:textSize="16sp" />
 
@@ -51,5 +54,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="只能通过PC端上传文件，上传码为班课邀请码" />
+        android:text="只能通过PC端上传文件" />
+
 </LinearLayout>

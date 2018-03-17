@@ -92,7 +92,6 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
         intent.putExtra("read_num", read_num);
         intent.putExtra("informid", inform_id);
         startActivity(intent);
-
     }
 
     private void getUnreadNum(String informid) {

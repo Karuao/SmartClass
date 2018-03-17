@@ -14,6 +14,8 @@ import team.qdu.core.HomeworkAppAction;
 import team.qdu.core.HomeworkAppActionImpl;
 import team.qdu.core.InformAppAction;
 import team.qdu.core.InformAppActionImpl;
+import team.qdu.core.MaterialAppAction;
+import team.qdu.core.MaterialAppActionImpl;
 import team.qdu.core.MemberAppAction;
 import team.qdu.core.MemberAppActionImpl;
 import team.qdu.core.UserAppAction;
@@ -37,6 +39,8 @@ public class SApplication extends Application {
 
     private MemberAppAction memberAppAction;
 
+    private MaterialAppAction materialAppAction;
+
     private static List<Activity> activityList = new ArrayList<>();
 
     @Override
@@ -53,6 +57,7 @@ public class SApplication extends Application {
         informAppAction = new InformAppActionImpl(this);
         homeworkAppAction = new HomeworkAppActionImpl(this);
         memberAppAction = new MemberAppActionImpl(this);
+        materialAppAction=new MaterialAppActionImpl(this);
     }
 
     public UserAppAction getUserAppAction() {
@@ -73,6 +78,8 @@ public class SApplication extends Application {
     public MemberAppAction getMemberAppAction() {
         return memberAppAction;
     }
+
+    public MaterialAppAction getMaterialAppAction(){return materialAppAction;}
 
     //向list中添加Activity
     public static void addActivity(Activity activity) {

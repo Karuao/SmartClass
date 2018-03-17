@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/imagepicker/imagepicker.iml" filepath="$PROJECT_DIR$/imagepicker/imagepicker.iml" />
       <module fileurl="file://C:\Users\asus\Desktop\SmartClass\imagepicker\imagepicker.iml" filepath="C:\Users\asus\Desktop\SmartClass\imagepicker\imagepicker.iml" />
+      <module fileurl="file://E:\SmartClass\imagepicker\imagepicker.iml" filepath="E:\SmartClass\imagepicker\imagepicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/model/model.iml" filepath="$PROJECT_DIR$/model/model.iml" />
     </modules>
   </component>

@@ -13,6 +13,7 @@ import java.util.List;
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.HomeworkAppAction;
 import team.qdu.core.InformAppAction;
+import team.qdu.core.MaterialAppAction;
 import team.qdu.core.MemberAppAction;
 import team.qdu.core.UserAppAction;
 import team.qdu.smartclass.R;
@@ -43,6 +44,8 @@ public abstract class SBaseActivity extends AppCompatActivity {
 
     public MemberAppAction memberAppAction;
 
+    public MaterialAppAction materialAppAction;
+
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -51,9 +54,9 @@ public abstract class SBaseActivity extends AppCompatActivity {
         userAppAction = application.getUserAppAction();
         classAppAction = application.getClassAppAction();
         informAppAction = application.getInformAppAction();
-
         homeworkAppAction = application.getHomeworkAppAction();
         memberAppAction = application.getMemberAppAction();
+        materialAppAction=application.getMaterialAppAction();
     }
 
     //从SharedPreferences获取userId
