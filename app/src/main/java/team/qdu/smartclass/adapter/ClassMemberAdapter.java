@@ -26,9 +26,8 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
     public int rank=1;
     public int lastExp;
 
-    public ClassMemberAdapter(Context context, List itemList) {
+    public ClassMemberAdapter(Context context) {
         super(context);
-        this.itemList = itemList;
     }
 
     /**

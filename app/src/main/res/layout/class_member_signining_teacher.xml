@@ -52,10 +52,24 @@
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/signIn_list_student_forTeacher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp">
+
+        </ListView>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="200dp"
         android:layout_weight="1"
         android:gravity="center|bottom"
         android:orientation="horizontal">
@@ -102,6 +116,7 @@
             android:layout_weight="1"
             android:background="@drawable/shape_button_yellow"
             android:padding="10dp"
+            android:onClick="giveUpSignIn"
             android:text="放弃签到"
             android:textColor="#fff"
             android:textSize="18sp" />
@@ -113,6 +128,7 @@
             android:background="@drawable/shape_button_warn"
             android:padding="10dp"
             android:text="结束签到"
+            android:onClick="endSignIn"
             android:textColor="#fff"
             android:textSize="18sp" />
 

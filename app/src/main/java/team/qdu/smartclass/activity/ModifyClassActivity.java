@@ -102,7 +102,7 @@ public class ModifyClassActivity extends SBaseActivity{
 
             @Override
             public void onFailure(String errorEvent, String message) {
-
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         });
         mDestinationUri = Uri.fromFile(new File(this.getCacheDir(), "cropImage.png"));

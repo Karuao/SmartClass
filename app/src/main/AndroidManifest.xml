@@ -44,6 +44,7 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.StuMemberSigninActivity"></activity>
         <activity android:name=".activity.TeaMemberSigninActivity"></activity>
+        <activity android:name=".activity.TeaMemberSigniningActivity"></activity>
         <activity android:name=".activity.TeaInformDetailActivity"></activity>
         <activity android:name=".activity.StuInformDetailActivity"></activity>
         <activity android:name=".activity.CreateInformActivity"></activity>

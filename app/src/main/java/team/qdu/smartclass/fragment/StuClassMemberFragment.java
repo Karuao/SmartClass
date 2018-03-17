@@ -31,6 +31,7 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
     //标题栏班课名
     private TextView titleBarClassNameTxt;
     private  TextView memberCount;
+    private ClassMemberAdapter classMemberAdapter;
     private ListView listView;
     private  TextView rank;
     private StuClassMainActivity parentActivity;
@@ -67,6 +68,8 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
     }
 
     private void initEvent() {
+        classMemberAdapter = new ClassMemberAdapter(getActivity());
+        listView.setAdapter(classMemberAdapter);
         listView.setOnItemClickListener(this);
         // 设置下拉进度的主题颜色
         swipeRefreshLayout.setColorSchemeResources(R.color.colorSecondary);
@@ -88,7 +91,7 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
             @Override
             public void onSuccess(List<ClassUser> data, String message) {
                 memberCount.setText(String.valueOf(data.size()));
-                listView.setAdapter(new ClassMemberAdapter(getActivity(), data));
+                classMemberAdapter.setItems(data);
                 int classUserId = Integer.parseInt(getClassUserId());
                 int myRank=1;
                 int lastExp=0;
