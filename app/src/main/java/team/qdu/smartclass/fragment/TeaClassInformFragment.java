@@ -16,6 +16,7 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Inform;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.activity.TeaInformDetailActivity;
 import team.qdu.smartclass.adapter.TeaInfoAdapter;
@@ -41,7 +42,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
         currentPage = inflater.inflate(R.layout.class_tab04_admin, container, false);
         parentActivity = (TeaClassMainActivity) getActivity();
         titleBarClassNameTxt = (TextView) currentPage.findViewById(R.id.txt_titlebar_classname);
-        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
+        titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
         listview = (ListView) currentPage.findViewById(R.id.class_inform_listView);
         getInform();
         refreshFlag = false;

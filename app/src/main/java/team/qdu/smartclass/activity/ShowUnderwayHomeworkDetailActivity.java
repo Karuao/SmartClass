@@ -59,7 +59,7 @@ public class ShowUnderwayHomeworkDetailActivity extends SBaseActivity implements
                 if (!TextUtils.isEmpty(data.getDetail())) {
                     underwayAnswerDetailTxt.setText(data.getDetail());
                 }
-                if (data.getUrl() != null) {
+                if (!TextUtils.isEmpty(data.getUrl())) {
                     ImgUtil.initHomeworkPhotoList(ShowUnderwayHomeworkDetailActivity.this,
                             homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {

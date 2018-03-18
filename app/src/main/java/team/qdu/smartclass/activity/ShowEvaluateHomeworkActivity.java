@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -18,13 +19,13 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.model.HomeworkWithBLOBs;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.HomeworkEvaluateAdapter;
 import team.qdu.smartclass.adapter.HomeworkNotEvaluateAdapter;
 import team.qdu.smartclass.adapter.HomeworkShowPhotoAdapter;
 import team.qdu.smartclass.adapter.HomeworkUncommitAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkFinishFragment;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
-import team.qdu.smartclass.util.ButtonUtil;
 import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
@@ -99,7 +100,7 @@ public class ShowEvaluateHomeworkActivity extends SBaseActivity implements Adapt
             public void onSuccess(HomeworkWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getName());
                 homeworkDetailTxt.setText(data.getDetail());
-                if (data.getUrl() != null) {
+                if (!TextUtils.isEmpty(data.getUrl())) {
                     ImgUtil.initHomeworkPhotoList(ShowEvaluateHomeworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);
@@ -148,42 +149,44 @@ public class ShowEvaluateHomeworkActivity extends SBaseActivity implements Adapt
 
     //结束作业点击事件
     public void toFinishHomework(View view) {
-        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
-            String notEvaluateStuNum = notEvaluateStuNumTxt.getText().toString();
-            if ("0人".equals(notEvaluateStuNum)) {
-                //结束作业
-                AlertDialog alert;
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("结束作业")
-                        .setMessage("确认结束作业？")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                homeworkAppAction.getNotEvaluateStuNum(homeworkId, new ActionCallbackListener<Integer>() {
-                                    @Override
-                                    public void onSuccess(Integer data, String message) {
-                                        changeHomeworkStatus(homeworkId, "评价中");
-                                    }
+        startActivity(new Intent(this, LoadingActivity.class));
+        String notEvaluateStuNum = notEvaluateStuNumTxt.getText().toString();
+        if ("0人".equals(notEvaluateStuNum)) {
+            //结束作业
+            AlertDialog alert;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("结束作业")
+                    .setMessage("确认结束作业？")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            homeworkAppAction.getNotEvaluateStuNum(homeworkId, new ActionCallbackListener<Integer>() {
+                                @Override
+                                public void onSuccess(Integer data, String message) {
+                                    changeHomeworkStatus(homeworkId, "评价中");
+                                    SApplication.clearActivity();//关闭加载中动画
+                                }
 
-                                    @Override
-                                    public void onFailure(String errorEvent, String message) {
-                                        Toast.makeText(ShowEvaluateHomeworkActivity.this,
-                                                "结束班课失败，请稍后再试", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }).create().show();
-            } else {
-                //取消操作并提示n人作业未评价
-                Toast.makeText(ShowEvaluateHomeworkActivity.this, "仍有" + notEvaluateStuNum
-                        + "作业未评价,请评价后再结束作业", Toast.LENGTH_SHORT).show();
-            }
+                                @Override
+                                public void onFailure(String errorEvent, String message) {
+                                    Toast.makeText(ShowEvaluateHomeworkActivity.this,
+                                            "结束班课失败，请稍后再试", Toast.LENGTH_SHORT).show();
+                                    SApplication.clearActivity();//关闭加载中动画
+                                }
+                            });
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).create().show();
+        } else {
+            //取消操作并提示n人作业未评价
+            Toast.makeText(ShowEvaluateHomeworkActivity.this, "仍有" + notEvaluateStuNum
+                    + "作业未评价,请评价后再结束作业", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     //改变作业状态

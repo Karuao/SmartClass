@@ -14,6 +14,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
 
 /**
@@ -37,7 +38,7 @@ public class StuClassDetailFragment extends SBaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.class_tab05, container, false);
         titleBarClassNameTxt = (TextView) view.findViewById(R.id.txt_titlebar_classname);
-        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
+        titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
         stuClassDetailImg = (ImageView) view.findViewById(R.id.img_class);
         stuClassName = (TextView) view.findViewById(R.id.tv_class_classname);
         stuClassNum = (TextView) view.findViewById(R.id.tv_class_classnum);

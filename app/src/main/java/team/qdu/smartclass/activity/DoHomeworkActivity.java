@@ -1,9 +1,7 @@
 package team.qdu.smartclass.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,8 +9,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.nanchen.compresshelper.CompressHelper;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -22,10 +18,10 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.HomeworkAddPhotoAdapter;
 import team.qdu.smartclass.adapter.HomeworkShowPhotoAdapter;
 import team.qdu.smartclass.fragment.StuHomeworkUnderwayFragment;
-import team.qdu.smartclass.util.ButtonUtil;
 import team.qdu.smartclass.util.FileUtil;
 import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.HorizontalListView;
@@ -34,7 +30,7 @@ import team.qdu.smartclass.view.HorizontalListView;
  * Created by 11602 on 2018/2/26.
  */
 
-public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener, DeleteFiles {
+public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener{
 
     private TextView homeworkTitleTxt;
     private TextView homeworkDetailTxt;
@@ -88,10 +84,10 @@ public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnI
             @Override
             public void onSuccess(HomeworkAnswerWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getHomework().getName());
-                if (data.getHomework().getDetail() != null) {
+                if (!TextUtils.isEmpty(data.getHomework().getDetail())) {
                     homeworkDetailTxt.setText(data.getHomework().getDetail());
                 }
-                if (data.getHomework().getUrl() != null) {
+                if (!TextUtils.isEmpty(data.getHomework().getUrl())) {
                     ImgUtil.initHomeworkPhotoList(DoHomeworkActivity.this, homeworkShowPhotoAdapter, data.getHomework().getUrl(), data.getHomework().getUrl_file_num());
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);
@@ -99,7 +95,7 @@ public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnI
                 if (!TextUtils.isEmpty(data.getDetail())) {
                     answerDetailEdt.setText(data.getDetail());
                 }
-                if (data.getUrl() != null) {
+                if (!TextUtils.isEmpty(data.getUrl())) {
                     ImgUtil.initHomeworkPhotoList(DoHomeworkActivity.this, homeworkAddPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                     delPhotoesUrl = data.getUrl();
                 }
@@ -116,40 +112,29 @@ public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnI
 
     //提交作业点击事件
     public void toSubmitHomework(View view) throws URISyntaxException {
-        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
-            String answerDetail = answerDetailEdt.getText().toString();
-            photoList = new ArrayList<>();
-            for (int i = 0; i < homeworkAddPhotoAdapter.getImagesSize(); i++) {
-                photoList.add(new CompressHelper.Builder(context)
-                        .setMaxWidth(1920)
-                        .setMaxHeight(1080)
-                        .setQuality(80)
-                        .setCompressFormat(Bitmap.CompressFormat.JPEG)
-                        .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_PICTURES).getAbsolutePath())
-                        .build()
-                        .compressToFile(
-                                new File(homeworkAddPhotoAdapter.getImages().get(i).path)));
-            }
-            homeworkAppAction.commitHomework(homeworkAnswerId, homeworkId, getClassId(), getUserId(),
-                    ifSubmit, answerDetail, photoList, delPhotoesUrl, new ActionCallbackListener<Void>() {
-                        @Override
-                        public void onSuccess(Void data, String message) {
-                            Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                            StuHomeworkUnderwayFragment.refreshFlag = true;
-                            finish();
-                            deleteCompressFiles();
-                            deleteCacheFiles();
-                        }
+        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        String answerDetail = answerDetailEdt.getText().toString();
+        photoList = new ArrayList<>();
+        ImgUtil.compressPhotoes(photoList, homeworkAddPhotoAdapter, this);
+        homeworkAppAction.commitHomework(homeworkAnswerId, homeworkId, getClassId(), getUserId(),
+                ifSubmit, answerDetail, photoList, delPhotoesUrl, new ActionCallbackListener<Void>() {
+                    @Override
+                    public void onSuccess(Void data, String message) {
+                        Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                        StuHomeworkUnderwayFragment.refreshFlag = true;
+                        finish();
+                        FileUtil.deleteCompressFiles(photoList);
+                        FileUtil.deleteCacheFiles(delPhotoesUrl);
+                        SApplication.clearActivity();//关闭加载中动画
+                    }
 
-                        @Override
-                        public void onFailure(String errorEvent, String message) {
-                            Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                            deleteCompressFiles();
-                        }
-                    });
-        }
-
+                    @Override
+                    public void onFailure(String errorEvent, String message) {
+                        Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                        FileUtil.deleteCompressFiles(photoList);
+                        SApplication.clearActivity();//关闭加载中动画
+                    }
+                });
     }
 
     @Override
@@ -166,19 +151,5 @@ public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnI
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         ImgUtil.setHomeworkAddList(homeworkAddPhotoAdapter, requestCode, resultCode, data);
-    }
-
-    @Override
-    public void deleteCompressFiles() {
-        for (File file : photoList) {
-            file.delete();
-        }
-    }
-
-    @Override
-    public void deleteCacheFiles() {
-        if (delPhotoesUrl != null) {
-            FileUtil.deleteDir(new File(Environment.getExternalStorageDirectory() + "/" + delPhotoesUrl));
-        }
     }
 }

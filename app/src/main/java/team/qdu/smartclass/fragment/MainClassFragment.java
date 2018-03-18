@@ -23,11 +23,13 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
+import team.qdu.smartclass.activity.LoadingActivity;
 import team.qdu.smartclass.activity.MainActivity;
+import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.ClassAdapter;
-import team.qdu.smartclass.util.ButtonUtil;
 
 
 public class MainClassFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
@@ -115,39 +117,40 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
-        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
-            final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
-            parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<ClassUser>() {
-                @Override
-                public void onSuccess(ClassUser data, String message) {
-                    Intent intent;
-                    if ("老师".equals(data.getTitle())) {
-                        intent = new Intent(getContext(), TeaClassMainActivity.class);
-                    } else {
-                        intent = new Intent(getContext(), StuClassMainActivity.class);
-                    }
-                    setUserTitle(data.getTitle());
-                    setClassId(classId);
-                    setClassUserId(data.getClass_user_id().toString());
-                    intent.putExtra("className", data.getMy_class().getName());
-                    intent.putExtra("ifNewMaterial", data.getIf_new_material());
-                    intent.putExtra("ifNewHomework", data.getIf_new_homework());
-                    intent.putExtra("unreadInformationNum", data.getUnread_information_num());
-                    startActivity(intent);
+        startActivity(new Intent(getActivity(), LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
+        parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<ClassUser>() {
+            @Override
+            public void onSuccess(ClassUser data, String message) {
+                Intent intent;
+                if ("老师".equals(data.getTitle())) {
+                    intent = new Intent(getContext(), TeaClassMainActivity.class);
+                } else {
+                    intent = new Intent(getContext(), StuClassMainActivity.class);
                 }
-
-                @Override
-                public void onFailure(String errorEvent, String message) {
-                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            //取消红点显示
-            BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView");
-            if (badgeView != null) {
-                badgeView.decrementBadgeCount(1);
-                parentActivity.classAppAction.readNew(getClassUserId(), "classList");
+                setUserTitle(data.getTitle());
+                setClassId(classId);
+                setClassUserId(data.getClass_user_id().toString());
+                ((SBaseActivity) getActivity()).setCourse(data.getMy_class().getCourse());
+                intent.putExtra("ifNewMaterial", data.getIf_new_material());
+                intent.putExtra("ifNewHomework", data.getIf_new_homework());
+                intent.putExtra("unreadInformationNum", data.getUnread_information_num());
+                startActivity(intent);
+                SApplication.clearActivity();//关闭加载中动画
             }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                SApplication.clearActivity();//关闭加载中动画
+            }
+        });
+
+        //取消红点显示
+        BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView");
+        if (badgeView != null) {
+            badgeView.decrementBadgeCount(1);
+            parentActivity.classAppAction.readNew(getClassUserId(), "classList");
         }
     }
 }

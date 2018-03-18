@@ -48,7 +48,6 @@ public class ShowInviteCodeActivity extends SBaseActivity {
 
     public void accessClass(View view) {
         Intent intent = new Intent(ShowInviteCodeActivity.this, TeaClassMainActivity.class);
-        intent.putExtra("classId", getClassId());
         finish();
         startActivity(intent);
     }

@@ -18,9 +18,9 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
-import team.qdu.model.Class;
 import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.ShowMemberDetailActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.ClassMemberAdapter;
@@ -58,7 +58,7 @@ public class TeaClassMemberFragment extends SBaseFragment implements AdapterView
         listView = (ListView) currentPage.findViewById(R.id.list_classMember_teacher);
         swipeRefreshLayout = (SwipeRefreshLayout) currentPage.findViewById(R.id.swipe_refresh_layout_member_teacher);
         titleBarClassNameTxt = (TextView) currentPage.findViewById(R.id.txt_titlebar_classname);
-        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
+        titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
     }
 
     //页面从后台返回到前台运行

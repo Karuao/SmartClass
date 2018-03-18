@@ -17,7 +17,6 @@ import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.ShowFinishHomeworkDetialActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
 import team.qdu.smartclass.adapter.StuHomeworkFinishAdapter;
-import team.qdu.smartclass.util.ButtonUtil;
 
 /**
  * Created by 11602 on 2018/2/22.
@@ -65,11 +64,9 @@ public class StuHomeworkFinishFragment extends SBaseFragment implements AdapterV
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
-            String homeworkAnswerId = ((TextView) view.findViewById(R.id.txt_homework_finish_id)).getText().toString();
-            Intent intent = new Intent(getParentFragment().getActivity(), ShowFinishHomeworkDetialActivity.class);
-            intent.putExtra("homeworkAnswerId", homeworkAnswerId);
-            startActivity(intent);
-        }
+        String homeworkAnswerId = ((TextView) view.findViewById(R.id.txt_homework_finish_id)).getText().toString();
+        Intent intent = new Intent(getParentFragment().getActivity(), ShowFinishHomeworkDetialActivity.class);
+        intent.putExtra("homeworkAnswerId", homeworkAnswerId);
+        startActivity(intent);
     }
 }

@@ -67,7 +67,7 @@ public class SApplication extends Application {
         informAppAction = new InformAppActionImpl(this);
         homeworkAppAction = new HomeworkAppActionImpl(this);
         memberAppAction = new MemberAppActionImpl(this);
-        materialAppAction=new MaterialAppActionImpl(this);
+        materialAppAction = new MaterialAppActionImpl(this);
         imgAppAction = new ImgAppActionImpl(this);
     }
 
@@ -86,6 +86,7 @@ public class SApplication extends Application {
     public ClassAppAction getClassAppAction() {
         return classAppAction;
     }
+
     public InformAppAction getInformAppAction() {
         return informAppAction;
     }
@@ -98,7 +99,9 @@ public class SApplication extends Application {
         return memberAppAction;
     }
 
-    public MaterialAppAction getMaterialAppAction(){return materialAppAction;}
+    public MaterialAppAction getMaterialAppAction() {
+        return materialAppAction;
+    }
 
     public ImgAppAction getImgAppAction() {
         return imgAppAction;

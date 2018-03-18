@@ -9,7 +9,7 @@ import android.widget.Toast;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.util.ButtonUtil;
+import team.qdu.smartclass.SApplication;
 
 /**
  * Created by 11602 on 2018/1/31.
@@ -32,21 +32,23 @@ public class JoinClassActivity extends SBaseActivity {
 
     //输入邀请码后加入班课点击事件
     public void toJoinClass(View view) {
-        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
-            classAppAction.joinClass(invitecodeEdt.getText().toString(), getUserId(), new ActionCallbackListener<Class>() {
-                @Override
-                public void onSuccess(Class data, String message) {
-                    Intent intent = new Intent(JoinClassActivity.this, ConfirmJoinClassActivity.class);
-                    intent.putExtra("data", data);
-                    application.addActivity(JoinClassActivity.this);
-                    startActivity(intent);
-                }
+        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        classAppAction.joinClass(invitecodeEdt.getText().toString(), getUserId(), new ActionCallbackListener<Class>() {
+            @Override
+            public void onSuccess(Class data, String message) {
+                Intent intent = new Intent(JoinClassActivity.this, ConfirmJoinClassActivity.class);
+                intent.putExtra("data", data);
+                application.addActivity(JoinClassActivity.this);
+                startActivity(intent);
+                SApplication.clearActivity();//关闭加载中动画
+            }
 
-                @Override
-                public void onFailure(String errorEvent, String message) {
-                    Toast.makeText(JoinClassActivity.this, message, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(JoinClassActivity.this, message, Toast.LENGTH_SHORT).show();
+                SApplication.clearActivity();//关闭加载中动画
+            }
+        });
     }
+
 }

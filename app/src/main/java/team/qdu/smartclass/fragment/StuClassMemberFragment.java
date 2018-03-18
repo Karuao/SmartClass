@@ -10,15 +10,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
-import team.qdu.model.User;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
-import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.ClassMemberAdapter;
 
 /**
@@ -54,7 +52,7 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
         listView = (ListView) currentPage.findViewById(R.id.list_classMember);
         swipeRefreshLayout = (SwipeRefreshLayout) currentPage.findViewById(R.id.swipe_refresh_layout_member_student);
         titleBarClassNameTxt = (TextView) currentPage.findViewById(R.id.txt_titlebar_classname);
-        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
+        titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
     }
 
     //页面从后台返回到前台运行

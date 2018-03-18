@@ -18,7 +18,6 @@ import team.qdu.smartclass.activity.ShowEvaluateHomeworkActivity;
 import team.qdu.smartclass.activity.ShowUnderwayHomeworkActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.TeaHomeworkUnderwayAdapter;
-import team.qdu.smartclass.util.ButtonUtil;
 
 /**
  * Created by 11602 on 2018/2/22.
@@ -79,17 +78,15 @@ public class TeaHomeworkUnderwayFragment extends SBaseFragment implements Adapte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
-            String homeworkId = ((TextView) view.findViewById(R.id.txt_homework_underway_id)).getText().toString();
-            String homeworkStatus = ((TextView) view.findViewById(R.id.txt_homework_underway_status)).getText().toString();
-            Intent intent;
-            if ("进行中".equals(homeworkStatus)) {
-                intent = new Intent(getParentFragment().getActivity(), ShowUnderwayHomeworkActivity.class);
-            } else {
-                intent = new Intent(getParentFragment().getActivity(), ShowEvaluateHomeworkActivity.class);
-            }
-            intent.putExtra("homeworkId", homeworkId);
-            startActivity(intent);
+        String homeworkId = ((TextView) view.findViewById(R.id.txt_homework_underway_id)).getText().toString();
+        String homeworkStatus = ((TextView) view.findViewById(R.id.txt_homework_underway_status)).getText().toString();
+        Intent intent;
+        if ("进行中".equals(homeworkStatus)) {
+            intent = new Intent(getParentFragment().getActivity(), ShowUnderwayHomeworkActivity.class);
+        } else {
+            intent = new Intent(getParentFragment().getActivity(), ShowEvaluateHomeworkActivity.class);
         }
+        intent.putExtra("homeworkId", homeworkId);
+        startActivity(intent);
     }
 }

@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.TeaClassMainActivity;
+import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.adapter.TeaHomeworkFragmentPagerAdapter;
 
 /**
@@ -48,7 +48,7 @@ public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnCl
     //初始化View
     private void initView() {
         titleBarClassNameTxt = (TextView) currentPage.findViewById(R.id.txt_titlebar_classname);
-        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
+        titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
         teaHomeworkVpager = (ViewPager) currentPage.findViewById(R.id.class_tab03_admin_viewpager);
         tabUnderway = (LinearLayout) currentPage.findViewById(R.id.ll_class_homework_underway);
         tabFinish = (LinearLayout) currentPage.findViewById(R.id.ll_class_homework_finish);

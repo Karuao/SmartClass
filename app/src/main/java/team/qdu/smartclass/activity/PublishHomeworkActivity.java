@@ -23,9 +23,9 @@ import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.HomeworkAddPhotoAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
-import team.qdu.smartclass.util.ButtonUtil;
 import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.CustomDatePicker;
 import team.qdu.smartclass.view.HorizontalListView;
@@ -75,40 +75,42 @@ public class PublishHomeworkActivity extends SBaseActivity implements AdapterVie
 
     //发布作业点击事件
     public void toPublish(View view) throws URISyntaxException {
-        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
-            String title = homeworkTitleEdt.getText().toString();
-            String deadline = homeworkDeadlineTxt.getText().toString();
-            String detail = homeworkDetailEdt.getText().toString();
-            List<File> photoList = new ArrayList<>();
-            for (int i = 0; i < homeworkAddPhotoAdapter.getImagesSize(); i++) {
-                photoList.add(new CompressHelper.Builder(context)
-                        .setMaxWidth(1920)  // 默认最大宽度为720
-                        .setMaxHeight(1080) // 默认最大高度为960
-                        .setQuality(80)    // 默认压缩质量为80
-                        .setCompressFormat(Bitmap.CompressFormat.JPEG) // 设置默认压缩为jpg格式
-                        .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_PICTURES).getAbsolutePath())
-                        .build()
-                        .compressToFile(
-                                new File(homeworkAddPhotoAdapter.getImages().get(i).path)));
-            }
-
-            homeworkAppAction.publishHomework(title, deadline, detail, photoList, getClassId(),
-                    new ActionCallbackListener<Void>() {
-                        @Override
-                        public void onSuccess(Void data, String message) {
-                            Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                            TeaHomeworkUnderwayFragment.refreshFlag = true;
-                            finish();
-                        }
-
-                        @Override
-                        public void onFailure(String errorEvent, String message) {
-                            Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        String title = homeworkTitleEdt.getText().toString();
+        String deadline = homeworkDeadlineTxt.getText().toString();
+        String detail = homeworkDetailEdt.getText().toString();
+        List<File> photoList = new ArrayList<>();
+        for (int i = 0; i < homeworkAddPhotoAdapter.getImagesSize(); i++) {
+            photoList.add(new CompressHelper.Builder(context)
+                    .setMaxWidth(1920)  // 默认最大宽度为720
+                    .setMaxHeight(1080) // 默认最大高度为960
+                    .setQuality(80)    // 默认压缩质量为80
+                    .setCompressFormat(Bitmap.CompressFormat.JPEG) // 设置默认压缩为jpg格式
+                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                    .build()
+                    .compressToFile(
+                            new File(homeworkAddPhotoAdapter.getImages().get(i).path)));
         }
+
+        homeworkAppAction.publishHomework(title, deadline, detail, photoList, getClassId(),
+                new ActionCallbackListener<Void>() {
+                    @Override
+                    public void onSuccess(Void data, String message) {
+                        Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                        TeaHomeworkUnderwayFragment.refreshFlag = true;
+                        finish();
+                        SApplication.clearActivity();//关闭加载中动画
+                    }
+
+                    @Override
+                    public void onFailure(String errorEvent, String message) {
+                        Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                        SApplication.clearActivity();//关闭加载中动画
+                    }
+                });
     }
+
 
     //截止日期点击事件
     public void toPickDate(View view) {

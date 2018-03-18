@@ -13,6 +13,7 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Material;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.TeaMaterialAdapter;
 
@@ -51,7 +52,7 @@ public class TeaClassMaterialFragment extends SBaseFragment {
 
     public void initView() {
         titleBarClassNameTxt = (TextView) currentPage.findViewById(R.id.txt_titlebar_classname);
-        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
+        titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
     }
     private void getMaterial() {
         String classid = getClassId();

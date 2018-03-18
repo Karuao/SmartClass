@@ -23,7 +23,6 @@ import team.qdu.smartclass.adapter.HomeworkCommitAdapter;
 import team.qdu.smartclass.adapter.HomeworkShowPhotoAdapter;
 import team.qdu.smartclass.adapter.HomeworkUncommitAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
-import team.qdu.smartclass.util.ButtonUtil;
 import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
@@ -81,7 +80,7 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
                 if (!TextUtils.isEmpty(data.getDetail())) {
                     homeworkDetailTxt.setText(data.getDetail());
                 }
-                if (data.getUrl() != null) {
+                if (!TextUtils.isEmpty(data.getUrl())) {
                     ImgUtil.initHomeworkPhotoList(ShowUnderwayHomeworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);
@@ -122,41 +121,39 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
 
     //开始评价点击事件
     public void toEvaluate(View view) {
-        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
-            AlertDialog alert;
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            int uncommitStuNum = Integer.parseInt(uncommitStuNumTxt.getText().toString().substring(0, 1));
-            if (uncommitStuNum > 0) {
-                alert = builder.setTitle("开始评价")
-                        .setMessage(uncommitStuNum + "人未提交作业，开始评价后将无法再提交作业。")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                changeHomeworkStatus(homeworkId, "进行中");
-                            }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }).create();
-            } else {
-                alert = builder.setTitle("开始评价")
-                        .setMessage("开始评价后将无法再提交作业。")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                changeHomeworkStatus(homeworkId, "进行中");
-                            }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }).create();
-            }
-            alert.show();
+        AlertDialog alert;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        int uncommitStuNum = Integer.parseInt(uncommitStuNumTxt.getText().toString().substring(0, 1));
+        if (uncommitStuNum > 0) {
+            alert = builder.setTitle("开始评价")
+                    .setMessage(uncommitStuNum + "人未提交作业，开始评价后将无法再提交作业。")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            changeHomeworkStatus(homeworkId, "进行中");
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).create();
+        } else {
+            alert = builder.setTitle("开始评价")
+                    .setMessage("开始评价后将无法再提交作业。")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            changeHomeworkStatus(homeworkId, "进行中");
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).create();
         }
+        alert.show();
     }
 
     //改变作业状态

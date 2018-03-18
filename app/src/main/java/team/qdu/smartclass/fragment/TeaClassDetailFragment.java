@@ -16,6 +16,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 
 /**
@@ -47,7 +48,7 @@ public class TeaClassDetailFragment extends SBaseFragment {
         View view=inflater.inflate(R.layout.class_tab05_admin, container, false);
         refreshFlag=false;
         titleBarClassNameTxt = (TextView) view.findViewById(R.id.txt_titlebar_classname);
-        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
+        titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
         checkBox=(CheckBox)view.findViewById(R.id.chk_join);
         allow=(TextView)view.findViewById(R.id.tv_join);
         className=(TextView)view.findViewById(R.id.tv_class_classname);

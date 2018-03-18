@@ -73,7 +73,7 @@ public class ShowFinishHomeworkDetialActivity extends SBaseActivity implements A
                 if (!TextUtils.isEmpty(data.getDetail())) {
                     answerDetailTxt.setText(data.getDetail());
                 }
-                if (data.getUrl() != null) {
+                if (!TextUtils.isEmpty(data.getUrl())) {
                     ImgUtil.initHomeworkPhotoList(ShowFinishHomeworkDetialActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     answerPhotoRlayout.setVisibility(View.GONE);
@@ -81,12 +81,12 @@ public class ShowFinishHomeworkDetialActivity extends SBaseActivity implements A
                 if (data.getExp() != null) {
                     answerExpTxt.setText(data.getExp().toString());
                 }
-                if (data.getRemark() != null) {
+                if (!TextUtils.isEmpty(data.getRemark())) {
                     evaluateRemarkTxt.setText(data.getRemark());
                 } else {
                     evaluateRemarkRlayout.setVisibility(View.GONE);
                 }
-                if (data.getRemark_url() != null) {
+                if (!TextUtils.isEmpty(data.getRemark_url())) {
                     ImgUtil.initHomeworkPhotoList(ShowFinishHomeworkDetialActivity.this, homeworkShowPhotoAdapter1, data.getRemark_url(), data.getRemark_url_file_num());
                 } else {
                     evaluatePhotoRlayout.setVisibility(View.GONE);

@@ -1,6 +1,9 @@
 package team.qdu.smartclass.util;
 
+import android.os.Environment;
+
 import java.io.File;
+import java.util.List;
 
 /**
  * Created by 11602 on 2018/3/17.
@@ -26,5 +29,17 @@ public class FileUtil {
         }
         // 目录此时为空，可以删除
         dir.delete();
+    }
+
+    public static void deleteCompressFiles(List<File> photoList) {
+        for (File file : photoList) {
+            file.delete();
+        }
+    }
+
+    public static void deleteCacheFiles(String delPhotoesUrl) {
+        if (delPhotoesUrl != null) {
+            FileUtil.deleteDir(new File(Environment.getExternalStorageDirectory() + "/" + delPhotoesUrl));
+        }
     }
 }

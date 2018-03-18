@@ -33,8 +33,8 @@ import java.net.URISyntaxException;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.fragment.MainClassFragment;
-import team.qdu.smartclass.util.ButtonUtil;
 
 
 /**
@@ -84,8 +84,8 @@ public class CreateClassActivity extends SBaseActivity {
 
     //创建班课按钮点击事件
     public void finishCreate(View view) throws URISyntaxException {
-        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
-            File file = null;
+        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        File file = null;
 //            if (isDefaultAvatar) {
 //                //将mipmap中的默认头像转成File
 //                Resources r = this.getResources();
@@ -102,30 +102,33 @@ public class CreateClassActivity extends SBaseActivity {
 //            } else {
 //                file = new File(new URI(mDestinationUri.toString()));
 //            }
-            if (!isDefaultAvatar) {
-                file = new File(new URI(mDestinationUri.toString()));
-            }
-            String name = classnameEdt.getText().toString();
-            String course = courseEdt.getText().toString();
-            String userId = getUserId();
-            classAppAction.createClass(file, name, course, userId, new ActionCallbackListener<String>() {
-                @Override
-                public void onSuccess(String data, String message) {
-                    MainClassFragment.refreshFlag = true;
-                    setClassId(data);
-                    setUserTitle("teacher");
-                    Intent intent = new Intent(CreateClassActivity.this, ShowInviteCodeActivity.class);
-                    intent.putExtra("avatarUri", mDestinationUri);
-                    finish();
-                    startActivity(intent);
-                }
-
-                @Override
-                public void onFailure(String errorEvent, String message) {
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                }
-            });
+        if (!isDefaultAvatar) {
+            file = new File(new URI(mDestinationUri.toString()));
         }
+        String name = classnameEdt.getText().toString();
+        final String course = courseEdt.getText().toString();
+        String userId = getUserId();
+        classAppAction.createClass(file, name, course, userId, new ActionCallbackListener<String>() {
+            @Override
+            public void onSuccess(String data, String message) {
+                MainClassFragment.refreshFlag = true;
+                setClassId(data);
+                setUserTitle("teacher");
+                setCourse(course);
+                Intent intent = new Intent(CreateClassActivity.this, ShowInviteCodeActivity.class);
+                intent.putExtra("avatarUri", mDestinationUri);
+                finish();
+                startActivity(intent);
+                SApplication.clearActivity();//关闭加载中动画
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                SApplication.clearActivity();//关闭加载中动画
+            }
+        });
+
     }
 
     //拍照点击事件

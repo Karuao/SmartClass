@@ -22,9 +22,9 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.HomeworkAddPhotoAdapter;
 import team.qdu.smartclass.adapter.HomeworkShowPhotoAdapter;
-import team.qdu.smartclass.util.ButtonUtil;
 import team.qdu.smartclass.util.FileUtil;
 import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.HorizontalListView;
@@ -33,7 +33,7 @@ import team.qdu.smartclass.view.HorizontalListView;
  * Created by 11602 on 2018/3/3.
  */
 
-public class EvaluateHomworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener, DeleteFiles {
+public class EvaluateHomworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
 
     private TextView homeworkTitleTxt;
     private TextView answerDetailTxt;
@@ -88,7 +88,7 @@ public class EvaluateHomworkActivity extends SBaseActivity implements AdapterVie
                 if (!TextUtils.isEmpty(data.getDetail())) {
                     answerDetailTxt.setText(data.getDetail());
                 }
-                if (data.getUrl() != null) {
+                if (!TextUtils.isEmpty(data.getUrl())) {
                     ImgUtil.initHomeworkPhotoList(EvaluateHomworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     answerPhotoRlayout.setVisibility(View.GONE);
@@ -96,10 +96,10 @@ public class EvaluateHomworkActivity extends SBaseActivity implements AdapterVie
                 if (data.getExp() != null) {
                     answerExpEdt.setText(data.getExp().toString());
                 }
-                if (data.getRemark() != null) {
+                if (!TextUtils.isEmpty(data.getRemark())) {
                     evaluateRemarkEdt.setText(data.getRemark());
                 }
-                if (data.getRemark_url() != null) {
+                if (!TextUtils.isEmpty(data.getRemark_url())) {
                     ImgUtil.initHomeworkPhotoList(EvaluateHomworkActivity.this, homeworkAddPhotoAdapter, data.getRemark_url(), data.getRemark_url_file_num());
                 }
             }
@@ -118,39 +118,41 @@ public class EvaluateHomworkActivity extends SBaseActivity implements AdapterVie
 
     //提交评价点击事件
     public void toSubmitEvaluation(View view) throws URISyntaxException {
-        if (!ButtonUtil.isFastDoubleClick(view.getId())) {
-            String answerExp = answerExpEdt.getText().toString();
-            String evaluateRemark = evaluateRemarkEdt.getText().toString();
-            photoList = new ArrayList<>();
-            for (int i = 0; i < homeworkAddPhotoAdapter.getImagesSize(); i++) {
-                photoList.add(new CompressHelper.Builder(context)
-                        .setMaxWidth(1920)
-                        .setMaxHeight(1080)
-                        .setQuality(80)
-                        .setCompressFormat(Bitmap.CompressFormat.JPEG)
-                        .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_PICTURES).getAbsolutePath())
-                        .build()
-                        .compressToFile(
-                                new File(homeworkAddPhotoAdapter.getImages().get(i).path)));
-            }
-            homeworkAppAction.commitHomeworkEvaluation(homeworkAnswerId, answerExp, evaluateRemark, photoList, delPhotoesUrl, new ActionCallbackListener<Void>() {
-                @Override
-                public void onSuccess(Void data, String message) {
-                    Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                    ShowEvaluateHomeworkActivity.refreshFlag = true;
-                    finish();
-                    deleteCompressFiles();
-                    deleteCacheFiles();
-                }
-
-                @Override
-                public void onFailure(String errorEvent, String message) {
-                    Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                    deleteCompressFiles();
-                }
-            });
+        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        String answerExp = answerExpEdt.getText().toString();
+        String evaluateRemark = evaluateRemarkEdt.getText().toString();
+        photoList = new ArrayList<>();
+        for (int i = 0; i < homeworkAddPhotoAdapter.getImagesSize(); i++) {
+            photoList.add(new CompressHelper.Builder(context)
+                    .setMaxWidth(1920)
+                    .setMaxHeight(1080)
+                    .setQuality(80)
+                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                    .build()
+                    .compressToFile(
+                            new File(homeworkAddPhotoAdapter.getImages().get(i).path)));
         }
+        homeworkAppAction.commitHomeworkEvaluation(homeworkAnswerId, answerExp, evaluateRemark, photoList, delPhotoesUrl, new ActionCallbackListener<Void>() {
+            @Override
+            public void onSuccess(Void data, String message) {
+                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                ShowEvaluateHomeworkActivity.refreshFlag = true;
+                finish();
+                FileUtil.deleteCompressFiles(photoList);
+                FileUtil.deleteCacheFiles(delPhotoesUrl);
+                SApplication.clearActivity();//关闭加载中动画
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                FileUtil.deleteCompressFiles(photoList);
+                SApplication.clearActivity();//关闭加载中动画
+            }
+        });
+
     }
 
     @Override
@@ -166,20 +168,6 @@ public class EvaluateHomworkActivity extends SBaseActivity implements AdapterVie
         } else {
             //点击下面添加作业图片的ListView中的图片执行的操作
             ImgUtil.responseClickHomeworkAddPhotoListItem(this, homeworkAddPhotoAdapter, parent, position);
-        }
-    }
-
-    @Override
-    public void deleteCompressFiles() {
-        for (File file : photoList) {
-            file.delete();
-        }
-    }
-
-    @Override
-    public void deleteCacheFiles() {
-        if (delPhotoesUrl != null) {
-            FileUtil.deleteDir(new File(Environment.getExternalStorageDirectory() + "/" + delPhotoesUrl));
         }
     }
 }

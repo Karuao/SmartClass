@@ -17,6 +17,7 @@ import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 import com.lzy.imagepicker.ui.ImageViewActivity;
+import com.nanchen.compresshelper.CompressHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -231,5 +232,21 @@ public class ImgUtil {
         intentView.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
         intentView.putExtra(ImagePicker.EXTRA_FROM_ITEMS, true);
         context.startActivity(intentView);
+    }
+
+    //压缩图片
+    public static void compressPhotoes(List photoList, HomeworkAddPhotoAdapter homeworkAddPhotoAdapter, Context context) {
+        for (int i = 0; i < homeworkAddPhotoAdapter.getImagesSize(); i++) {
+            photoList.add(new CompressHelper.Builder(context)
+                    .setMaxWidth(1920)
+                    .setMaxHeight(1080)
+                    .setQuality(80)
+                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                    .build()
+                    .compressToFile(
+                            new File(homeworkAddPhotoAdapter.getImages().get(i).path)));
+        }
     }
 }

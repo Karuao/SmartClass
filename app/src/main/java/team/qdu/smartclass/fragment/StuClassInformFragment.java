@@ -15,6 +15,7 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Inform_User;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
 import team.qdu.smartclass.activity.StuInformDetailActivity;
 import team.qdu.smartclass.adapter.StuInfoAdapter;
@@ -36,7 +37,7 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.class_tab04, container, false);
         titleBarClassNameTxt = (TextView) view.findViewById(R.id.txt_titlebar_classname);
-        titleBarClassNameTxt.setText(getActivity().getIntent().getStringExtra("className"));
+        titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
         parentActivity = (StuClassMainActivity) getActivity();
         listview = (ListView) view.findViewById(R.id.class_inform_listView);
         getInform();

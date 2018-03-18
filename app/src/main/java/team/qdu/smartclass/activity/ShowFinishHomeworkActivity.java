@@ -2,6 +2,7 @@ package team.qdu.smartclass.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -87,7 +88,7 @@ public class ShowFinishHomeworkActivity extends SBaseActivity implements Adapter
             public void onSuccess(HomeworkWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getName());
                 homeworkDetailTxt.setText(data.getDetail());
-                if (data.getUrl() != null) {
+                if (!TextUtils.isEmpty(data.getUrl())) {
                     ImgUtil.initHomeworkPhotoList(ShowFinishHomeworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);

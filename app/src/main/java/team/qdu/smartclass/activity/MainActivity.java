@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.MainFragmentPagerAdapter;
-import team.qdu.smartclass.util.ButtonUtil;
 
 /**
  * 主页
@@ -98,7 +97,6 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
 
     //创建班课点击事件
     public void toCreateClass(View view) {
-        if (!ButtonUtil.isFastDoubleClick()) {
             Intent intent;
             if (ifNeedFillProfile()) {
                 intent = new Intent(MainActivity.this, PrepareClassActivity.class);
@@ -108,12 +106,10 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
                 intent = new Intent(MainActivity.this, CreateClassActivity.class);
             }
             startActivity(intent);
-        }
     }
 
     //加入班课点击事件
     public void toJoinClass(View view) {
-        if (!ButtonUtil.isFastDoubleClick()) {
             Intent intent;
             if (ifNeedFillProfile()) {
                 intent = new Intent(MainActivity.this, PrepareClassActivity.class);
@@ -123,7 +119,6 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
                 intent = new Intent(MainActivity.this, JoinClassActivity.class);
             }
             startActivity(intent);
-        }
     }
 
     //是否需要完善个人信息

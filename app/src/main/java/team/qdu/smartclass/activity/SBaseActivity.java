@@ -61,7 +61,6 @@ public abstract class SBaseActivity extends AppCompatActivity {
         userAppAction = application.getUserAppAction();
         classAppAction = application.getClassAppAction();
         informAppAction = application.getInformAppAction();
-
         homeworkAppAction = application.getHomeworkAppAction();
         memberAppAction = application.getMemberAppAction();
         materialAppAction=application.getMaterialAppAction();
@@ -129,6 +128,20 @@ public abstract class SBaseActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    //从SharedPreferences获取classUserId
+    public String getCourse() {
+        SharedPreferences sharedPreferences = getSharedPreferences("user",
+                Activity.MODE_PRIVATE);
+        return sharedPreferences.getString("course", null);
+    }
+
+    public void setCourse(String classUserId) {
+        SharedPreferences sharedPreferences = getSharedPreferences("user",
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("course", classUserId);
+        editor.commit();
+    }
 
     //弹出Dialog
     public SelectDialog showDialog(SelectDialog.SelectDialogListener listener, List<String> names) {

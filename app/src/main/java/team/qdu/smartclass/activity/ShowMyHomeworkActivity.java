@@ -70,10 +70,10 @@ public class ShowMyHomeworkActivity extends SBaseActivity implements AdapterView
             @Override
             public void onSuccess(HomeworkAnswerWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getHomework().getName());
-                if (data.getHomework().getDetail() != null) {
+                if (!TextUtils.isEmpty(data.getHomework().getDetail())) {
                     homeworkDetailTxt.setText(data.getHomework().getDetail());
                 }
-                if (data.getHomework().getUrl() != null) {
+                if (!TextUtils.isEmpty(data.getHomework().getUrl())) {
                     ImgUtil.initHomeworkPhotoList(ShowMyHomeworkActivity.this, homeworkShowPhotoAdapter, data.getHomework().getUrl(), data.getHomework().getUrl_file_num());
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);
@@ -83,7 +83,7 @@ public class ShowMyHomeworkActivity extends SBaseActivity implements AdapterView
                 } else {
                     answerDetailRlayout.setVisibility(View.GONE);
                 }
-                if (data.getUrl() != null) {
+                if (!TextUtils.isEmpty(data.getUrl())) {
                     ImgUtil.initHomeworkPhotoList(ShowMyHomeworkActivity.this, homeworkShowPhotoAdapter1, data.getUrl(), data.getUrl_file_num());
                 } else {
                     answerPhotoRlayout.setVisibility(View.GONE);
