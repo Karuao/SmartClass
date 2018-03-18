@@ -1,6 +1,7 @@
 package team.qdu.smartclass.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import team.qdu.smartclass.R;
 
@@ -16,5 +17,9 @@ public class StuMemberSigninActivity extends SBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_member_signin_student);
+    }
+
+    public void signInforStudent(View view){
+
     }
 }

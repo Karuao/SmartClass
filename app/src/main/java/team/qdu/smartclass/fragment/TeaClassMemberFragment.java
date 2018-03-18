@@ -24,6 +24,7 @@ import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.ShowMemberDetailActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.ClassMemberAdapter;
+import team.qdu.smartclass.adapter.SignInHistoryForTeacherAdapter;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -35,6 +36,7 @@ public class TeaClassMemberFragment extends SBaseFragment implements AdapterView
     //标题栏班课名
     private TextView titleBarClassNameTxt;
     private  TextView memberCount;
+    private ClassMemberAdapter classMemberAdapter;
     private ListView listView;
     private TeaClassMainActivity parentActivity;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -70,6 +72,8 @@ public class TeaClassMemberFragment extends SBaseFragment implements AdapterView
     }
 
     private void initEvent() {
+        classMemberAdapter = new ClassMemberAdapter(getActivity());
+        listView.setAdapter(classMemberAdapter);
         listView.setOnItemClickListener(this);
         // 设置下拉进度的主题颜色
         swipeRefreshLayout.setColorSchemeResources(R.color.colorSecondary);
@@ -109,7 +113,7 @@ public class TeaClassMemberFragment extends SBaseFragment implements AdapterView
             @Override
             public void onSuccess(List<ClassUser> data, String message) {
                 memberCount.setText(String.valueOf(data.size()));
-                listView.setAdapter(new ClassMemberAdapter(getActivity(), data));
+                classMemberAdapter.setItems(data);
                 swipeRefreshLayout.setRefreshing(false);
             }
 

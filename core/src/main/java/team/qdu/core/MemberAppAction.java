@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import java.util.List;
 
+import team.qdu.model.Attendance;
 import team.qdu.model.ClassUser;
 
 /**
@@ -24,5 +25,15 @@ public interface MemberAppAction {
     //移出班课
     public void shiftClass(String classUserId,ActionCallbackListener<Void> listener);
 
+    //教师端开始签到
+    public void beginSignInForTeacher(String classId,ActionCallbackListener<Attendance> listener);
 
+    //教师放弃本次签到
+    public void giveUpSignIn(String attendanceId,ActionCallbackListener<Void> listener);
+
+    //教师结束本次签到
+    public void endSignIn(String attendanceId,ActionCallbackListener<Void> listener);
+
+    //教师获取签到历史
+    public void getTeacherSignInHistory(String classId,ActionCallbackListener<List<Attendance>> listener);
 }

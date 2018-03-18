@@ -1,4 +1,4 @@
-<!--签到时间的lsitviewitem-->
+<!--学生端签到时间的lsitviewitem-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"

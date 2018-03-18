@@ -68,7 +68,7 @@
             android:background="@drawable/shape_button_yellow"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:onClick="toRegister"
+            android:onClick="signInforStudent"
             android:padding="10dp"
             android:text="开始签到"
             android:textColor="#fff"

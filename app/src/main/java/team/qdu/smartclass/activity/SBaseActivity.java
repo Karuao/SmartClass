@@ -129,6 +129,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
         editor.commit();
     }
 
+
     //弹出Dialog
     public SelectDialog showDialog(SelectDialog.SelectDialogListener listener, List<String> names) {
         SelectDialog dialog = new SelectDialog(this, R.style

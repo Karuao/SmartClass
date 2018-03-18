@@ -15,6 +15,7 @@ import team.qdu.api.net.FileHttpEngine;
 import team.qdu.api.net.HttpEngine;
 import team.qdu.api.net.ImgHttpEngine;
 import team.qdu.model.ApiResponse;
+import team.qdu.model.Attendance;
 import team.qdu.model.ClassUser;
 
 /**
@@ -46,6 +47,24 @@ public class MemberApiImpl implements MemberApi {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/getClassMembers");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    //教师获取签到历史
+    @Override
+    public ApiResponse<List<Attendance>> getTeacherSignInHistory(String classId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("classId", classId);
+
+        Type type = new TypeToken<ApiResponse<List<Attendance>>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getTeacherSignInHistory");
         } catch (IOException e) {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());
@@ -91,6 +110,57 @@ public class MemberApiImpl implements MemberApi {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/shiftClass");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<Attendance> beginSignInForTeacher(String classId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("classId", classId);
+
+        Type type = new TypeToken<ApiResponse<Attendance>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/beginSignInForTeacher");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<Void> giveUpSignIn(String attendanceId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("attendanceId", attendanceId);
+
+        Type type = new TypeToken<ApiResponse<ClassUser>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/giveUpSignIn");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<Void> endSignIn(String attendanceId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("attendanceId", attendanceId);
+
+        Type type = new TypeToken<ApiResponse<ClassUser>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/endSignIn");
         } catch (IOException e) {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());
