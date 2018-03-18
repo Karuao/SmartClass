@@ -12,10 +12,11 @@
     <color name="text_white">#FFFFFF</color>
     <color name="text_yellow">#f19022</color>
     <color name="text_orange">#f15a22</color>
+    <color name="text_black">#000000</color>
+    <color name="text_little_black">#4f4f4f</color>
     <color name="text_topbar">#694E42</color>
 
     <color name="bg_black">#000000</color>
-    <color name="little_black">#4f4f4f</color>
     <color name="bg_white">#FFFFFF</color>
     <color name="bg_gray">#00F1F1F1</color>
     <color name="bg_rlayout_topbar">#FCFCFC</color>

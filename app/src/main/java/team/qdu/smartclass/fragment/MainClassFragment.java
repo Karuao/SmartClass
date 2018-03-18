@@ -115,7 +115,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
         startActivity(new Intent(getActivity(), LoadingActivity.class));//加载中动画，用来防止用户重复点击
         final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
@@ -136,6 +136,12 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                 intent.putExtra("ifNewHomework", data.getIf_new_homework());
                 intent.putExtra("unreadInformationNum", data.getUnread_information_num());
                 startActivity(intent);
+                //取消红点显示
+                BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView");
+                if (badgeView != null) {
+                    badgeView.decrementBadgeCount(1);
+                    parentActivity.classAppAction.readNew(getClassUserId(), "classList");
+                }
                 SApplication.clearActivity();//关闭加载中动画
             }
 
@@ -145,12 +151,5 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                 SApplication.clearActivity();//关闭加载中动画
             }
         });
-
-        //取消红点显示
-        BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView");
-        if (badgeView != null) {
-            badgeView.decrementBadgeCount(1);
-            parentActivity.classAppAction.readNew(getClassUserId(), "classList");
-        }
     }
 }

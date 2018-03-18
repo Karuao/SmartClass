@@ -81,7 +81,7 @@
                 android:layout_below="@+id/txt_homework_name"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:textColor="@color/little_black"/>
+                android:textColor="@color/text_little_black"/>
 
 
         </RelativeLayout>

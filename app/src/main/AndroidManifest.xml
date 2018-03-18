@@ -9,9 +9,9 @@
     <application
         android:name=".SApplication"
         android:allowBackup="true"
-        android:icon="@drawable/head2"
+        android:icon="@mipmap/ic_useravatar_def"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/head2"
+        android:roundIcon="@mipmap/ic_useravatar_def"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
@@ -24,12 +24,7 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.StuClassMainActivity"></activity>
         <activity android:name=".activity.TeaClassMainActivity"></activity>
@@ -58,22 +53,22 @@
         <activity android:name=".activity.InformUnReadActivity"></activity>
         <activity android:name=".activity.ConfirmJoinClassActivity"></activity>
         <activity
-        android:name=".activity.PublishHomeworkActivity"
-        android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+            android:name=".activity.TeaPublishHomeworkActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.ModifyClassActivity"></activity>
         <activity
-            android:name=".activity.DoHomeworkActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        android:name=".activity.StuCommitHomeworkActivity"
+        android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.ShowPhotoActivity"></activity>
-        <activity android:name=".activity.ShowUnderwayHomeworkActivity"></activity>
-        <activity android:name=".activity.ShowUnderwayHomeworkDetailActivity"></activity>
-        <activity android:name=".activity.ShowEvaluateHomeworkActivity"></activity>
+        <activity android:name=".activity.TeaShowUnderwayHomeworkListActivity"></activity>
+        <activity android:name=".activity.TeaShowUnderwayHomeworkActivity"></activity>
+        <activity android:name=".activity.TeaShowEvaluatedHomeworkListActivity"></activity>
         <activity
-            android:name=".activity.EvaluateHomworkActivity"
+            android:name=".activity.TeaEvaluateHomworkActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
-        <activity android:name=".activity.ShowMyHomeworkActivity"></activity>
-        <activity android:name=".activity.ShowFinishHomeworkActivity"></activity>
-        <activity android:name=".activity.ShowFinishHomeworkDetialActivity"></activity>
+        <activity android:name=".activity.StuShowHomeworkActivity"></activity>
+        <activity android:name=".activity.TeaShowFinishedHomeworkListActivity"></activity>
+        <activity android:name=".activity.TeaShowFinishedHomeworkActivity"></activity>
         <activity android:name=".activity.CropActivity2"></activity>
         <activity android:name=".activity.ShowMemberDetailActivity"></activity>
         <activity android:name=".activity.LoadingActivity"></activity>

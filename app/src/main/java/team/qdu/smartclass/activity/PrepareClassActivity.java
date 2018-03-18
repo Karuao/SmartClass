@@ -210,7 +210,7 @@ public class PrepareClassActivity extends SBaseActivity {
             Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             Intent pickIntent = new Intent(Intent.ACTION_PICK, null);
             // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型"
-            pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+            pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/jpeg");
             startActivityForResult(pickIntent, GALLERY_REQUEST_CODE);
         }
     }

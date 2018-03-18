@@ -127,7 +127,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
     //TeaClassHomeworkFragment老师作业界面发布作业点击事件
     public void toPublish(View view) {
-        startActivity(new Intent(TeaClassMainActivity.this, PublishHomeworkActivity.class));
+        startActivity(new Intent(TeaClassMainActivity.this, TeaPublishHomeworkActivity.class));
     }
 
     public void toCreateInform(View view) {

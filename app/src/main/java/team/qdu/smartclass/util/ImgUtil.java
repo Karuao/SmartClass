@@ -234,7 +234,20 @@ public class ImgUtil {
         context.startActivity(intentView);
     }
 
-    //压缩图片
+    //压缩头像图片
+    public static File compressAvatarPhoto(Context context, File oldFile) {
+        return new CompressHelper.Builder(context)
+                .setMaxWidth(192)
+                .setMaxHeight(192)
+                .setQuality(80)
+                .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                .build()
+                .compressToFile(oldFile);
+    }
+
+    //压缩图片ListView中的图片
     public static void compressPhotoes(List photoList, HomeworkAddPhotoAdapter homeworkAddPhotoAdapter, Context context) {
         for (int i = 0; i < homeworkAddPhotoAdapter.getImagesSize(); i++) {
             photoList.add(new CompressHelper.Builder(context)
