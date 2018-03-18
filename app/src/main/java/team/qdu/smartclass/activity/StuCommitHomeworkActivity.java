@@ -27,10 +27,11 @@ import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
+ * 学生提交作业
  * Created by 11602 on 2018/2/26.
  */
 
-public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener{
+public class StuCommitHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener{
 
     private TextView homeworkTitleTxt;
     private TextView homeworkDetailTxt;
@@ -53,7 +54,7 @@ public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnI
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_stu_dowork);
+        setContentView(R.layout.activity_stu_commithomework);
         homeworkAnswerId = getIntent().getStringExtra("homeworkAnswerId");
         initView();
         initEvent();
@@ -88,7 +89,7 @@ public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnI
                     homeworkDetailTxt.setText(data.getHomework().getDetail());
                 }
                 if (!TextUtils.isEmpty(data.getHomework().getUrl())) {
-                    ImgUtil.initHomeworkPhotoList(DoHomeworkActivity.this, homeworkShowPhotoAdapter, data.getHomework().getUrl(), data.getHomework().getUrl_file_num());
+                    ImgUtil.initHomeworkPhotoList(StuCommitHomeworkActivity.this, homeworkShowPhotoAdapter, data.getHomework().getUrl(), data.getHomework().getUrl_file_num());
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);
                 }
@@ -96,7 +97,7 @@ public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnI
                     answerDetailEdt.setText(data.getDetail());
                 }
                 if (!TextUtils.isEmpty(data.getUrl())) {
-                    ImgUtil.initHomeworkPhotoList(DoHomeworkActivity.this, homeworkAddPhotoAdapter, data.getUrl(), data.getUrl_file_num());
+                    ImgUtil.initHomeworkPhotoList(StuCommitHomeworkActivity.this, homeworkAddPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                     delPhotoesUrl = data.getUrl();
                 }
                 homeworkId = data.getHomework_id().toString();
@@ -105,7 +106,7 @@ public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnI
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(StuCommitHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -120,7 +121,7 @@ public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnI
                 ifSubmit, answerDetail, photoList, delPhotoesUrl, new ActionCallbackListener<Void>() {
                     @Override
                     public void onSuccess(Void data, String message) {
-                        Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StuCommitHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
                         StuHomeworkUnderwayFragment.refreshFlag = true;
                         finish();
                         FileUtil.deleteCompressFiles(photoList);
@@ -130,7 +131,7 @@ public class DoHomeworkActivity extends SBaseActivity implements AdapterView.OnI
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
-                        Toast.makeText(DoHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StuCommitHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
                         FileUtil.deleteCompressFiles(photoList);
                         SApplication.clearActivity();//关闭加载中动画
                     }

@@ -14,7 +14,7 @@ import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.ShowFinishHomeworkActivity;
+import team.qdu.smartclass.activity.TeaShowFinishedHomeworkListActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.TeaHomeworkFinishAdapter;
 
@@ -77,7 +77,7 @@ public class TeaHomeworkFinishFragment extends SBaseFragment implements AdapterV
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String homeworkId = ((TextView) view.findViewById(R.id.txt_homework_finish_id)).getText().toString();
-        Intent intent = new Intent(getParentFragment().getActivity(), ShowFinishHomeworkActivity.class);
+        Intent intent = new Intent(getParentFragment().getActivity(), TeaShowFinishedHomeworkListActivity.class);
         intent.putExtra("homeworkId", homeworkId);
         startActivity(intent);
     }

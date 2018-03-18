@@ -35,6 +35,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.fragment.MainClassFragment;
+import team.qdu.smartclass.util.ImgUtil;
 
 
 /**
@@ -47,6 +48,7 @@ public class CreateClassActivity extends SBaseActivity {
     private EditText classnameEdt;
     private EditText courseEdt;
     private ImageView AvatarImg;
+    private File classAvatar;
     //弹出窗口
     private PopupWindow selectphotoPopup;
 
@@ -85,30 +87,14 @@ public class CreateClassActivity extends SBaseActivity {
     //创建班课按钮点击事件
     public void finishCreate(View view) throws URISyntaxException {
         startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
-        File file = null;
-//            if (isDefaultAvatar) {
-//                //将mipmap中的默认头像转成File
-//                Resources r = this.getResources();
-//                Bitmap bmp = BitmapFactory.decodeResource(r, R.mipmap.ic_classavatar_def);
-//                file = new File(Environment.getExternalStorageDirectory() + File.separator + "defClassAvatar.png");//将要保存图片的路径
-//                try {
-//                    BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-//                    bmp.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-//                    bos.flush();
-//                    bos.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            } else {
-//                file = new File(new URI(mDestinationUri.toString()));
-//            }
         if (!isDefaultAvatar) {
-            file = new File(new URI(mDestinationUri.toString()));
+            classAvatar = new File(new URI(mDestinationUri.toString()));
+            classAvatar = ImgUtil.compressAvatarPhoto(this, classAvatar);
         }
         String name = classnameEdt.getText().toString();
         final String course = courseEdt.getText().toString();
         String userId = getUserId();
-        classAppAction.createClass(file, name, course, userId, new ActionCallbackListener<String>() {
+        classAppAction.createClass(classAvatar, name, course, userId, new ActionCallbackListener<String>() {
             @Override
             public void onSuccess(String data, String message) {
                 MainClassFragment.refreshFlag = true;
@@ -120,12 +106,14 @@ public class CreateClassActivity extends SBaseActivity {
                 finish();
                 startActivity(intent);
                 SApplication.clearActivity();//关闭加载中动画
+                classAvatar.delete();//删除缓存的压缩图片
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 SApplication.clearActivity();//关闭加载中动画
+                classAvatar.delete();//删除缓存的压缩图片
             }
         });
 
@@ -163,7 +151,7 @@ public class CreateClassActivity extends SBaseActivity {
             Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             Intent pickIntent = new Intent(Intent.ACTION_PICK, null);
             // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型"
-            pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+            pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/jpeg");
             startActivityForResult(pickIntent, GALLERY_REQUEST_CODE);
         }
     }

@@ -24,10 +24,11 @@ import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
+ * 老师显示已结束作业的学生作业列表
  * Created by 11602 on 2018/3/3.
  */
 
-public class ShowFinishHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
+public class TeaShowFinishedHomeworkListActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
 
     private TextView homeworkTitleTxt;
     private TextView homeworkDetailTxt;
@@ -44,7 +45,7 @@ public class ShowFinishHomeworkActivity extends SBaseActivity implements Adapter
 
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.class_homework_admin_finish);
+        setContentView(R.layout.activity_tea_showfinishedhomeworklist);
         homeworkId = getIntent().getStringExtra("homeworkId");
         initView();
         initEvent();
@@ -89,7 +90,7 @@ public class ShowFinishHomeworkActivity extends SBaseActivity implements Adapter
                 homeworkTitleTxt.setText(data.getName());
                 homeworkDetailTxt.setText(data.getDetail());
                 if (!TextUtils.isEmpty(data.getUrl())) {
-                    ImgUtil.initHomeworkPhotoList(ShowFinishHomeworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
+                    ImgUtil.initHomeworkPhotoList(TeaShowFinishedHomeworkListActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);
                 }
@@ -97,7 +98,7 @@ public class ShowFinishHomeworkActivity extends SBaseActivity implements Adapter
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(ShowFinishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeaShowFinishedHomeworkListActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
         //设置已评价、未评价和未提交人数和列表
@@ -116,9 +117,9 @@ public class ShowFinishHomeworkActivity extends SBaseActivity implements Adapter
                 evaluateStuNumTxt.setText(evaluateHomeworkAnswer.size() + "人");
                 uncommitStuNumTxt.setText(uncommitHomeworkAnswer.size() + "人");
                 evaluateHomeworkList.setAdapter(new HomeworkEvaluateAdapter(
-                        ShowFinishHomeworkActivity.this, evaluateHomeworkAnswer));
+                        TeaShowFinishedHomeworkListActivity.this, evaluateHomeworkAnswer));
                 uncommitHomeworkList.setAdapter(new HomeworkUncommitAdapter(
-                        ShowFinishHomeworkActivity.this, uncommitHomeworkAnswer));
+                        TeaShowFinishedHomeworkListActivity.this, uncommitHomeworkAnswer));
             }
 
             @Override
@@ -135,7 +136,7 @@ public class ShowFinishHomeworkActivity extends SBaseActivity implements Adapter
         } else {
             //点击下面作业提交情况
             String homeworkAnswerId = ((TextView) view.findViewById(R.id.txt_homeworkanswer_id)).getText().toString();
-            Intent intent = new Intent(this, ShowFinishHomeworkDetialActivity.class);
+            Intent intent = new Intent(this, TeaShowFinishedHomeworkActivity.class);
             intent.putExtra("homeworkAnswerId", homeworkAnswerId);
             startActivity(intent);
         }

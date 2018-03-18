@@ -124,7 +124,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-            android:textColor="@color/little_black"
+            android:textColor="@color/text_little_black"
             android:textSize="16sp" />
 
     </RelativeLayout>
@@ -171,7 +171,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-            android:textColor="@color/little_black"
+            android:textColor="@color/text_little_black"
             android:textSize="16sp" />
 
     </RelativeLayout>

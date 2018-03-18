@@ -1,15 +1,18 @@
 package team.qdu.smartclass.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.jauker.widget.BadgeView;
+
+import java.io.File;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
@@ -31,7 +34,7 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
      * @author Administrator
      */
     public final class Compo {
-//        public TextView classUserIdTxt;
+        //        public TextView classUserIdTxt;
         public TextView classIdTxt;
         public TextView titleTxt;
         public TextView classNameTxt;
@@ -68,9 +71,10 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
         final Compo finalCompo = compo;
         if (!TextUtils.isEmpty(itemList.get(position).getMy_class().getAvatar())) {
             //从服务器获取图片绑定到班课封面上
-            ((SBaseActivity) context).classAppAction.getBitmap(itemList.get(position).getMy_class().getAvatar(), new ActionCallbackListener<Bitmap>() {
+            ((SBaseActivity) context).imgAppAction.cacheImg(itemList.get(position).getMy_class().getAvatar(), new ActionCallbackListener<File>() {
                 @Override
-                public void onSuccess(Bitmap data, String message) {
+                public void onSuccess(File data, String message) {
+                    Glide.with(context).load(data.getPath()).into(finalCompo.classImg);
                     //取消已结束班课
                     //已结束班课班课封面在图片之上加一层灰色图层
 //                if ("已结束".equals(itemList.get(position).getIf_allow_to_join())) {
@@ -80,11 +84,11 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
 //                } else {
 //                    finalCompo.classImg.setImageBitmap(data);
 //                }
-                    finalCompo.classImg.setImageBitmap(data);
                 }
 
                 @Override
                 public void onFailure(String errorEvent, String message) {
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 }
             });
         }

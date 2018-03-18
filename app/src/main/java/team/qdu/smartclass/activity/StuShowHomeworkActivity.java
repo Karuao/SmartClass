@@ -16,11 +16,11 @@ import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
- * 展示自己提交的作业，不可修改
+ * 学生显示自己提交的作业，不可修改
  * Created by 11602 on 2018/2/26.
  */
 
-public class ShowMyHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
+public class StuShowHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
 
     private TextView homeworkTitleTxt;
     private TextView homeworkDetailTxt;
@@ -37,7 +37,7 @@ public class ShowMyHomeworkActivity extends SBaseActivity implements AdapterView
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_stu_homework);
+        setContentView(R.layout.activity_stu_showhomework);
         homeworkAnswerId = getIntent().getStringExtra("homeworkAnswerId");
         initView();
         initEvent();
@@ -74,7 +74,7 @@ public class ShowMyHomeworkActivity extends SBaseActivity implements AdapterView
                     homeworkDetailTxt.setText(data.getHomework().getDetail());
                 }
                 if (!TextUtils.isEmpty(data.getHomework().getUrl())) {
-                    ImgUtil.initHomeworkPhotoList(ShowMyHomeworkActivity.this, homeworkShowPhotoAdapter, data.getHomework().getUrl(), data.getHomework().getUrl_file_num());
+                    ImgUtil.initHomeworkPhotoList(StuShowHomeworkActivity.this, homeworkShowPhotoAdapter, data.getHomework().getUrl(), data.getHomework().getUrl_file_num());
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);
                 }
@@ -84,7 +84,7 @@ public class ShowMyHomeworkActivity extends SBaseActivity implements AdapterView
                     answerDetailRlayout.setVisibility(View.GONE);
                 }
                 if (!TextUtils.isEmpty(data.getUrl())) {
-                    ImgUtil.initHomeworkPhotoList(ShowMyHomeworkActivity.this, homeworkShowPhotoAdapter1, data.getUrl(), data.getUrl_file_num());
+                    ImgUtil.initHomeworkPhotoList(StuShowHomeworkActivity.this, homeworkShowPhotoAdapter1, data.getUrl(), data.getUrl_file_num());
                 } else {
                     answerPhotoRlayout.setVisibility(View.GONE);
                 }
@@ -92,7 +92,7 @@ public class ShowMyHomeworkActivity extends SBaseActivity implements AdapterView
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(ShowMyHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(StuShowHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }

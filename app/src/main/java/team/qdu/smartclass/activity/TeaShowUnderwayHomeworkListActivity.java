@@ -27,10 +27,11 @@ import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
+ * 老师显示进行中作业的学生作业列表
  * Created by 11602 on 2018/3/1.
  */
 
-public class ShowUnderwayHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
+public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
 
     private TextView homeworkTitleTxt;
     private TextView homeworkDetailTxt;
@@ -45,7 +46,7 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
 
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_checkhomeworkcommitstatus);
+        setContentView(R.layout.activity_tea_showunderwayhomeworklist);
         homeworkId = getIntent().getStringExtra("homeworkId");
         initView();
         initEvent();
@@ -81,7 +82,7 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
                     homeworkDetailTxt.setText(data.getDetail());
                 }
                 if (!TextUtils.isEmpty(data.getUrl())) {
-                    ImgUtil.initHomeworkPhotoList(ShowUnderwayHomeworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
+                    ImgUtil.initHomeworkPhotoList(TeaShowUnderwayHomeworkListActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);
                 }
@@ -89,7 +90,7 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(ShowUnderwayHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeaShowUnderwayHomeworkListActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
         //设置已提交和未提交人数和列表
@@ -108,9 +109,9 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
                 commitStuNumTxt.setText(commitHomeworkAnswer.size() + "人");
                 uncommitStuNumTxt.setText(uncommitHomeworkAnswer.size() + "人");
                 commitHomeworkList.setAdapter(new HomeworkCommitAdapter(
-                        ShowUnderwayHomeworkActivity.this, commitHomeworkAnswer));
+                        TeaShowUnderwayHomeworkListActivity.this, commitHomeworkAnswer));
                 uncommitHomeworkList.setAdapter(new HomeworkUncommitAdapter(
-                        ShowUnderwayHomeworkActivity.this, uncommitHomeworkAnswer));
+                        TeaShowUnderwayHomeworkListActivity.this, uncommitHomeworkAnswer));
             }
 
             @Override
@@ -162,16 +163,16 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
             @Override
             public void onSuccess(Void data, String message) {
                 TeaHomeworkUnderwayFragment.refreshFlag = true;
-                Intent intent = new Intent(ShowUnderwayHomeworkActivity.this, ShowEvaluateHomeworkActivity.class);
+                Intent intent = new Intent(TeaShowUnderwayHomeworkListActivity.this, TeaShowEvaluatedHomeworkListActivity.class);
                 intent.putExtra("homeworkId", homeworkId);
                 startActivity(intent);
-                Toast.makeText(ShowUnderwayHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeaShowUnderwayHomeworkListActivity.this, message, Toast.LENGTH_SHORT).show();
                 finish();
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(ShowUnderwayHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeaShowUnderwayHomeworkListActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -183,7 +184,7 @@ public class ShowUnderwayHomeworkActivity extends SBaseActivity implements Adapt
         } else {
             //学生提交的作业点击事件
             String homeworkAnswerId = ((TextView) view.findViewById(R.id.txt_homeworkanswer_id)).getText().toString();
-            Intent intent = new Intent(this, ShowUnderwayHomeworkDetailActivity.class);
+            Intent intent = new Intent(this, TeaShowUnderwayHomeworkActivity.class);
             intent.putExtra("homeworkAnswerId", homeworkAnswerId);
             startActivity(intent);
         }

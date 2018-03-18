@@ -33,7 +33,7 @@ import team.qdu.smartclass.view.HorizontalListView;
  * Created by 11602 on 2018/3/3.
  */
 
-public class EvaluateHomworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
+public class TeaEvaluateHomworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
 
     private TextView homeworkTitleTxt;
     private TextView answerDetailTxt;
@@ -52,7 +52,7 @@ public class EvaluateHomworkActivity extends SBaseActivity implements AdapterVie
 
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.class_homework_admin_evaluate_details);
+        setContentView(R.layout.activity_tea_evaluatehomework);
         homeworkAnswerId = getIntent().getStringExtra("homeworkAnswerId");
         initView();
         initEvent();
@@ -89,7 +89,7 @@ public class EvaluateHomworkActivity extends SBaseActivity implements AdapterVie
                     answerDetailTxt.setText(data.getDetail());
                 }
                 if (!TextUtils.isEmpty(data.getUrl())) {
-                    ImgUtil.initHomeworkPhotoList(EvaluateHomworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
+                    ImgUtil.initHomeworkPhotoList(TeaEvaluateHomworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     answerPhotoRlayout.setVisibility(View.GONE);
                 }
@@ -100,13 +100,13 @@ public class EvaluateHomworkActivity extends SBaseActivity implements AdapterVie
                     evaluateRemarkEdt.setText(data.getRemark());
                 }
                 if (!TextUtils.isEmpty(data.getRemark_url())) {
-                    ImgUtil.initHomeworkPhotoList(EvaluateHomworkActivity.this, homeworkAddPhotoAdapter, data.getRemark_url(), data.getRemark_url_file_num());
+                    ImgUtil.initHomeworkPhotoList(TeaEvaluateHomworkActivity.this, homeworkAddPhotoAdapter, data.getRemark_url(), data.getRemark_url_file_num());
                 }
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeaEvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -137,8 +137,8 @@ public class EvaluateHomworkActivity extends SBaseActivity implements AdapterVie
         homeworkAppAction.commitHomeworkEvaluation(homeworkAnswerId, answerExp, evaluateRemark, photoList, delPhotoesUrl, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
-                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                ShowEvaluateHomeworkActivity.refreshFlag = true;
+                Toast.makeText(TeaEvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                TeaShowEvaluatedHomeworkListActivity.refreshFlag = true;
                 finish();
                 FileUtil.deleteCompressFiles(photoList);
                 FileUtil.deleteCacheFiles(delPhotoesUrl);
@@ -147,7 +147,7 @@ public class EvaluateHomworkActivity extends SBaseActivity implements AdapterVie
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(EvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeaEvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
                 FileUtil.deleteCompressFiles(photoList);
                 SApplication.clearActivity();//关闭加载中动画
             }

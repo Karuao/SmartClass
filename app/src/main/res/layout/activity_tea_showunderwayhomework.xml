@@ -56,25 +56,34 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/txt_underwayhomework_name"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:singleLine="true"
-            android:text="作业名"
-            android:textColor="#444"
-            android:textSize="20sp" />
+            android:padding="5dp">
 
-        <TextView
-            android:id="@+id/txt_underwayanswer_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/little_black"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/txt_homework_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="作业名"
+                android:textColor="@color/text_black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/txt_answer_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_homework_name"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/text_little_black"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rlayout_underwayanswer_photo"
@@ -82,24 +91,12 @@
             android:layout_height="match_parent"
             android:padding="5dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:background="#d6d6d6" />
-
             <team.qdu.smartclass.view.HorizontalListView
                 android:id="@+id/list_homework_showphoto"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="7dp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:layout_below="@+id/list_homework_showphoto"
-                android:layout_marginTop="5dp"
-                android:background="#d6d6d6" />
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="5dp" />
 
         </RelativeLayout>
     </LinearLayout>

@@ -5,9 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -32,10 +30,8 @@ import android.widget.Toast;
 
 import com.kevin.crop.UCrop;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -209,7 +205,7 @@ public class ChangeInfoActivity extends SBaseActivity {
             Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             Intent pickIntent = new Intent(Intent.ACTION_PICK, null);
             // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型"
-            pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+            pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/jpeg");
             startActivityForResult(pickIntent, GALLERY_REQUEST_CODE);
         }
     }

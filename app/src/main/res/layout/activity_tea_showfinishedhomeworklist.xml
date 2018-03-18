@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><!--点击一个正在进行的作业后进入的页面-->
+<?xml version="1.0" encoding="utf-8"?><!--点击一个已经结束的作业后进入的页面-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -48,7 +48,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="进行中作业"
+                        android:text="已结束作业"
                         android:textColor="@color/bg_white"
                         android:textSize="21sp"
                         android:textStyle="normal" />
@@ -63,13 +63,15 @@
 
             <TextView
                 android:id="@+id/txt_homework_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
                 android:singleLine="true"
                 android:text="作业名"
-                android:textColor="#444"
-                android:textSize="17sp" />
+                android:textColor="@color/text_black"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/txt_homework_detail"
@@ -78,17 +80,11 @@
                 android:layout_below="@+id/txt_homework_name"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:width="120dp"
-                android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                android:textColor="@color/little_black"
-                android:textSize="14sp" />
+                android:layout_marginTop="5dp"
+                android:textColor="@color/text_little_black"
+                android:textSize="18sp" />
 
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="#d6d6d6" />
 
         <RelativeLayout
             android:id="@+id/rlayout_homework_photo"
@@ -98,29 +94,20 @@
             android:paddingRight="5dp"
             android:paddingTop="5dp">
 
-            <!--<ImageView-->
-                <!--android:id="@+id/img_homework_photo"-->
-                <!--android:layout_width="64dp"-->
-                <!--android:layout_height="64dp"-->
-                <!--android:layout_marginLeft="5dp"-->
-                <!--android:onClick="toShowPhoto"-->
-                <!--android:src="@drawable/add_class_img" />-->
-
             <team.qdu.smartclass.view.HorizontalListView
                 android:id="@+id/list_homework_showphoto"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="7dp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:layout_below="@+id/list_homework_showphoto"
-                android:layout_marginTop="5dp"
-                android:background="#d6d6d6" />
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="5dp" />
 
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginTop="5dp"
+            android:background="#d6d6d6" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -134,7 +121,7 @@
                 android:text="已提交" />
 
             <TextView
-                android:id="@+id/txt_commitstu_num"
+                android:id="@+id/txt_evaluatestu_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -143,14 +130,13 @@
 
         </RelativeLayout>
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="2px"
             android:background="#d6d6d6" />
 
         <ListView
-            android:id="@+id/list_commithomework"
+            android:id="@+id/list_evaluatehomework"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></ListView>
 
@@ -178,6 +164,7 @@
                 android:layout_marginRight="5dp"
                 android:text="人" />
 
+
         </RelativeLayout>
 
         <View
@@ -189,27 +176,6 @@
             android:id="@+id/list_uncommithomework"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></ListView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
-            android:orientation="vertical">
-
-            <Button
-                android:layout_width="221dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:background="@drawable/shape_button"
-                android:gravity="center"
-                android:onClick="toEvaluate"
-                android:padding="10dp"
-                android:text="开始评价"
-                android:textColor="#fff"
-                android:textSize="18sp" />
-
-        </LinearLayout>
 
     </LinearLayout>
 

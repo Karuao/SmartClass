@@ -31,10 +31,11 @@ import team.qdu.smartclass.view.CustomDatePicker;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
+ * 老师发布作业
  * Created by 11602 on 2018/2/6.
  */
 
-public class PublishHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
+public class TeaPublishHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
 
     private EditText homeworkTitleEdt;
     private TextView homeworkDeadlineTxt;
@@ -97,7 +98,7 @@ public class PublishHomeworkActivity extends SBaseActivity implements AdapterVie
                 new ActionCallbackListener<Void>() {
                     @Override
                     public void onSuccess(Void data, String message) {
-                        Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TeaPublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
                         TeaHomeworkUnderwayFragment.refreshFlag = true;
                         finish();
                         SApplication.clearActivity();//关闭加载中动画
@@ -105,7 +106,7 @@ public class PublishHomeworkActivity extends SBaseActivity implements AdapterVie
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
-                        Toast.makeText(PublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TeaPublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
                         SApplication.clearActivity();//关闭加载中动画
                     }
                 });

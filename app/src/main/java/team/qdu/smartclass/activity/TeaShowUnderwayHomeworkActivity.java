@@ -16,10 +16,11 @@ import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
+ * 老师显示进行中作业的学生提交的作业
  * Created by 11602 on 2018/3/3.
  */
 
-public class ShowUnderwayHomeworkDetailActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
+public class TeaShowUnderwayHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
 
     private TextView underwayHomeworkTitleTxt;
     private TextView underwayAnswerDetailTxt;
@@ -30,15 +31,15 @@ public class ShowUnderwayHomeworkDetailActivity extends SBaseActivity implements
 
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.class_homework_admin_underway_details);
+        setContentView(R.layout.activity_tea_showunderwayhomework);
         homeworkAnswerId = getIntent().getStringExtra("homeworkAnswerId");
         initView();
         initEvent();
     }
 
     private void initView() {
-        underwayHomeworkTitleTxt = (TextView) findViewById(R.id.txt_underwayhomework_name);
-        underwayAnswerDetailTxt = (TextView) findViewById(R.id.txt_underwayanswer_detail);
+        underwayHomeworkTitleTxt = (TextView) findViewById(R.id.txt_homework_name);
+        underwayAnswerDetailTxt = (TextView) findViewById(R.id.txt_answer_detail);
         homeworkShowPhotoList = (HorizontalListView) findViewById(R.id.list_homework_showphoto);
         underwayAnswerPhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_underwayanswer_photo);
         setData();
@@ -60,7 +61,7 @@ public class ShowUnderwayHomeworkDetailActivity extends SBaseActivity implements
                     underwayAnswerDetailTxt.setText(data.getDetail());
                 }
                 if (!TextUtils.isEmpty(data.getUrl())) {
-                    ImgUtil.initHomeworkPhotoList(ShowUnderwayHomeworkDetailActivity.this,
+                    ImgUtil.initHomeworkPhotoList(TeaShowUnderwayHomeworkActivity.this,
                             homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     underwayAnswerPhotoRlayout.setVisibility(View.GONE);
@@ -69,7 +70,7 @@ public class ShowUnderwayHomeworkDetailActivity extends SBaseActivity implements
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(ShowUnderwayHomeworkDetailActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeaShowUnderwayHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }

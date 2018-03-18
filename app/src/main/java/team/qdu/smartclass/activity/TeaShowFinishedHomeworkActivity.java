@@ -16,10 +16,11 @@ import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
+ * 老师显示已结束作业的学生作业
  * Created by 11602 on 2018/3/4.
  */
 
-public class ShowFinishHomeworkDetialActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
+public class TeaShowFinishedHomeworkActivity extends SBaseActivity implements AdapterView.OnItemClickListener {
 
     private TextView homeworkTitleTxt;
     private TextView answerDetailTxt;
@@ -36,7 +37,7 @@ public class ShowFinishHomeworkDetialActivity extends SBaseActivity implements A
 
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.class_homework_admin_finish_details);
+        setContentView(R.layout.activity_tea_showfinishedhomework);
         homeworkAnswerId = getIntent().getStringExtra("homeworkAnswerId");
         initView();
         initEvent();
@@ -74,7 +75,7 @@ public class ShowFinishHomeworkDetialActivity extends SBaseActivity implements A
                     answerDetailTxt.setText(data.getDetail());
                 }
                 if (!TextUtils.isEmpty(data.getUrl())) {
-                    ImgUtil.initHomeworkPhotoList(ShowFinishHomeworkDetialActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
+                    ImgUtil.initHomeworkPhotoList(TeaShowFinishedHomeworkActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
                 } else {
                     answerPhotoRlayout.setVisibility(View.GONE);
                 }
@@ -87,7 +88,7 @@ public class ShowFinishHomeworkDetialActivity extends SBaseActivity implements A
                     evaluateRemarkRlayout.setVisibility(View.GONE);
                 }
                 if (!TextUtils.isEmpty(data.getRemark_url())) {
-                    ImgUtil.initHomeworkPhotoList(ShowFinishHomeworkDetialActivity.this, homeworkShowPhotoAdapter1, data.getRemark_url(), data.getRemark_url_file_num());
+                    ImgUtil.initHomeworkPhotoList(TeaShowFinishedHomeworkActivity.this, homeworkShowPhotoAdapter1, data.getRemark_url(), data.getRemark_url_file_num());
                 } else {
                     evaluatePhotoRlayout.setVisibility(View.GONE);
                 }
@@ -95,7 +96,7 @@ public class ShowFinishHomeworkDetialActivity extends SBaseActivity implements A
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                Toast.makeText(ShowFinishHomeworkDetialActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeaShowFinishedHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
