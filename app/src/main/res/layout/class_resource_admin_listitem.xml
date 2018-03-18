@@ -71,7 +71,6 @@
 
     <ImageButton
         android:id="@+id/deleteResource"
-        android:focusable="false"
         android:onClick="deleteMaterial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

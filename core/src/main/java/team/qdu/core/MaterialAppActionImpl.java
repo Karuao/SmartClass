@@ -61,4 +61,24 @@ public class MaterialAppActionImpl implements MaterialAppAction {
             }
         }.execute();
     }
+    @Override
+    public void deleteMaterial(final String materialid, final ActionCallbackListener<Void> listener) {
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return materialApi.deleteMaterial(materialid);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+
+    }
 }

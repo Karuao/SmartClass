@@ -57,4 +57,18 @@ public class MaterialApiImpl implements MaterialApi {
             return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
         }
     }
+    @Override
+    public ApiResponse<Void> deleteMaterial(String materialid) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("materialId",materialid);
+        Type type=new TypeToken<ApiResponse<Void>>(){
+        }.getType();
+        try{
+            return httpEngine.postHandle(paramMap, type, "/deleteMaterial");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            return new ApiResponse(TIME_OUT_EVENT,TIME_OUT_EVENT_MSG);
+        }
+    }
 }

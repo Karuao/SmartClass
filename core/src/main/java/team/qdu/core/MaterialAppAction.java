@@ -11,5 +11,6 @@ import team.qdu.model.Material;
 public interface MaterialAppAction {
     public void getTeaMaterial (String classid,ActionCallbackListener<List<Material>> listener);
     public void getStuMaterial (String classid,ActionCallbackListener<List<Material>> listener);
+    public void deleteMaterial(String materialid,ActionCallbackListener<Void> listener);
 
 }

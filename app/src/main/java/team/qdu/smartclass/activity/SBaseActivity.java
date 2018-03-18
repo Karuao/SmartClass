@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.lzy.imagepicker.ImagePicker;
+
 import java.util.List;
 
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.HomeworkAppAction;
+import team.qdu.core.ImgAppAction;
 import team.qdu.core.InformAppAction;
 import team.qdu.core.MaterialAppAction;
 import team.qdu.core.MemberAppAction;

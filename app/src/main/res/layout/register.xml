@@ -85,29 +85,28 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/shape_box"
-        android:layout_gravity="center_horizontal"
-        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/shape_box">
 
-        <EditText
-            android:id="@+id/edt_regPassConfirm"
-            android:cursorVisible="true"
-            android:inputType="textPassword"
-            android:layout_width="230dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:ems="15"
-            android:hint="确认密码"
-            android:textColorHint="@color/hint"
-            android:textCursorDrawable="@null"
-            android:textSize="16sp" />
+            <EditText
+                android:id="@+id/edt_regPassConfirm"
+                android:layout_width="230dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:cursorVisible="true"
+                android:ems="15"
+                android:hint="确认密码"
+                android:inputType="textPassword"
+                android:textColorHint="@color/hint"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp" />
 
-    </RelativeLayout>
+        </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -119,13 +118,12 @@
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spin_question"
-            android:layout_width="230dp"
+            android:layout_width="200dp"
             android:layout_height="20dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:entries="@array/user_question"
-            />
+            android:entries="@array/user_question" />
 
         <EditText
             android:id="@+id/edt_regAnswer"

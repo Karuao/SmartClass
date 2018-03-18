@@ -32,7 +32,7 @@ public class TeaMaterialAdapter extends SBaseAdapter<Material> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         Compo compo = null;
         if (convertView == null) {
             compo = new Compo();
@@ -41,14 +41,33 @@ public class TeaMaterialAdapter extends SBaseAdapter<Material> {
             compo.nameTxt = (TextView) convertView.findViewById(R.id.tv_class_filename);
             compo.timeTxt= (TextView) convertView.findViewById(R.id.tv_class_filetime);
             compo.materialidTxt= (TextView) convertView.findViewById(R.id.tv_materialid);
+            compo.deleteBtn= (ImageButton) convertView.findViewById(R.id.deleteResource);
             convertView.setTag(compo);
         } else {
             compo = (Compo) convertView.getTag();
         }
+
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         compo.nameTxt.setText(itemList.get(position).getName());
         compo.timeTxt.setText(sdf.format(itemList.get(position).getCreate_date_time()));
         compo.materialidTxt.setText(Integer.toString(itemList.get(position).getMaterial_id()));
+/*        compo.deleteBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ((View) v.getParent()).findViewById(R.id.tv_materialid);
+
+            }
+        });*/
         return convertView;
+    }
+    public interface onItemDeleteListener {
+        void onDeleteClick(int position);
+    }
+
+    private onItemDeleteListener mOnItemDeleteListener;
+
+    public void setOnItemDeleteClickListener(onItemDeleteListener mOnItemDeleteListener) {
+        this.mOnItemDeleteListener = mOnItemDeleteListener;
     }
 }

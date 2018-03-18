@@ -16,6 +16,8 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.TeaClassFragmentPagerAdapter;
+import team.qdu.smartclass.adapter.TeaMaterialAdapter;
+import team.qdu.smartclass.fragment.TeaClassMaterialFragment;
 
 /**
  * 班课主页
@@ -28,6 +30,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
     private ViewPager classVpager;
     private TeaClassFragmentPagerAdapter teaClassFragmentPagerAdapter;
+    private TeaMaterialAdapter teaMaterialAdapter;
     //tab
     private LinearLayout tabResource;
     private LinearLayout tabMember;
@@ -58,6 +61,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_mainpage);
         teaClassFragmentPagerAdapter = new TeaClassFragmentPagerAdapter(getSupportFragmentManager());
+
         initView();
         initEvents();
     }
@@ -183,6 +187,35 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
     @Override
     public void onPageScrollStateChanged(int i) {
+    }
+
+    public void deleteMaterial(final View view){
+
+        new AlertDialog.Builder(TeaClassMainActivity.this)
+                .setTitle("提示")
+                .setMessage("确定要删除此资源？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String materialid= ((TextView)((View) view.getParent()).findViewById(R.id.tv_materialid)).getText().toString();
+                                TeaClassMainActivity.this.materialAppAction.deleteMaterial(materialid, new ActionCallbackListener<Void>() {
+
+                                    @Override
+                                    public void onSuccess(Void data, String message) {
+                                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                        TeaClassMaterialFragment.refreshFlag = true;
+                                        finish();
+                                    }
+
+                                    @Override
+                                    public void onFailure(String errorEvent, String message) {
+                                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                })
+                .setNegativeButton("取消", null)
+                .show();
     }
 
 

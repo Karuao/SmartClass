@@ -74,6 +74,7 @@ public class LoginActivity extends SBaseActivity {
                 editorMain.commit();
                 storeUserIdAndAccount(data, account);
                 startActivity(intent);
+                finish();
             }
 
             @Override

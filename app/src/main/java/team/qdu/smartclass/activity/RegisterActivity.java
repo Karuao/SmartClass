@@ -59,6 +59,7 @@ public class RegisterActivity extends SBaseActivity {
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                finish();
             }
 
             @Override

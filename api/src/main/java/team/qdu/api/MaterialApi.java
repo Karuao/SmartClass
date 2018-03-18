@@ -12,4 +12,5 @@ import team.qdu.model.Material;
 public interface MaterialApi {
     public ApiResponse<List<Material>> getTeaMaterial(String classid);
     public ApiResponse<List<Material>> getStuMaterial(String classid);
+    public ApiResponse<Void> deleteMaterial(String materialid);
 }
