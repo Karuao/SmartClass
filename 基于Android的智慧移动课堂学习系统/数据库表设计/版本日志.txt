@@ -20,3 +20,12 @@
 2.homework_answer（学生提交作业表）添加字段if_submit
 3.homework（作业表）添加字段submit_num
 4.user（用户表）添加字段sno
+
+班课数据库表设计v1.6
+1.material表删除字段group、type、if_repository、detail、exp
+2.class_user表添加字段if_new_maerial、if_new_homework
+3.class_user表添加字段if_new_class_thing
+4.homework表添加字段url_file_num
+5.homework_answer表添加字段url_file_num, remark_url_file_num
+6.material表修改字段class_id为class_user_id
+7.attendance表添加字段attendance_stu_count, stu_num
