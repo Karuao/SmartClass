@@ -12,6 +12,10 @@ public class Attendance implements Serializable {
 
     private String if_open;
 
+    private Integer attendance_stu_count;
+
+    private Integer stu_num;
+
     private Integer class_id;
 
     private Date create_date_time;
@@ -34,6 +38,22 @@ public class Attendance implements Serializable {
 
     public void setIf_open(String if_open) {
         this.if_open = if_open == null ? null : if_open.trim();
+    }
+
+    public Integer getAttendance_stu_count() {
+        return attendance_stu_count;
+    }
+
+    public void setAttendance_stu_count(Integer attendance_stu_count) {
+        this.attendance_stu_count = attendance_stu_count;
+    }
+
+    public Integer getStu_num() {
+        return stu_num;
+    }
+
+    public void setStu_num(Integer stu_num) {
+        this.stu_num = stu_num;
     }
 
     public Integer getClass_id() {

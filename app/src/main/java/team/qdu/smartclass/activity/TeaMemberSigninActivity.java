@@ -21,23 +21,18 @@ import team.qdu.smartclass.adapter.SignInHistoryForTeacherAdapter;
 public class TeaMemberSigninActivity extends SBaseActivity{
 
     private ListView listView;
-    private TextView classMember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_member_admin_signin);
         initView();
-        Intent intent = getIntent();
-        String totalMember = intent.getStringExtra("classMember");
-        classMember.setText(totalMember);
         getTeacherSignInHistory();
     }
 
 
     public void initView(){
         listView = (ListView)findViewById(R.id.list_signin_history_teacher);
-        classMember = (TextView)findViewById(R.id.classMember);
     }
 
     public void signInforTeacher(View view){

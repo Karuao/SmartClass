@@ -119,10 +119,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     }
 
     public void toSignInforTeacher(View view) {
-        String classMember = ((TextView)findViewById(R.id.iv_class_member_teacher_allpeople)).getText().toString();
-        Intent intent = new Intent(TeaClassMainActivity.this, TeaMemberSigninActivity.class);
-        intent.putExtra("classMember",classMember);
-        startActivity(intent);
+        startActivity(new Intent(TeaClassMainActivity.this, TeaMemberSigninActivity.class));
     }
 
     //TeaClassHomeworkFragment老师作业界面发布作业点击事件

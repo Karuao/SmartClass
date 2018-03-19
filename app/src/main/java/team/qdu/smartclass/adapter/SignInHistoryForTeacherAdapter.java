@@ -48,8 +48,6 @@ public class SignInHistoryForTeacherAdapter extends SBaseAdapter<Attendance> {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
         String date = sdf.format(itemList.get(position).getCreate_date_time());
         compo.signInTime.setText(date);
-//        String classMember = ((TextView)convertView.findViewById(R.id.classMember)).getText().toString();
-//        compo.totalClassMember.setText(classMember);
         return convertView;
     }
 }
