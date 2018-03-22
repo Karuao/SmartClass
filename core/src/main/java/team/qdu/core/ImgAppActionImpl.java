@@ -41,4 +41,23 @@ public class ImgAppActionImpl implements ImgAppAction {
             }
         }.execute();
     }
+    @Override
+    public void cacheFile(final String urlTail, final ActionCallbackListener<File> listener) {
+        new AsyncTask<Void, Void, File>() {
+
+            @Override
+            protected File doInBackground(Void... params) {
+                return imgApi.cacheImg(urlTail);
+            }
+
+            @Override
+            protected void onPostExecute(File img) {
+                if (img != null) {
+                    listener.onSuccess(img, "文件缓存成功");
+                } else {
+                    listener.onFailure(null, "文件缓存失败");
+                }
+            }
+        }.execute();
+    }
 }

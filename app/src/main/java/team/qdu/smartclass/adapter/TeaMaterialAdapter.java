@@ -28,6 +28,8 @@ public class TeaMaterialAdapter extends SBaseAdapter<Material> {
         public TextView timeTxt;
         public TextView materialidTxt;
         public ImageButton deleteBtn;
+        public TextView urlTxt;
+
 
     }
 
@@ -42,6 +44,7 @@ public class TeaMaterialAdapter extends SBaseAdapter<Material> {
             compo.timeTxt= (TextView) convertView.findViewById(R.id.tv_class_filetime);
             compo.materialidTxt= (TextView) convertView.findViewById(R.id.tv_materialid);
             compo.deleteBtn= (ImageButton) convertView.findViewById(R.id.deleteResource);
+            compo.urlTxt=(TextView)convertView.findViewById(R.id.tv_materialurl);
             convertView.setTag(compo);
         } else {
             compo = (Compo) convertView.getTag();
@@ -52,6 +55,7 @@ public class TeaMaterialAdapter extends SBaseAdapter<Material> {
         compo.nameTxt.setText(itemList.get(position).getName());
         compo.timeTxt.setText(sdf.format(itemList.get(position).getCreate_date_time()));
         compo.materialidTxt.setText(Integer.toString(itemList.get(position).getMaterial_id()));
+        compo.urlTxt.setText(itemList.get(position).getUrl());
 /*        compo.deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -60,14 +64,5 @@ public class TeaMaterialAdapter extends SBaseAdapter<Material> {
             }
         });*/
         return convertView;
-    }
-    public interface onItemDeleteListener {
-        void onDeleteClick(int position);
-    }
-
-    private onItemDeleteListener mOnItemDeleteListener;
-
-    public void setOnItemDeleteClickListener(onItemDeleteListener mOnItemDeleteListener) {
-        this.mOnItemDeleteListener = mOnItemDeleteListener;
     }
 }

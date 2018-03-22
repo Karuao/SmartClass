@@ -1,5 +1,6 @@
 <!--班课资源的listviewitem-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:descendantFocusability="blocksDescendants"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -72,6 +73,7 @@
     <ImageButton
         android:id="@+id/deleteResource"
         android:onClick="deleteMaterial"
+        android:focusable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -89,6 +91,16 @@
         android:layout_marginStart="24dp"
         android:layout_toEndOf="@+id/tv_class_filetime"
         android:layout_toRightOf="@+id/tv_class_filetime"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tv_materialurl"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_class_filetime"
+        android:layout_alignEnd="@+id/tv_materialid"
+        android:layout_alignRight="@+id/tv_materialid"
         android:text="TextView" />
 
 
