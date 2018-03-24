@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -152,7 +153,8 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                 classVpager.setCurrentItem(0);
                 if ("是".equals(getIntent().getStringExtra("ifNewMaterial"))) {
                     getIntent().putExtra("ifNewMaterial", "否");
-                    materailBadgeView.decrementBadgeCount(1);
+                    ((ViewGroup) materailBadgeView.getParent()).removeView(materailBadgeView);
+//                    materailBadgeView.decrementBadgeCount(1);
                     readNew("material");
                 }
                 break;
@@ -165,7 +167,8 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                 classVpager.setCurrentItem(2);
                 if ("是".equals(getIntent().getStringExtra("ifNewHomework"))) {
                     getIntent().putExtra("ifNewHomework", "否");
-                    homeworkBadgeView.decrementBadgeCount(1);
+                    ((ViewGroup) homeworkBadgeView.getParent()).removeView(homeworkBadgeView);
+//                    homeworkBadgeView.decrementBadgeCount(1);
                     readNew("homework");
                 }
                 break;
@@ -191,12 +194,24 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         switch (currentItem) {
             case 0:
                 imgResource.setImageResource(R.drawable.class_resource_select);
+                if ("是".equals(getIntent().getStringExtra("ifNewMaterial"))) {
+                    getIntent().putExtra("ifNewMaterial", "否");
+                    ((ViewGroup) materailBadgeView.getParent()).removeView(materailBadgeView);
+//                    materailBadgeView.decrementBadgeCount(1);
+                    readNew("material");
+                }
                 break;
             case 1:
                 imgMember.setImageResource(R.drawable.class_member_select);
                 break;
             case 2:
                 imgHomework.setImageResource(R.drawable.class_homework_select);
+                if ("是".equals(getIntent().getStringExtra("ifNewHomework"))) {
+                    getIntent().putExtra("ifNewHomework", "否");
+                    ((ViewGroup) homeworkBadgeView.getParent()).removeView(homeworkBadgeView);
+//                    homeworkBadgeView.decrementBadgeCount(1);
+                    readNew("homework");
+                }
                 break;
             case 3:
                 imgInform.setImageResource(R.drawable.class_inform_select);

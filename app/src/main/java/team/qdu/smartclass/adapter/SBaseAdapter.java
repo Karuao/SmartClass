@@ -75,7 +75,7 @@ public abstract class SBaseAdapter<T> extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public T getItem(int i) {
         return itemList.get(i);
     }
 

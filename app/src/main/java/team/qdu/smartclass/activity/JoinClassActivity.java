@@ -9,7 +9,7 @@ import android.widget.Toast;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.SApplication;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by 11602 on 2018/1/31.
@@ -32,7 +32,7 @@ public class JoinClassActivity extends SBaseActivity {
 
     //输入邀请码后加入班课点击事件
     public void toJoinClass(View view) {
-        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        LoadingDialogUtil.createLoadingDialog(this, "加载中...");//加载中动画，用来防止用户重复点击
         classAppAction.joinClass(invitecodeEdt.getText().toString(), getUserId(), new ActionCallbackListener<Class>() {
             @Override
             public void onSuccess(Class data, String message) {
@@ -40,13 +40,13 @@ public class JoinClassActivity extends SBaseActivity {
                 intent.putExtra("data", data);
                 application.addActivity(JoinClassActivity.this);
                 startActivity(intent);
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(JoinClassActivity.this, message, Toast.LENGTH_SHORT).show();
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
     }

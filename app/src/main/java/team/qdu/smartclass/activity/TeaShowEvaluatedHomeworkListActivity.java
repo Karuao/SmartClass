@@ -19,7 +19,6 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.model.HomeworkWithBLOBs;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.HomeworkEvaluateAdapter;
 import team.qdu.smartclass.adapter.HomeworkNotEvaluateAdapter;
 import team.qdu.smartclass.adapter.HomeworkShowPhotoAdapter;
@@ -27,6 +26,7 @@ import team.qdu.smartclass.adapter.HomeworkUncommitAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkFinishFragment;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
 import team.qdu.smartclass.util.ImgUtil;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
@@ -159,7 +159,7 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(TeaShowEvaluatedHomeworkListActivity.this, LoadingActivity.class));
+                            LoadingDialogUtil.createLoadingDialog(TeaShowEvaluatedHomeworkListActivity.this, "加载中...");//加载中动画，用来防止用户重复点击
                             homeworkAppAction.getNotEvaluateStuNum(homeworkId, new ActionCallbackListener<Integer>() {
                                 @Override
                                 public void onSuccess(Integer data, String message) {
@@ -170,7 +170,7 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
                                 public void onFailure(String errorEvent, String message) {
                                     Toast.makeText(TeaShowEvaluatedHomeworkListActivity.this,
                                             "结束班课失败，请稍后再试", Toast.LENGTH_SHORT).show();
-                                    SApplication.clearActivity();//关闭加载中动画
+                                    LoadingDialogUtil.closeDialog();//关闭加载中动画
                                 }
                             });
                         }
@@ -196,13 +196,13 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
                 TeaHomeworkFinishFragment.refreshFlag = true;
                 Toast.makeText(TeaShowEvaluatedHomeworkListActivity.this, message, Toast.LENGTH_SHORT).show();
                 finish();
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(TeaShowEvaluatedHomeworkListActivity.this, message, Toast.LENGTH_SHORT).show();
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
     }

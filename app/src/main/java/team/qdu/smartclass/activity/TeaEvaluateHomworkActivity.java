@@ -22,11 +22,11 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.HomeworkAddPhotoAdapter;
 import team.qdu.smartclass.adapter.HomeworkShowPhotoAdapter;
 import team.qdu.smartclass.util.FileUtil;
 import team.qdu.smartclass.util.ImgUtil;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
@@ -118,7 +118,7 @@ public class TeaEvaluateHomworkActivity extends SBaseActivity implements Adapter
 
     //提交评价点击事件
     public void toSubmitEvaluation(View view) throws URISyntaxException {
-        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        LoadingDialogUtil.createLoadingDialog(this, "上传中...");//加载中动画，用来防止用户重复点击
         String answerExp = answerExpEdt.getText().toString();
         String evaluateRemark = evaluateRemarkEdt.getText().toString();
         photoList = new ArrayList<>();
@@ -142,14 +142,14 @@ public class TeaEvaluateHomworkActivity extends SBaseActivity implements Adapter
                 finish();
                 FileUtil.deleteCompressFiles(photoList);
                 FileUtil.deleteCacheFiles(delPhotoesUrl);
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(TeaEvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();
                 FileUtil.deleteCompressFiles(photoList);
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
 

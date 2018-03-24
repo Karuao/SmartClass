@@ -11,8 +11,8 @@ import android.widget.Toast;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.fragment.MainClassFragment;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by 11602 on 2018/2/4.
@@ -54,7 +54,7 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
     }
 
     public void confirmJoinClass(View view) {
-        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        LoadingDialogUtil.createLoadingDialog(this, "加载中...");//加载中动画，用来防止用户重复点击
         classAppAction.confirmJoinClass(data.getClass_id().toString(), getUserId(), new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data1, String message) {
@@ -66,13 +66,13 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
                 application.clearActivity();
                 finish();
                 startActivity(new Intent(ConfirmJoinClassActivity.this, StuClassMainActivity.class));
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(ConfirmJoinClassActivity.this, message, Toast.LENGTH_SHORT).show();
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
     }

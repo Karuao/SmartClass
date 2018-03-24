@@ -33,9 +33,9 @@ import java.net.URISyntaxException;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.fragment.MainClassFragment;
 import team.qdu.smartclass.util.ImgUtil;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 
 /**
@@ -86,7 +86,7 @@ public class CreateClassActivity extends SBaseActivity {
 
     //创建班课按钮点击事件
     public void finishCreate(View view) throws URISyntaxException {
-        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        LoadingDialogUtil.createLoadingDialog(this, "上传中...");//加载中动画，用来防止用户重复点击
         if (!isDefaultAvatar) {
             classAvatar = new File(new URI(mDestinationUri.toString()));
             classAvatar = ImgUtil.compressAvatarPhoto(this, classAvatar);
@@ -105,14 +105,14 @@ public class CreateClassActivity extends SBaseActivity {
                 intent.putExtra("avatarUri", mDestinationUri);
                 finish();
                 startActivity(intent);
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
                 classAvatar.delete();//删除缓存的压缩图片
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
                 classAvatar.delete();//删除缓存的压缩图片
             }
         });

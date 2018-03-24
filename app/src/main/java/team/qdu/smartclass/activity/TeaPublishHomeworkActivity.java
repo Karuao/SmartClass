@@ -23,10 +23,10 @@ import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.HomeworkAddPhotoAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
 import team.qdu.smartclass.util.ImgUtil;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 import team.qdu.smartclass.view.CustomDatePicker;
 import team.qdu.smartclass.view.HorizontalListView;
 
@@ -76,7 +76,8 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
 
     //发布作业点击事件
     public void toPublish(View view) throws URISyntaxException {
-        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
+//        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        LoadingDialogUtil.createLoadingDialog(this, "上传中...");//加载中动画，用来防止用户重复点击
         String title = homeworkTitleEdt.getText().toString();
         String deadline = homeworkDeadlineTxt.getText().toString();
         String detail = homeworkDetailEdt.getText().toString();
@@ -101,13 +102,15 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
                         Toast.makeText(TeaPublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
                         TeaHomeworkUnderwayFragment.refreshFlag = true;
                         finish();
-                        SApplication.clearActivity();//关闭加载中动画
+//                        SApplication.clearActivity();//关闭加载中动画
+                        LoadingDialogUtil.closeDialog();
                     }
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
                         Toast.makeText(TeaPublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                        SApplication.clearActivity();//关闭加载中动画
+//                        SApplication.clearActivity();//关闭加载中动画
+                        LoadingDialogUtil.closeDialog();
                     }
                 });
     }

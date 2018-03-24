@@ -23,13 +23,12 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.SApplication;
-import team.qdu.smartclass.activity.LoadingActivity;
 import team.qdu.smartclass.activity.MainActivity;
 import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.ClassAdapter;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 
 public class MainClassFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
@@ -115,9 +114,9 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
 
     @Override
-    public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+    public void onItemClick(final AdapterView<?> parent, final View view, final int position, long id) {
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
-        startActivity(new Intent(getActivity(), LoadingActivity.class));//加载中动画，用来防止用户重复点击
+        LoadingDialogUtil.createLoadingDialog(getActivity(), "加载中...");//加载中动画，用来防止用户重复点击
         final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
         parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<ClassUser>() {
             @Override
@@ -138,17 +137,19 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                 startActivity(intent);
                 //取消红点显示
                 BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView");
+//                if ("是".equals(classAdapter.getItem(position).getIf_new_class_thing())) {
                 if (badgeView != null) {
-                    badgeView.decrementBadgeCount(1);
+                    ((ViewGroup) badgeView.getParent()).removeView(badgeView);
+//                    badgeView.decrementBadgeCount(1);
                     parentActivity.classAppAction.readNew(getClassUserId(), "classList");
                 }
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                SApplication.clearActivity();//关闭加载中动画
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
     }

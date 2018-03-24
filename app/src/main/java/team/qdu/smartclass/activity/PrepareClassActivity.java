@@ -40,6 +40,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.MainUserFragment;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * 创建加入班课之前的工作，保证个人信息完整
@@ -128,6 +129,7 @@ public class PrepareClassActivity extends SBaseActivity {
     }
 
     public void confirmClick(View view) throws URISyntaxException {
+        LoadingDialogUtil.createLoadingDialog(this, "上传中...");//加载中动画，用来防止用户重复点击
         File file = null;
         if (!isDefaultAvatar) {
             file = new File(new URI(mDestinationUri.toString()));
@@ -150,9 +152,11 @@ public class PrepareClassActivity extends SBaseActivity {
                         if ("create".equals(getIntent().getStringExtra("do"))) {
                             finish();
                             startActivity(new Intent(PrepareClassActivity.this, CreateClassActivity.class));
+                            LoadingDialogUtil.closeDialog();//关闭加载中动画
                         } else {
                             finish();
                             startActivity(new Intent(PrepareClassActivity.this, JoinClassActivity.class));
+                            LoadingDialogUtil.closeDialog();//关闭加载中动画
                         }
                     }
 
