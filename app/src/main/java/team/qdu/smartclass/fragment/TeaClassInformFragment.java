@@ -1,7 +1,6 @@
 package team.qdu.smartclass.fragment;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +20,6 @@ import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.activity.TeaInformDetailActivity;
 import team.qdu.smartclass.adapter.TeaInfoAdapter;
 
-import static android.content.Context.MODE_PRIVATE;
-
 /**
  * Created by rjmgc on 2018/1/17.
  */
@@ -36,6 +33,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
     TeaClassMainActivity parentActivity;
     //刷新标志
     public static boolean refreshFlag;
+    Bundle mBundle = new Bundle();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,6 +90,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
         intent.putExtra("time", time);
         intent.putExtra("read_num", read_num);
         intent.putExtra("informid", inform_id);
+        intent.putExtras(mBundle);
         startActivity(intent);
     }
 
@@ -100,10 +99,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
 
             @Override
             public void onSuccess(Void data, String message) {
-                SharedPreferences unreadNumSetting = parentActivity.getSharedPreferences("unreadNum", MODE_PRIVATE);
-                SharedPreferences.Editor editor = unreadNumSetting.edit();
-                editor.putString("unreadNum", message);
-                editor.commit();
+                mBundle.putString("unreadnumber", message);
             }
 
             @Override

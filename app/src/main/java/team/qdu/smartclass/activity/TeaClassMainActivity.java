@@ -16,7 +16,6 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.TeaClassFragmentPagerAdapter;
-import team.qdu.smartclass.adapter.TeaMaterialAdapter;
 import team.qdu.smartclass.fragment.TeaClassMaterialFragment;
 
 /**
@@ -30,7 +29,6 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
     private ViewPager classVpager;
     private TeaClassFragmentPagerAdapter teaClassFragmentPagerAdapter;
-    private TeaMaterialAdapter teaMaterialAdapter;
     //tab
     private LinearLayout tabResource;
     private LinearLayout tabMember;
@@ -204,7 +202,9 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                         TeaClassMaterialFragment.refreshFlag = true;
-                                        finish();
+                                        teaClassFragmentPagerAdapter.getTeaClassMaterialFragment().getMaterial();
+
+
                                     }
 
                                     @Override

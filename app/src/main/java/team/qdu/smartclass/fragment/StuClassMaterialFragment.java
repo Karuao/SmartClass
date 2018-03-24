@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.List;
 
+import team.qdu.api.util.OpenFileUtil;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Material;
 import team.qdu.smartclass.R;
@@ -21,7 +24,7 @@ import team.qdu.smartclass.adapter.StuMaterialAdapter;
  * Created by rjmgc on 2018/1/17.
  */
 
-public class StuClassMaterialFragment extends SBaseFragment {
+public class StuClassMaterialFragment extends SBaseFragment implements AdapterView.OnItemClickListener{
     ListView listview;
     StuClassMainActivity parentActivity;
     //刷新标志
@@ -38,6 +41,7 @@ public class StuClassMaterialFragment extends SBaseFragment {
         refreshFlag = false;
         initView();
         getMaterial();
+        listview.setOnItemClickListener(this);
         return currentPage;
     }
 
@@ -66,6 +70,27 @@ public class StuClassMaterialFragment extends SBaseFragment {
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final String name = ((TextView) view.findViewById(R.id.tv_class_filename)).getText().toString();
+        final String url = ((TextView) view.findViewById(R.id.tv_materialurl)).getText().toString();
+        String urltail = url;
+        parentActivity.imgAppAction.cacheFile(urltail, new ActionCallbackListener<File>() {
+            @Override
+            public void onSuccess(File data, String message) {
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                OpenFileUtil openFileUtil=new OpenFileUtil();
+                openFileUtil.openFileByPath(getContext(),url);
+
+
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
     }

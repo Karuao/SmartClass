@@ -12,6 +12,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.List;
 
+import team.qdu.api.util.OpenFileUtil;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Material;
 import team.qdu.smartclass.R;
@@ -58,9 +59,8 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
         titleBarClassNameTxt.setText(((SBaseActivity) getActivity()).getCourse());
     }
 
-    private void getMaterial() {
-        String classid = getClassId();
-        parentActivity.materialAppAction.getTeaMaterial(classid, new ActionCallbackListener<List<Material>>() {
+    public void getMaterial() {
+        parentActivity.materialAppAction.getTeaMaterial(parentActivity.getClassId(), new ActionCallbackListener<List<Material>>() {
 
             @Override
             public void onSuccess(List<Material> data, String message) {
@@ -83,6 +83,10 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
             @Override
             public void onSuccess(File data, String message) {
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                OpenFileUtil openFileUtil=new OpenFileUtil();
+                openFileUtil.openFileByPath(getContext(),url);
+
+
             }
 
             @Override

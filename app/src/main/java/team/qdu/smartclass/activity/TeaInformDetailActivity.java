@@ -1,7 +1,6 @@
 package team.qdu.smartclass.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,6 +24,7 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
     private TextView tvTime;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,20 +39,20 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
         tvRead_number = (TextView) findViewById(R.id.tv_class_inform_readnumber);
         tvUnRead_number = (TextView) findViewById(R.id.tv_class_inform_unreadnumber);
         LoutUnRead_number = (LinearLayout) findViewById(R.id.ll_class_inform_unreadnumber);
-        LoutRead_number.setOnClickListener(this);
-        LoutUnRead_number.setOnClickListener(this);
-
         String detail = getIntent().getStringExtra("detail");
         String time = getIntent().getStringExtra("time");
         String read_num = getIntent().getStringExtra("read_num");
 
-        SharedPreferences unreadNumSetting = getSharedPreferences("unreadNum", MODE_PRIVATE);
-        String unread_num = unreadNumSetting.getString("unreadNum", "");
+        Bundle bundle = getIntent().getExtras();
+        String unread_num=bundle.getString("unreadnumber");
 
         tvDetial.setText(detail);
         tvRead_number.setText(read_num);
         tvUnRead_number.setText(unread_num + "人未读");
         tvTime.setText(time);
+        LoutRead_number.setOnClickListener(this);
+        LoutUnRead_number.setOnClickListener(this);
+
     }
 
     public void toDeleteInform(View view) {

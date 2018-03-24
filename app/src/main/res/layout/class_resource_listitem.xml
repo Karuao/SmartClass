@@ -8,10 +8,12 @@
 
     <ImageView
         android:id="@+id/iv_class_file"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:src="@drawable/add_class_img" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignBottom="@+id/tv_class_filetime"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/file" />
 
     <TextView
         android:id="@+id/tv_class_filename"
@@ -68,6 +70,26 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_materialid"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/linearLayout2"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_toEndOf="@+id/tv_class_filetime"
+        android:layout_toRightOf="@+id/tv_class_filetime"
+        android:text="TextView" />
 
+    <TextView
+        android:id="@+id/tv_materialurl"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_class_filetime"
+        android:layout_alignEnd="@+id/tv_materialid"
+        android:layout_alignRight="@+id/tv_materialid"
+        android:text="TextView" />
 
 </RelativeLayout>

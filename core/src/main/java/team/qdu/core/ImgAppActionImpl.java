@@ -47,15 +47,15 @@ public class ImgAppActionImpl implements ImgAppAction {
 
             @Override
             protected File doInBackground(Void... params) {
-                return imgApi.cacheImg(urlTail);
+                return imgApi.cacheFile(urlTail);
             }
 
             @Override
             protected void onPostExecute(File img) {
                 if (img != null) {
-                    listener.onSuccess(img, "文件缓存成功");
+                    listener.onSuccess(img, "文件下载成功");
                 } else {
-                    listener.onFailure(null, "文件缓存失败");
+                    listener.onFailure(null, "文件下载失败");
                 }
             }
         }.execute();

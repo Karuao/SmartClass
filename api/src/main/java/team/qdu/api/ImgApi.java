@@ -9,4 +9,5 @@ import java.io.File;
 public interface ImgApi {
 
     public File cacheImg(String urlTail);
+    public File cacheFile(String urlTail);
 }

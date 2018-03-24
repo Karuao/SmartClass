@@ -65,4 +65,7 @@ public class TeaClassFragmentPagerAdapter extends FragmentPagerAdapter {
     public TeaClassHomeworkFragment getTeaClassHomeworkFragment() {
         return teaClassHomeworkFragment;
     }
+    public TeaClassMaterialFragment getTeaClassMaterialFragment(){
+        return teaClassMaterialFragment;
+    }
 }

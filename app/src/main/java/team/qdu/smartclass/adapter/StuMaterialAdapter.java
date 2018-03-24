@@ -25,6 +25,8 @@ public class StuMaterialAdapter extends SBaseAdapter<Material> {
     public final class Compo {
         public TextView nameTxt;
         public TextView timeTxt;
+        public TextView urlTxt;
+        public TextView materialidTxt;
 
     }
 
@@ -37,6 +39,8 @@ public class StuMaterialAdapter extends SBaseAdapter<Material> {
             convertView = layoutInflater.inflate(R.layout.class_resource_listitem, null);
             compo.nameTxt = (TextView) convertView.findViewById(R.id.tv_class_filename);
             compo.timeTxt= (TextView) convertView.findViewById(R.id.tv_class_filetime);
+            compo.urlTxt=(TextView)convertView.findViewById(R.id.tv_materialurl);
+            compo.materialidTxt= (TextView) convertView.findViewById(R.id.tv_materialid);
             convertView.setTag(compo);
         } else {
             compo = (Compo) convertView.getTag();
@@ -44,6 +48,8 @@ public class StuMaterialAdapter extends SBaseAdapter<Material> {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         compo.nameTxt.setText(itemList.get(position).getName());
         compo.timeTxt.setText(sdf.format(itemList.get(position).getCreate_date_time()));
+        compo.materialidTxt.setText(Integer.toString(itemList.get(position).getMaterial_id()));
+        compo.urlTxt.setText(itemList.get(position).getUrl());
         return convertView;
     }
 }

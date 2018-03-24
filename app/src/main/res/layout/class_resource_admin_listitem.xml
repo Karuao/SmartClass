@@ -9,10 +9,12 @@
 
     <ImageView
         android:id="@+id/iv_class_file"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:src="@drawable/add_class_img" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignBottom="@+id/tv_class_filetime"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/file" />
 
     <TextView
         android:id="@+id/tv_class_filename"
@@ -79,7 +81,7 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/linearLayout"
         android:layout_toStartOf="@+id/linearLayout"
-        app:srcCompat="@drawable/delete" />
+        app:srcCompat="@drawable/delete1" />
 
     <TextView
         android:id="@+id/tv_materialid"
