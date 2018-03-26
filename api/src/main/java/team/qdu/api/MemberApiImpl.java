@@ -16,6 +16,7 @@ import team.qdu.api.net.HttpEngine;
 import team.qdu.api.net.ImgHttpEngine;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.Attendance;
+import team.qdu.model.Attendance_user;
 import team.qdu.model.ClassUser;
 
 /**
@@ -73,6 +74,25 @@ public class MemberApiImpl implements MemberApi {
         }
     }
 
+    //学生获取签到历史
+    @Override
+    public ApiResponse<List<Attendance_user>> getStudentSignInHistory(String userId,String classId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("userId",userId);
+        paramMap.put("classId", classId);
+
+        Type type = new TypeToken<ApiResponse<List<Attendance_user>>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getStudentSignInHistory");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
     @Override
     public Bitmap getBitmap(String urlTail) {
         try {
@@ -102,6 +122,40 @@ public class MemberApiImpl implements MemberApi {
     }
 
     @Override
+    public ApiResponse<List<Attendance>> getAttendanceInfo(String classId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("classId", classId);
+
+        Type type = new TypeToken<ApiResponse<List<Attendance>>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getAttendanceInfo");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<List<Attendance_user>> getAttendanceUserInfo(String attendanceId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("attendanceId", attendanceId);
+
+        Type type = new TypeToken<ApiResponse<List<Attendance_user>>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getAttendanceUserInfo");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
     public ApiResponse<Void> shiftClass(String classUserId) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("classUserId", classUserId);
@@ -110,6 +164,59 @@ public class MemberApiImpl implements MemberApi {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/shiftClass");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<Void> setStudentSignIn(String attendanceUserId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("attendanceUserId", attendanceUserId);
+
+        Type type = new TypeToken<ApiResponse<Void>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/setStudentSignIn");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<Void> setStudentNotSignIn(String attendanceUserId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("attendanceUserId", attendanceUserId);
+
+        Type type = new TypeToken<ApiResponse<Void>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/setStudentNotSignIn");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<Attendance_user> beginSignInForStudent(String userId,String attendanceId,String classUserId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("userId", userId);
+        paramMap.put("attendanceId",attendanceId);
+        paramMap.put("classUserId",classUserId);
+
+        Type type = new TypeToken<ApiResponse<Attendance_user>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/beginSignInForStudent");
         } catch (IOException e) {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());

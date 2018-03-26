@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--教师点击签到后进入的签到页面-->
+<!--显示签到结果页面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/class_top"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:background="#00000000"
-                android:onClick="giveUpSignIn"
+                android:onClick="toBack"
                 android:src="@drawable/left_goback" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -44,7 +45,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="签到中"
+                android:text="签到结果"
                 android:textColor="@color/bg_white"
                 android:textSize="21sp"
                 android:textStyle="normal" />
@@ -54,84 +55,91 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <ListView
-            android:id="@+id/signIn_list_student_forTeacher"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp">
-
-        </ListView>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_weight="1"
-        android:gravity="center|bottom"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/class_member_signining_signinstudent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:text="0"
-            android:textColor="@color/colorRank"
-            android:textSize="30dp" />
-
-        <TextView
-            android:id="@+id/symbol"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:text="/"
-            android:textSize="30dp" />
+            android:text="已签到" />
 
 
         <TextView
-            android:id="@+id/class_member_signining_allstudent"
+            android:id="@+id/iv_class_member_signInMember"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
             android:layout_marginTop="5dp"
-            android:text="2"
-            android:textSize="30dp" />
+            android:layout_toLeftOf="@+id/tv_class_people"
+            android:text="?"
+            android:textColor="@color/colorRank" />
+
+
+        <TextView
+            android:id="@+id/tv_class_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:text="人"
+            android:textColor="@color/text_yellow" />
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <ListView
+        android:id="@+id/list_signin_signIn_student"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:layout_marginTop="0dp">
+
+    </ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp">
+        android:orientation="horizontal">
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/shape_button_yellow"
-            android:padding="10dp"
-            android:onClick="giveUpSignIn"
-            android:text="放弃签到"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="未签到" />
 
-        <Button
+
+        <TextView
+            android:id="@+id/iv_class_member_notSignInMember"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/shape_button_warn"
-            android:padding="10dp"
-            android:text="结束签到"
-            android:onClick="endSignIn"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@+id/tv_class_people2"
+            android:text="?"
+            android:textColor="@color/colorRank" />
 
-    </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_class_people2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:text="人"
+            android:textColor="@color/text_yellow" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list_signin_notSignIn_student"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:layout_marginTop="0dp">
+
+    </ListView>
 </LinearLayout>

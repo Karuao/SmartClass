@@ -6,6 +6,7 @@ import java.util.List;
 
 import team.qdu.model.ApiResponse;
 import team.qdu.model.Attendance;
+import team.qdu.model.Attendance_user;
 import team.qdu.model.ClassUser;
 
 /**
@@ -20,7 +21,17 @@ public interface MemberApi {
 
     public ApiResponse<ClassUser> searchByClassUserId(String classUserId);
 
+    public ApiResponse<List<Attendance>> getAttendanceInfo(String classId);
+
+    public ApiResponse<List<Attendance_user>> getAttendanceUserInfo(String attendanceId);
+
     public ApiResponse<Void> shiftClass(String classUserId);
+
+    public ApiResponse<Void> setStudentSignIn(String attendanceUserId);
+
+    public ApiResponse<Void> setStudentNotSignIn(String attendanceUserId);
+
+    public ApiResponse<Attendance_user> beginSignInForStudent(String userId, String attendanceId,String classUserId);
 
     public ApiResponse<Attendance> beginSignInForTeacher(String classId);
 
@@ -29,4 +40,6 @@ public interface MemberApi {
     public ApiResponse<Void> endSignIn(String attendanceId);
 
     public ApiResponse<List<Attendance>> getTeacherSignInHistory(String classId);
+
+    public ApiResponse<List<Attendance_user>> getStudentSignInHistory(String userId,String classId);
 }

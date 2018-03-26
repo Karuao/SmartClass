@@ -62,6 +62,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/button_signIn_student"
             android:layout_width="221dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -70,9 +71,9 @@
             android:gravity="center"
             android:onClick="signInforStudent"
             android:padding="10dp"
-            android:text="开始签到"
+            android:text="签到"
             android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -89,13 +90,22 @@
             android:text="历史签到记录" />
 
         <TextView
-            android:id="@+id/iv_class_member_allpeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@+id/iv_class_member_signInRate"
+            android:text="出勤率"
+            android:textColor="@color/text_yellow" />
+
+        <TextView
+            android:id="@+id/iv_class_member_signInRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_toLeftOf="@+id/tv_class_people"
             android:text="?"
-            android:textColor="@color/text_yellow" />
+            android:textColor="@color/colorRank"
+            android:maxLength="4"/>
 
 
         <TextView

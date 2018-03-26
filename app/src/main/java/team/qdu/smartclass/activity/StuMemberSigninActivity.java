@@ -1,9 +1,21 @@
 package team.qdu.smartclass.activity;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.List;
+
+import team.qdu.core.ActionCallbackListener;
+import team.qdu.model.Attendance;
+import team.qdu.model.Attendance_user;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.adapter.SignInHistoryForStudentAdapter;
 
 
 /**
@@ -13,13 +25,105 @@ import team.qdu.smartclass.R;
  */
 public class StuMemberSigninActivity extends SBaseActivity {
 
+    private ListView listView;
+    private TextView signInRate;
+    private Button button;
+
+    public static boolean refreshFlag = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_member_signin_student);
+        initView();
+        getStudentSignInHistory();
     }
 
-    public void signInforStudent(View view){
+    public void initView(){
+        listView = (ListView)findViewById(R.id.list_signin_history_student);
+        signInRate = (TextView)findViewById(R.id.iv_class_member_signInRate);
+        button = (Button)findViewById(R.id.button_signIn_student);
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (refreshFlag) {
+            getStudentSignInHistory();
+            refreshFlag = false;
+        }
+    }
+
+    //学生签到
+    public void signInforStudent(View view){
+        this.memberAppAction.getAttendanceInfo(getClassId(), new ActionCallbackListener<List<Attendance>>() {
+            @Override
+            public void onSuccess(List<Attendance> data, String message) {
+                if(data.size()==0){
+                    new AlertDialog.Builder(StuMemberSigninActivity.this)
+                            .setTitle("提示")
+                            .setMessage("未开始签到或签到已结束！")
+                            .setPositiveButton("确定",null)
+                            .show();
+                }else {
+                    if (!data.get(0).getIf_open().equals("签到中")) {
+                        new AlertDialog.Builder(StuMemberSigninActivity.this)
+                                .setTitle("提示")
+                                .setMessage("未开始签到或签到已结束！")
+                                .setPositiveButton("确定", null)
+                                .show();
+                    } else {
+                        StuMemberSigninActivity.this.memberAppAction.beginSignInForStudent(getUserId(), data.get(0).getAttendance_id().toString(), getClassUserId(),new ActionCallbackListener<Attendance_user>() {
+                            @Override
+                            public void onSuccess(Attendance_user data, String message) {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                getStudentSignInHistory();
+                            }
+
+                            @Override
+                            public void onFailure(String errorEvent, String message) {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //获取签到历史记录
+    private void getStudentSignInHistory() {
+        this.memberAppAction.getStudentSignInHistory(getUserId(),getClassId(), new ActionCallbackListener<List<Attendance_user>>() {
+            @Override
+            public void onSuccess(List<Attendance_user> data, String message) {
+                double attendanceNum=0.0;
+                double totalNum;
+                double rate;
+                listView.setAdapter(new SignInHistoryForStudentAdapter(context,data));
+                totalNum = data.size();
+                for (Attendance_user au:data) {
+                    if(au.getAttendance_status().equals("已签到")){
+                        attendanceNum++;
+                    }
+                }
+                if(totalNum==0){
+                    rate=0.0;
+                }
+                else {
+                    rate = attendanceNum / totalNum * 100;
+                }
+                signInRate.setText(String.valueOf(rate));
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

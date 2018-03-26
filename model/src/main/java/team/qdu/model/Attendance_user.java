@@ -20,6 +20,26 @@ public class Attendance_user  implements Serializable {
 
     private Date modify_date_time;
 
+    private Attendance attendance;
+
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getAttendance_user_id() {

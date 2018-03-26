@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import java.util.List;
 
 import team.qdu.model.Attendance;
+import team.qdu.model.Attendance_user;
 import team.qdu.model.ClassUser;
 
 /**
@@ -36,4 +37,22 @@ public interface MemberAppAction {
 
     //教师获取签到历史
     public void getTeacherSignInHistory(String classId,ActionCallbackListener<List<Attendance>> listener);
+
+    //学生获取签到历史
+    public void getStudentSignInHistory(String userId,String classId,ActionCallbackListener<List<Attendance_user>> listener);
+
+    //学生签到
+    public void beginSignInForStudent(String userId,String attendanceId,String classUserId,ActionCallbackListener<Attendance_user> listener);
+
+    //获得签到信息
+    public void getAttendanceInfo(String classId,ActionCallbackListener<List<Attendance>> listener);
+
+    //获得学生签到信息
+    public void getAttendanceUserInfo(String attendanceId,ActionCallbackListener<List<Attendance_user>> listener);
+
+    //教师端设置学生为已签到
+    public void setStudentSignIn(String attendanceUserId,ActionCallbackListener<Void> listener);
+
+    //教师端设置学生为未签到
+    public void setStudentNotSignIn(String attendanceUserId,ActionCallbackListener<Void> listener);
 }

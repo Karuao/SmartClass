@@ -50,6 +50,7 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.CropActivity"></activity>
         <activity android:name=".activity.ShowInviteCodeActivity"></activity>
+        <activity android:name=".activity.ShowSignInResultActivity"></activity>
         <activity android:name=".activity.InformReadActivity"></activity>
         <activity android:name=".activity.InformUnReadActivity"></activity>
         <activity android:name=".activity.ConfirmJoinClassActivity"></activity>
@@ -73,6 +74,20 @@
         <activity android:name=".activity.CropActivity2"></activity>
         <activity android:name=".activity.ShowMemberDetailActivity"></activity>
         <activity android:name=".activity.LoadingActivity"></activity>
+
+        <receiver
+            android:name=".adapter.TeaSignInReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <category android:name="team.qdu.smartclass" />
+            </intent-filter>
+        </receiver>
     </application>
 
 

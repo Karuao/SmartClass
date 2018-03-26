@@ -1,14 +1,17 @@
 package team.qdu.smartclass.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Attendance;
 import team.qdu.smartclass.R;
@@ -40,9 +43,10 @@ public class TeaMemberSigninActivity extends SBaseActivity{
             @Override
             public void onSuccess(Attendance data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(TeaMemberSigninActivity.this, TeaMemberSigniningActivity.class);
-                intent.putExtra("attendanceId",data.getAttendance_id().toString());
-                startActivity(intent);
+                    Intent intent = new Intent(TeaMemberSigninActivity.this, TeaMemberSigniningActivity.class);
+                    intent.putExtra("attendanceId", data.getAttendance_id().toString());
+                    JPushInterface.setAlias(context,123,getUserId());
+                    startActivity(intent);
             }
 
             @Override
@@ -52,12 +56,21 @@ public class TeaMemberSigninActivity extends SBaseActivity{
         });
     }
 
-    //获取登录用户的班课成员列表
+    //获取签到历史记录
     private void getTeacherSignInHistory() {
         this.memberAppAction.getTeacherSignInHistory(getClassId(), new ActionCallbackListener<List<Attendance>>() {
             @Override
-            public void onSuccess(List<Attendance> data, String message) {
+            public void onSuccess(final List<Attendance> data, String message) {
                 listView.setAdapter(new SignInHistoryForTeacherAdapter(context,data));
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String attendanceId = data.get(position).getAttendance_id().toString();
+                        Intent intent = new Intent(TeaMemberSigninActivity.this,ShowSignInResultActivity.class);
+                        intent.putExtra("attendanceId",attendanceId);
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override

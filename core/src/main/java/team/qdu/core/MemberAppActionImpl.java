@@ -10,6 +10,7 @@ import team.qdu.api.MemberApi;
 import team.qdu.api.MemberApiImpl;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.Attendance;
+import team.qdu.model.Attendance_user;
 import team.qdu.model.ClassUser;
 
 /**
@@ -89,6 +90,69 @@ public class MemberAppActionImpl implements MemberAppAction {
         return null;
     }
 
+    //获取签到信息
+    @Override
+    public void getAttendanceInfo(final String classId, final ActionCallbackListener<List<Attendance>> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<List<Attendance>>>() {
+            @Override
+            protected ApiResponse<List<Attendance>> doInBackground(Void... params) {
+                return memberApi.getAttendanceInfo(classId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<List<Attendance>> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObjList(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    //获取学生签到信息
+    @Override
+    public void getAttendanceUserInfo(final String attendanceId, final ActionCallbackListener<List<Attendance_user>> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<List<Attendance_user>>>() {
+            @Override
+            protected ApiResponse<List<Attendance_user>> doInBackground(Void... params) {
+                return memberApi.getAttendanceUserInfo(attendanceId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<List<Attendance_user>> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObjList(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    //学生获取签到历史
+    @Override
+    public void getStudentSignInHistory(final String userId,final String classId, final ActionCallbackListener<List<Attendance_user>> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<List<Attendance_user>>>() {
+            @Override
+            protected ApiResponse<List<Attendance_user>> doInBackground(Void... params) {
+                return memberApi.getStudentSignInHistory(userId,classId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<List<Attendance_user>> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObjList(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
     //教师获取签到历史
     @Override
     public void getTeacherSignInHistory(final String classId, final ActionCallbackListener<List<Attendance>> listener) {
@@ -124,6 +188,69 @@ public class MemberAppActionImpl implements MemberAppAction {
             protected void onPostExecute(ApiResponse<Void> response) {
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    //教师端设置学生为已签到
+    @Override
+    public void setStudentSignIn(final String attendanceUserId,final ActionCallbackListener<Void> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return memberApi.setStudentSignIn(attendanceUserId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    //教师端设置学生为未签到
+    @Override
+    public void setStudentNotSignIn(final String attendanceUserId,final ActionCallbackListener<Void> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+            @Override
+            protected ApiResponse<Void> doInBackground(Void... params) {
+                return memberApi.setStudentNotSignIn(attendanceUserId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Void> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(null, response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    //学生签到
+    @Override
+    public void beginSignInForStudent(final String userId,final String attendanceId,final String classUserId, final ActionCallbackListener<Attendance_user> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<Attendance_user>>() {
+            @Override
+            protected ApiResponse<Attendance_user> doInBackground(Void... params) {
+                return memberApi.beginSignInForStudent(userId,attendanceId,classUserId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<Attendance_user> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
                     listener.onFailure(response.getEvent(), response.getMsg());
                 }
