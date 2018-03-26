@@ -28,6 +28,7 @@ public class TeaSignInReceiver extends BroadcastReceiver {
             System.out.println("收到了自定义消息："+bundle.getString(JPushInterface.EXTRA_MESSAGE));
             // 自定义消息不会展示在通知栏，完全要开发者写代码去处理
             Intent i = new Intent(context, TeaMemberSigniningActivity.class);
+            i.putExtra("attendanceId",bundle.getString(JPushInterface.EXTRA_MESSAGE));
             context.startActivity(i);
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             System.out.println("收到了通知");
