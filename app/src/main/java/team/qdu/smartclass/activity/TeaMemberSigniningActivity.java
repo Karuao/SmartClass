@@ -28,7 +28,7 @@ import team.qdu.smartclass.adapter.SignInStudentAdapter;
 public class TeaMemberSigniningActivity  extends SBaseActivity{
 
     private TextView classTotalMember;
-    private TextView signInStuNum;
+    public TextView signInStuNum;
     private ListView stuSignIn;
 
     @Override
