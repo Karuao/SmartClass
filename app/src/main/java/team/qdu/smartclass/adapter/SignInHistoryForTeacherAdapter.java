@@ -48,6 +48,7 @@ public class SignInHistoryForTeacherAdapter extends SBaseAdapter<Attendance> {
         String date = sdf.format(itemList.get(position).getCreate_date_time());
         compo.signInTime.setText(date);
         compo.totalClassMember.setText(itemList.get(position).getStu_num().toString());
+        compo.signInNumber.setText(itemList.get(position).getAttendance_stu_count().toString());
         return convertView;
     }
 }

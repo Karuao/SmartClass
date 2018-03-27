@@ -30,7 +30,7 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
     private TextView classTotalMember;
     private TextView signInStuNum;
     private ListView stuSignIn;
-    private SignInStudentAdapter signInStudentAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +60,7 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                             @Override
                             public void onSuccess(Void data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                SApplication.clearActivity();
                                 finish();
                             }
 
@@ -89,6 +90,7 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                             public void onSuccess(Void data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                 finish();
+                                SApplication.clearActivity();
                                 Intent intent1 = new Intent(TeaMemberSigniningActivity.this,ShowSignInResultActivity.class);
                                 intent1.putExtra("attendanceId",attendanceId);
                                 startActivity(intent1);
@@ -154,6 +156,7 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                                     @Override
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                        SApplication.clearActivity();
                                         finish();
                                     }
 
@@ -171,8 +174,5 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
         return super.dispatchKeyEvent(event);
     }
 
-    public SignInStudentAdapter getSignInStudentAdapter() {
-        return signInStudentAdapter;
-    }
 
 }

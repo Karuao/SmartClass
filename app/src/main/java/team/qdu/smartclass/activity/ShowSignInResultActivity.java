@@ -35,6 +35,7 @@ public class ShowSignInResultActivity extends SBaseActivity{
         setContentView(R.layout.class_member_signin_result);
         initView();
         getList();
+        TeaMemberSigninActivity.refreshFlag = true;
     }
 
     public void initView(){

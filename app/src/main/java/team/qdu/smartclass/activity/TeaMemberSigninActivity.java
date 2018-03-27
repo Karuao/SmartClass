@@ -24,6 +24,8 @@ import team.qdu.smartclass.adapter.SignInHistoryForTeacherAdapter;
 public class TeaMemberSigninActivity extends SBaseActivity{
 
     private ListView listView;
+    public static boolean refreshFlag = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,16 @@ public class TeaMemberSigninActivity extends SBaseActivity{
 
     public void initView(){
         listView = (ListView)findViewById(R.id.list_signin_history_teacher);
+    }
+
+    //页面从后台返回到前台运行
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (refreshFlag) {
+            getTeacherSignInHistory();
+            refreshFlag = false;
+        }
     }
 
     public void signInforTeacher(View view){
