@@ -197,18 +197,18 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //教师端设置学生为已签到
     @Override
-    public void setStudentSignIn(final String attendanceUserId,final ActionCallbackListener<List<Attendance_user>> listener) {
+    public void setStudentSignIn(final String attendanceUserId,final ActionCallbackListener<Void> listener) {
         //请求Api
-        new AsyncTask<Void, Void, ApiResponse<List<Attendance_user>>>() {
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
             @Override
-            protected ApiResponse<List<Attendance_user>> doInBackground(Void... params) {
+            protected ApiResponse<Void> doInBackground(Void... params) {
                 return memberApi.setStudentSignIn(attendanceUserId);
             }
 
             @Override
-            protected void onPostExecute(ApiResponse<List<Attendance_user>> response) {
+            protected void onPostExecute(ApiResponse<Void> response) {
                 if (response.isSuccess()) {
-                    listener.onSuccess(response.getObjList(), response.getMsg());
+                    listener.onSuccess(null, response.getMsg());
                 } else {
                     listener.onFailure(response.getEvent(), response.getMsg());
                 }
@@ -218,18 +218,18 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //教师端设置学生为未签到
     @Override
-    public void setStudentNotSignIn(final String attendanceUserId,final ActionCallbackListener<List<Attendance_user>> listener) {
+    public void setStudentNotSignIn(final String attendanceUserId,final ActionCallbackListener<Void> listener) {
         //请求Api
-        new AsyncTask<Void, Void, ApiResponse<List<Attendance_user>>>() {
+        new AsyncTask<Void, Void, ApiResponse<Void>>() {
             @Override
-            protected ApiResponse<List<Attendance_user>> doInBackground(Void... params) {
+            protected ApiResponse<Void> doInBackground(Void... params) {
                 return memberApi.setStudentNotSignIn(attendanceUserId);
             }
 
             @Override
-            protected void onPostExecute(ApiResponse<List<Attendance_user>> response) {
+            protected void onPostExecute(ApiResponse<Void> response) {
                 if (response.isSuccess()) {
-                    listener.onSuccess(response.getObjList(), response.getMsg());
+                    listener.onSuccess(null, response.getMsg());
                 } else {
                     listener.onFailure(response.getEvent(), response.getMsg());
                 }

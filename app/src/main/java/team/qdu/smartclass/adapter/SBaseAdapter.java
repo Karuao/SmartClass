@@ -50,11 +50,6 @@ public abstract class SBaseAdapter<T> extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void deleteItems(List<T> itemList){
-        this.itemList.removeAll(itemList);
-        notifyDataSetChanged();
-    }
-
     /**
      * 设置为新的数据，旧数据会被清空
      *
