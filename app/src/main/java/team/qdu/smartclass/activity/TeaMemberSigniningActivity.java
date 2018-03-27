@@ -18,6 +18,7 @@ import team.qdu.model.Attendance;
 import team.qdu.model.Attendance_user;
 import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.SignInStudentAdapter;
 
 /**
@@ -29,11 +30,13 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
     private TextView classTotalMember;
     private TextView signInStuNum;
     private ListView stuSignIn;
+    private SignInStudentAdapter signInStudentAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_member_signining_teacher);
         initView();
+        SApplication.addActivity(this);
         getSignInStudent();
     }
 
@@ -166,6 +169,10 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
             }
         }
         return super.dispatchKeyEvent(event);
+    }
+
+    public SignInStudentAdapter getSignInStudentAdapter() {
+        return signInStudentAdapter;
     }
 
 }

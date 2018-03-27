@@ -1,5 +1,6 @@
 package team.qdu.smartclass.adapter;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import cn.jpush.android.api.JPushInterface;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.activity.TeaMemberSigniningActivity;
 
@@ -24,12 +26,11 @@ public class TeaSignInReceiver extends BroadcastReceiver {
         Log.d(TAG, "onReceive - " + intent.getAction());
 
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
+           // ((TeaMemberSigniningActivity) SApplication.getActivityList().get(0)).getSignInStudentAdapter().addItems();
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             System.out.println("收到了自定义消息："+bundle.getString(JPushInterface.EXTRA_MESSAGE));
             // 自定义消息不会展示在通知栏，完全要开发者写代码去处理
-            Intent i = new Intent(context, TeaMemberSigniningActivity.class);
-            i.putExtra("attendanceId",bundle.getString(JPushInterface.EXTRA_MESSAGE));
-            context.startActivity(i);
+            ((TeaMemberSigniningActivity) SApplication.getActivityList().get(0)).getSignInStudent();
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             System.out.println("收到了通知");
             // 在这里可以做些统计，或者做些其他工作

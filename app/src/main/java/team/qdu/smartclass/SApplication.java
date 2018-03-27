@@ -116,6 +116,10 @@ public class SApplication extends Application {
         activityList.add(activity);
     }
 
+    public static List<Activity> getActivityList() {
+        return activityList;
+    }
+
     //finish list中的所有的Activity
     public static void clearActivity() {
         if (activityList != null) {
