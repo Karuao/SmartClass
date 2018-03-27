@@ -29,6 +29,10 @@ public class ShowSignInResultActivity extends SBaseActivity{
     private TextView signInMember;
     private TextView notSignInMember;
 
+    SignInStudentAdapter signInStudentAdapter;
+    NotSignInStudentAdapter notSignInStudentAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,11 +80,12 @@ public class ShowSignInResultActivity extends SBaseActivity{
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     switch (position) {
                                         case 0:
-                                            ShowSignInResultActivity.this.memberAppAction.setStudentSignIn(attendanceUserId, new ActionCallbackListener<Void>() {
+                                            ShowSignInResultActivity.this.memberAppAction.setStudentSignIn(attendanceUserId, new ActionCallbackListener<List<Attendance_user>>() {
                                                 @Override
-                                                public void onSuccess(Void data, String message) {
+                                                public void onSuccess(List<Attendance_user> data, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                                    getList();
+                                                    getSignInStudentAdapter().addItems(data);
+                                                    getNotSignInStudentAdapter().deleteItems(data);
                                                 }
 
                                                 @Override
@@ -90,11 +95,12 @@ public class ShowSignInResultActivity extends SBaseActivity{
                                             });
                                             break;
                                         case 1:
-                                            ShowSignInResultActivity.this.memberAppAction.setStudentNotSignIn(attendanceUserId, new ActionCallbackListener<Void>() {
+                                            ShowSignInResultActivity.this.memberAppAction.setStudentNotSignIn(attendanceUserId, new ActionCallbackListener<List<Attendance_user>>() {
                                                 @Override
-                                                public void onSuccess(Void data, String message) {
+                                                public void onSuccess(List<Attendance_user> data, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                                    getList();
+                                                    getSignInStudentAdapter().deleteItems(data);
+                                                    getNotSignInStudentAdapter().addItems(data);
                                                 }
 
                                                 @Override
@@ -122,11 +128,12 @@ public class ShowSignInResultActivity extends SBaseActivity{
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     switch (position) {
                                         case 0:
-                                            ShowSignInResultActivity.this.memberAppAction.setStudentSignIn(attendanceUserId, new ActionCallbackListener<Void>() {
+                                            ShowSignInResultActivity.this.memberAppAction.setStudentSignIn(attendanceUserId, new ActionCallbackListener<List<Attendance_user>>() {
                                                 @Override
-                                                public void onSuccess(Void data, String message) {
+                                                public void onSuccess(List<Attendance_user> data, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                                    getList();
+                                                    getSignInStudentAdapter().addItems(data);
+                                                    getNotSignInStudentAdapter().deleteItems(data);
                                                 }
 
                                                 @Override
@@ -136,11 +143,12 @@ public class ShowSignInResultActivity extends SBaseActivity{
                                             });
                                             break;
                                         case 1:
-                                            ShowSignInResultActivity.this.memberAppAction.setStudentNotSignIn(attendanceUserId, new ActionCallbackListener<Void>() {
+                                            ShowSignInResultActivity.this.memberAppAction.setStudentNotSignIn(attendanceUserId, new ActionCallbackListener<List<Attendance_user>>() {
                                                 @Override
-                                                public void onSuccess(Void data, String message) {
+                                                public void onSuccess(List<Attendance_user> data, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                                    getList();
+                                                    getSignInStudentAdapter().deleteItems(data);
+                                                    getNotSignInStudentAdapter().addItems(data);
                                                 }
 
                                                 @Override
@@ -163,5 +171,14 @@ public class ShowSignInResultActivity extends SBaseActivity{
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    public SignInStudentAdapter getSignInStudentAdapter() {
+        return signInStudentAdapter;
+    }
+
+    public NotSignInStudentAdapter getNotSignInStudentAdapter() {
+        return notSignInStudentAdapter;
     }
 }

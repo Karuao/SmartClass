@@ -173,11 +173,11 @@ public class MemberApiImpl implements MemberApi {
     }
 
     @Override
-    public ApiResponse<Void> setStudentSignIn(String attendanceUserId) {
+    public ApiResponse<List<Attendance_user>> setStudentSignIn(String attendanceUserId) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("attendanceUserId", attendanceUserId);
 
-        Type type = new TypeToken<ApiResponse<Void>>() {
+        Type type = new TypeToken<ApiResponse<List<Attendance_user>>>() {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/setStudentSignIn");
@@ -190,11 +190,11 @@ public class MemberApiImpl implements MemberApi {
     }
 
     @Override
-    public ApiResponse<Void> setStudentNotSignIn(String attendanceUserId) {
+    public ApiResponse<List<Attendance_user>> setStudentNotSignIn(String attendanceUserId) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("attendanceUserId", attendanceUserId);
 
-        Type type = new TypeToken<ApiResponse<Void>>() {
+        Type type = new TypeToken<ApiResponse<List<Attendance_user>>>() {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/setStudentNotSignIn");

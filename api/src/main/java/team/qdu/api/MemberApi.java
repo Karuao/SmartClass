@@ -27,9 +27,9 @@ public interface MemberApi {
 
     public ApiResponse<Void> shiftClass(String classUserId);
 
-    public ApiResponse<Void> setStudentSignIn(String attendanceUserId);
+    public ApiResponse<List<Attendance_user>> setStudentSignIn(String attendanceUserId);
 
-    public ApiResponse<Void> setStudentNotSignIn(String attendanceUserId);
+    public ApiResponse<List<Attendance_user>> setStudentNotSignIn(String attendanceUserId);
 
     public ApiResponse<Attendance_user> beginSignInForStudent(String userId, String attendanceId,String classUserId);
 

@@ -51,8 +51,8 @@ public interface MemberAppAction {
     public void getAttendanceUserInfo(String attendanceId,ActionCallbackListener<List<Attendance_user>> listener);
 
     //教师端设置学生为已签到
-    public void setStudentSignIn(String attendanceUserId,ActionCallbackListener<Void> listener);
+    public void setStudentSignIn(String attendanceUserId,ActionCallbackListener<List<Attendance_user>> listener);
 
     //教师端设置学生为未签到
-    public void setStudentNotSignIn(String attendanceUserId,ActionCallbackListener<Void> listener);
+    public void setStudentNotSignIn(String attendanceUserId,ActionCallbackListener<List<Attendance_user>> listener);
 }
