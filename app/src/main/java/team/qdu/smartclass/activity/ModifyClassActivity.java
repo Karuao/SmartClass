@@ -66,8 +66,10 @@ public class ModifyClassActivity extends SBaseActivity{
     private String mTempPhotoPath;
     //剪切后图像文件
     private Uri mDestinationUri;
-    //判断是否使用默认头像
+    //判断是否使用原头像
     private boolean isDefaultAvatar = true;
+
+    public Bitmap defaultAvatar;
 
     //相册选图标记
     private static final int GALLERY_REQUEST_CODE = 0;
@@ -90,10 +92,12 @@ public class ModifyClassActivity extends SBaseActivity{
                     @Override
                     public void onSuccess(Bitmap data, String message) {
                         AvatarImg.setImageBitmap(data);
+                        defaultAvatar = data;
                     }
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                     }
                 });
                 setSpinnerItemSelectedByValue(universitySpin,data.getUniversity());
@@ -124,20 +128,7 @@ public class ModifyClassActivity extends SBaseActivity{
     //修改班课信息按钮点击事件
     public void finishModify(View view) throws URISyntaxException {
         File file = null;
-        if (isDefaultAvatar) {
-            //将mipmap中的默认头像转成File
-            Resources r = this.getResources();
-            Bitmap bmp = BitmapFactory.decodeResource(r, R.mipmap.ic_classavatar_def);
-            file = new File(Environment.getExternalStorageDirectory() + File.separator + "defClassAvatar.png");//将要保存图片的路径
-            try {
-                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-                bmp.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-                bos.flush();
-                bos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
+        if (!isDefaultAvatar) {
             file = new File(new URI(mDestinationUri.toString()));
         }
         String name = classnameEdt.getText().toString();

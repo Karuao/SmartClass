@@ -4,11 +4,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <include layout="@layout/personal_info_top" />
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="45dp">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -22,7 +28,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:src="@drawable/head2"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="8dp" />
@@ -267,10 +273,8 @@
             </RelativeLayout>
 
         </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-
-
-    <include layout="@layout/personal_info_top" />
 </RelativeLayout>

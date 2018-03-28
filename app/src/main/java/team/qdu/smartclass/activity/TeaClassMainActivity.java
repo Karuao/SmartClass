@@ -297,25 +297,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
     //编辑班课按钮
     public void compileClass(View view) {
-        this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
-            @Override
-            public void onSuccess(Class data, String message) {
-                if (data.getIf_allow_to_join().equals("已结束")) {
-                    new AlertDialog.Builder(TeaClassMainActivity.this)
-                            .setTitle("提示")
-                            .setMessage("班课结束后不允许编辑！")
-                            .setPositiveButton("确定", null)
-                            .show();
-                } else {
-                    startActivity(new Intent(TeaClassMainActivity.this, ModifyClassActivity.class));
-                }
-            }
-
-            @Override
-            public void onFailure(String errorEvent, String message) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+        startActivity(new Intent(TeaClassMainActivity.this, ModifyClassActivity.class));
     }
 
     //更改作业状态点击事件，由进行中到评价中或由评价中到已结束

@@ -201,7 +201,10 @@ public class ClassApiImpl implements ClassApi {
         paramMap.put("department",department);
         paramMap.put("goal",goal);
         paramMap.put("exam",exam);
-        fileMap.put("avatar", avatar);
+        if(avatar!=null) {
+            fileMap= new HashMap<>();
+            fileMap.put("avatar", avatar);
+        }
 
         Type type = new TypeToken<ApiResponse<String>>() {
         }.getType();
