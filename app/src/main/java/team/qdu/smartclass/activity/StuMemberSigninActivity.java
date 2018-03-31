@@ -1,8 +1,10 @@
 package team.qdu.smartclass.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,6 +17,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Attendance;
 import team.qdu.model.Attendance_user;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.SignInHistoryForStudentAdapter;
 
 
@@ -27,8 +30,9 @@ public class StuMemberSigninActivity extends SBaseActivity {
 
     private ListView listView;
     private TextView signInRate;
-    private Button button;
+    private SignInHistoryForStudentAdapter signInHistoryForStudentAdapter;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
     public static boolean refreshFlag = false;
 
     @Override
@@ -36,13 +40,31 @@ public class StuMemberSigninActivity extends SBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_member_signin_student);
         initView();
+        initEvent();
         getStudentSignInHistory();
     }
 
     public void initView(){
         listView = (ListView)findViewById(R.id.list_signin_history_student);
         signInRate = (TextView)findViewById(R.id.iv_class_member_signInRate);
-        button = (Button)findViewById(R.id.button_signIn_student);
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout_student_signing);
+    }
+
+    private void initEvent() {
+        signInHistoryForStudentAdapter = new SignInHistoryForStudentAdapter(this);
+        listView.setAdapter(signInHistoryForStudentAdapter);
+        // 设置下拉进度的主题颜色
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorSecondary);
+        // 下拉时触发SwipeRefreshLayout的下拉动画，动画完毕之后就会回调这个方法
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // 开始刷新，设置当前为刷新状态
+                swipeRefreshLayout.setRefreshing(true);
+                // TODO 获取数据
+                getStudentSignInHistory();
+            }
+        });
     }
 
     @Override
@@ -77,7 +99,8 @@ public class StuMemberSigninActivity extends SBaseActivity {
                             @Override
                             public void onSuccess(Attendance_user data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                getStudentSignInHistory();
+                                finish();
+                                startActivity(new Intent(StuMemberSigninActivity.this,StuMemberSigninActivity.class));
                             }
 
                             @Override
@@ -104,7 +127,7 @@ public class StuMemberSigninActivity extends SBaseActivity {
                 double attendanceNum=0.0;
                 double totalNum;
                 double rate;
-                listView.setAdapter(new SignInHistoryForStudentAdapter(context,data));
+                signInHistoryForStudentAdapter.setItems(data);
                 totalNum = data.size();
                 for (Attendance_user au:data) {
                     if(au.getAttendance_status().equals("已签到")){
@@ -118,11 +141,13 @@ public class StuMemberSigninActivity extends SBaseActivity {
                     rate = attendanceNum / totalNum * 100;
                 }
                 signInRate.setText(String.valueOf(rate));
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

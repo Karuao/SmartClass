@@ -16,6 +16,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.TeaClassFragmentPagerAdapter;
+import team.qdu.smartclass.fragment.MainClassFragment;
 import team.qdu.smartclass.fragment.TeaClassMaterialFragment;
 
 /**
@@ -280,7 +281,8 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                             @Override
                             public void onSuccess(Void data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(TeaClassMainActivity.this, MainActivity.class));
+                                finish();
+                                MainClassFragment.refreshFlag = true;
                             }
 
                             @Override

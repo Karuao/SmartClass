@@ -127,6 +127,11 @@
         android:layout_marginTop="5dp"
         android:background="#d6d6d6" />
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout_student_signing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ListView
         android:id="@+id/list_signin_history_student"
         android:layout_width="match_parent"
@@ -134,4 +139,6 @@
         android:layout_marginTop="0dp">
 
     </ListView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
