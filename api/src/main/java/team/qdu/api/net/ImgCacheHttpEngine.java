@@ -46,7 +46,7 @@ public class ImgCacheHttpEngine {
             //新建相应的文件
             String filePath = Environment.getExternalStorageDirectory() + File.separator + urlTail;
             new File(filePath.substring(0, filePath.lastIndexOf(File.separator))).mkdirs();
-            File file = new File(Environment.getExternalStorageDirectory() + File.separator + urlTail);
+            File file = new File(filePath);
             //对应文件建立输出流
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             //新建缓存,用来存储,从网络读取数据,再写入文件

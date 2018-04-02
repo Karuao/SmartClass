@@ -28,8 +28,10 @@ public class InitialActivity extends SBaseActivity {
         if (!(Build.VERSION.SDK_INT < Build.VERSION_CODES.M
                 || (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED))) {
+            //如果有权限未获取则获取权限
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CAMERA);
         } else {
+            //以获取所有需要的权限则start LoginActivity
             startActivity(new Intent(context, LoginActivity.class));
             finish();
         }
