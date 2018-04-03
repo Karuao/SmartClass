@@ -30,6 +30,7 @@ import team.qdu.smartclass.view.SelectDialog;
  */
 
 public abstract class SBaseActivity extends AppCompatActivity {
+
     //上下文实例
     public Context context;
 
@@ -63,7 +64,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
         informAppAction = application.getInformAppAction();
         homeworkAppAction = application.getHomeworkAppAction();
         memberAppAction = application.getMemberAppAction();
-        materialAppAction=application.getMaterialAppAction();
+        materialAppAction = application.getMaterialAppAction();
         imgAppAction = application.getImgAppAction();
         imagePicker = application.getImagePicker();
     }

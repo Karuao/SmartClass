@@ -1,5 +1,6 @@
 package team.qdu.smartclass.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -113,10 +114,10 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
             public void onSuccess(List<Attendance> data, String message) {
                 classTotalMember.setText(data.get(0).getStu_num().toString());
                 signInStuNum.setText(data.get(0).getAttendance_stu_count().toString());
-                String attendanceId = data.get(0).getAttendance_id().toString();
+                final String attendanceId = data.get(0).getAttendance_id().toString();
                 TeaMemberSigniningActivity.this.memberAppAction.getAttendanceUserInfo(attendanceId, new ActionCallbackListener<List<Attendance_user>>() {
                     @Override
-                    public void onSuccess(List<Attendance_user> data, String message) {
+                    public void onSuccess(final List<Attendance_user> data, String message) {
                         List<Attendance_user> list= new ArrayList<>();
                         for (Attendance_user au:data) {
                             if(au.getAttendance_status().equals("已签到")){
@@ -124,6 +125,34 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                             }
                         }
                         stuSignIn.setAdapter(new SignInStudentAdapter(TeaMemberSigniningActivity.this,list));
+                        if(list.size()==data.size()){
+                            new AlertDialog.Builder(TeaMemberSigniningActivity.this)
+                                    .setTitle("提示")
+                                    .setMessage("所有班课成员已签到，是否结束本次签到？")
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            TeaMemberSigniningActivity.this.memberAppAction.endSignIn(attendanceId, new ActionCallbackListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void data, String message) {
+                                                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                    SApplication.clearActivity();
+                                                    Intent intent1 = new Intent(TeaMemberSigniningActivity.this,ShowSignInResultActivity.class);
+                                                    intent1.putExtra("attendanceId",attendanceId);
+                                                    startActivity(intent1);
+                                                }
+
+                                                @Override
+                                                public void onFailure(String errorEvent, String message) {
+                                                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
+                                    })
+                                    .setNegativeButton("取消",null)
+                                    .show();
+                        }
                     }
 
                     @Override

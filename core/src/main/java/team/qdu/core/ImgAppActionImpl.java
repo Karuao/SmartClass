@@ -2,6 +2,7 @@ package team.qdu.core;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Environment;
 
 import java.io.File;
 
@@ -24,6 +25,11 @@ public class ImgAppActionImpl implements ImgAppAction {
 
     @Override
     public void cacheImg(final String urlTail, final ActionCallbackListener<File> listener) {
+        File img = new File(Environment.getExternalStorageDirectory() + File.separator + urlTail);
+        if (img.exists()) {
+            listener.onSuccess(img, "图片加载成功");
+            return;
+        }
         new AsyncTask<Void, Void, File>() {
 
             @Override
@@ -41,6 +47,7 @@ public class ImgAppActionImpl implements ImgAppAction {
             }
         }.execute();
     }
+
     @Override
     public void cacheFile(final String urlTail, final ActionCallbackListener<File> listener) {
         new AsyncTask<Void, Void, File>() {

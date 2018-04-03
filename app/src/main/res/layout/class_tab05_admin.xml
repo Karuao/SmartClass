@@ -365,7 +365,7 @@
         android:layout_height="2px"
         android:background="#d6d6d6" />
     -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
@@ -383,7 +383,13 @@
             android:textStyle="normal"
             android:onClick="deleteClass"/>
 
-    </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#d6d6d6" />
 <!--
     <View
         android:layout_width="match_parent"

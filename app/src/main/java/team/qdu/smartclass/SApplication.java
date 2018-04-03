@@ -48,9 +48,10 @@ public class SApplication extends Application {
 
     private ImgAppAction imgAppAction;
 
-    private static List<Activity> activityList = new ArrayList<>();
+    public static List<Activity> activityList = new ArrayList<>();
 
     private ImagePicker imagePicker;
+
 
     @Override
     public void onCreate() {

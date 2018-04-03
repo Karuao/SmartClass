@@ -19,9 +19,8 @@ import team.qdu.smartclass.activity.SBaseActivity;
 
 public class SignInHistoryForStudentAdapter extends SBaseAdapter<Attendance_user>{
 
-    public SignInHistoryForStudentAdapter(Context context, List itemList) {
+    public SignInHistoryForStudentAdapter(Context context) {
         super(context);
-        this.itemList = itemList;
     }
 
     public final class Compo {

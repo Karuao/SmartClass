@@ -9,10 +9,13 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,9 @@ public class MainUserFragment extends SBaseFragment {
     //刷新页面标志
     public static boolean refreshFlag = false;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ScrollView scrollView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_main_user, container, false);
@@ -46,7 +52,10 @@ public class MainUserFragment extends SBaseFragment {
         userDepartment=(TextView) view.findViewById(R.id.userDepartment);
         userMotto=(TextView) view.findViewById(R.id.userMotto);
         personAvatar=(ImageView)view.findViewById(R.id.userAvatar);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout_user);
+        scrollView = (ScrollView)view.findViewById(R.id.scrollView2);
         initView();
+        initEvent();
         return view;
     }
 
@@ -73,11 +82,13 @@ public class MainUserFragment extends SBaseFragment {
                         @Override
                         public void onSuccess(Bitmap data, String message) {
                             personAvatar.setImageBitmap(data);
+                            swipeRefreshLayout.setRefreshing(false);
                         }
 
                         @Override
                         public void onFailure(String errorEvent, String message) {
                             Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                            swipeRefreshLayout.setRefreshing(false);
                         }
                     });
                 }
@@ -93,7 +104,33 @@ public class MainUserFragment extends SBaseFragment {
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
+
+    private void initEvent() {
+        if (scrollView != null) {
+            scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+                @Override
+                public void onScrollChanged() {
+                    if (swipeRefreshLayout != null) {
+                        swipeRefreshLayout.setEnabled(scrollView.getScrollY() == 0);
+                        // 设置下拉进度的主题颜色
+                        swipeRefreshLayout.setColorSchemeResources(R.color.colorSecondary);
+                        // 下拉时触发SwipeRefreshLayout的下拉动画，动画完毕之后就会回调这个方法
+                        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                // 开始刷新，设置当前为刷新状态
+                                swipeRefreshLayout.setRefreshing(true);
+                                // TODO 获取数据
+                                initView();
+                            }
+                        });
+                    }
+                }
+            });
+        }
     }
 }
