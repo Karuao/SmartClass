@@ -29,3 +29,6 @@
 5.homework_answer表添加字段url_file_num, remark_url_file_num
 6.material表修改字段class_id为class_user_id
 7.attendance表添加字段attendance_stu_count, stu_num
+
+班课数据库表设计v1.7
+1.新增表material_user表
