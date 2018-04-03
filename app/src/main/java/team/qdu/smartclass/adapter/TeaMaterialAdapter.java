@@ -3,7 +3,8 @@ package team.qdu.smartclass.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -27,8 +28,9 @@ public class TeaMaterialAdapter extends SBaseAdapter<Material> {
         public TextView nameTxt;
         public TextView timeTxt;
         public TextView materialidTxt;
-        public ImageButton deleteBtn;
+        public ImageView deleteBtn;
         public TextView urlTxt;
+        public ImageView resourceImg;
 
 
     }
@@ -43,8 +45,9 @@ public class TeaMaterialAdapter extends SBaseAdapter<Material> {
             compo.nameTxt = (TextView) convertView.findViewById(R.id.tv_class_filename);
             compo.timeTxt= (TextView) convertView.findViewById(R.id.tv_class_filetime);
             compo.materialidTxt= (TextView) convertView.findViewById(R.id.tv_materialid);
-            compo.deleteBtn= (ImageButton) convertView.findViewById(R.id.deleteResource);
+            compo.deleteBtn= (ImageView) convertView.findViewById(R.id.deleteResource);
             compo.urlTxt=(TextView)convertView.findViewById(R.id.tv_materialurl);
+            compo.resourceImg= (ImageView) convertView.findViewById(R.id.iv_class_file);
             convertView.setTag(compo);
         } else {
             compo = (Compo) convertView.getTag();
@@ -56,13 +59,22 @@ public class TeaMaterialAdapter extends SBaseAdapter<Material> {
         compo.timeTxt.setText(sdf.format(itemList.get(position).getCreate_date_time()));
         compo.materialidTxt.setText(Integer.toString(itemList.get(position).getMaterial_id()));
         compo.urlTxt.setText(itemList.get(position).getUrl());
-/*        compo.deleteBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                ((View) v.getParent()).findViewById(R.id.tv_materialid);
-
-            }
-        });*/
+        String ext = MimeTypeMap.getFileExtensionFromUrl((String) compo.urlTxt.getText());
+        if(ext.equals("pptx")||ext.equals("ppt")){
+            compo.resourceImg.setImageResource(R.drawable.ppt);
+        }
+        else if(ext.equals("doc")||ext.equals("docx")){
+            compo.resourceImg.setImageResource(R.drawable.word);
+        }
+        else if(ext.equals("xlsx")){
+            compo.resourceImg.setImageResource(R.drawable.excel);
+        }
+        else if(ext.equals("rar")||ext.equals("zip")){
+            compo.resourceImg.setImageResource(R.drawable.zip);
+        }
+        else if(ext.equals("txt")){
+            compo.resourceImg.setImageResource(R.drawable.txt);
+        }
         return convertView;
     }
 }

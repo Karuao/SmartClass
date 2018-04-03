@@ -13,7 +13,7 @@
         android:layout_alignBottom="@+id/tv_class_filetime"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/file" />
+        android:src="@drawable/resource_file" />
 
     <TextView
         android:id="@+id/tv_class_filename"
@@ -41,26 +41,6 @@
         android:textColor="#898989"
         android:textSize="15sp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:id="@+id/linearLayout">
-
-
-        <View
-            android:id="@+id/view_class_file"
-            android:layout_width="2dp"
-            android:layout_height="16dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="6dp"
-            android:background="#c4c4c4" />
-
-
-
-    </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -72,15 +52,12 @@
 
     <TextView
         android:id="@+id/tv_materialid"
-        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/linearLayout2"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_toEndOf="@+id/tv_class_filetime"
-        android:layout_toRightOf="@+id/tv_class_filetime"
-        android:text="TextView" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="TextView"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/tv_materialurl"

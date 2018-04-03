@@ -8,7 +8,7 @@
     <include android:id="@+id/top" layout="@layout/class_tab01_top" />
     <ListView
         android:id="@+id/class_material_listView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     </ListView>
 </LinearLayout>

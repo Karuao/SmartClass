@@ -204,7 +204,6 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                         TeaClassMaterialFragment.refreshFlag = true;
                                         teaClassFragmentPagerAdapter.getTeaClassMaterialFragment().getMaterial();
 
-
                                     }
 
                                     @Override
@@ -248,7 +247,6 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                             hint2.setVisibility(View.GONE);
                                             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                         }
-
                                         @Override
                                         public void onFailure(String errorEvent, String message) {
                                             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

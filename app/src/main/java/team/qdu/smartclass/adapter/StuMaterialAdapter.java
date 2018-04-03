@@ -3,6 +3,8 @@ package team.qdu.smartclass.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -27,7 +29,7 @@ public class StuMaterialAdapter extends SBaseAdapter<Material> {
         public TextView timeTxt;
         public TextView urlTxt;
         public TextView materialidTxt;
-
+        public ImageView resourceImg;
     }
 
     @Override
@@ -41,6 +43,7 @@ public class StuMaterialAdapter extends SBaseAdapter<Material> {
             compo.timeTxt= (TextView) convertView.findViewById(R.id.tv_class_filetime);
             compo.urlTxt=(TextView)convertView.findViewById(R.id.tv_materialurl);
             compo.materialidTxt= (TextView) convertView.findViewById(R.id.tv_materialid);
+            compo.resourceImg= (ImageView) convertView.findViewById(R.id.iv_class_file);
             convertView.setTag(compo);
         } else {
             compo = (Compo) convertView.getTag();
@@ -50,6 +53,22 @@ public class StuMaterialAdapter extends SBaseAdapter<Material> {
         compo.timeTxt.setText(sdf.format(itemList.get(position).getCreate_date_time()));
         compo.materialidTxt.setText(Integer.toString(itemList.get(position).getMaterial_id()));
         compo.urlTxt.setText(itemList.get(position).getUrl());
+        String ext = MimeTypeMap.getFileExtensionFromUrl((String) compo.urlTxt.getText());
+        if(ext.equals("pptx")||ext.equals("ppt")){
+            compo.resourceImg.setImageResource(R.drawable.ppt);
+        }
+        else if(ext.equals("doc")||ext.equals("docx")){
+            compo.resourceImg.setImageResource(R.drawable.word);
+        }
+        else if(ext.equals("xlsx")){
+            compo.resourceImg.setImageResource(R.drawable.excel);
+        }
+        else if(ext.equals("rar")||ext.equals("zip")){
+            compo.resourceImg.setImageResource(R.drawable.zip);
+        }
+        else if(ext.equals("txt")){
+            compo.resourceImg.setImageResource(R.drawable.txt);
+        }
         return convertView;
     }
 }

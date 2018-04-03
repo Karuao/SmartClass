@@ -14,7 +14,7 @@
         android:layout_alignBottom="@+id/tv_class_filetime"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/file" />
+        android:src="@drawable/resource_file" />
 
     <TextView
         android:id="@+id/tv_class_filename"
@@ -72,16 +72,18 @@
 
     </LinearLayout>
 
-    <ImageButton
+    <ImageView
         android:id="@+id/deleteResource"
-        android:onClick="deleteMaterial"
-        android:focusable="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
         android:layout_toLeftOf="@+id/linearLayout"
         android:layout_toStartOf="@+id/linearLayout"
-        app:srcCompat="@drawable/delete1" />
+        android:focusable="false"
+        android:onClick="deleteMaterial"
+        android:src="@drawable/resoursedelete" />
 
     <TextView
         android:id="@+id/tv_materialid"
@@ -104,6 +106,7 @@
         android:layout_alignEnd="@+id/tv_materialid"
         android:layout_alignRight="@+id/tv_materialid"
         android:text="TextView" />
+
 
 
 </RelativeLayout>

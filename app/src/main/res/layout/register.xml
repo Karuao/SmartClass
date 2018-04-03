@@ -116,7 +116,7 @@
         android:layout_gravity="center_horizontal"
         >
 
-        <android.support.v7.widget.AppCompatSpinner
+        <Spinner
             android:id="@+id/spin_question"
             android:layout_width="200dp"
             android:layout_height="20dp"
@@ -124,6 +124,14 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:entries="@array/user_question" />
+        <!--<android.support.v7.widget.AppCompatSpinner-->
+            <!--android:id="@+id/spin_question"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:entries="@array/user_question" />-->
 
         <EditText
             android:id="@+id/edt_regAnswer"

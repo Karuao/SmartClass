@@ -1,5 +1,7 @@
 package team.qdu.smartclass.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,11 +75,22 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
             }
         });
     }
+
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
         final String name = ((TextView) view.findViewById(R.id.tv_class_filename)).getText().toString();
         final String url = ((TextView) view.findViewById(R.id.tv_materialurl)).getText().toString();
-        String urltail = url;
+        final String urltail = url;
+        new AlertDialog.Builder(getContext())
+                .setTitle("提示")
+                .setMessage("确定要下载此资源？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final String url = ((TextView) view.findViewById(R.id.tv_materialurl)).getText().toString();
+
+                        String urltail = url;
+
         parentActivity.imgAppAction.cacheFile(urltail, new ActionCallbackListener<File>() {
             @Override
             public void onSuccess(File data, String message) {
@@ -93,5 +106,9 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+                })
+                .setNegativeButton("取消", null)
+                .show();
     }
 }
