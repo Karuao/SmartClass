@@ -145,7 +145,7 @@ public class ImgUtil {
                 homeworkPhotoAdapter.setItems(photoList);
             } else {
                 //图片不存在从服务器获取
-                ((SBaseActivity) context).imgAppAction.cacheImg(urlTail, new ActionCallbackListener<File>() {
+                ((SBaseActivity) context).fileAppAction.cacheImg(urlTail, new ActionCallbackListener<File>() {
                     @Override
                     public void onSuccess(File data, String message) {
                         List<ImageItem> photoList = new ArrayList<>();

@@ -14,29 +14,29 @@ import java.net.URL;
  * Created by 11602 on 2018/1/30.
  */
 
-public class ImgCacheHttpEngine {
+public class FileCacheHttpEngine {
 
-    private final static String TAG = "ImgCacheHttpEngine";
+    private final static String TAG = "FileCacheHttpEngine";
     //The development database
-    private final static String SERVER_URL = "http://10.0.2.2/";
+//    private final static String SERVER_URL = "http://10.0.2.2/";
     //    private final static String SERVER_URL = "http://47.94.7.159/";
     //The official database
-//    private final static String SERVER_URL = "http://140.143.134.146/";
+    private final static String SERVER_URL = "http://140.143.134.146/";
     private final static String REQUEST_METHOD = "GET";
     private final static String ENCODE_TYPE = "UTF-8";
     private final static int TIME_OUT = 4000;
 
-    private static ImgCacheHttpEngine instance = null;
+    private static FileCacheHttpEngine instance = null;
 
-    public static ImgCacheHttpEngine getInstance() {
+    public static FileCacheHttpEngine getInstance() {
         if (instance == null) {
-            instance = new ImgCacheHttpEngine();
+            instance = new FileCacheHttpEngine();
         }
         return instance;
     }
 
     public File cacheImg(String urlTail) throws IOException {
-        //打印出请求
+        //打印出请求z
         Log.i(TAG, "request: " + urlTail);
         HttpURLConnection connection = getConnection(urlTail);
         connection.connect();

@@ -42,7 +42,10 @@ public class HttpEngine {
     }
 
     public <T> T postHandle(Map<String, String> paramsMap, Type typeofT, String urlTail) throws IOException {
-        String data = joinParams(paramsMap);
+        String data = "";
+        if (paramsMap != null) {
+            data = joinParams(paramsMap);
+        }
         //打印出请求
         Log.i(TAG, "request: " + data);
         HttpURLConnection connection = getConnection(urlTail);

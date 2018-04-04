@@ -14,8 +14,8 @@ import team.qdu.core.ClassAppAction;
 import team.qdu.core.ClassAppActionImpl;
 import team.qdu.core.HomeworkAppAction;
 import team.qdu.core.HomeworkAppActionImpl;
-import team.qdu.core.ImgAppAction;
-import team.qdu.core.ImgAppActionImpl;
+import team.qdu.core.FileAppAction;
+import team.qdu.core.FileAppActionImpl;
 import team.qdu.core.InformAppAction;
 import team.qdu.core.InformAppActionImpl;
 import team.qdu.core.MaterialAppAction;
@@ -46,7 +46,7 @@ public class SApplication extends Application {
 
     private MaterialAppAction materialAppAction;
 
-    private ImgAppAction imgAppAction;
+    private FileAppAction fileAppAction;
 
     public static List<Activity> activityList = new ArrayList<>();
 
@@ -69,7 +69,7 @@ public class SApplication extends Application {
         homeworkAppAction = new HomeworkAppActionImpl(this);
         memberAppAction = new MemberAppActionImpl(this);
         materialAppAction = new MaterialAppActionImpl(this);
-        imgAppAction = new ImgAppActionImpl(this);
+        fileAppAction = new FileAppActionImpl(this);
     }
 
     private void initImagePicker() {
@@ -104,8 +104,8 @@ public class SApplication extends Application {
         return materialAppAction;
     }
 
-    public ImgAppAction getImgAppAction() {
-        return imgAppAction;
+    public FileAppAction getFileAppAction() {
+        return fileAppAction;
     }
 
     public ImagePicker getImagePicker() {

@@ -35,4 +35,6 @@
     <color name="text2">#333333</color>
 
     <color name="blue">#33b5e5</color>
+    <color name="red">#eb2127</color>
+    <color name="white">#ffffff</color>
 </resources>
