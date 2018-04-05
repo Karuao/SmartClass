@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><!--学生经验值详情页面的顶部标题栏-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/class_top"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/title"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/iv_class_top2_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:background="#00000000"
+                android:onClick="toBack"
+                android:src="@drawable/left_goback" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dp"
+                android:onClick="toBack"
+                android:src="@drawable/head2"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="8dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="经验值明细"
+                android:textColor="@color/bg_white"
+                android:textSize="21sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

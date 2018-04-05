@@ -7,6 +7,7 @@ import java.util.List;
 import team.qdu.model.Attendance;
 import team.qdu.model.Attendance_user;
 import team.qdu.model.ClassUser;
+import team.qdu.model.ClassUserExp;
 
 /**
  * Created by asus on 2018/3/7.
@@ -46,6 +47,9 @@ public interface MemberAppAction {
 
     //获得签到信息
     public void getAttendanceInfo(String classId,ActionCallbackListener<List<Attendance>> listener);
+
+    //获得经验值明细
+    public void getExpDetail(String classId,String userId,ActionCallbackListener<List<ClassUserExp>> listener);
 
     //获得学生签到信息
     public void getAttendanceUserInfo(String attendanceId,ActionCallbackListener<List<Attendance_user>> listener);

@@ -18,6 +18,7 @@ import team.qdu.model.ApiResponse;
 import team.qdu.model.Attendance;
 import team.qdu.model.Attendance_user;
 import team.qdu.model.ClassUser;
+import team.qdu.model.ClassUserExp;
 
 /**
  * Created by asus on 2018/3/7.
@@ -130,6 +131,24 @@ public class MemberApiImpl implements MemberApi {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/getAttendanceInfo");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
+            //返回连接服务器失败
+            return new ApiResponse(TIME_OUT_EVENT, TIME_OUT_EVENT_MSG);
+        }
+    }
+
+    @Override
+    public ApiResponse<List<ClassUserExp>> getExpDetail(String classId,String userId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("classId", classId);
+        paramMap.put("userId",userId);
+
+        Type type = new TypeToken<ApiResponse<List<ClassUserExp>>>() {
+        }.getType();
+        try {
+            return httpEngine.postHandle(paramMap, type, "/getExpDetail");
         } catch (IOException e) {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());

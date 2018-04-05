@@ -32,6 +32,7 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
     private ClassMemberAdapter classMemberAdapter;
     private ListView listView;
     private  TextView rank;
+    private TextView myExp;
     private StuClassMainActivity parentActivity;
     private SwipeRefreshLayout swipeRefreshLayout;
     public static boolean refreshFlag = false;
@@ -53,6 +54,7 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
         swipeRefreshLayout = (SwipeRefreshLayout) currentPage.findViewById(R.id.swipe_refresh_layout_member_student);
         titleBarClassNameTxt = (TextView) currentPage.findViewById(R.id.txt_titlebar_classname);
         titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
+        myExp = (TextView)currentPage.findViewById(R.id.myExp);
     }
 
     //页面从后台返回到前台运行
@@ -106,6 +108,17 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
                     }
                 }
                 rank.setText(String.valueOf(myRank));
+                parentActivity.memberAppAction.getMemberInfo(getClassUserId(), new ActionCallbackListener<ClassUser>() {
+                    @Override
+                    public void onSuccess(ClassUser data, String message) {
+                        myExp.setText(data.getExp().toString());
+                    }
+
+                    @Override
+                    public void onFailure(String errorEvent, String message) {
+                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                    }
+                });
                 swipeRefreshLayout.setRefreshing(false);
             }
 

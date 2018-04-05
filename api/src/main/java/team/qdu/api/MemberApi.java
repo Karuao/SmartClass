@@ -8,6 +8,7 @@ import team.qdu.model.ApiResponse;
 import team.qdu.model.Attendance;
 import team.qdu.model.Attendance_user;
 import team.qdu.model.ClassUser;
+import team.qdu.model.ClassUserExp;
 
 /**
  * Created by asus on 2018/3/7.
@@ -24,6 +25,8 @@ public interface MemberApi {
     public ApiResponse<List<Attendance>> getAttendanceInfo(String classId);
 
     public ApiResponse<List<Attendance_user>> getAttendanceUserInfo(String attendanceId);
+
+    public ApiResponse<List<ClassUserExp>> getExpDetail(String classId,String userId);
 
     public ApiResponse<Void> shiftClass(String classUserId);
 

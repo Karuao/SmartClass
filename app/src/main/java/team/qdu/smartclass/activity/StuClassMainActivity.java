@@ -134,6 +134,10 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         startActivity(new Intent(StuClassMainActivity.this, StuMemberSigninActivity.class));
     }
 
+    public void checkExpDetail(View view){
+        startActivity(new Intent(StuClassMainActivity.this,ShowExpDetailActivity.class));
+    }
+
     //若某个页面有新推送，查看页面后进行的操作
     private void readNew(String whichPage) {
         classAppAction.readNew(getClassUserId(), whichPage);

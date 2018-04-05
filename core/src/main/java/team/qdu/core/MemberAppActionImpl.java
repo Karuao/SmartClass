@@ -12,6 +12,7 @@ import team.qdu.model.ApiResponse;
 import team.qdu.model.Attendance;
 import team.qdu.model.Attendance_user;
 import team.qdu.model.ClassUser;
+import team.qdu.model.ClassUserExp;
 
 /**
  * Created by asus on 2018/3/7.
@@ -102,6 +103,27 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<List<Attendance>> response) {
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObjList(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
+            }
+        }.execute();
+    }
+
+    //获取经验值明细
+    @Override
+    public void getExpDetail(final String classId, final String userId,final ActionCallbackListener<List<ClassUserExp>> listener) {
+        //请求Api
+        new AsyncTask<Void, Void, ApiResponse<List<ClassUserExp>>>() {
+            @Override
+            protected ApiResponse<List<ClassUserExp>> doInBackground(Void... params) {
+                return memberApi.getExpDetail(classId,userId);
+            }
+
+            @Override
+            protected void onPostExecute(ApiResponse<List<ClassUserExp>> response) {
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {

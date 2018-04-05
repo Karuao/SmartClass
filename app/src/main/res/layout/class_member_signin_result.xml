@@ -104,7 +104,8 @@
             android:layout_alignParentRight="true"
             android:background="#00000000"
             android:onClick="setVisible1"
-            android:src="@drawable/folding" />
+            android:src="@drawable/folding"
+            android:visibility="invisible"/>
 
         <ImageButton
             android:id="@+id/unfolding1"
@@ -115,8 +116,7 @@
             android:layout_alignParentRight="true"
             android:background="#00000000"
             android:onClick="setVisible1"
-            android:src="@drawable/unfolding"
-            android:visibility="invisible"/>
+            android:src="@drawable/unfolding" />
 
     </RelativeLayout>
 
@@ -178,7 +178,8 @@
             android:layout_alignParentRight="true"
             android:background="#00000000"
             android:onClick="setVisible2"
-            android:src="@drawable/folding" />
+            android:src="@drawable/folding"
+            android:visibility="invisible"/>
 
         <ImageButton
             android:id="@+id/unfolding2"
@@ -189,8 +190,7 @@
             android:layout_alignParentRight="true"
             android:background="#00000000"
             android:onClick="setVisible2"
-            android:src="@drawable/unfolding"
-            android:visibility="invisible"/>
+            android:src="@drawable/unfolding" />
 
     </RelativeLayout>
 

@@ -82,18 +82,10 @@ public class StuMemberSigninActivity extends SBaseActivity {
             @Override
             public void onSuccess(List<Attendance> data, String message) {
                 if(data.size()==0){
-                    new AlertDialog.Builder(StuMemberSigninActivity.this)
-                            .setTitle("提示")
-                            .setMessage("未开始签到或签到已结束！")
-                            .setPositiveButton("确定",null)
-                            .show();
+                    Toast.makeText(context,"未开始签到或签到已结束！",Toast.LENGTH_SHORT).show();
                 }else {
                     if (!data.get(0).getIf_open().equals("签到中")) {
-                        new AlertDialog.Builder(StuMemberSigninActivity.this)
-                                .setTitle("提示")
-                                .setMessage("未开始签到或签到已结束！")
-                                .setPositiveButton("确定", null)
-                                .show();
+                        Toast.makeText(context,"未开始签到或签到已结束！",Toast.LENGTH_SHORT).show();
                     } else {
                         StuMemberSigninActivity.this.memberAppAction.beginSignInForStudent(getUserId(), data.get(0).getAttendance_id().toString(), getClassUserId(),new ActionCallbackListener<Attendance_user>() {
                             @Override

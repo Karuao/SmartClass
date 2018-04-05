@@ -181,13 +181,13 @@ public class ShowSignInResultActivity extends SBaseActivity{
     public void setVisible1(View view){
         if(visible1==true){
             signInStudent.setVisibility(View.GONE);
-            folding1.setVisibility(View.GONE);
-            unfolding1.setVisibility(View.VISIBLE);
+            folding1.setVisibility(View.VISIBLE);
+            unfolding1.setVisibility(View.GONE);
             visible1=false;
         }else {
             signInStudent.setVisibility(View.VISIBLE);
-            folding1.setVisibility(View.VISIBLE);
-            unfolding1.setVisibility(View.GONE);
+            folding1.setVisibility(View.GONE);
+            unfolding1.setVisibility(View.VISIBLE);
             visible1=true;
         }
     }
@@ -195,13 +195,13 @@ public class ShowSignInResultActivity extends SBaseActivity{
     public void setVisible2(View view){
         if(visible2==true){
             notSignInStudent.setVisibility(View.GONE);
-            folding2.setVisibility(View.GONE);
-            unfolding2.setVisibility(View.VISIBLE);
+            folding2.setVisibility(View.VISIBLE);
+            unfolding2.setVisibility(View.GONE);
             visible2=false;
         }else {
             notSignInStudent.setVisibility(View.VISIBLE);
-            folding2.setVisibility(View.VISIBLE);
-            unfolding2.setVisibility(View.GONE);
+            folding2.setVisibility(View.GONE);
+            unfolding2.setVisibility(View.VISIBLE);
             visible2=true;
         }
     }

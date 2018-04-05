@@ -82,7 +82,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:onClick="checkExpDetail">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -110,6 +111,44 @@
                 android:textColor="@color/bg_white"
                 android:textSize="17sp"
                 android:textStyle="normal" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/title"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:onClick="checkExpDetail">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="获得"
+                android:textColor="@color/bg_white" />
+
+            <TextView
+                android:id="@+id/myExp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="?"
+                android:textColor="@color/bg_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="经验值"
+                android:textColor="@color/bg_white" />
 
         </LinearLayout>
 
