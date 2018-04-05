@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,8 +20,6 @@ import team.qdu.smartclass.R;
  * Created by Rock on 2017/4/23.
  */
 public class SetActivity extends SBaseActivity {
-    SharedPreferences sprfMain;
-    SharedPreferences.Editor editorMain;
     Button logout;
     TextView setAccount;
 
@@ -53,16 +50,10 @@ public class SetActivity extends SBaseActivity {
 
 
     public void toLogout(View view) {
-        resetSprfMain();
+        setUserId(null);
         startActivity(new Intent(SetActivity.this, LoginActivity.class));
         application.clearActivity();
         SetActivity.this.finish();
 
-    }
-    public void resetSprfMain(){
-        sprfMain= PreferenceManager.getDefaultSharedPreferences(this);
-        editorMain=sprfMain.edit();
-        editorMain.putBoolean("main",false);
-        editorMain.commit();
     }
 }

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -29,21 +28,10 @@ public class LoginActivity extends SBaseActivity {
     private EditText passwordEdt;
     private Button loginBtn;
     private ToggleButton tbPasswordVisibility;
-    SharedPreferences sprfMain;
-    SharedPreferences.Editor editorMain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        sprfMain = PreferenceManager.getDefaultSharedPreferences(this);
-        editorMain = sprfMain.edit();
-        //.getBoolean("main",false)；当找不到"main"所对应的键值是默认返回false
-        if (sprfMain.getBoolean("main", false)) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            LoginActivity.this.finish();
-        }
         setContentView(R.layout.login);
         initView();
     }
@@ -61,17 +49,11 @@ public class LoginActivity extends SBaseActivity {
     public void toLogin(View view) {
         final String account = accountEdt.getText().toString();
         String password = passwordEdt.getText().toString();
-//        startActivity(new Intent(LoginActivity.this, MainActivity.class));
         this.userAppAction.login(account, password, new ActionCallbackListener<String>() {
             @Override
             public void onSuccess(String data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                Bundle b1 = new Bundle();
-                b1.putString("account", account);
-                intent.putExtras(b1);
-                editorMain.putBoolean("main",true);
-                editorMain.commit();
                 storeUserIdAndAccount(data, account);
                 startActivity(intent);
                 finish();

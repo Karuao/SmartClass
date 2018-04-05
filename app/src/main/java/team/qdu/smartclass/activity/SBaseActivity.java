@@ -80,7 +80,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("user",
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("classId", userId);
+        editor.putString("userId", userId);
         editor.commit();
     }
 

@@ -4,10 +4,12 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -34,6 +36,8 @@ import static com.lzy.imagepicker.ui.ImageGridActivity.REQUEST_PERMISSION_CAMERA
 public class InitialActivity extends SBaseActivity {
 
     private CommonProgressDialog progressDialog;
+    SharedPreferences sprfMain;
+    SharedPreferences.Editor editorMain;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -133,8 +137,16 @@ public class InitialActivity extends SBaseActivity {
 
     //start LoginActivity, finish this
     private void startAndFinishActivity() {
-        startActivity(new Intent(context, LoginActivity.class));
-        finish();
+        sprfMain = PreferenceManager.getDefaultSharedPreferences(this);
+        editorMain = sprfMain.edit();
+        if (getUserId() != null) {
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            startActivity(new Intent(context, LoginActivity.class));
+            finish();
+        }
     }
 
     //请求权限回调

@@ -90,7 +90,6 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
         intent.putExtra("time", time);
         intent.putExtra("read_num", read_num);
         intent.putExtra("informid", inform_id);
-        intent.putExtras(mBundle);
         startActivity(intent);
     }
 
@@ -99,7 +98,6 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
 
             @Override
             public void onSuccess(Void data, String message) {
-                mBundle.putString("unreadnumber", message);
             }
 
             @Override

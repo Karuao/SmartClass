@@ -29,6 +29,7 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_inform_admin_details);
+
         initView();
     }
 
@@ -43,12 +44,12 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
         String time = getIntent().getStringExtra("time");
         String read_num = getIntent().getStringExtra("read_num");
 
-        Bundle bundle = getIntent().getExtras();
-        String unread_num=bundle.getString("unreadnumber");
 
+        String inform_id=getIntent().getStringExtra("informid");
+        getUnreadNum(inform_id);
         tvDetial.setText(detail);
         tvRead_number.setText(read_num);
-        tvUnRead_number.setText(unread_num + "人未读");
+
         tvTime.setText(time);
         LoutRead_number.setOnClickListener(this);
         LoutUnRead_number.setOnClickListener(this);
@@ -87,5 +88,20 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
                 startActivity(intent2);
                 break;
         }
+    }
+
+    private void getUnreadNum(String informid) {
+        informAppAction.getUnreadNum(informid, new ActionCallbackListener<Void>() {
+
+            @Override
+            public void onSuccess(Void data, String message) {
+                tvUnRead_number.setText(message + "人未读");
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+
+            }
+        });
     }
 }
