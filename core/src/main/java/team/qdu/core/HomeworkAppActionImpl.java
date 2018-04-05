@@ -101,12 +101,12 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
     }
 
     @Override
-    public void changeHomeworkStatus(final String homeworkId, final String homeworkStatus, final ActionCallbackListener<Void> listener) {
+    public void changeHomeworkStatus(final String homeworkId, final String homeworkStatus, final String homeworkTitle, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
-                return homeworkApi.changeHomeworkStatus(homeworkId, homeworkStatus);
+                return homeworkApi.changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle);
             }
 
             @Override
@@ -142,8 +142,8 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
 
 
     @Override
-    public void commitHomework(final String homeworkAnswerId, final String homeworkId, final String classId, final String userId, final String ifSubmit, final String detail, final List<File> photoList, final String delPhotoesUrl, final ActionCallbackListener<Void> listener) {
-        if (TextUtils.isEmpty(detail) && photoList == null) {
+    public void commitHomework(final String homeworkAnswerId, final String homeworkId, final String classId, final String userId, final String ifSubmit, final String homeworkTitle, final String detail, final List<File> photoList, final String delPhotoesUrl, final ActionCallbackListener<Void> listener) {
+        if (TextUtils.isEmpty(detail) && photoList.size() == 0) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "提交的文字和图片不能全为空");
             return;
         }
@@ -152,7 +152,7 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
-                return homeworkApi.commitHomework(homeworkAnswerId, homeworkId, classId, userId, ifSubmit, detail, photoList, delPhotoesUrl);
+                return homeworkApi.commitHomework(homeworkAnswerId, homeworkId, classId, userId, ifSubmit, homeworkTitle, detail, photoList, delPhotoesUrl);
             }
 
             @Override

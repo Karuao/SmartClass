@@ -308,6 +308,8 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                 .getText().toString();
         final String homeworkId = ((TextView) listItem.findViewById(R.id.txt_homework_underway_id))
                 .getText().toString();
+        final String homeworkTitle = ((TextView) listItem.findViewById(R.id.txt_homework_title))
+                .getText().toString();
         AlertDialog.Builder builder = new AlertDialog.Builder(TeaClassMainActivity.this);
         //生成对话框
         if ("进行中".equals(homeworkStatus)) {
@@ -316,7 +318,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            changeHomeworkStatus(homeworkId, homeworkStatus);
+                            changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle);
                         }
                     })
                     .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -335,7 +337,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                 @Override
                                 public void onSuccess(Integer data, String message) {
                                     if (data == 0) {
-                                        changeHomeworkStatus(homeworkId, homeworkStatus);
+                                        changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle);
                                     } else {
                                         Toast.makeText(TeaClassMainActivity.this, "仍有" + data
                                                 + "人作业未评价,请评价后再结束作业", Toast.LENGTH_SHORT).show();
@@ -361,8 +363,8 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
 
     //改变作业状态
-    private void changeHomeworkStatus(String homeworkId, final String homeworkStatus) {
-        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, new ActionCallbackListener<Void>() {
+    private void changeHomeworkStatus(String homeworkId, final String homeworkStatus, String homeworkTitle) {
+        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 teaClassFragmentPagerAdapter.getTeaClassHomeworkFragment().getTeaHomeworkFragmentPagerAdapter().

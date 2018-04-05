@@ -17,11 +17,11 @@ public interface HomeworkApi {
 
     public ApiResponse<List> getHomeworkList(String classId, String userId, String userTitle, String requestStatus);
 
-    public ApiResponse<Void> changeHomeworkStatus(String homeworkId, String homeworkStatus);
+    public ApiResponse<Void> changeHomeworkStatus(String homeworkId, String homeworkStatus, String homeworkTitle);
 
     public ApiResponse<HomeworkAnswerWithBLOBs> getStuHomeworkDetail(String homeworkAnswerId);
 
-    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, List<File> photoList, String delPhotoesUrl);
+    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String homeworkTitle, String detail, List<File> photoList, String delPhotoesUrl);
 
     public ApiResponse<HomeworkWithBLOBs> getHomeworkDetail(String homeworkId);
 

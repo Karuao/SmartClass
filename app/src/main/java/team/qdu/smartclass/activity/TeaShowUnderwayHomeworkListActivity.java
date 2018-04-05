@@ -43,6 +43,8 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
     private ListView uncommitHomeworkList;
     private HomeworkShowPhotoAdapter homeworkShowPhotoAdapter;
     private String homeworkId;
+    //作业标题
+    private String homeworkTitle;
 
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
@@ -77,6 +79,7 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
         homeworkAppAction.getHomeworkDetail(homeworkId, new ActionCallbackListener<HomeworkWithBLOBs>() {
             @Override
             public void onSuccess(HomeworkWithBLOBs data, String message) {
+                homeworkTitle = data.getName();
                 homeworkTitleTxt.setText(data.getName());
                 if (!TextUtils.isEmpty(data.getDetail())) {
                     homeworkDetailTxt.setText(data.getDetail());
@@ -159,7 +162,7 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
 
     //改变作业状态
     private void changeHomeworkStatus(final String homeworkId, final String homeworkStatus) {
-        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, new ActionCallbackListener<Void>() {
+        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 TeaHomeworkUnderwayFragment.refreshFlag = true;

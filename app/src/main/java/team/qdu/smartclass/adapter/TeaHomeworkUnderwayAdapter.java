@@ -38,7 +38,7 @@ public class TeaHomeworkUnderwayAdapter extends SBaseAdapter<Homework> {
             //获得组件，实例化组件
             convertView = layoutInflater.inflate(R.layout.class_homework_admin_underway_listitem, null);
             compo.homeworkIdTxt = (TextView) convertView.findViewById(R.id.txt_homework_underway_id);
-            compo.homeworkNameTxt = (TextView) convertView.findViewById(R.id.txt_homework_underway_name);
+            compo.homeworkNameTxt = (TextView) convertView.findViewById(R.id.txt_homework_title);
             compo.homeworkExpTxt = (TextView) convertView.findViewById(R.id.txt_homework_underway_exp);
             compo.homeworkSubmitNumTxt = (TextView) convertView.findViewById(R.id.txt_homework_underway_submitnum);
             compo.homeworkStatusTxt = (TextView) convertView.findViewById(R.id.txt_homework_underway_status);

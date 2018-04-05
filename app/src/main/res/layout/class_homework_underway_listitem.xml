@@ -19,7 +19,7 @@
         android:src="@mipmap/ic_homework_default" />
 
     <TextView
-        android:id="@+id/txt_homework_underway_name"
+        android:id="@+id/txt_homework_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txt_homework_underway_exp"
@@ -34,7 +34,7 @@
         android:id="@+id/txt_homework_underway_exp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_homework_underway_name"
+        android:layout_below="@+id/txt_homework_title"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/iv_class_homework"
@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txt_homework_underway_exp"
-        android:layout_below="@+id/txt_homework_underway_name"
+        android:layout_below="@+id/txt_homework_title"
         android:layout_marginLeft="65dp"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/iv_class_homework"
