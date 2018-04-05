@@ -34,6 +34,7 @@ public class ImgAppActionImpl implements ImgAppAction {
 
             @Override
             protected File doInBackground(Void... params) {
+
                 return imgApi.cacheImg(urlTail);
             }
 
@@ -54,6 +55,7 @@ public class ImgAppActionImpl implements ImgAppAction {
 
             @Override
             protected File doInBackground(Void... params) {
+
                 return imgApi.cacheFile(urlTail);
             }
 

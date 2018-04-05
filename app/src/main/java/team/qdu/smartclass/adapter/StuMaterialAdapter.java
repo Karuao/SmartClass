@@ -10,14 +10,14 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import team.qdu.model.Material;
+import team.qdu.model.Material_User;
 import team.qdu.smartclass.R;
 
 /**
  * Created by n551 on 2018/1/29.
  */
 
-public class StuMaterialAdapter extends SBaseAdapter<Material> {
+public class StuMaterialAdapter extends SBaseAdapter<Material_User> {
 
     public StuMaterialAdapter(Context context, List itemList) {
         super(context);
@@ -29,6 +29,7 @@ public class StuMaterialAdapter extends SBaseAdapter<Material> {
         public TextView timeTxt;
         public TextView urlTxt;
         public TextView materialidTxt;
+        public TextView materialuseridTxt;
         public ImageView resourceImg;
     }
 
@@ -43,6 +44,7 @@ public class StuMaterialAdapter extends SBaseAdapter<Material> {
             compo.timeTxt= (TextView) convertView.findViewById(R.id.tv_class_filetime);
             compo.urlTxt=(TextView)convertView.findViewById(R.id.tv_materialurl);
             compo.materialidTxt= (TextView) convertView.findViewById(R.id.tv_materialid);
+            compo.materialuseridTxt= (TextView) convertView.findViewById(R.id.tv_material_user_id);
             compo.resourceImg= (ImageView) convertView.findViewById(R.id.iv_class_file);
             convertView.setTag(compo);
         } else {
@@ -52,6 +54,7 @@ public class StuMaterialAdapter extends SBaseAdapter<Material> {
         compo.nameTxt.setText(itemList.get(position).getName());
         compo.timeTxt.setText(sdf.format(itemList.get(position).getCreate_date_time()));
         compo.materialidTxt.setText(Integer.toString(itemList.get(position).getMaterial_id()));
+        compo.materialuseridTxt.setText(Integer.toString(itemList.get(position).getMaterial_user_id()));
         compo.urlTxt.setText(itemList.get(position).getUrl());
         String ext = MimeTypeMap.getFileExtensionFromUrl((String) compo.urlTxt.getText());
         if(ext.equals("pptx")||ext.equals("ppt")){

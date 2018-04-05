@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.List;
 
-import team.qdu.api.util.OpenFileUtil;
+import team.qdu.smartclass.util.OpenFileUtil;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Material;
 import team.qdu.smartclass.R;
@@ -88,7 +88,7 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        parentActivity.imgAppAction.cacheFile(urltail, new ActionCallbackListener<File>() {
+                        parentActivity.imgAppAction.cacheFile(urltail,new ActionCallbackListener<File>() {
                             @Override
                             public void onSuccess(File data, String message) {
                                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();

@@ -11,5 +11,5 @@ public interface ImgAppAction {
     //缓存图片
     public void cacheImg(String urlTail, ActionCallbackListener<File> listener);
     //缓存文件
-    public void cacheFile(String urlTail, ActionCallbackListener<File> listener);
+    public void cacheFile(String urlTail,ActionCallbackListener<File> listener);
 }

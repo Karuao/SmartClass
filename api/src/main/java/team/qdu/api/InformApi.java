@@ -16,7 +16,7 @@ public interface InformApi {
     public ApiResponse<List<Inform>> getInform(String classid);
     public ApiResponse<Void> createInform(String classid,String detail);
     public ApiResponse<List<Inform_User>> getUserInform(String classid, String userid);
-    public ApiResponse<Void> ClickInform(String inform_user_id);
+    public ApiResponse<Void> ClickInform(String inform_user_id,String classid,String userid);
     public ApiResponse<Void> deleteInform(String inform_id);
     public ApiResponse<List<User>> getReadPeople(String inform_id);
     public ApiResponse<List<User>> getUnReadPeople(String inform_id);

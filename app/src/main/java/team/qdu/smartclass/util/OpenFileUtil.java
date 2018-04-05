@@ -1,4 +1,4 @@
-package team.qdu.api.util;
+package team.qdu.smartclass.util;
 
 import android.content.Context;
 import android.content.Intent;

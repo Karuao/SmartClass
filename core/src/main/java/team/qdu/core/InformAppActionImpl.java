@@ -87,12 +87,12 @@ public class InformAppActionImpl implements InformAppAction {
     }
 
     @Override
-    public void ClickInform(final String inform_user_id, final ActionCallbackListener<Void> listener) {
+    public void ClickInform(final String inform_user_id,final String classid,final String userid,  final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
-                return informApi.ClickInform(inform_user_id);
+                return informApi.ClickInform(inform_user_id,classid,userid);
             }
 
             @Override

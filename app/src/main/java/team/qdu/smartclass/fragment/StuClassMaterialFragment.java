@@ -14,9 +14,9 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.List;
 
-import team.qdu.api.util.OpenFileUtil;
+import team.qdu.smartclass.util.OpenFileUtil;
 import team.qdu.core.ActionCallbackListener;
-import team.qdu.model.Material;
+import team.qdu.model.Material_User;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
@@ -62,10 +62,11 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
     }
     private void getMaterial() {
         String classid = getClassId();
-        parentActivity.materialAppAction.getStuMaterial(classid,new ActionCallbackListener<List<Material>>() {
+        String userid=  getUserId();
+        parentActivity.materialAppAction.getStuMaterial(classid,userid,new ActionCallbackListener<List<Material_User>>() {
 
             @Override
-            public void onSuccess(List<Material> data, String message) {
+            public void onSuccess(List<Material_User> data, String message) {
                 listview.setAdapter(new StuMaterialAdapter(getActivity(), data));
             }
 
@@ -80,7 +81,10 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
     public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
         final String name = ((TextView) view.findViewById(R.id.tv_class_filename)).getText().toString();
         final String url = ((TextView) view.findViewById(R.id.tv_materialurl)).getText().toString();
+        final String material_user_id=((TextView) view.findViewById(R.id.tv_material_user_id)).getText().toString();
         final String urltail = url;
+        final String classid=getClassId();
+        final String userid=getUserId();
         new AlertDialog.Builder(getContext())
                 .setTitle("提示")
                 .setMessage("确定要下载此资源？")
@@ -91,10 +95,11 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
 
                         String urltail = url;
 
-        parentActivity.imgAppAction.cacheFile(urltail, new ActionCallbackListener<File>() {
+        parentActivity.imgAppAction.cacheFile(urltail,new ActionCallbackListener<File>() {
             @Override
             public void onSuccess(File data, String message) {
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                DownloadMaterial(classid,userid,name,material_user_id);
                 OpenFileUtil openFileUtil=new OpenFileUtil();
                 openFileUtil.openFileByPath(getContext(),url);
 
@@ -110,5 +115,19 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
                 })
                 .setNegativeButton("取消", null)
                 .show();
+    }
+    private void DownloadMaterial(String classid,String userid,String name,String material_user_id) {
+        parentActivity.materialAppAction.downloadMaterial(classid,userid,name,material_user_id, new ActionCallbackListener<Void>() {
+
+            @Override
+            public void onSuccess(Void data, String message) {
+
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+
+            }
+        });
     }
 }

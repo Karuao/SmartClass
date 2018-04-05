@@ -36,6 +36,7 @@ public class ImgApiImpl implements ImgApi {
 
     @Override
     public File cacheFile(String urlTail) {
+
         try {
             return imgCacheHttpEngine.cacheImg(urlTail);
         } catch (IOException e) {

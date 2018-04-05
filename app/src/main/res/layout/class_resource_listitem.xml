@@ -60,6 +60,19 @@
         android:visibility="invisible" />
 
     <TextView
+        android:id="@+id/tv_material_user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_class_filename"
+        android:layout_alignBottom="@+id/tv_class_filename"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_toEndOf="@+id/tv_materialid"
+        android:layout_toRightOf="@+id/tv_materialid"
+        android:text="TextView"
+        android:visibility="invisible" />
+
+    <TextView
         android:id="@+id/tv_materialurl"
         android:visibility="invisible"
         android:layout_width="wrap_content"

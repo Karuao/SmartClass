@@ -78,9 +78,11 @@ public class InformApiImpl implements InformApi {
     }
 
     @Override
-    public ApiResponse<Void> ClickInform(String inform_user_id) {
+    public ApiResponse<Void> ClickInform(String inform_user_id,String classid,String userid) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("informuserId",inform_user_id);
+        paramMap.put("classId",classid);
+        paramMap.put("userId",userid);
         Type type=new TypeToken<ApiResponse<Void>>(){
         }.getType();
         try{
