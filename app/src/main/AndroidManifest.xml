@@ -33,7 +33,9 @@
         <activity android:name=".activity.RetrieveOneActivity"></activity>
         <activity android:name=".activity.RetrieveThreeActivity"></activity>
         <activity android:name=".activity.RetrieveTwoActivity"></activity>
-        <activity android:name=".activity.ChangeInfoActivity"></activity>
+        <activity
+            android:name=".activity.ChangeInfoActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.SetActivity"></activity>
         <activity
             android:name=".activity.CreateClassActivity"
@@ -59,8 +61,8 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.ModifyClassActivity"></activity>
         <activity
-        android:name=".activity.StuCommitHomeworkActivity"
-        android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+            android:name=".activity.StuCommitHomeworkActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity android:name=".activity.ShowPhotoActivity"></activity>
         <activity android:name=".activity.TeaShowUnderwayHomeworkListActivity"></activity>
         <activity android:name=".activity.TeaShowUnderwayHomeworkActivity"></activity>
@@ -85,6 +87,7 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
+
                 <category android:name="team.qdu.smartclass" />
             </intent-filter>
         </receiver>
