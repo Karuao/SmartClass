@@ -71,7 +71,7 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
         final Compo finalCompo = compo;
         if (!TextUtils.isEmpty(itemList.get(position).getMy_class().getAvatar())) {
             //从服务器获取图片绑定到班课封面上
-            ((SBaseActivity) context).imgAppAction.cacheImg(itemList.get(position).getMy_class().getAvatar(), new ActionCallbackListener<File>() {
+            ((SBaseActivity) context).fileAppAction.cacheImg(itemList.get(position).getMy_class().getAvatar(), new ActionCallbackListener<File>() {
                 @Override
                 public void onSuccess(File data, String message) {
                     Glide.with(context).load(data.getPath()).into(finalCompo.classImg);

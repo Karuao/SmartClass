@@ -48,6 +48,8 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
     private ListView notEvaluateHomeworkList;
     private ListView uncommitHomeworkList;
     private String homeworkId;
+    //作业标题
+    private String homeworkTitle;
     //刷新标志
     public static boolean refreshFlag;
 
@@ -98,7 +100,8 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
         homeworkAppAction.getHomeworkDetail(homeworkId, new ActionCallbackListener<HomeworkWithBLOBs>() {
             @Override
             public void onSuccess(HomeworkWithBLOBs data, String message) {
-                homeworkTitleTxt.setText(data.getName());
+                homeworkTitle = data.getName();
+                homeworkTitleTxt.setText(homeworkTitle);
                 homeworkDetailTxt.setText(data.getDetail());
                 if (!TextUtils.isEmpty(data.getUrl())) {
                     ImgUtil.initHomeworkPhotoList(TeaShowEvaluatedHomeworkListActivity.this, homeworkShowPhotoAdapter, data.getUrl(), data.getUrl_file_num());
@@ -189,7 +192,7 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
 
     //改变作业状态
     private void changeHomeworkStatus(String homeworkId, final String homeworkStatus) {
-        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, new ActionCallbackListener<Void>() {
+        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 TeaHomeworkUnderwayFragment.refreshFlag = true;

@@ -12,7 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import team.qdu.core.ActionCallbackListener;
+import team.qdu.model.Attendance;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.TeaClassFragmentPagerAdapter;
@@ -118,7 +121,23 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     }
 
     public void toSignInforTeacher(View view) {
-        startActivity(new Intent(TeaClassMainActivity.this, TeaMemberSigninActivity.class));
+        this.memberAppAction.getAttendanceInfo(getClassId(), new ActionCallbackListener<List<Attendance>>() {
+            @Override
+            public void onSuccess(List<Attendance> data, String message) {
+                if(data.get(0).getIf_open().equals("签到中")){
+                    Intent intent = new Intent(TeaClassMainActivity.this, TeaMemberSigniningActivity.class);
+                    intent.putExtra("attendanceId", data.get(0).getAttendance_id().toString());
+                    startActivity(intent);
+                }else{
+                    startActivity(new Intent(TeaClassMainActivity.this, TeaMemberSigninActivity.class));
+                }
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //TeaClassHomeworkFragment老师作业界面发布作业点击事件
@@ -205,6 +224,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                         TeaClassMaterialFragment.refreshFlag = true;
                                         teaClassFragmentPagerAdapter.getTeaClassMaterialFragment().getMaterial();
 
+
                                     }
 
                                     @Override
@@ -248,6 +268,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                             hint2.setVisibility(View.GONE);
                                             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                         }
+
                                         @Override
                                         public void onFailure(String errorEvent, String message) {
                                             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -308,6 +329,8 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                 .getText().toString();
         final String homeworkId = ((TextView) listItem.findViewById(R.id.txt_homework_underway_id))
                 .getText().toString();
+        final String homeworkTitle = ((TextView) listItem.findViewById(R.id.txt_homework_title))
+                .getText().toString();
         AlertDialog.Builder builder = new AlertDialog.Builder(TeaClassMainActivity.this);
         //生成对话框
         if ("进行中".equals(homeworkStatus)) {
@@ -316,7 +339,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            changeHomeworkStatus(homeworkId, homeworkStatus);
+                            changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle);
                         }
                     })
                     .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -335,7 +358,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                 @Override
                                 public void onSuccess(Integer data, String message) {
                                     if (data == 0) {
-                                        changeHomeworkStatus(homeworkId, homeworkStatus);
+                                        changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle);
                                     } else {
                                         Toast.makeText(TeaClassMainActivity.this, "仍有" + data
                                                 + "人作业未评价,请评价后再结束作业", Toast.LENGTH_SHORT).show();
@@ -361,8 +384,8 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
 
     //改变作业状态
-    private void changeHomeworkStatus(String homeworkId, final String homeworkStatus) {
-        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, new ActionCallbackListener<Void>() {
+    private void changeHomeworkStatus(String homeworkId, final String homeworkStatus, String homeworkTitle) {
+        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 teaClassFragmentPagerAdapter.getTeaClassHomeworkFragment().getTeaHomeworkFragmentPagerAdapter().

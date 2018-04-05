@@ -44,6 +44,8 @@ public class StuCommitHomeworkActivity extends SBaseActivity implements AdapterV
     private String homeworkAnswerId;
     //作业id
     private String homeworkId;
+    //作业标题
+    private String homeworkTitle;
     //是否提交过
     private String ifSubmit;
     //要删除的图片Url，如果重新上传图片则在服务器上删除之前的图片
@@ -84,7 +86,8 @@ public class StuCommitHomeworkActivity extends SBaseActivity implements AdapterV
         homeworkAppAction.getStuHomeworkDetail(homeworkAnswerId, new ActionCallbackListener<HomeworkAnswerWithBLOBs>() {
             @Override
             public void onSuccess(HomeworkAnswerWithBLOBs data, String message) {
-                homeworkTitleTxt.setText(data.getHomework().getName());
+                homeworkTitle = data.getHomework().getName();
+                homeworkTitleTxt.setText(homeworkTitle);
                 if (!TextUtils.isEmpty(data.getHomework().getDetail())) {
                     homeworkDetailTxt.setText(data.getHomework().getDetail());
                 }
@@ -118,7 +121,7 @@ public class StuCommitHomeworkActivity extends SBaseActivity implements AdapterV
         photoList = new ArrayList<>();
         ImgUtil.compressPhotoes(photoList, homeworkAddPhotoAdapter, this);
         homeworkAppAction.commitHomework(homeworkAnswerId, homeworkId, getClassId(), getUserId(),
-                ifSubmit, answerDetail, photoList, delPhotoesUrl, new ActionCallbackListener<Void>() {
+                ifSubmit, homeworkTitle, answerDetail, photoList, delPhotoesUrl, new ActionCallbackListener<Void>() {
                     @Override
                     public void onSuccess(Void data, String message) {
                         Toast.makeText(StuCommitHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();

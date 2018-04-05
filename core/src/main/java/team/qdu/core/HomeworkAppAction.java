@@ -19,13 +19,13 @@ public interface HomeworkAppAction {
     public void getHomeworkList(String classId, String userId, String userTitle, String requestStatus, ActionCallbackListener<List> listener);
 
     //更改作业状态
-    public void changeHomeworkStatus(String homeworkId, String homeworkStatus, ActionCallbackListener<Void> listener);
+    public void changeHomeworkStatus(String homeworkId, String homeworkStatus, String homeworkTitle, ActionCallbackListener<Void> listener);
 
     //获取学生作业详情
     public void getStuHomeworkDetail(String homeworkAnswerId, ActionCallbackListener<HomeworkAnswerWithBLOBs> listener);
 
     //学生提交作业
-    public void commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, List<File> photoList, String delPhotoesUrl, ActionCallbackListener<Void> listener);
+    public void commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String homeworkTitle, String detail, List<File> photoList, String delPhotoesUrl, ActionCallbackListener<Void> listener);
 
     //获取作业详情
     public void getHomeworkDetail(String homeworkId, ActionCallbackListener<HomeworkWithBLOBs> listener);

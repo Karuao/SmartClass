@@ -88,7 +88,7 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        parentActivity.imgAppAction.cacheFile(urltail,new ActionCallbackListener<File>() {
+                        parentActivity.fileAppAction.cacheFile(urltail, new ActionCallbackListener<File>() {
                             @Override
                             public void onSuccess(File data, String message) {
                                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();

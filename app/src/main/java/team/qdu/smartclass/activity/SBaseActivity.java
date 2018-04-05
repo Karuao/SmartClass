@@ -14,7 +14,7 @@ import java.util.List;
 
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.HomeworkAppAction;
-import team.qdu.core.ImgAppAction;
+import team.qdu.core.FileAppAction;
 import team.qdu.core.InformAppAction;
 import team.qdu.core.MaterialAppAction;
 import team.qdu.core.MemberAppAction;
@@ -50,7 +50,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
 
     public MaterialAppAction materialAppAction;
 
-    public ImgAppAction imgAppAction;
+    public FileAppAction fileAppAction;
 
     public ImagePicker imagePicker;
 
@@ -65,7 +65,7 @@ public abstract class SBaseActivity extends AppCompatActivity {
         homeworkAppAction = application.getHomeworkAppAction();
         memberAppAction = application.getMemberAppAction();
         materialAppAction = application.getMaterialAppAction();
-        imgAppAction = application.getImgAppAction();
+        fileAppAction = application.getFileAppAction();
         imagePicker = application.getImagePicker();
     }
 

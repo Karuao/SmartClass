@@ -95,15 +95,12 @@ public class TeaClassMemberFragment extends SBaseFragment implements AdapterView
         String memberName = ((TextView) view.findViewById(R.id.tv_class_membername2)).getText().toString();
         String memberSno = ((TextView) view.findViewById(R.id.tv_class_membernum2)).getText().toString();
         String memberExp = ((TextView) view.findViewById(R.id.tv_class_memberexp2)).getText().toString();
-        Bitmap bmp =((BitmapDrawable) ((ImageView) view.findViewById(R.id.iv_class_memberimg)).getDrawable()).getBitmap();
+        String memberAvatar = ((TextView)view.findViewById(R.id.memberAvatar)).getText().toString();
         Intent intent = new Intent(getContext(), ShowMemberDetailActivity.class);
         intent.putExtra("memberName",memberName);
         intent.putExtra("memberSno",memberSno);
         intent.putExtra("memberExp",memberExp);
-        ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte [] bitmapByte =baos.toByteArray();
-        intent.putExtra("bitmap", bitmapByte);
+        intent.putExtra("memberAvatar", memberAvatar);
         startActivity(intent);
     }
 

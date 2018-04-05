@@ -93,10 +93,11 @@ public class HomeworkApiImpl implements HomeworkApi {
     }
 
     @Override
-    public ApiResponse<Void> changeHomeworkStatus(String homeworkId, String homeworkStatus) {
+    public ApiResponse<Void> changeHomeworkStatus(String homeworkId, String homeworkStatus, String homeworkTitle) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("homeworkId", homeworkId);
         paramMap.put("homeworkStatus", homeworkStatus);
+        paramMap.put("homeworkTitle", homeworkTitle);
 
         Type type = new TypeToken<ApiResponse<Void>>() {
         }.getType();
@@ -128,7 +129,7 @@ public class HomeworkApiImpl implements HomeworkApi {
     }
 
     @Override
-    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String detail, List<File> photoList, String delPhotoesUrl) {
+    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String homeworkTitle, String detail, List<File> photoList, String delPhotoesUrl) {
         Map<String, String> paramMap = new HashMap<>();
         Map<String, File> fileMap = null;
         paramMap.put("homeworkAnswerId", homeworkAnswerId);
@@ -136,6 +137,7 @@ public class HomeworkApiImpl implements HomeworkApi {
         paramMap.put("classId", classId);
         paramMap.put("userId", userId);
         paramMap.put("ifSubmit", ifSubmit);
+        paramMap.put("homeworkTitle", homeworkTitle);
         paramMap.put("detail", detail);
         paramMap.put("delPhotoesUrl", delPhotoesUrl);
         if (photoList != null) {

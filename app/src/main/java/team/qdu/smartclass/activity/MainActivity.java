@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.jpush.android.api.JPushInterface;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.MainFragmentPagerAdapter;
 
@@ -48,6 +49,7 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
         setContentView(R.layout.activity_mainpage);
         mainFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager());
         initView();
+        JPushInterface.setAlias(context,1,getUserId());
         initEvents();
     }
 

@@ -203,5 +203,4 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
         return super.dispatchKeyEvent(event);
     }
 
-
 }

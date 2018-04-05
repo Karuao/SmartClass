@@ -95,7 +95,7 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
 
                         String urltail = url;
 
-        parentActivity.imgAppAction.cacheFile(urltail,new ActionCallbackListener<File>() {
+        parentActivity.fileAppAction.cacheFile(urltail, new ActionCallbackListener<File>() {
             @Override
             public void onSuccess(File data, String message) {
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();

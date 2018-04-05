@@ -56,14 +56,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal"
+        android:onClick="setVisible1"
+        android:background="@color/title">
 
         <TextView
+            android:id="@+id/abc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:text="已签到" />
+            android:text="已签到"
+            android:textColor="@color/bg_white"
+            android:textSize="15dp"/>
 
 
         <TextView
@@ -71,29 +77,53 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_toLeftOf="@+id/tv_class_people"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/abc"
             android:text="?"
-            android:textColor="@color/colorRank" />
+            android:textColor="@color/bg_white" />
 
 
         <TextView
             android:id="@+id/tv_class_people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/iv_class_member_signInMember"
             android:text="人"
-            android:textColor="@color/text_yellow" />
+            android:textColor="@color/bg_white"
+            android:textSize="15dp"/>
+
+        <ImageButton
+            android:id="@+id/folding1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:background="#00000000"
+            android:onClick="setVisible1"
+            android:src="@drawable/folding" />
+
+        <ImageButton
+            android:id="@+id/unfolding1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:background="#00000000"
+            android:onClick="setVisible1"
+            android:src="@drawable/unfolding"
+            android:visibility="invisible"/>
 
     </RelativeLayout>
 
     <ListView
         android:id="@+id/list_signin_signIn_student"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="0dp">
 
     </ListView>
@@ -101,14 +131,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:onClick="setVisible2"
+        android:background="@color/title">
 
         <TextView
+            android:id="@+id/def"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:text="未签到" />
+            android:text="未签到"
+            android:textColor="@color/bg_white"
+            android:textSize="15dp"/>
 
 
         <TextView
@@ -116,7 +152,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_toLeftOf="@+id/tv_class_people2"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/def"
             android:text="?"
             android:textColor="@color/colorRank" />
 
@@ -125,20 +162,42 @@
             android:id="@+id/tv_class_people2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/iv_class_member_notSignInMember"
             android:text="人"
-            android:textColor="@color/text_yellow" />
+            android:textColor="@color/bg_white" />
+
+        <ImageButton
+            android:id="@+id/folding2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:background="#00000000"
+            android:onClick="setVisible2"
+            android:src="@drawable/folding" />
+
+        <ImageButton
+            android:id="@+id/unfolding2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:background="#00000000"
+            android:onClick="setVisible2"
+            android:src="@drawable/unfolding"
+            android:visibility="invisible"/>
 
     </RelativeLayout>
 
     <ListView
         android:id="@+id/list_signin_notSignIn_student"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="0dp">
 
     </ListView>

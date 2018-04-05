@@ -53,6 +53,7 @@ dependencies {
 //    compile 'com.lzy.widget:imagepicker:0.6.1'//手机获取图片
     compile 'com.github.nanchen2251:CompressHelper:1.0.5' //图片压缩库
 //    compile 'com.jakewharton:butterknife:7.0.1'
+    compile files('libs/nineoldandroids-2.4.0.jar')//BaseAnimatorSet动画
     testCompile 'junit:junit:4.12'
 }
 dependencies {
