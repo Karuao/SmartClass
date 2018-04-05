@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,13 @@ public class ShowSignInResultActivity extends SBaseActivity{
     private ListView notSignInStudent;
     private TextView signInMember;
     private TextView notSignInMember;
+    private ImageButton folding1;
+    private ImageButton folding2;
+    private ImageButton unfolding1;
+    private ImageButton unfolding2;
+    //初始设置listview可见
+    private  boolean visible1 = true;
+    private  boolean visible2 = true;
 
 
     @Override
@@ -44,6 +52,10 @@ public class ShowSignInResultActivity extends SBaseActivity{
         notSignInStudent = (ListView)findViewById(R.id.list_signin_notSignIn_student);
         signInMember = (TextView)findViewById(R.id.iv_class_member_signInMember);
         notSignInMember = (TextView)findViewById(R.id.iv_class_member_notSignInMember);
+        folding1 = (ImageButton)findViewById(R.id.folding1);
+        folding2 = (ImageButton)findViewById(R.id.folding2);
+        unfolding1 = (ImageButton)findViewById(R.id.unfolding1);
+        unfolding2 = (ImageButton)findViewById(R.id.unfolding2);
     }
 
     public void getList(){
@@ -164,5 +176,33 @@ public class ShowSignInResultActivity extends SBaseActivity{
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void setVisible1(View view){
+        if(visible1==true){
+            signInStudent.setVisibility(View.GONE);
+            folding1.setVisibility(View.GONE);
+            unfolding1.setVisibility(View.VISIBLE);
+            visible1=false;
+        }else {
+            signInStudent.setVisibility(View.VISIBLE);
+            folding1.setVisibility(View.VISIBLE);
+            unfolding1.setVisibility(View.GONE);
+            visible1=true;
+        }
+    }
+
+    public void setVisible2(View view){
+        if(visible2==true){
+            notSignInStudent.setVisibility(View.GONE);
+            folding2.setVisibility(View.GONE);
+            unfolding2.setVisibility(View.VISIBLE);
+            visible2=false;
+        }else {
+            notSignInStudent.setVisibility(View.VISIBLE);
+            folding2.setVisibility(View.VISIBLE);
+            unfolding2.setVisibility(View.GONE);
+            visible2=true;
+        }
     }
 }

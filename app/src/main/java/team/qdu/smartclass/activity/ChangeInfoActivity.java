@@ -28,6 +28,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.kevin.crop.UCrop;
 
 import java.io.File;
@@ -40,6 +41,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.MainUserFragment;
+import team.qdu.smartclass.util.ImgUtil;
 
 /**
  * 修改个人信息
@@ -49,17 +51,18 @@ import team.qdu.smartclass.fragment.MainUserFragment;
 
 public class ChangeInfoActivity extends SBaseActivity {
 
-    TextView modifyUserAccount;
-    TextView modifyUserName;
-    TextView modifyUserNumber;
-    AppCompatSpinner modifyUserGender;
-    AppCompatSpinner modifyUserUniversity;
-    AppCompatSpinner modifyUserDepartment;
-    TextView modifyUserMotto;
+    private TextView modifyUserAccount;
+    private TextView modifyUserName;
+    private TextView modifyUserNumber;
+    private AppCompatSpinner modifyUserGender;
+    private AppCompatSpinner modifyUserUniversity;
+    private AppCompatSpinner modifyUserDepartment;
+    private TextView modifyUserMotto;
+    private File userAvatar;
     Button btn;
 
-    ImageView AvatarImg;
-    PopupWindow selectphotoPopup;
+    private ImageView AvatarImg;
+    private PopupWindow selectphotoPopup;
 
     //权限
     public static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 102;
@@ -94,16 +97,19 @@ public class ChangeInfoActivity extends SBaseActivity {
                 modifyUserMotto.setText(user.getStatus_message());
                 modifyUserNumber.setText(user.getSno());
                 //从服务器获取图片
-                ChangeInfoActivity.this.classAppAction.getBitmap(user.getAvatar(), new ActionCallbackListener<Bitmap>() {
-                    @Override
-                    public void onSuccess(Bitmap data, String message) {
-                        AvatarImg.setImageBitmap(data);
-                    }
+                if(user.getAvatar()!=null) {
+                    ChangeInfoActivity.this.fileAppAction.cacheImg(user.getAvatar(), new ActionCallbackListener<File>() {
+                        @Override
+                        public void onSuccess(File data, String message) {
+                            Glide.with(context).load(data.getPath()).into(AvatarImg);
+                        }
 
-                    @Override
-                    public void onFailure(String errorEvent, String message) {
-                    }
-                });
+                        @Override
+                        public void onFailure(String errorEvent, String message) {
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
                 setSpinnerItemSelectedByValue(modifyUserGender,user.getGender());
                 setSpinnerItemSelectedByValue(modifyUserUniversity,user.getUniversity());
                 setSpinnerItemSelectedByValue(modifyUserDepartment,user.getDepartment());
@@ -129,18 +135,22 @@ public class ChangeInfoActivity extends SBaseActivity {
     }
 
     public void confirmClick(View view) throws URISyntaxException {
-        File file = null;
         if (!isDefaultAvatar) {
-            file = new File(new URI(mDestinationUri.toString()));
+            userAvatar = new File(new URI(mDestinationUri.toString()));
+        }else {
+            userAvatar = null;
         }
-        String userAccount=modifyUserAccount.getText().toString();
+        if(userAvatar!=null) {
+            userAvatar = ImgUtil.compressAvatarPhoto(this, userAvatar);
+        }
+        final String userAccount=modifyUserAccount.getText().toString();
         String userName=modifyUserName.getText().toString();
         String userGender=modifyUserGender.getSelectedItem().toString();
         String userNumber=modifyUserNumber.getText().toString();
         String userUniversity=modifyUserUniversity.getSelectedItem().toString();
         String userDepartment=modifyUserDepartment.getSelectedItem().toString();
         String userMotto=modifyUserMotto.getText().toString();
-        this.userAppAction.modifyUserInformation(file,userAccount,userName,userGender,userNumber,userUniversity,userDepartment
+        this.userAppAction.modifyUserInformation(userAvatar,userAccount,userName,userGender,userNumber,userUniversity,userDepartment
         ,userMotto,new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
@@ -148,11 +158,17 @@ public class ChangeInfoActivity extends SBaseActivity {
                 //MainUserFragment的刷新标志设为true，下次进入该页面将刷新
                 MainUserFragment.refreshFlag = true;
                 finish();
+                if(userAvatar!=null) {
+                    userAvatar.delete();
+                }
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                if(userAvatar!=null) {
+                    userAvatar.delete();
+                }
             }
         });
     }

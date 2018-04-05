@@ -27,6 +27,7 @@ import android.widget.PopupWindow;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.kevin.crop.UCrop;
 
 import java.io.BufferedOutputStream;
@@ -41,6 +42,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.TeaClassDetailFragment;
+import team.qdu.smartclass.util.ImgUtil;
 
 /**
  * Created by asus on 2018/2/7.
@@ -48,15 +50,16 @@ import team.qdu.smartclass.fragment.TeaClassDetailFragment;
 
 public class ModifyClassActivity extends SBaseActivity{
 
-    EditText classnameEdt;
-    EditText courseEdt;
-    AppCompatSpinner universitySpin;
-    AppCompatSpinner departmentSpin;
-    EditText goalEdt;
-    EditText examEdt;
+    private EditText classnameEdt;
+    private EditText courseEdt;
+    private AppCompatSpinner universitySpin;
+    private AppCompatSpinner departmentSpin;
+    private EditText goalEdt;
+    private EditText examEdt;
+    private File classAvatar;
 
-    ImageView AvatarImg;
-    PopupWindow selectphotoPopup;
+    private ImageView AvatarImg;
+    private PopupWindow selectphotoPopup;
 
     //权限
     public static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 102;
@@ -69,7 +72,6 @@ public class ModifyClassActivity extends SBaseActivity{
     //判断是否使用原头像
     private boolean isDefaultAvatar = true;
 
-    public Bitmap defaultAvatar;
 
     //相册选图标记
     private static final int GALLERY_REQUEST_CODE = 0;
@@ -87,19 +89,20 @@ public class ModifyClassActivity extends SBaseActivity{
                 courseEdt.setText(data.getCourse());
                 goalEdt.setText(data.getDetail());
                 examEdt.setText(data.getExam_shedule());
-                //从服务器获取图片
-                ModifyClassActivity.this.classAppAction.getBitmap(data.getAvatar(), new ActionCallbackListener<Bitmap>() {
-                    @Override
-                    public void onSuccess(Bitmap data, String message) {
-                        AvatarImg.setImageBitmap(data);
-                        defaultAvatar = data;
-                    }
+                if(data.getAvatar()!=null) {
+                    //从服务器获取图片
+                    ModifyClassActivity.this.fileAppAction.cacheImg(data.getAvatar(), new ActionCallbackListener<File>() {
+                        @Override
+                        public void onSuccess(File data, String message) {
+                            Glide.with(context).load(data.getPath()).into(AvatarImg);
+                        }
 
-                    @Override
-                    public void onFailure(String errorEvent, String message) {
-                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(String errorEvent, String message) {
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
                 setSpinnerItemSelectedByValue(universitySpin,data.getUniversity());
                 setSpinnerItemSelectedByValue(departmentSpin,data.getDepartment());
             }
@@ -127,9 +130,13 @@ public class ModifyClassActivity extends SBaseActivity{
 
     //修改班课信息按钮点击事件
     public void finishModify(View view) throws URISyntaxException {
-        File file = null;
         if (!isDefaultAvatar) {
-            file = new File(new URI(mDestinationUri.toString()));
+            classAvatar = new File(new URI(mDestinationUri.toString()));
+        }else {
+            classAvatar = null;
+        }
+        if(classAvatar!=null) {
+            classAvatar = ImgUtil.compressAvatarPhoto(this, classAvatar);
         }
         String name = classnameEdt.getText().toString();
         String course = courseEdt.getText().toString();
@@ -138,18 +145,24 @@ public class ModifyClassActivity extends SBaseActivity{
         String department = departmentSpin.getSelectedItem().toString();
         String goal = goalEdt.getText().toString();
         String exam = examEdt.getText().toString();
-        classAppAction.compileClass(classId,file, name, course, university,department,goal,exam, new ActionCallbackListener<String>() {
+        classAppAction.compileClass(classId,classAvatar, name, course, university,department,goal,exam, new ActionCallbackListener<String>() {
             @Override
             public void onSuccess(String data, String message) {
                 TeaClassDetailFragment.refreshFlag= true;
                 setClassId(classId);
                 finish();
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                if(classAvatar!=null) {
+                    classAvatar.delete();
+                }
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                if(classAvatar!=null) {
+                    classAvatar.delete();
+                }
             }
         });
     }

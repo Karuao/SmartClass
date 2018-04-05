@@ -11,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
+
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.TeaClassMemberFragment;
@@ -35,12 +39,21 @@ public class ShowMemberDetailActivity extends SBaseActivity {
         String memberName = intent.getStringExtra("memberName");
         String memberSno = intent.getStringExtra("memberSno");
         String memberExp = intent.getStringExtra("memberExp");
-        byte [] bis=intent.getByteArrayExtra("bitmap");
-        Bitmap bitmap= BitmapFactory.decodeByteArray(bis, 0, bis.length);
+        String memberAvatar = intent.getStringExtra("memberAvatar");
         memName.setText(memberName);
         memSno.setText(memberSno);
         memExp.setText(memberExp);
-        memImg.setImageBitmap(bitmap);
+        this.fileAppAction.cacheImg(memberAvatar, new ActionCallbackListener<File>() {
+            @Override
+            public void onSuccess(File data, String message) {
+                Glide.with(context).load(data.getPath()).into(memImg);
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
         memberImgTop.setText(memberName);
     }
 

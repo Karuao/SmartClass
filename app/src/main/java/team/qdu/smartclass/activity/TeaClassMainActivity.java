@@ -12,7 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import team.qdu.core.ActionCallbackListener;
+import team.qdu.model.Attendance;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.TeaClassFragmentPagerAdapter;
@@ -118,7 +121,23 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     }
 
     public void toSignInforTeacher(View view) {
-        startActivity(new Intent(TeaClassMainActivity.this, TeaMemberSigninActivity.class));
+        this.memberAppAction.getAttendanceInfo(getClassId(), new ActionCallbackListener<List<Attendance>>() {
+            @Override
+            public void onSuccess(List<Attendance> data, String message) {
+                if(data.get(0).getIf_open().equals("签到中")){
+                    Intent intent = new Intent(TeaClassMainActivity.this, TeaMemberSigniningActivity.class);
+                    intent.putExtra("attendanceId", data.get(0).getAttendance_id().toString());
+                    startActivity(intent);
+                }else{
+                    startActivity(new Intent(TeaClassMainActivity.this, TeaMemberSigninActivity.class));
+                }
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //TeaClassHomeworkFragment老师作业界面发布作业点击事件
@@ -205,6 +224,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                         TeaClassMaterialFragment.refreshFlag = true;
                                         teaClassFragmentPagerAdapter.getTeaClassMaterialFragment().getMaterial();
 
+
                                     }
 
                                     @Override
@@ -248,6 +268,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                             hint2.setVisibility(View.GONE);
                                             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                         }
+
                                         @Override
                                         public void onFailure(String errorEvent, String message) {
                                             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

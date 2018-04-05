@@ -12,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
+
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.model.User;
@@ -26,20 +30,20 @@ import team.qdu.smartclass.activity.TeaClassMainActivity;
 public class TeaClassDetailFragment extends SBaseFragment {
 
     //标题栏班课名
-    TextView titleBarClassNameTxt;
-    CheckBox checkBox;
-    TextView hint;
-    View hint2;
-    TextView allow;
-    TextView className;
-    TextView classNum;
-    TextView classTea;
-    TextView classUniversity;
-    TextView classDepartment;
-    TextView classCode;
-    TextView classDetail;
-    TextView classExam;
-    ImageView teaClassDetailImg;
+    private TextView titleBarClassNameTxt;
+    private CheckBox checkBox;
+    private TextView hint;
+    private View hint2;
+    private TextView allow;
+    private TextView className;
+    private TextView classNum;
+    private TextView classTea;
+    private TextView classUniversity;
+    private TextView classDepartment;
+    private TextView classCode;
+    private TextView classDetail;
+    private TextView classExam;
+    private ImageView teaClassDetailImg;
 
     public static boolean refreshFlag;
 
@@ -175,16 +179,19 @@ public class TeaClassDetailFragment extends SBaseFragment {
                     hint2.setVisibility(View.GONE);
                 }
                 //从服务器获取图片
-                parentActivity.classAppAction.getBitmap(cls.getAvatar(), new ActionCallbackListener<Bitmap>() {
-                    @Override
-                    public void onSuccess(Bitmap data, String message) {
-                        teaClassDetailImg.setImageBitmap(data);
-                    }
+                if(cls.getAvatar()!=null) {
+                    parentActivity.fileAppAction.cacheImg(cls.getAvatar(), new ActionCallbackListener<File>() {
+                        @Override
+                        public void onSuccess(File data, String message) {
+                            Glide.with(getActivity()).load(data.getPath()).into(teaClassDetailImg);
+                        }
 
-                    @Override
-                    public void onFailure(String errorEvent, String message) {
-                    }
-                });
+                        @Override
+                        public void onFailure(String errorEvent, String message) {
+                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
 
             @Override

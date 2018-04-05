@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
@@ -41,6 +44,7 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
         public TextView userExp;
         public TextView userRank;
         public TextView classUserId;
+        public TextView memberAvatar;
         public ImageView classMemberImg;
        // public TextView myRank;
     }
@@ -58,6 +62,7 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
             compo.userRank = (TextView) convertView.findViewById(R.id.tv_class_member_rank2) ;
             compo.classMemberImg = (ImageView) convertView.findViewById(R.id.iv_class_memberimg);
             compo.classUserId = (TextView)convertView.findViewById(R.id.member_classUserId);
+            compo.memberAvatar = (TextView)convertView.findViewById(R.id.memberAvatar) ;
            // compo.myRank = (TextView)convertView.findViewById(R.id.tv_class_member_rank);
             convertView.setTag(compo);
         } else {
@@ -68,6 +73,7 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
         compo.userSno.setText(itemList.get(position).getUser().getSno());
         compo.userExp.setText(itemList.get(position).getExp().toString());
         compo.classUserId.setText(Integer.toString(itemList.get(position).getClass_user_id()));
+        compo.memberAvatar.setText(itemList.get(position).getUser().getAvatar());
         if(position>0) {
             lastExp = itemList.get(position - 1).getExp();
             if (itemList.get(position).getExp() == lastExp) {
@@ -82,10 +88,10 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
         final Compo finalCompo = compo;
         //从服务器获取图片绑定到班课成员封面上
         if (!TextUtils.isEmpty(itemList.get(position).getUser().getAvatar())) {
-            ((SBaseActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<Bitmap>() {
+            ((SBaseActivity) context).fileAppAction.cacheImg(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<File>() {
                 @Override
-                public void onSuccess(Bitmap data, String message) {
-                    finalCompo.classMemberImg.setImageBitmap(data);
+                public void onSuccess(File data, String message) {
+                    Glide.with(context).load(data.getPath()).into(finalCompo.classMemberImg);
                 }
 
                 @Override

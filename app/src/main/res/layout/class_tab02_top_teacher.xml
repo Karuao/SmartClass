@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/class_top"
     android:layout_width="match_parent"
-    android:layout_height="115dp"
+    android:layout_height="75dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -70,15 +70,6 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/title"
-        android:gravity="center"
-        android:orientation="vertical">
-
-    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

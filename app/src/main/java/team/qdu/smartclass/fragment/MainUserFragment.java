@@ -19,9 +19,14 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
+
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.activity.ChangeInfoActivity;
 import team.qdu.smartclass.activity.MainActivity;
 
 public class MainUserFragment extends SBaseFragment {
@@ -76,12 +81,12 @@ public class MainUserFragment extends SBaseFragment {
         parentActivity.userAppAction.getUserInforByAccount(account,new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
+                //从服务器获取图片
                 if(user.getAvatar()!=null) {
-                    //从服务器获取图片
-                    parentActivity.userAppAction.getBitmap(user.getAvatar(), new ActionCallbackListener<Bitmap>() {
+                    parentActivity.fileAppAction.cacheImg(user.getAvatar(), new ActionCallbackListener<File>() {
                         @Override
-                        public void onSuccess(Bitmap data, String message) {
-                            personAvatar.setImageBitmap(data);
+                        public void onSuccess(File data, String message) {
+                            Glide.with(getActivity()).load(data.getPath()).into(personAvatar);
                             swipeRefreshLayout.setRefreshing(false);
                         }
 

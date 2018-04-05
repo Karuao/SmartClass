@@ -53,6 +53,8 @@ public class SignInHistoryForStudentAdapter extends SBaseAdapter<Attendance_user
         compo.signInState.setText(itemList.get(position).getAttendance_status());
         if(itemList.get(position).getAttendance_status().equals("未签到")){
             compo.signInState.setTextColor((context).getResources().getColor(R.color.colorRank));
+        }else {
+            compo.signInState.setTextColor((context).getResources().getColor(R.color.hinter));
         }
         return convertView;
     }
