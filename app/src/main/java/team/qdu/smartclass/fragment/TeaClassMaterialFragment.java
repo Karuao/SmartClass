@@ -3,6 +3,7 @@ package team.qdu.smartclass.fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,31 +83,48 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
         final String url = ((TextView) view.findViewById(R.id.tv_materialurl)).getText().toString();
         final String urltail = url;
 
-        new AlertDialog.Builder(this.getContext())
-                .setTitle("提示")
-                .setMessage("确定要下载此资源？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        parentActivity.fileAppAction.cacheFile(urltail, new ActionCallbackListener<File>() {
-                            @Override
-                            public void onSuccess(File data, String message) {
-                                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                                OpenFileUtil openFileUtil = new OpenFileUtil();
-                                openFileUtil.openFileByPath(getContext(), url);
 
-                            }
+        if (CheckIfFileExist(url) == false) {
+            new AlertDialog.Builder(this.getContext())
+                    .setTitle("提示")
+                    .setMessage("确定要下载此资源？")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            parentActivity.fileAppAction.cacheFile(urltail, new ActionCallbackListener<File>() {
+                                @Override
+                                public void onSuccess(File data, String message) {
+                                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                                    OpenFileUtil openFileUtil = new OpenFileUtil();
+                                    openFileUtil.openFileByPath(getContext(), url);
 
-                            @Override
-                            public void onFailure(String errorEvent, String message) {
-                                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                })
-                .setNegativeButton("取消", null)
-                .show();
+                                }
+
+                                @Override
+                                public void onFailure(String errorEvent, String message) {
+                                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    })
+                    .setNegativeButton("取消", null)
+                    .show();
+        }
+        else {
+            OpenFileUtil openFileUtil = new OpenFileUtil();
+            openFileUtil.openFileByPath(getContext(), url);
+        }
     }
+
+
+    public boolean CheckIfFileExist(final String urlTail){
+        File img = new File(Environment.getExternalStorageDirectory() + File.separator + urlTail);
+        if (img.exists()) {
+            return true;
+        }
+        return false;
+    }
+
 }
 
 

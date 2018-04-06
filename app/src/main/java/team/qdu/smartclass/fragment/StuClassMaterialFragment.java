@@ -3,6 +3,7 @@ package team.qdu.smartclass.fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,8 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
         final String urltail = url;
         final String classid=getClassId();
         final String userid=getUserId();
+
+        if (CheckIfFileExist(url) == false) {
         new AlertDialog.Builder(getContext())
                 .setTitle("提示")
                 .setMessage("确定要下载此资源？")
@@ -115,7 +118,12 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
                 })
                 .setNegativeButton("取消", null)
                 .show();
+    } else {
+            OpenFileUtil openFileUtil = new OpenFileUtil();
+            openFileUtil.openFileByPath(getContext(), url);
+        }
     }
+
     private void DownloadMaterial(String classid,String userid,String name,String material_user_id) {
         parentActivity.materialAppAction.downloadMaterial(classid,userid,name,material_user_id, new ActionCallbackListener<Void>() {
 
@@ -129,5 +137,12 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
 
             }
         });
+    }
+    public boolean CheckIfFileExist(final String urlTail){
+        File img = new File(Environment.getExternalStorageDirectory() + File.separator + urlTail);
+        if (img.exists()) {
+            return true;
+        }
+        return false;
     }
 }
