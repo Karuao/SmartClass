@@ -135,7 +135,10 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
     }
 
     public void checkExpDetail(View view){
-        startActivity(new Intent(StuClassMainActivity.this,ShowExpDetailActivity.class));
+        Intent intent = new Intent(new Intent(StuClassMainActivity.this,ShowExpDetailActivity.class));
+        intent.putExtra("classId",getClassId());
+        intent.putExtra("userId",getUserId());
+        startActivity(intent);
     }
 
     //若某个页面有新推送，查看页面后进行的操作
@@ -242,10 +245,8 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                         StuClassMainActivity.this.classAppAction.quitClass(classId, userId, new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
-                                MainClassFragment.refreshFlag = true;
-                                Intent intent = new Intent(StuClassMainActivity.this, MainActivity.class);
                                 finish();
-                                startActivity(intent);
+                                MainClassFragment.refreshFlag = true;
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                             }
 

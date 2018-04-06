@@ -45,6 +45,7 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
         public TextView userRank;
         public TextView classUserId;
         public TextView memberAvatar;
+        public TextView memberId;
         public ImageView classMemberImg;
        // public TextView myRank;
     }
@@ -63,6 +64,7 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
             compo.classMemberImg = (ImageView) convertView.findViewById(R.id.iv_class_memberimg);
             compo.classUserId = (TextView)convertView.findViewById(R.id.member_classUserId);
             compo.memberAvatar = (TextView)convertView.findViewById(R.id.memberAvatar) ;
+            compo.memberId = (TextView)convertView.findViewById(R.id.memberId);
            // compo.myRank = (TextView)convertView.findViewById(R.id.tv_class_member_rank);
             convertView.setTag(compo);
         } else {
@@ -74,6 +76,7 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
         compo.userExp.setText(itemList.get(position).getExp().toString());
         compo.classUserId.setText(Integer.toString(itemList.get(position).getClass_user_id()));
         compo.memberAvatar.setText(itemList.get(position).getUser().getAvatar());
+        compo.memberId.setText(itemList.get(position).getUser().getUser_id().toString());
         if(position>0) {
             lastExp = itemList.get(position - 1).getExp();
             if (itemList.get(position).getExp() == lastExp) {

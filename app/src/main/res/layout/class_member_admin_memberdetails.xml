@@ -66,9 +66,12 @@
 
 
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#d6d6d6" />
 
 
-<!--
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,15 +89,11 @@
                 android:text="查看经验明细"
                 android:textColor="#fff"
                 android:textSize="18sp"
+                android:onClick="checkStudentExpDetail"
                 />
 
         </RelativeLayout>
--->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="#d6d6d6" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

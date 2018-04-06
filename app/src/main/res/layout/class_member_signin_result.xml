@@ -58,8 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:orientation="horizontal"
-        android:onClick="setVisible1"
-        android:background="@color/title">
+        android:onClick="setVisible1">
 
         <TextView
             android:id="@+id/abc"
@@ -68,7 +67,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:text="已签到"
-            android:textColor="@color/bg_white"
+            android:textColor="@color/classbottom"
             android:textSize="15dp"/>
 
 
@@ -79,8 +78,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/abc"
-            android:text="?"
-            android:textColor="@color/bg_white" />
+            android:text="?" />
 
 
         <TextView
@@ -92,7 +90,7 @@
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/iv_class_member_signInMember"
             android:text="人"
-            android:textColor="@color/bg_white"
+            android:textColor="@color/classbottom"
             android:textSize="15dp"/>
 
         <ImageButton
@@ -120,6 +118,12 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginTop="5dp"
+        android:background="#d6d6d6" />
+
     <ListView
         android:id="@+id/list_signin_signIn_student"
         android:layout_width="wrap_content"
@@ -128,13 +132,18 @@
 
     </ListView>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginTop="0dp"
+        android:background="#d6d6d6" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="1dp"
-        android:onClick="setVisible2"
-        android:background="@color/title">
+        android:onClick="setVisible2">
 
         <TextView
             android:id="@+id/def"
@@ -143,7 +152,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:text="未签到"
-            android:textColor="@color/bg_white"
+            android:textColor="@color/classbottom"
             android:textSize="15dp"/>
 
 
@@ -167,7 +176,7 @@
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/iv_class_member_notSignInMember"
             android:text="人"
-            android:textColor="@color/bg_white" />
+            android:textColor="@color/classbottom"/>
 
         <ImageButton
             android:id="@+id/folding2"
@@ -193,6 +202,12 @@
             android:src="@drawable/unfolding" />
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginTop="5dp"
+        android:background="#d6d6d6" />
 
     <ListView
         android:id="@+id/list_signin_notSignIn_student"

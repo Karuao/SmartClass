@@ -1,5 +1,6 @@
 package team.qdu.smartclass.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
@@ -57,7 +58,10 @@ public class ShowExpDetailActivity extends SBaseActivity implements AdapterView.
     }
 
     public void getExpDetailList(){
-        this.memberAppAction.getExpDetail(getClassId(), getUserId(), new ActionCallbackListener<List<ClassUserExp>>() {
+        Intent intent = getIntent();
+        String classId = intent.getStringExtra("classId");
+        String userId = intent.getStringExtra("userId");
+        this.memberAppAction.getExpDetail(classId, userId, new ActionCallbackListener<List<ClassUserExp>>() {
             @Override
             public void onSuccess(List<ClassUserExp> data, String message) {
                 expDetailAdapter.setItems(data);

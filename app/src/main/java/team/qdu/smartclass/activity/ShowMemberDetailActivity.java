@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import java.io.File;
 
 import team.qdu.core.ActionCallbackListener;
+import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.TeaClassMemberFragment;
 
@@ -89,6 +90,15 @@ public class ShowMemberDetailActivity extends SBaseActivity {
                 })
                 .setNegativeButton("取消",null)
                 .show();
+    }
+
+    public void checkStudentExpDetail(View view){
+        Intent intent2 = getIntent();
+        String memberId = intent2.getStringExtra("memberId");
+        Intent intent = new Intent(ShowMemberDetailActivity.this,ShowExpDetailActivity.class);
+        intent.putExtra("classId",getClassId());
+        intent.putExtra("userId",memberId);
+        startActivity(intent);
     }
 
 }

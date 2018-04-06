@@ -24,6 +24,7 @@ import team.qdu.core.MemberAppAction;
 import team.qdu.core.MemberAppActionImpl;
 import team.qdu.core.UserAppAction;
 import team.qdu.core.UserAppActionImpl;
+import team.qdu.smartclass.activity.MainActivity;
 import team.qdu.smartclass.util.GlideImageLoader;
 
 /**
@@ -116,6 +117,19 @@ public class SApplication extends Application {
     public static void addActivity(Activity activity) {
         activityList.add(activity);
     }
+
+
+    public static void removeMainActivity(List<Activity> list){
+        list.remove(MainActivity.class);
+    }
+//    public static void removeActivity(ArrayList<Activity> list, Activity target){
+//        for(int i=0;i<list.size();i++){
+//            Activity activity = list.get(i);
+//            if(activity.equals(target)){
+//                list.remove(activity);
+//            }
+//        }
+//    }
 
     public static List<Activity> getActivityList() {
         return activityList;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -50,10 +51,24 @@ public class SetActivity extends SBaseActivity {
 
 
     public void toLogout(View view) {
+        application.addActivity(SetActivity.this);
         setUserId(null);
-        startActivity(new Intent(SetActivity.this, LoginActivity.class));
         application.clearActivity();
-        SetActivity.this.finish();
-
+        startActivity(new Intent(SetActivity.this, LoginActivity.class));
     }
+
+    public void toBack2(View view){
+        finish();
+        application.removeMainActivity(application.activityList);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {//点击的是返回键
+            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {//按键的按下事件
+                application.removeMainActivity(application.activityList);
+            }
+        }
+            return super.dispatchKeyEvent(event);
+        }
 }

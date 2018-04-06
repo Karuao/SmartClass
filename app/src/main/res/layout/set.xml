@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="25dp"
-            android:onClick="toBack"
+            android:onClick="toBack2"
             android:src="@drawable/back"/>
 
     </RelativeLayout>
