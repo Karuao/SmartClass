@@ -120,7 +120,7 @@ public class SApplication extends Application {
 
 
     public static void removeMainActivity(List<Activity> list){
-        list.remove(MainActivity.class);
+        list.remove(0);
     }
 //    public static void removeActivity(ArrayList<Activity> list, Activity target){
 //        for(int i=0;i<list.size();i++){

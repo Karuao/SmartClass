@@ -81,7 +81,6 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
 
     //修改个人信息点击事件
     public void toChangeInfo(View view) {
-        System.out.println("这是一个演示 "+application.activityList);
         startActivity(new Intent(MainActivity.this, ChangeInfoActivity.class));
     }
 
