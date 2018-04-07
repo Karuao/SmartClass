@@ -1,6 +1,5 @@
 <!--我的信息页面的设置按钮点击后的页面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,25 +8,24 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_logout_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:layout_marginLeft="25dp"
-            android:onClick="toBack2"
-            android:src="@drawable/back"/>
+            android:layout_marginTop="25dp"
+            android:onClick="toBack"
+            android:src="@drawable/back" />
 
     </RelativeLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:src="@drawable/head2"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="8dp" />
@@ -43,7 +41,6 @@
         android:textColor="#000"
         android:textSize="23sp"
         android:typeface="sans" />
-
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -66,9 +63,8 @@
 
     </RelativeLayout>
 
-
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp">
@@ -77,12 +73,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="220dp"
-            android:text="联系我们：13744564464@qq.com"
-            android:textColor="#c4c4c4"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:paddingBottom="10dp"
+            android:text="联系我们：\n13744564464@qq.com"
+            android:textColor="@color/hinter"
             android:textSize="13sp" />
 
     </RelativeLayout>
-
 
 </LinearLayout>

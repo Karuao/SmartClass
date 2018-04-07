@@ -180,10 +180,9 @@
             android:layout_marginLeft="230dp"
             android:onClick="toFindPass"
             android:text="找回密码"
-            android:textColor="#c4c4c4"
+            android:textColor="@color/hinter"
             android:textSize="13sp" />
 
     </RelativeLayout>
-
 
 </LinearLayout>
