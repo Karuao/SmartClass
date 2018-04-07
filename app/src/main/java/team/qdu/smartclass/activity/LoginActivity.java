@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,7 +25,6 @@ public class LoginActivity extends SBaseActivity {
 
     private EditText accountEdt;
     private EditText passwordEdt;
-    private Button loginBtn;
     private ToggleButton tbPasswordVisibility;
 
     @Override
@@ -40,10 +38,8 @@ public class LoginActivity extends SBaseActivity {
     private void initView() {
         accountEdt = (EditText) findViewById(R.id.edt_id);
         passwordEdt = (EditText) findViewById(R.id.edt_pass);
-        loginBtn = (Button) findViewById(R.id.btn_login);
         tbPasswordVisibility = (ToggleButton) findViewById(R.id.tb_password_visibility);
         this.tbPasswordVisibility.setOnCheckedChangeListener(new ToggleButtonClick());
-
     }
 
     public void toLogin(View view) {
@@ -86,12 +82,12 @@ public class LoginActivity extends SBaseActivity {
                 // 隐藏密码
                 //etPassword.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 passwordEdt.setTransformationMethod(PasswordTransformationMethod.getInstance());
-
             }
             //6、每次显示或者关闭时，密码显示编辑的线不统一在最后，下面是为了统一
             passwordEdt.setSelection(passwordEdt.length());
         }
     }
+
     //将登录的用户的用户名存储进SharedPreferences
     public void storeUserIdAndAccount(String userId, String account) {
         SharedPreferences mySharedPreferences = getSharedPreferences("user", Activity.MODE_PRIVATE);
