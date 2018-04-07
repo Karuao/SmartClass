@@ -15,9 +15,7 @@
         android:roundIcon="@mipmap/ic_useravatar_def"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity
-            android:name=".activity.InitialActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        <activity android:name=".activity.InitialActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,10 +27,18 @@
         <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.StuClassMainActivity"></activity>
         <activity android:name=".activity.TeaClassMainActivity"></activity>
-        <activity android:name=".activity.RegisterActivity"></activity>
-        <activity android:name=".activity.RetrieveOneActivity"></activity>
-        <activity android:name=".activity.RetrieveThreeActivity"></activity>
-        <activity android:name=".activity.RetrieveTwoActivity"></activity>
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        <activity
+            android:name=".activity.RetrieveOneActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        <activity
+            android:name=".activity.RetrieveThreeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        <activity
+            android:name=".activity.RetrieveTwoActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity
             android:name=".activity.ChangeInfoActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
@@ -45,8 +51,12 @@
         <activity android:name=".activity.TeaMemberSigniningActivity"></activity>
         <activity android:name=".activity.TeaInformDetailActivity"></activity>
         <activity android:name=".activity.StuInformDetailActivity"></activity>
-        <activity android:name=".activity.CreateInformActivity"></activity>
-        <activity android:name=".activity.JoinClassActivity"></activity>
+        <activity
+            android:name=".activity.CreateInformActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        <activity
+            android:name=".activity.JoinClassActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity
             android:name=".activity.PrepareClassActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
