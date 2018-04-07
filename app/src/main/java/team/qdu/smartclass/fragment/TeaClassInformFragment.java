@@ -10,7 +10,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.net.URISyntaxException;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
@@ -20,7 +19,6 @@ import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.activity.TeaInformDetailActivity;
 import team.qdu.smartclass.adapter.TeaInfoAdapter;
-import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -84,11 +82,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
         final String time = ((TextView) view.findViewById(R.id.tv_class_inform_time)).getText().toString();
         final String read_num = ((TextView) view.findViewById(R.id.tv_class_inform_people)).getText().toString();
         final String inform_id = ((TextView) view.findViewById(R.id.tv_inform_id)).getText().toString();
-        try {
-            getUnreadNum(inform_id);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        getUnreadNum(inform_id);
         Intent intent = new Intent(getContext(), TeaInformDetailActivity.class);
         String classid = getClassId();
         intent.putExtra("detail", detail);
@@ -99,18 +93,15 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
         startActivity(intent);
     }
 
-    private void getUnreadNum(String informid) throws URISyntaxException {
-        LoadingDialogUtil.createLoadingDialog(getContext(), "加载中...");
+    private void getUnreadNum(String informid)  {
         parentActivity.informAppAction.getUnreadNum(informid, new ActionCallbackListener<Void>() {
 
             @Override
             public void onSuccess(Void data, String message) {
-                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
-                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
     }

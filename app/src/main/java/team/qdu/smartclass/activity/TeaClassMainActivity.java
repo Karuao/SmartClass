@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.net.URISyntaxException;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
@@ -22,7 +21,6 @@ import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.TeaClassFragmentPagerAdapter;
 import team.qdu.smartclass.fragment.MainClassFragment;
 import team.qdu.smartclass.fragment.TeaClassMaterialFragment;
-import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * 班课主页
@@ -209,7 +207,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     public void onPageScrollStateChanged(int i) {
     }
 
-    public void deleteMaterial(final View view)throws URISyntaxException{
+    public void deleteMaterial(final View view){
 
         new AlertDialog.Builder(TeaClassMainActivity.this)
                 .setTitle("提示")
@@ -224,13 +222,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                         TeaClassMaterialFragment.refreshFlag = true;
-
-                                        try {
-                                            LoadingDialogUtil.closeDialog();//关闭加载中动画
-                                            teaClassFragmentPagerAdapter.getTeaClassMaterialFragment().getMaterial();
-                                        } catch (URISyntaxException e) {
-                                            e.printStackTrace();
-                                        }
+                                        teaClassFragmentPagerAdapter.getTeaClassMaterialFragment().getMaterial();
 
 
                                     }
@@ -238,7 +230,6 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                     @Override
                                     public void onFailure(String errorEvent, String message) {
                                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                        LoadingDialogUtil.closeDialog();//关闭加载中动画
                                     }
                                 });
                             }
