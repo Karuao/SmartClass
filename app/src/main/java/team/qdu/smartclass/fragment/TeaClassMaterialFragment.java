@@ -13,8 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.List;
 
+import team.qdu.smartclass.util.LoadingDialogUtil;
 import team.qdu.smartclass.util.OpenFileUtil;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Material;
@@ -43,7 +45,11 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
         listview = (ListView) currentPage.findViewById(R.id.class_material_listView);
         refreshFlag = false;
         initView();
-        getMaterial();
+        try {
+            getMaterial();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         listview.setOnItemClickListener(this);
         return currentPage;
     }
@@ -52,7 +58,11 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
     public void onResume() {
         super.onResume();
         if (refreshFlag) {
-            getMaterial();
+            try {
+                getMaterial();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
             refreshFlag = false;
         }
     }
@@ -62,17 +72,20 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
         titleBarClassNameTxt.setText(((SBaseActivity) getActivity()).getCourse());
     }
 
-    public void getMaterial() {
+    public void getMaterial() throws URISyntaxException {
+        LoadingDialogUtil.createLoadingDialog(getContext(), "加载中...");
         parentActivity.materialAppAction.getTeaMaterial(parentActivity.getClassId(), new ActionCallbackListener<List<Material>>() {
 
             @Override
             public void onSuccess(List<Material> data, String message) {
                 listview.setAdapter(new TeaMaterialAdapter(getActivity(), data));
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
     }

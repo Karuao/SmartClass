@@ -12,8 +12,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.net.URISyntaxException;
+
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * 登陆
@@ -42,7 +45,8 @@ public class LoginActivity extends SBaseActivity {
         this.tbPasswordVisibility.setOnCheckedChangeListener(new ToggleButtonClick());
     }
 
-    public void toLogin(View view) {
+    public void toLogin(View view) throws URISyntaxException {
+        LoadingDialogUtil.createLoadingDialog(this, "登录中...");
         final String account = accountEdt.getText().toString();
         String password = passwordEdt.getText().toString();
         this.userAppAction.login(account, password, new ActionCallbackListener<String>() {
@@ -53,11 +57,13 @@ public class LoginActivity extends SBaseActivity {
                 storeUserIdAndAccount(data, account);
                 startActivity(intent);
                 finish();
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
     }

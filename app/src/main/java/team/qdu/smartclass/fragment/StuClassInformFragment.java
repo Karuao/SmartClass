@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
@@ -19,6 +20,7 @@ import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
 import team.qdu.smartclass.activity.StuInformDetailActivity;
 import team.qdu.smartclass.adapter.StuInfoAdapter;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -40,7 +42,11 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
         titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
         parentActivity = (StuClassMainActivity) getActivity();
         listview = (ListView) view.findViewById(R.id.class_inform_listView);
-        getInform();
+        try {
+            getInform();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         listview.setOnItemClickListener(this);
         return view;
 
@@ -50,12 +56,17 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
     public void onResume() {
         super.onResume();
         if (refreshFlag) {
-            getInform();
+            try {
+                getInform();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
             refreshFlag = false;
         }
     }
 
-    private void getInform() {
+    private void getInform()  throws URISyntaxException {
+        LoadingDialogUtil.createLoadingDialog(getContext(), "加载中...");
         String classid = getClassId();
         String userid = getUserId();
 
@@ -64,11 +75,13 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
             @Override
             public void onSuccess(List<Inform_User> data, String message) {
                 listview.setAdapter(new StuInfoAdapter(getActivity(), data));
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
     }

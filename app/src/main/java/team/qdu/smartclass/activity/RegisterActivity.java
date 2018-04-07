@@ -8,8 +8,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.net.URISyntaxException;
+
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * 注册页面
@@ -45,7 +48,8 @@ public class RegisterActivity extends SBaseActivity {
     }
 
 
-    public void toRegister(View view) {
+    public void toRegister(View view) throws URISyntaxException {
+        LoadingDialogUtil.createLoadingDialog(this, "注册中...");
         String account = accountEdt.getText().toString();
         String password = passwordEdt.getText().toString();
         String passwordConfirm = passwordEdtConfirm.getText().toString();
@@ -58,11 +62,13 @@ public class RegisterActivity extends SBaseActivity {
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 finish();
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
     }
