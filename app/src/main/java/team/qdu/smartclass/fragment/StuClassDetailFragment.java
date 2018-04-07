@@ -16,6 +16,7 @@ import team.qdu.model.User;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -64,17 +65,20 @@ public class StuClassDetailFragment extends SBaseFragment {
                     stuClassExam.setText(data.getExam_shedule());
                 }
                 final String userId = data.getUser_id().toString();
+                LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
                 parentActivity.userAppAction.getUserInforById(userId, new ActionCallbackListener<User>() {
                     @Override
                     public void onSuccess(User user, String message) {
                         stuClassTeacher.setText(user.getName());
                         stuClassUniversity.setText(user.getUniversity());
                         stuClassDepartment.setText(user.getDepartment());
+                        LoadingDialogUtil.closeDialog();
                     }
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                        LoadingDialogUtil.closeDialog();
                     }
                 });
                 //从服务器获取图片
@@ -86,6 +90,7 @@ public class StuClassDetailFragment extends SBaseFragment {
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
+                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
             }

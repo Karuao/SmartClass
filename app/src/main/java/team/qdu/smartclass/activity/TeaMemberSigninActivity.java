@@ -18,6 +18,7 @@ import team.qdu.model.Attendance;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.SignInHistoryForStudentAdapter;
 import team.qdu.smartclass.adapter.SignInHistoryForTeacherAdapter;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by asus on 2018/3/15.
@@ -74,6 +75,7 @@ public class TeaMemberSigninActivity extends SBaseActivity{
     }
 
     public void signInforTeacher(View view){
+        LoadingDialogUtil.createLoadingDialog(this,"加载中...");
         this.memberAppAction.beginSignInForTeacher(getClassId(), new ActionCallbackListener<Attendance>() {
             @Override
             public void onSuccess(Attendance data, String message) {
@@ -81,11 +83,13 @@ public class TeaMemberSigninActivity extends SBaseActivity{
                     Intent intent = new Intent(TeaMemberSigninActivity.this, TeaMemberSigniningActivity.class);
                     intent.putExtra("attendanceId", data.getAttendance_id().toString());
                     startActivity(intent);
+                    LoadingDialogUtil.closeDialog();
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                LoadingDialogUtil.closeDialog();
             }
         });
     }

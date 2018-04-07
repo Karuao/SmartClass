@@ -42,6 +42,7 @@ import team.qdu.model.User;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.MainUserFragment;
 import team.qdu.smartclass.util.ImgUtil;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * 修改个人信息
@@ -150,6 +151,7 @@ public class ChangeInfoActivity extends SBaseActivity {
         String userUniversity=modifyUserUniversity.getSelectedItem().toString();
         String userDepartment=modifyUserDepartment.getSelectedItem().toString();
         String userMotto=modifyUserMotto.getText().toString();
+        LoadingDialogUtil.createLoadingDialog(this,"加载中...");
         this.userAppAction.modifyUserInformation(userAvatar,userAccount,userName,userGender,userNumber,userUniversity,userDepartment
         ,userMotto,new ActionCallbackListener<Void>() {
             @Override
@@ -161,6 +163,7 @@ public class ChangeInfoActivity extends SBaseActivity {
                 if(userAvatar!=null) {
                     userAvatar.delete();
                 }
+                LoadingDialogUtil.closeDialog();
             }
 
             @Override
@@ -169,6 +172,7 @@ public class ChangeInfoActivity extends SBaseActivity {
                 if(userAvatar!=null) {
                     userAvatar.delete();
                 }
+                LoadingDialogUtil.closeDialog();
             }
         });
     }

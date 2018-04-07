@@ -18,6 +18,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.StuClassFragmentPagerAdapter;
 import team.qdu.smartclass.fragment.MainClassFragment;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * 班课主页
@@ -242,17 +243,20 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        LoadingDialogUtil.createLoadingDialog(StuClassMainActivity.this,"加载中...");
                         StuClassMainActivity.this.classAppAction.quitClass(classId, userId, new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
                                 finish();
                                 MainClassFragment.refreshFlag = true;
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                LoadingDialogUtil.closeDialog();
                             }
 
                             @Override
                             public void onFailure(String errorEvent, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                LoadingDialogUtil.closeDialog();
                             }
                         });
                     }

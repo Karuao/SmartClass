@@ -26,8 +26,6 @@ import team.qdu.smartclass.activity.SBaseActivity;
 
 public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
 
-    public int rank=1;
-    public int lastExp;
 
     public ClassMemberAdapter(Context context) {
         super(context);
@@ -53,6 +51,8 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         Compo compo = null;
+        int rank=1;
+        int lastExp;
         if (convertView == null) {
             compo = new Compo();
             //获得组件，实例化组件

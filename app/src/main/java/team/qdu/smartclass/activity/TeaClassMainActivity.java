@@ -21,6 +21,7 @@ import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.TeaClassFragmentPagerAdapter;
 import team.qdu.smartclass.fragment.MainClassFragment;
 import team.qdu.smartclass.fragment.TeaClassMaterialFragment;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * 班课主页
@@ -121,21 +122,28 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     }
 
     public void toSignInforTeacher(View view) {
+        LoadingDialogUtil.createLoadingDialog(this,"加载中...");
         this.memberAppAction.getAttendanceInfo(getClassId(), new ActionCallbackListener<List<Attendance>>() {
             @Override
             public void onSuccess(List<Attendance> data, String message) {
-                if(data.get(0).getIf_open().equals("签到中")){
-                    Intent intent = new Intent(TeaClassMainActivity.this, TeaMemberSigniningActivity.class);
-                    intent.putExtra("attendanceId", data.get(0).getAttendance_id().toString());
-                    startActivity(intent);
-                }else{
+                if(data.size()==0){
                     startActivity(new Intent(TeaClassMainActivity.this, TeaMemberSigninActivity.class));
+                }else {
+                    if (data.get(0).getIf_open().equals("签到中")) {
+                        Intent intent = new Intent(TeaClassMainActivity.this, TeaMemberSigniningActivity.class);
+                        intent.putExtra("attendanceId", data.get(0).getAttendance_id().toString());
+                        startActivity(intent);
+                    } else {
+                        startActivity(new Intent(TeaClassMainActivity.this, TeaMemberSigninActivity.class));
+                    }
                 }
+                LoadingDialogUtil.closeDialog();
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                LoadingDialogUtil.closeDialog();
             }
         });
     }
@@ -296,17 +304,20 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        LoadingDialogUtil.createLoadingDialog(TeaClassMainActivity.this,"加载中...");
                         TeaClassMainActivity.this.classAppAction.deleteClass(getClassId(), new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                 finish();
                                 MainClassFragment.refreshFlag = true;
+                                LoadingDialogUtil.closeDialog();
                             }
 
                             @Override
                             public void onFailure(String errorEvent, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                LoadingDialogUtil.closeDialog();
                             }
                         });
                     }

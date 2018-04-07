@@ -123,7 +123,6 @@
             android:width="120dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
             android:textColor="@color/text_little_black"
             android:textSize="16sp" />
 
@@ -170,7 +169,6 @@
             android:width="120dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
             android:textColor="@color/text_little_black"
             android:textSize="16sp" />
 

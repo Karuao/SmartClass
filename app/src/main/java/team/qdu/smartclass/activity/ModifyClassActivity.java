@@ -43,6 +43,7 @@ import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.TeaClassDetailFragment;
 import team.qdu.smartclass.util.ImgUtil;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by asus on 2018/2/7.
@@ -145,6 +146,7 @@ public class ModifyClassActivity extends SBaseActivity{
         String department = departmentSpin.getSelectedItem().toString();
         String goal = goalEdt.getText().toString();
         String exam = examEdt.getText().toString();
+        LoadingDialogUtil.createLoadingDialog(this,"加载中...");
         classAppAction.compileClass(classId,classAvatar, name, course, university,department,goal,exam, new ActionCallbackListener<String>() {
             @Override
             public void onSuccess(String data, String message) {
@@ -155,6 +157,7 @@ public class ModifyClassActivity extends SBaseActivity{
                 if(classAvatar!=null) {
                     classAvatar.delete();
                 }
+                LoadingDialogUtil.closeDialog();
             }
 
             @Override
@@ -163,6 +166,7 @@ public class ModifyClassActivity extends SBaseActivity{
                 if(classAvatar!=null) {
                     classAvatar.delete();
                 }
+                LoadingDialogUtil.closeDialog();
             }
         });
     }

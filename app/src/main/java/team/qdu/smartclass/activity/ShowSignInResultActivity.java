@@ -17,6 +17,7 @@ import team.qdu.model.Attendance_user;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.NotSignInStudentAdapter;
 import team.qdu.smartclass.adapter.SignInStudentAdapter;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 import team.qdu.smartclass.view.SelectDialog;
 
 /**
@@ -89,30 +90,36 @@ public class ShowSignInResultActivity extends SBaseActivity{
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     switch (position) {
                                         case 0:
+                                            LoadingDialogUtil.createLoadingDialog(ShowSignInResultActivity.this,"加载中...");
                                             ShowSignInResultActivity.this.memberAppAction.setStudentSignIn(attendanceUserId, new ActionCallbackListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void data, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                                     getList();
+                                                    LoadingDialogUtil.closeDialog();
                                                 }
 
                                                 @Override
                                                 public void onFailure(String errorEvent, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                                    LoadingDialogUtil.closeDialog();
                                                 }
                                             });
                                             break;
                                         case 1:
+                                            LoadingDialogUtil.createLoadingDialog(ShowSignInResultActivity.this,"加载中...");
                                             ShowSignInResultActivity.this.memberAppAction.setStudentNotSignIn(attendanceUserId, new ActionCallbackListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void data, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                                     getList();
+                                                    LoadingDialogUtil.closeDialog();
                                                 }
 
                                                 @Override
                                                 public void onFailure(String errorEvent, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                                    LoadingDialogUtil.closeDialog();
                                                 }
                                             });
                                             break;
@@ -135,30 +142,36 @@ public class ShowSignInResultActivity extends SBaseActivity{
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     switch (position) {
                                         case 0:
+                                            LoadingDialogUtil.createLoadingDialog(ShowSignInResultActivity.this,"加载中...");
                                             ShowSignInResultActivity.this.memberAppAction.setStudentSignIn(attendanceUserId, new ActionCallbackListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void data, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                                     getList();
+                                                    LoadingDialogUtil.closeDialog();
                                                 }
 
                                                 @Override
                                                 public void onFailure(String errorEvent, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                                    LoadingDialogUtil.closeDialog();
                                                 }
                                             });
                                             break;
                                         case 1:
+                                            LoadingDialogUtil.createLoadingDialog(ShowSignInResultActivity.this,"加载中...");
                                             ShowSignInResultActivity.this.memberAppAction.setStudentNotSignIn(attendanceUserId, new ActionCallbackListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void data, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                                     getList();
+                                                    LoadingDialogUtil.closeDialog();
                                                 }
 
                                                 @Override
                                                 public void onFailure(String errorEvent, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                                    LoadingDialogUtil.closeDialog();
                                                 }
                                             });
                                             break;

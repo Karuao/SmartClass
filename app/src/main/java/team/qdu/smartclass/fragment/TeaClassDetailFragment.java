@@ -18,6 +18,7 @@ import team.qdu.model.User;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -140,28 +141,34 @@ public class TeaClassDetailFragment extends SBaseFragment {
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                             if(!isChecked){
                                 TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
+                                LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
                                 parentActivity.classAppAction.notAllowToJoin(classId,new ActionCallbackListener<Void>() {
                                     @Override
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                        LoadingDialogUtil.closeDialog();
                                     }
 
                                     @Override
                                     public void onFailure(String errorEvent, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                        LoadingDialogUtil.closeDialog();
                                     }
                                 });
                             }else{
                                 TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
+                                LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
                                 parentActivity.classAppAction.allowToJoin(classId,new ActionCallbackListener<Void>() {
                                     @Override
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                        LoadingDialogUtil.closeDialog();
                                     }
 
                                     @Override
                                     public void onFailure(String errorEvent, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                        LoadingDialogUtil.closeDialog();
                                     }
                                 });
                             }
@@ -183,6 +190,7 @@ public class TeaClassDetailFragment extends SBaseFragment {
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
+                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
             }

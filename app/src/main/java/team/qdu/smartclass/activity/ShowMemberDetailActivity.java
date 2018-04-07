@@ -19,6 +19,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.TeaClassMemberFragment;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by asus on 2018/3/12.
@@ -73,17 +74,20 @@ public class ShowMemberDetailActivity extends SBaseActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        LoadingDialogUtil.createLoadingDialog(ShowMemberDetailActivity.this,"加载中");
                         ShowMemberDetailActivity.this.memberAppAction.shiftClass(getClassUserId(), new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                 TeaClassMemberFragment.refreshFlag = true;
                                 finish();
+                                LoadingDialogUtil.closeDialog();
                             }
 
                             @Override
                             public void onFailure(String errorEvent, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                LoadingDialogUtil.closeDialog();
                             }
                         });
                     }

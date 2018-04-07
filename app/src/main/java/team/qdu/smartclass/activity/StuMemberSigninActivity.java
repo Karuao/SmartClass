@@ -19,6 +19,7 @@ import team.qdu.model.Attendance_user;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.SignInHistoryForStudentAdapter;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 
 /**
@@ -78,6 +79,7 @@ public class StuMemberSigninActivity extends SBaseActivity {
 
     //学生签到
     public void signInforStudent(View view){
+        LoadingDialogUtil.createLoadingDialog(StuMemberSigninActivity.this,"加载中...");
         this.memberAppAction.getAttendanceInfo(getClassId(), new ActionCallbackListener<List<Attendance>>() {
             @Override
             public void onSuccess(List<Attendance> data, String message) {
@@ -87,26 +89,31 @@ public class StuMemberSigninActivity extends SBaseActivity {
                     if (!data.get(0).getIf_open().equals("签到中")) {
                         Toast.makeText(context,"未开始签到或签到已结束！",Toast.LENGTH_SHORT).show();
                     } else {
+                        LoadingDialogUtil.createLoadingDialog(StuMemberSigninActivity.this,"加载中...");
                         StuMemberSigninActivity.this.memberAppAction.beginSignInForStudent(getUserId(), data.get(0).getAttendance_id().toString(), getClassUserId(),new ActionCallbackListener<Attendance_user>() {
                             @Override
                             public void onSuccess(Attendance_user data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                 finish();
                                 startActivity(new Intent(StuMemberSigninActivity.this,StuMemberSigninActivity.class));
+                                LoadingDialogUtil.closeDialog();
                             }
 
                             @Override
                             public void onFailure(String errorEvent, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                LoadingDialogUtil.closeDialog();
                             }
                         });
                     }
                 }
+                LoadingDialogUtil.closeDialog();
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                LoadingDialogUtil.closeDialog();
             }
         });
     }

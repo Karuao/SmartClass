@@ -21,6 +21,7 @@ import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.SignInStudentAdapter;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by asus on 2018/3/16.
@@ -57,17 +58,20 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        LoadingDialogUtil.createLoadingDialog(TeaMemberSigniningActivity.this,"加载中...");
                         TeaMemberSigniningActivity.this.memberAppAction.giveUpSignIn(attendanceId, new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                 SApplication.clearActivity();
                                 finish();
+                                LoadingDialogUtil.closeDialog();
                             }
 
                             @Override
                             public void onFailure(String errorEvent, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                LoadingDialogUtil.closeDialog();
                             }
                         });
                     }
@@ -86,6 +90,7 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        LoadingDialogUtil.createLoadingDialog(TeaMemberSigniningActivity.this,"加载中...");
                         TeaMemberSigniningActivity.this.memberAppAction.endSignIn(attendanceId, new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
@@ -95,11 +100,13 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                                 Intent intent1 = new Intent(TeaMemberSigniningActivity.this,ShowSignInResultActivity.class);
                                 intent1.putExtra("attendanceId",attendanceId);
                                 startActivity(intent1);
+                                LoadingDialogUtil.closeDialog();
                             }
 
                             @Override
                             public void onFailure(String errorEvent, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                LoadingDialogUtil.closeDialog();
                             }
                         });
                     }
@@ -132,6 +139,7 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
+                                            LoadingDialogUtil.createLoadingDialog(TeaMemberSigniningActivity.this,"加载中...");
                                             TeaMemberSigniningActivity.this.memberAppAction.endSignIn(attendanceId, new ActionCallbackListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void data, String message) {
@@ -141,11 +149,13 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                                                     Intent intent1 = new Intent(TeaMemberSigniningActivity.this,ShowSignInResultActivity.class);
                                                     intent1.putExtra("attendanceId",attendanceId);
                                                     startActivity(intent1);
+                                                    LoadingDialogUtil.closeDialog();
                                                 }
 
                                                 @Override
                                                 public void onFailure(String errorEvent, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                                    LoadingDialogUtil.closeDialog();
                                                 }
                                             });
                                         }
@@ -181,17 +191,20 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                LoadingDialogUtil.createLoadingDialog(TeaMemberSigniningActivity.this,"加载中...");
                                 TeaMemberSigniningActivity.this.memberAppAction.giveUpSignIn(attendanceId, new ActionCallbackListener<Void>() {
                                     @Override
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                         SApplication.clearActivity();
                                         finish();
+                                        LoadingDialogUtil.closeDialog();
                                     }
 
                                     @Override
                                     public void onFailure(String errorEvent, String message) {
                                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                        LoadingDialogUtil.closeDialog();
                                     }
                                 });
                             }
