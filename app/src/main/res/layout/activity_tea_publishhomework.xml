@@ -5,8 +5,8 @@
 
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <!--顶部标题-->
         <LinearLayout
@@ -220,8 +220,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="72dp"
                     android:layout_below="@+id/tv_class_homework_file_text"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="7dp"/>
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="5dp" />
             </RelativeLayout>
 
             <View
