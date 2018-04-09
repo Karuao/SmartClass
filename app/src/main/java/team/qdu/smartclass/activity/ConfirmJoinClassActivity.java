@@ -55,12 +55,13 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
 
     public void confirmJoinClass(View view) {
         LoadingDialogUtil.createLoadingDialog(this, "加载中...");//加载中动画，用来防止用户重复点击
-        classAppAction.confirmJoinClass(data.getClass_id().toString(), getUserId(), new ActionCallbackListener<Void>() {
+        classAppAction.confirmJoinClass(data.getClass_id().toString(), getUserId(), new ActionCallbackListener<Integer>() {
             @Override
-            public void onSuccess(Void data1, String message) {
+            public void onSuccess(Integer data1, String message) {
                 Toast.makeText(ConfirmJoinClassActivity.this, message, Toast.LENGTH_SHORT).show();
                 setClassId(data.getClass_id().toString());
                 setUserTitle("student");
+                setClassUserId(data1.toString());
                 setCourse(data.getCourse());
                 MainClassFragment.refreshFlag = true;
                 application.clearActivity();

@@ -25,7 +25,7 @@ public interface ClassApi {
 
     public ApiResponse<Class> joinClass(String classId, String userId);
 
-    public ApiResponse<Void> confirmJoinClass(String classId, String userId);
+    public ApiResponse<Integer> confirmJoinClass(String classId, String userId);
 
     public ApiResponse<Void> notAllowToJoin(String classId);
 

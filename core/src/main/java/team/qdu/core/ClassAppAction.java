@@ -48,7 +48,7 @@ public interface ClassAppAction {
     public void joinClass(String classId, String userId, ActionCallbackListener<Class> listener);
 
     //确认加入班课
-    public void confirmJoinClass(String classId, String userId, ActionCallbackListener<Void> listener);
+    public void confirmJoinClass(String classId, String userId, ActionCallbackListener<Integer> listener);
 
     //退出班课
     public void quitClass(String classId, String userId, ActionCallbackListener<Void> listener);

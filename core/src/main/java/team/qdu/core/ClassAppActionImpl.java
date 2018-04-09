@@ -271,22 +271,22 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void confirmJoinClass(final String classId, final String userId, final ActionCallbackListener<Void> listener) {
+    public void confirmJoinClass(final String classId, final String userId, final ActionCallbackListener<Integer> listener) {
         if (TextUtils.isEmpty(classId) || classId.length() < 6) {
             listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "邀请码长度大于6位");
             return;
         }
-        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+        new AsyncTask<Void, Void, ApiResponse<Integer>>() {
 
             @Override
-            protected ApiResponse<Void> doInBackground(Void... params) {
+            protected ApiResponse<Integer> doInBackground(Void... params) {
                 return classApi.confirmJoinClass(classId, userId);
             }
 
             @Override
-            protected void onPostExecute(ApiResponse<Void> response) {
+            protected void onPostExecute(ApiResponse<Integer> response) {
                 if (response.isSuccess()) {
-                    listener.onSuccess(null, response.getMsg());
+                    listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
                     listener.onFailure(response.getEvent(), response.getMsg());
                 }
