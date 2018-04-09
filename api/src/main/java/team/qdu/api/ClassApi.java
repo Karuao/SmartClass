@@ -21,7 +21,7 @@ public interface ClassApi {
 
     public Bitmap getBitmap(String urlTail);
 
-    public ApiResponse<String> createClass(File avatar, String name, String course, String userId);
+    public ApiResponse<ClassUser> createClass(File avatar, String name, String course, String userId);
 
     public ApiResponse<Class> joinClass(String classId, String userId);
 

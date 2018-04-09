@@ -32,6 +32,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import team.qdu.core.ActionCallbackListener;
+import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.MainClassFragment;
 import team.qdu.smartclass.util.ImgUtil;
@@ -94,26 +95,31 @@ public class CreateClassActivity extends SBaseActivity {
         String name = classnameEdt.getText().toString();
         final String course = courseEdt.getText().toString();
         String userId = getUserId();
-        classAppAction.createClass(classAvatar, name, course, userId, new ActionCallbackListener<String>() {
+        classAppAction.createClass(classAvatar, name, course, userId, new ActionCallbackListener<ClassUser>() {
             @Override
-            public void onSuccess(String data, String message) {
+            public void onSuccess(ClassUser data, String message) {
                 MainClassFragment.refreshFlag = true;
-                setClassId(data);
+                setClassId(data.getClass_id().toString());
+                setClassUserId(data.getClass_user_id().toString());
                 setUserTitle("teacher");
                 setCourse(course);
                 Intent intent = new Intent(CreateClassActivity.this, ShowInviteCodeActivity.class);
-                intent.putExtra("avatarUri", mDestinationUri);
+                intent.putExtra("avatarUrl", data.getMy_class().getAvatar());
                 finish();
                 startActivity(intent);
                 LoadingDialogUtil.closeDialog();//关闭加载中动画
-                classAvatar.delete();//删除缓存的压缩图片
+                if (!isDefaultAvatar) {
+                    classAvatar.delete();//删除缓存的压缩图片
+                }
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 LoadingDialogUtil.closeDialog();//关闭加载中动画
-                classAvatar.delete();//删除缓存的压缩图片
+                if (!isDefaultAvatar) {
+                    classAvatar.delete();//删除缓存的压缩图片
+                }
             }
         });
 

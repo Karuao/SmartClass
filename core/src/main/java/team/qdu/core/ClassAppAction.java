@@ -42,7 +42,7 @@ public interface ClassAppAction {
     public void compileClass(String classId, File avatar, String className, String course, String university, String department, String goal, String exam, ActionCallbackListener<String> listener);
 
     //创建班课
-    public void createClass(File avatar, String name, String course, String userId, ActionCallbackListener<String> listener);
+    public void createClass(File avatar, String name, String course, String userId, ActionCallbackListener<ClassUser> listener);
 
     //加入班课
     public void joinClass(String classId, String userId, ActionCallbackListener<Class> listener);

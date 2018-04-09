@@ -191,7 +191,7 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void createClass(final File avatar, final String name, final String course, final String userId, final ActionCallbackListener<String> listener) {
+    public void createClass(final File avatar, final String name, final String course, final String userId, final ActionCallbackListener<ClassUser> listener) {
         if (TextUtils.isEmpty(name)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "班级不能为空");
             return;
@@ -200,15 +200,15 @@ public class ClassAppActionImpl implements ClassAppAction {
             listener.onFailure(ErrorEvent.PARAM_NULL, "课程不能为空");
             return;
         }
-        new AsyncTask<Void, Void, ApiResponse<String>>() {
+        new AsyncTask<Void, Void, ApiResponse<ClassUser>>() {
 
             @Override
-            protected ApiResponse<String> doInBackground(Void... params) {
+            protected ApiResponse<ClassUser> doInBackground(Void... params) {
                 return classApi.createClass(avatar, name, course, userId);
             }
 
             @Override
-            protected void onPostExecute(ApiResponse<String> response) {
+            protected void onPostExecute(ApiResponse<ClassUser> response) {
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {

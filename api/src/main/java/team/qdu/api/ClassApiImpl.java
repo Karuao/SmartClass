@@ -167,7 +167,7 @@ public class ClassApiImpl implements ClassApi {
     }
 
     @Override
-    public ApiResponse<String> createClass(File avatar, String name, String course, String userId) {
+    public ApiResponse<ClassUser> createClass(File avatar, String name, String course, String userId) {
         Map<String, String> paramMap = new HashMap<>();
         Map<String, File> fileMap = null;
         paramMap.put("name", name);
@@ -178,7 +178,7 @@ public class ClassApiImpl implements ClassApi {
             fileMap.put("avatar", avatar);
         }
 
-        Type type = new TypeToken<ApiResponse<String>>() {
+        Type type = new TypeToken<ApiResponse<ClassUser>>() {
         }.getType();
         try {
             return fileHttpEngine.postHandle(paramMap, fileMap, type, "/createClass");
