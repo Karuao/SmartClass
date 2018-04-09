@@ -164,7 +164,8 @@
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/def"
             android:text="?"
-            android:textColor="@color/colorRank" />
+            android:textColor="@color/colorRank"
+            android:singleLine="true"/>
 
 
         <TextView

@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
@@ -79,7 +80,6 @@ public class StuMemberSigninActivity extends SBaseActivity {
 
     //学生签到
     public void signInforStudent(View view){
-        LoadingDialogUtil.createLoadingDialog(StuMemberSigninActivity.this,"加载中...");
         this.memberAppAction.getAttendanceInfo(getClassId(), new ActionCallbackListener<List<Attendance>>() {
             @Override
             public void onSuccess(List<Attendance> data, String message) {
@@ -107,13 +107,11 @@ public class StuMemberSigninActivity extends SBaseActivity {
                         });
                     }
                 }
-                LoadingDialogUtil.closeDialog();
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                LoadingDialogUtil.closeDialog();
             }
         });
     }
@@ -125,7 +123,7 @@ public class StuMemberSigninActivity extends SBaseActivity {
             public void onSuccess(List<Attendance_user> data, String message) {
                 double attendanceNum=0.0;
                 double totalNum;
-                double rate;
+                String rate;
                 signInHistoryForStudentAdapter.setItems(data);
                 totalNum = data.size();
                 for (Attendance_user au:data) {
@@ -134,12 +132,34 @@ public class StuMemberSigninActivity extends SBaseActivity {
                     }
                 }
                 if(totalNum==0){
-                    rate=0.0;
+                    rate="0";
                 }
                 else {
-                    rate = attendanceNum / totalNum * 100;
+                    rate = String.valueOf(attendanceNum / totalNum * 100);
+                    BigDecimal b = new BigDecimal(rate);
+                    double df = b.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    String number = String.valueOf(df);
+                    if (Double.valueOf(rate) != 100) {
+                        if(Double.valueOf(rate)>=10) {
+                            String xiaoShu = number.substring(3, 4);
+                            if (xiaoShu.equals("0")) {
+                                rate = number.substring(0, 2);
+                            }else {
+                                rate = number;
+                            }
+                        }else {
+                            String xiaoShu = number.substring(2, 3);
+                            if (xiaoShu.equals("0")) {
+                                rate = number.substring(0, 1);
+                            }else {
+                                rate = number;
+                            }
+                        }
+                    }else {
+                        rate = "100";
+                    }
                 }
-                signInRate.setText(String.valueOf(rate));
+                signInRate.setText(rate);
                 swipeRefreshLayout.setRefreshing(false);
             }
 

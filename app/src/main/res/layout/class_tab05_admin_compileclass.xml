@@ -120,8 +120,8 @@
                         android:textCursorDrawable="@color/bg_black"
                         android:textSize="18sp"
                         android:inputType="text"
-                        android:lines="1"
-                        android:maxLength="32"/>
+                        android:maxLength="32"
+                        android:singleLine="true"/>
                 </LinearLayout>
 
 
@@ -173,8 +173,8 @@
                         android:textCursorDrawable="@color/bg_black"
                         android:textSize="18sp"
                         android:inputType="text"
-                        android:lines="1"
-                        android:maxLength="20"/>
+                        android:maxLength="20"
+                        android:singleLine="true"/>
                 </LinearLayout>
 
 
@@ -314,8 +314,8 @@
                         android:textCursorDrawable="@color/bg_black"
                         android:textSize="18sp"
                         android:inputType="text"
-                        android:lines="1"
-                        android:maxLength="200"/>
+                        android:maxLength="200"
+                        android:singleLine="true"/>
                 </LinearLayout>
 
 
@@ -368,8 +368,8 @@
                         android:textCursorDrawable="@color/bg_black"
                         android:textSize="18sp"
                         android:inputType="text"
-                        android:lines="1"
-                        android:maxLength="200"/>
+                        android:maxLength="200"
+                        android:singleLine="true"/>
                 </LinearLayout>
 
 

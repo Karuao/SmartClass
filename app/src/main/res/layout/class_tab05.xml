@@ -26,10 +26,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/img_class"
-            android:singleLine="true"
             android:text="课程名"
             android:textColor="#444"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:maxLength="20"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/tv_class_classnum"
@@ -40,7 +41,9 @@
             android:layout_toRightOf="@+id/img_class"
             android:text="班级"
             android:textColor="#898989"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:maxLength="20"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/tv_class_teacher"
@@ -52,7 +55,9 @@
             android:layout_toRightOf="@+id/img_class"
             android:text="老师"
             android:textColor="#898989"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:maxLength="20"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/tv_class_university"
@@ -64,7 +69,9 @@
             android:layout_toRightOf="@+id/tv_class_teacher"
             android:text="学校"
             android:textColor="#898989"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:maxLength="20"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/tv_class_department"
@@ -76,7 +83,9 @@
             android:layout_toRightOf="@+id/tv_class_university"
             android:text="院系"
             android:textColor="#898989"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:maxLength="20"
+            android:singleLine="true"/>
 
 
     </RelativeLayout>
@@ -124,7 +133,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/text_little_black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:onClick="seeMoreDetailForStu"/>
 
     </RelativeLayout>
 
@@ -170,7 +180,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/text_little_black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:onClick="seeMoreExamForStu"/>
 
     </RelativeLayout>
 

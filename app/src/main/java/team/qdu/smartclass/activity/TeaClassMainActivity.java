@@ -54,7 +54,13 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     public static final int PAGE_FOUR = 3;
     public static final int PAGE_FIVE = 4;
 
+    //设置考试安排和学习目标是否单行显示
+    public boolean singleLine1=true;
+    public boolean singleLine2=true;
+
     TextView allow;
+    TextView classDetail;
+    TextView classExam;
     CheckBox ifAllowTojoin;
     TextView hint;
     View hint2;
@@ -110,6 +116,11 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         ifAllowTojoin = (CheckBox) findViewById(R.id.chk_join);
         hint = (TextView) findViewById(R.id.hint);
         hint2 = (View) findViewById(R.id.hint2);
+    }
+
+    public void initView3(){
+        classDetail=(TextView)findViewById(R.id.tv_class_goal_details_admin);
+        classExam=(TextView)findViewById(R.id.tv_class_exam_details_admin);
     }
 
     //切换图片颜色
@@ -413,6 +424,28 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                 Toast.makeText(TeaClassMainActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void seeMoreDetail(View view){
+        initView3();
+        if(singleLine1==true){
+            classDetail.setSingleLine(false);
+            singleLine1 = false;
+        }else {
+            classDetail.setSingleLine(true);
+            singleLine1 = true;
+        }
+    }
+
+    public void seeMoreExam(View view){
+        initView3();
+        if(singleLine2==true){
+            classExam.setSingleLine(false);
+            singleLine2 = false;
+        }else {
+            classExam.setSingleLine(true);
+            singleLine2 = true;
+        }
     }
 }
 

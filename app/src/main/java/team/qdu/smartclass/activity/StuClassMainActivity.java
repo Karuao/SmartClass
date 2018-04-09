@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jauker.widget.BadgeView;
@@ -54,6 +55,13 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
     public static final int PAGE_THREE = 2;
     public static final int PAGE_FOUR = 3;
     public static final int PAGE_FIVE = 4;
+
+    //设置考试安排和学习目标是否单行显示
+    public boolean singleLine1=true;
+    public boolean singleLine2=true;
+
+    TextView stuClassDetail;
+    TextView stuClassExam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +112,11 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
             informBadgeView.setText(getIntent().getSerializableExtra("unreadInformationNum").toString());
             informBadgeView.setTargetView(tabInform);
         }
+    }
+
+    public void initView2(){
+        stuClassDetail = (TextView)findViewById(R.id.tv_class_goal_details);
+        stuClassExam = (TextView)findViewById(R.id.tv_class_exam_details);
     }
 
     private void initEvents() {
@@ -265,5 +278,26 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                 .show();
     }
 
+    public void seeMoreDetailForStu(View view){
+        initView2();
+        if(singleLine1==true){
+            stuClassDetail.setSingleLine(false);
+            singleLine1 = false;
+        }else {
+            stuClassDetail.setSingleLine(true);
+            singleLine1 = true;
+        }
+    }
+
+    public void seeMoreExamForStu(View view){
+        initView2();
+        if(singleLine2==true){
+            stuClassExam.setSingleLine(false);
+            singleLine2 = false;
+        }else {
+            stuClassExam.setSingleLine(true);
+            singleLine2 = true;
+        }
+    }
 }
 

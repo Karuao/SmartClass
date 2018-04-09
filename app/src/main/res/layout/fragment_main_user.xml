@@ -59,7 +59,9 @@
                             android:id="@+id/userAccount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:maxLength="20"
+                            android:singleLine="true"/>
                     </LinearLayout>
 
 
@@ -89,7 +91,9 @@
                             android:id="@+id/userName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:maxLength="20"
+                            android:singleLine="true"/>
                     </LinearLayout>
 
 
@@ -119,7 +123,8 @@
                             android:id="@+id/userGender"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:singleLine="true"/>
                     </LinearLayout>
 
 
@@ -149,7 +154,9 @@
                             android:id="@+id/userNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:maxLength="20"
+                            android:singleLine="true"/>
                     </LinearLayout>
 
 
@@ -179,7 +186,9 @@
                             android:id="@+id/userUniversity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:maxLength="20"
+                            android:singleLine="true"/>
                     </LinearLayout>
 
 
@@ -209,7 +218,8 @@
                             android:id="@+id/userDepartment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:singleLine="true"/>
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -239,7 +249,9 @@
                             android:id="@+id/userMotto"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:singleLine="true"
+                            android:maxLength="200"/>
                     </LinearLayout>
 
 

@@ -53,7 +53,8 @@
                         android:text="学生姓名"
                         android:textColor="@color/bg_white"
                         android:textSize="21sp"
-                        android:textStyle="normal" />
+                        android:textStyle="normal"
+                        android:singleLine="true"/>
                 </LinearLayout>
 
 

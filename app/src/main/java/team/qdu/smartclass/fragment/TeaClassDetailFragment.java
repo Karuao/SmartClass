@@ -12,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
+
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.model.User;
@@ -107,28 +111,34 @@ public class TeaClassDetailFragment extends SBaseFragment {
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                             if(!isChecked){
                                 TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
+                                LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
                                 parentActivity.classAppAction.notAllowToJoin(classId,new ActionCallbackListener<Void>() {
                                     @Override
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                        LoadingDialogUtil.closeDialog();
                                     }
 
                                     @Override
                                     public void onFailure(String errorEvent, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                        LoadingDialogUtil.closeDialog();
                                     }
                                 });
                             }else{
                                 TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
+                                LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
                                 parentActivity.classAppAction.allowToJoin(classId,new ActionCallbackListener<Void>() {
                                     @Override
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                        LoadingDialogUtil.closeDialog();
                                     }
 
                                     @Override
                                     public void onFailure(String errorEvent, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                        LoadingDialogUtil.closeDialog();
                                     }
                                 });
                             }
@@ -182,17 +192,19 @@ public class TeaClassDetailFragment extends SBaseFragment {
                     hint2.setVisibility(View.GONE);
                 }
                 //从服务器获取图片
-                parentActivity.classAppAction.getBitmap(cls.getAvatar(), new ActionCallbackListener<Bitmap>() {
-                    @Override
-                    public void onSuccess(Bitmap data, String message) {
-                        teaClassDetailImg.setImageBitmap(data);
-                    }
+                if(cls.getAvatar()!=null) {
+                    parentActivity.fileAppAction.cacheImg(cls.getAvatar(), new ActionCallbackListener<File>() {
+                        @Override
+                        public void onSuccess(File data, String message) {
+                            Glide.with(getActivity()).load(data.getPath()).into(teaClassDetailImg);
+                        }
 
-                    @Override
-                    public void onFailure(String errorEvent, String message) {
-                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(String errorEvent, String message) {
+                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
 
             @Override

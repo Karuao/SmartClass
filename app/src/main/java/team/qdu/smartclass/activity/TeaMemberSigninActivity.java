@@ -99,7 +99,7 @@ public class TeaMemberSigninActivity extends SBaseActivity{
         this.memberAppAction.getTeacherSignInHistory(getClassId(), new ActionCallbackListener<List<Attendance>>() {
             @Override
             public void onSuccess(final List<Attendance> data, String message) {
-                signInHistoryForTeacherAdapter.addItems(data);
+                signInHistoryForTeacherAdapter.setItems(data);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
