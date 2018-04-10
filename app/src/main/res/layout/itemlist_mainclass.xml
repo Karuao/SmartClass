@@ -43,8 +43,7 @@
         android:layout_below="@+id/txt_title"
         android:layout_marginLeft="15dp"
         android:layout_toRightOf="@+id/img_class"
-        android:maxLines="2"
-        android:minLines="1"
+        android:singleLine="true"
         android:text="班级"
         android:textColor="#898989"
         android:textSize="15sp" />
@@ -61,8 +60,7 @@
             android:id="@+id/tv_teacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:minLines="1"
+            android:singleLine="true"
             android:text="老师"
             android:textColor="#898989"
             android:textSize="15sp" />

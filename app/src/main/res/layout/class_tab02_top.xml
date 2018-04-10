@@ -45,6 +45,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:singleLine="true"
                 android:text="班课"
                 android:textColor="@color/bg_white"
                 android:textSize="21sp"
@@ -82,8 +83,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:onClick="checkExpDetail">
+            android:onClick="checkExpDetail"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -126,8 +127,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:onClick="checkExpDetail">
+            android:onClick="checkExpDetail"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"

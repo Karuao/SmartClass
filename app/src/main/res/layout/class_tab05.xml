@@ -18,7 +18,7 @@
             android:id="@+id/img_class"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:src="@drawable/ic_classavatar_def" />
+            android:src="@mipmap/ic_classavatar_def" />
 
         <TextView
             android:id="@+id/tv_class_classname"
@@ -26,11 +26,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/img_class"
+            android:maxLength="20"
+            android:singleLine="true"
             android:text="课程名"
             android:textColor="#444"
-            android:textSize="18sp"
-            android:maxLength="20"
-            android:singleLine="true"/>
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_class_classnum"
@@ -39,11 +39,11 @@
             android:layout_below="@+id/tv_class_classname"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/img_class"
+            android:maxLength="20"
+            android:singleLine="true"
             android:text="班级"
             android:textColor="#898989"
-            android:textSize="15sp"
-            android:maxLength="20"
-            android:singleLine="true"/>
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tv_class_teacher"
@@ -53,11 +53,11 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/img_class"
+            android:maxLength="20"
+            android:singleLine="true"
             android:text="老师"
             android:textColor="#898989"
-            android:textSize="15sp"
-            android:maxLength="20"
-            android:singleLine="true"/>
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tv_class_university"
@@ -67,11 +67,11 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/tv_class_teacher"
+            android:maxLength="20"
+            android:singleLine="true"
             android:text="学校"
             android:textColor="#898989"
-            android:textSize="15sp"
-            android:maxLength="20"
-            android:singleLine="true"/>
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tv_class_department"
@@ -81,11 +81,11 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/tv_class_university"
+            android:maxLength="20"
+            android:singleLine="true"
             android:text="院系"
             android:textColor="#898989"
-            android:textSize="15sp"
-            android:maxLength="20"
-            android:singleLine="true"/>
+            android:textSize="15sp" />
 
 
     </RelativeLayout>
@@ -131,10 +131,10 @@
             android:layout_marginRight="5dp"
             android:width="120dp"
             android:ellipsize="end"
+            android:onClick="seeMoreDetailForStu"
             android:singleLine="true"
             android:textColor="@color/text_little_black"
-            android:textSize="16sp"
-            android:onClick="seeMoreDetailForStu"/>
+            android:textSize="16sp" />
 
     </RelativeLayout>
 
@@ -178,10 +178,10 @@
             android:layout_marginRight="5dp"
             android:width="120dp"
             android:ellipsize="end"
+            android:onClick="seeMoreExamForStu"
             android:singleLine="true"
             android:textColor="@color/text_little_black"
-            android:textSize="16sp"
-            android:onClick="seeMoreExamForStu"/>
+            android:textSize="16sp" />
 
     </RelativeLayout>
 
@@ -205,18 +205,18 @@
         android:layout_height="40dp"
         android:background="@color/bg_white"
         android:gravity="center"
-        android:orientation="vertical"
-        android:onClick="quitClass">
+        android:onClick="quitClass"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_class_exitclass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="quitClass"
             android:text="退出班课"
             android:textColor="@color/colorRank"
             android:textSize="20sp"
-            android:textStyle="normal"
-            android:onClick="quitClass"/>
+            android:textStyle="normal" />
 
     </LinearLayout>
 

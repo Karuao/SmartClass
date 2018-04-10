@@ -12,6 +12,6 @@
             android:layout_height="64dp"
             android:layout_gravity="left|bottom"
             android:scaleType="fitXY"
-            android:src="@drawable/add_class_img" />
+            android:src="@mipmap/btn_add_class" />
     </FrameLayout>
 </LinearLayout>

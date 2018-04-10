@@ -28,10 +28,10 @@
 
             <ImageView
                 android:id="@+id/img_avatar"
-                android:layout_width="112dp"
-                android:layout_height="112dp"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/add_class_img" />
+                android:src="@mipmap/ic_classavatar_def" />
 
             <TextView
                 android:id="@+id/txt_invitecode"
@@ -40,6 +40,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp"
                 android:text="111111"
+                android:singleLine="true"
                 android:textColor="@color/colorRank"
                 android:textSize="32sp" />
 

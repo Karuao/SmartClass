@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_class_homework_file_text"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/add_class_img" />
+                android:src="@mipmap/btn_add_class" />
 
 
         </RelativeLayout>

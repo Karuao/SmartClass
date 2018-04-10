@@ -28,20 +28,20 @@
 
             <ImageView
                 android:id="@+id/img_avatar"
-                android:layout_width="112dp"
-                android:layout_height="112dp"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/add_class_img" />
+                android:src="@mipmap/ic_classavatar_def" />
 
             <TextView
                 android:id="@+id/txt_classname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:textSize="24sp"
-                android:singleLine="false"
-                android:text="Java04班" />
+                android:layout_marginTop="15dp"
+                android:singleLine="true"
+                android:text="Java04班"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/txt_course"
@@ -49,9 +49,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:textSize="24sp"
-                android:singleLine="false"
-                android:text="软件工程" />
+                android:singleLine="true"
+                android:text="软件工程"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/txt_teacher"
@@ -59,9 +59,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:textSize="24sp"
-                android:singleLine="false"
-                android:text="老师：赵宁" />
+                android:singleLine="true"
+                android:text="老师：赵宁"
+                android:textSize="24sp" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
