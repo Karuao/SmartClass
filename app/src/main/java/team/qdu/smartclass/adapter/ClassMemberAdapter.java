@@ -26,8 +26,9 @@ import team.qdu.smartclass.activity.SBaseActivity;
 
 public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
 
-    private static int rank=1;
-    private static int lastExp;
+    int rank=1;
+    int lastExp;
+
 
     public ClassMemberAdapter(Context context) {
         super(context);
@@ -105,5 +106,9 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
             });
         }
         return convertView;
+    }
+
+    public void initRank(){
+        rank =1;
     }
 }

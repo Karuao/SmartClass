@@ -120,6 +120,7 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
+                classMemberAdapter.initRank();
                 swipeRefreshLayout.setRefreshing(false);
             }
 

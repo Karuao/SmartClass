@@ -115,6 +115,7 @@ public class TeaClassMemberFragment extends SBaseFragment implements AdapterView
             public void onSuccess(List<ClassUser> data, String message) {
                 memberCount.setText(String.valueOf(data.size()));
                 classMemberAdapter.setItems(data);
+                classMemberAdapter.initRank();
                 swipeRefreshLayout.setRefreshing(false);
             }
 

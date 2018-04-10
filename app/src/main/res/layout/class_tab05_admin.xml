@@ -175,7 +175,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/text_little_black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:onClick="seeMoreDetail"/>
 
     </RelativeLayout>
 

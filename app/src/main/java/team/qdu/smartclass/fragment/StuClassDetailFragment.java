@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
+
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.model.User;
@@ -78,18 +82,20 @@ public class StuClassDetailFragment extends SBaseFragment {
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
-                //从服务器获取图片
-                parentActivity.classAppAction.getBitmap(data.getAvatar(), new ActionCallbackListener<Bitmap>() {
-                    @Override
-                    public void onSuccess(Bitmap data, String message) {
-                        stuClassDetailImg.setImageBitmap(data);
-                    }
+                if(data.getAvatar()!=null) {
+                    //从服务器获取图片
+                    parentActivity.fileAppAction.cacheImg(data.getAvatar(), new ActionCallbackListener<File>() {
+                        @Override
+                        public void onSuccess(File data, String message) {
+                            Glide.with(getActivity()).load(data.getPath()).into(stuClassDetailImg);
+                        }
 
-                    @Override
-                    public void onFailure(String errorEvent, String message) {
-                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(String errorEvent, String message) {
+                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
 
             @Override
