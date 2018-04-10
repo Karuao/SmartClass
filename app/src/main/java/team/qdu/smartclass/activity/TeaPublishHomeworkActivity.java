@@ -124,8 +124,8 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
     //初始化DatePicker截止时间时间选择器
     private void initDatePicker() {
         Date current = new Date();
-        Date afterOneMinute = new Date(current.getTime() + 8 * 60 * 60 * 1000 + 60 * 1000);
-        Date afterOneDay = new Date(current.getTime() + 8 * 60 * 60 * 1000 + 24 * 60 * 60 * 1000);
+        Date afterOneMinute = new Date(current.getTime() + 60 * 1000);
+        Date afterOneDay = new Date(current.getTime() + 24 * 60 * 60 * 1000);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(current);
         calendar.add(Calendar.YEAR, 1);//日期加一年

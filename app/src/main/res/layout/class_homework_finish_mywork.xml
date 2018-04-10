@@ -1,59 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--点击‘我的作业’按钮后进入的'我的作业'页面-->
-<ScrollView android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?><!--点击‘我的作业’按钮后进入的'我的作业'页面-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout android:orientation="vertical"
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/class_top"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_width="match_parent">
+            android:background="@color/title"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <LinearLayout android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:orientation="horizontal"
-                android:background="@color/title"
-                >
-                <LinearLayout
-                    android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:onClick="toBack">
+
+                <ImageButton
+                    android:id="@+id/iv_class_top1_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:background="#00000000"
+                    android:src="@drawable/left_goback" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="30dp"
                     android:layout_height="fill_parent"
-                    android:layout_weight="5"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    >
-                    <ImageButton
-                        android:id="@+id/iv_class_top1_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
-                        android:onClick="toBack"
-                        android:background="#00000000"
-                        android:src="@drawable/left_goback"/>
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="30dp"
-                        android:layout_height="fill_parent"
-                        android:src="@drawable/head2"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="5dp"
-                        />
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="我的作业"
-                        android:textSize="21sp"
-                        android:textColor="@color/bg_white"
-                        android:textStyle="normal"
-                        android:layout_marginLeft="5dp"
-                        />
-                </LinearLayout>
-
-
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/head2" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_titlebar_classname"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:singleLine="true"
+                android:text="我的作业"
+                android:textColor="@color/bg_white"
+                android:textSize="21sp"
+                android:textStyle="normal" />
+
         </LinearLayout>
 
         <RelativeLayout
@@ -75,13 +71,13 @@
                 android:id="@+id/txt_homework_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:width="120dp"
-                android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                 android:layout_below="@+id/txt_homework_name"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:textColor="@color/text_little_black"/>
+                android:width="120dp"
+                android:text="xxxx奥术大师大xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                android:textColor="@color/text_little_black"
+                android:textSize="14sp" />
 
 
         </RelativeLayout>
@@ -143,10 +139,6 @@
             android:layout_height="2px"
             android:layout_marginTop="5dp"
             android:background="#d6d6d6" />
-
-
-
-
 
 
     </LinearLayout>

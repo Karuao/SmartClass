@@ -46,17 +46,18 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
             return;
         }
         if (TextUtils.isEmpty(detail) && photoList.size() == 0) {
-            listener.onFailure(ErrorEvent.PARAM_NULL, "截止日期和上传图片不能全为空");
+            listener.onFailure(ErrorEvent.PARAM_NULL, "作业内容和上传图片不能全为空");
             return;
         }
         //截至日期不能小于等于当前时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date deadlineDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
-        Date currentDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
+        Date deadlineDate = new Date();
+        Date currentDate = new Date();
         try {
             deadlineDate = sdf.parse(deadline);
         } catch (ParseException e) {
             e.printStackTrace();
+            listener.onFailure(ErrorEvent.PROGRESS_EXCEPTION, "发布作业失败，请稍后再试");
         }
         if ((currentDate.getTime() - currentDate.getTime() % 60) >= deadlineDate.getTime()) {
             listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "截至日期不能小于等于当前时间");

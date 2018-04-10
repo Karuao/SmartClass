@@ -1,59 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--点击已查阅人数或查阅人数后显示的详情页面-->
+<?xml version="1.0" encoding="utf-8"?><!--点击已查阅人数或查阅人数后显示的详情页面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/class_top"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:orientation="horizontal"
         android:background="@color/title"
-        >
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="5"
-            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
-            >
+            android:onClick="toBack">
+
             <ImageButton
                 android:id="@+id/iv_class_top1_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:onClick="toBack"
                 android:background="#00000000"
-                android:src="@drawable/left_goback"/>
+                android:src="@drawable/left_goback" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="30dp"
                 android:layout_height="fill_parent"
-                android:src="@drawable/head2"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="5dp"
-                />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="已查阅学生"
-                android:textSize="21sp"
-                android:textColor="@color/bg_white"
-                android:textStyle="normal"
-                android:layout_marginLeft="5dp"
-                />
+                android:src="@drawable/head2" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/txt_titlebar_classname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:singleLine="true"
+            android:text="已查阅学生"
+            android:textColor="@color/bg_white"
+            android:textSize="21sp"
+            android:textStyle="normal" />
 
     </LinearLayout>
-    <include android:id="@+id/top" layout="@layout/class_inform_admin_people_listitem" />
+
+    <include
+        android:id="@+id/top"
+        layout="@layout/class_inform_admin_people_listitem" />
+
     <ListView
         android:id="@+id/class_inform_checked_listView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"></ListView>
 
 
 </LinearLayout>

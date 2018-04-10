@@ -8,52 +8,48 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/class_top"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:orientation="vertical">
+            android:background="@color/title"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/title"
-                android:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:onClick="toBack">
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <ImageButton
+                    android:id="@+id/iv_class_top1_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:background="#00000000"
+                    android:src="@drawable/left_goback" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="30dp"
                     android:layout_height="fill_parent"
-                    android:layout_weight="5"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/iv_class_top1_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
-                        android:background="#00000000"
-                        android:onClick="toBack"
-                        android:src="@drawable/left_goback" />
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="30dp"
-                        android:layout_height="fill_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="5dp"
-                        android:src="@drawable/head2" />
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="查看作业详情"
-                        android:textColor="@color/bg_white"
-                        android:textSize="21sp"
-                        android:textStyle="normal" />
-                </LinearLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/head2" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_titlebar_classname"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:singleLine="true"
+                android:text="查看作业详情"
+                android:textColor="@color/bg_white"
+                android:textSize="21sp"
+                android:textStyle="normal" />
+
         </LinearLayout>
 
 
@@ -107,9 +103,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:background="#d6d6d6" />
 
         <RelativeLayout
@@ -154,8 +150,8 @@
         <RelativeLayout
             android:id="@+id/rlayout_evaluate_remark"
             android:layout_width="wrap_content"
-            android:padding="5dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/txt_evaluate"
@@ -163,8 +159,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:textSize="12sp"
-                android:text="评价:" />
+                android:text="评价:"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/txt_evaluate_remark"

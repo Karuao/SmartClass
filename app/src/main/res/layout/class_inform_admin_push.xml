@@ -1,59 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--管理员发布通知页面-->
-<LinearLayout android:orientation="vertical"
-    android:id="@+id/class_top"
-    android:layout_height="wrap_content"
+<?xml version="1.0" encoding="utf-8"?><!--管理员发布通知页面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/class_top"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:orientation="horizontal"
         android:background="@color/title"
-        >
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="5"
-            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
-            >
+            android:onClick="toBack">
+
             <ImageButton
                 android:id="@+id/iv_class_top1_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:onClick="toBack"
                 android:background="#00000000"
-                android:src="@drawable/left_goback"/>
+                android:src="@drawable/left_goback" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="30dp"
                 android:layout_height="fill_parent"
-                android:src="@drawable/head2"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="8dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="5dp"
-                />
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="新建通知"
-                android:textSize="21sp"
-                android:textColor="@color/bg_white"
-                android:textStyle="normal"
-                android:layout_marginLeft="5dp"
-                />
+                android:src="@drawable/head2" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/txt_titlebar_classname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:singleLine="true"
+            android:text="新建通知"
+            android:textColor="@color/bg_white"
+            android:textSize="21sp"
+            android:textStyle="normal" />
 
     </LinearLayout>
 
     <EditText
         android:id="@+id/Inform_Detail"
-        android:maxLength="200"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
@@ -62,6 +58,7 @@
         android:background="@drawable/text_area"
         android:enabled="true"
         android:gravity="top"
+        android:maxLength="200"
         android:maxLines="10"
         android:minLines="8"
         android:scrollbars="vertical" />
@@ -69,21 +66,20 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp">
 
         <Button
             android:layout_width="221dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="@drawable/shape_button"
-            android:onClick="toPush"
             android:gravity="center"
+            android:onClick="toPush"
             android:padding="10dp"
             android:text="发布通知"
             android:textColor="#fff"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
 
     </RelativeLayout>
 </LinearLayout>

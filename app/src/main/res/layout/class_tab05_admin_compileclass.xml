@@ -3,67 +3,60 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <!--顶部标题-->
+    <LinearLayout
+        android:id="@+id/class_top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/title"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:onClick="toBack">
+
+            <ImageButton
+                android:id="@+id/iv_class_top1_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:background="#00000000"
+                android:src="@drawable/left_goback" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/head2" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_titlebar_classname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:singleLine="true"
+            android:text="编辑班课"
+            android:textColor="@color/bg_white"
+            android:textSize="21sp"
+            android:textStyle="normal" />
+
+    </LinearLayout>
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="45dp">
 
-        <!--顶部标题-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/class_top"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:background="@color/title"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="5"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <ImageButton
-                            android:id="@+id/iv_class_top1_back"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="5dp"
-                            android:background="#00000000"
-                            android:onClick="toBack"
-                            android:src="@drawable/left_goback" />
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="30dp"
-                            android:layout_height="fill_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/head2" />
-
-                        <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="编辑班课"
-                            android:textColor="@color/bg_white"
-                            android:textSize="21sp"
-                            android:textStyle="normal" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-            </LinearLayout>
-
 
             <ImageView
                 android:id="@+id/modifyClassAvatar"
@@ -117,11 +110,11 @@
                         android:background="@null"
                         android:ems="15"
                         android:gravity="right"
-                        android:textCursorDrawable="@color/bg_black"
-                        android:textSize="18sp"
                         android:inputType="text"
                         android:maxLength="32"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textCursorDrawable="@color/bg_black"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
 
@@ -170,11 +163,11 @@
                         android:background="@null"
                         android:ems="15"
                         android:gravity="right"
-                        android:textCursorDrawable="@color/bg_black"
-                        android:textSize="18sp"
                         android:inputType="text"
                         android:maxLength="20"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textCursorDrawable="@color/bg_black"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
 
@@ -311,11 +304,11 @@
                         android:background="@null"
                         android:ems="15"
                         android:gravity="right"
-                        android:textCursorDrawable="@color/bg_black"
-                        android:textSize="18sp"
                         android:inputType="text"
                         android:maxLength="200"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textCursorDrawable="@color/bg_black"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
 
@@ -365,11 +358,11 @@
                         android:background="@null"
                         android:ems="15"
                         android:gravity="right"
-                        android:textCursorDrawable="@color/bg_black"
-                        android:textSize="18sp"
                         android:inputType="text"
                         android:maxLength="200"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textCursorDrawable="@color/bg_black"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
 
