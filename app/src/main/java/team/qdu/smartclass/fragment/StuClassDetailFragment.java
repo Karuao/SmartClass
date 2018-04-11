@@ -1,6 +1,5 @@
 package team.qdu.smartclass.fragment;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -20,7 +19,6 @@ import team.qdu.model.User;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
-import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -84,7 +82,7 @@ public class StuClassDetailFragment extends SBaseFragment {
                 });
                 if(data.getAvatar()!=null) {
                     //从服务器获取图片
-                    parentActivity.fileAppAction.cacheImg(data.getAvatar(), new ActionCallbackListener<File>() {
+                    parentActivity.fileAppAction.cacheImg(data.getAvatar(), getActivity(), new ActionCallbackListener<File>() {
                         @Override
                         public void onSuccess(File data, String message) {
                             Glide.with(getActivity()).load(data.getPath()).into(stuClassDetailImg);

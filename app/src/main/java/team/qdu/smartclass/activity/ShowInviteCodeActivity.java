@@ -47,7 +47,7 @@ public class ShowInviteCodeActivity extends SBaseActivity {
 //        avatarImg.setImageBitmap(avatar);
         String avatarUrl = getIntent().getStringExtra("avatarUrl");
         if (!TextUtils.isEmpty(avatarUrl)) {
-            fileAppAction.cacheImg(avatarUrl, new ActionCallbackListener<File>() {
+            fileAppAction.cacheImg(avatarUrl, this, new ActionCallbackListener<File>() {
                 @Override
                 public void onSuccess(File data, String message) {
                     Glide.with(context).load(data.getPath()).into(avatarImg);

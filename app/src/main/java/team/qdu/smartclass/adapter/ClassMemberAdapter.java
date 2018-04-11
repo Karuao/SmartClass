@@ -1,7 +1,6 @@
 package team.qdu.smartclass.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
-import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
@@ -93,7 +91,7 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
         final Compo finalCompo = compo;
         //从服务器获取图片绑定到班课成员封面上
         if (!TextUtils.isEmpty(itemList.get(position).getUser().getAvatar())) {
-            ((SBaseActivity) context).fileAppAction.cacheImg(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<File>() {
+            ((SBaseActivity) context).fileAppAction.cacheImg(itemList.get(position).getUser().getAvatar(), context, new ActionCallbackListener<File>() {
                 @Override
                 public void onSuccess(File data, String message) {
                     Glide.with(context).load(data.getPath()).into(finalCompo.classMemberImg);

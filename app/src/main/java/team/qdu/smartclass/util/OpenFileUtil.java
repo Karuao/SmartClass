@@ -3,7 +3,6 @@ package team.qdu.smartclass.util;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
 import android.widget.Toast;
 
 import java.io.File;
@@ -97,7 +96,7 @@ public class OpenFileUtil {
         }
         try {
             //设置intent的data和Type属性
-            intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator +path)), type);
+            intent.setDataAndType(Uri.fromFile(new File(context.getExternalFilesDir(null) + File.separator +path)), type);
             //跳转
             context.startActivity(intent);
         } catch (Exception e) { //当系统没有携带文件打开软件，提示

@@ -1,6 +1,5 @@
 package team.qdu.smartclass.fragment;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -193,9 +192,10 @@ public class TeaClassDetailFragment extends SBaseFragment {
                 }
                 //从服务器获取图片
                 if(cls.getAvatar()!=null) {
-                    parentActivity.fileAppAction.cacheImg(cls.getAvatar(), new ActionCallbackListener<File>() {
+                    parentActivity.fileAppAction.cacheImg(cls.getAvatar(), getActivity(), new ActionCallbackListener<File>() {
                         @Override
                         public void onSuccess(File data, String message) {
+                            if (getActivity().isFinishing())
                             Glide.with(getActivity()).load(data.getPath()).into(teaClassDetailImg);
                         }
 

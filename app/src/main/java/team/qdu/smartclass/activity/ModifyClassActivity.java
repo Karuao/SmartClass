@@ -3,9 +3,7 @@ package team.qdu.smartclass.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -30,10 +28,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.kevin.crop.UCrop;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -92,7 +88,7 @@ public class ModifyClassActivity extends SBaseActivity{
                 examEdt.setText(data.getExam_shedule());
                 if(data.getAvatar()!=null) {
                     //从服务器获取图片
-                    ModifyClassActivity.this.fileAppAction.cacheImg(data.getAvatar(), new ActionCallbackListener<File>() {
+                    ModifyClassActivity.this.fileAppAction.cacheImg(data.getAvatar(), context, new ActionCallbackListener<File>() {
                         @Override
                         public void onSuccess(File data, String message) {
                             Glide.with(context).load(data.getPath()).into(AvatarImg);

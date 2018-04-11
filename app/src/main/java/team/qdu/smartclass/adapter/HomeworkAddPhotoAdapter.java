@@ -26,7 +26,7 @@ public class HomeworkAddPhotoAdapter extends SBaseAdapter<ImageItem> {
         public ImageView homeworkDelPhotoImg;
     }
 
-    //添加一个Null值，getView时遇到则不设置图片，即为添加图片按钮
+    //添加一个Null值，getView时遇到null设置为添加图片按钮
     public HomeworkAddPhotoAdapter(Context context, int maxImgCount) {
         super(context);
         this.maxImgCount = maxImgCount;

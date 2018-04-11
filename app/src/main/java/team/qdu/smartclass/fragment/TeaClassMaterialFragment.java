@@ -3,7 +3,6 @@ package team.qdu.smartclass.fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,13 +90,12 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            parentActivity.fileAppAction.cacheFile(urltail, new ActionCallbackListener<File>() {
+                            parentActivity.fileAppAction.cacheFile(urltail, getActivity(), new ActionCallbackListener<File>() {
                                 @Override
                                 public void onSuccess(File data, String message) {
                                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                                     OpenFileUtil openFileUtil = new OpenFileUtil();
                                     openFileUtil.openFileByPath(getContext(), url);
-
                                 }
 
                                 @Override
@@ -118,7 +116,7 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
 
 
     public boolean CheckIfFileExist(final String urlTail){
-        File img = new File(Environment.getExternalStorageDirectory() + File.separator + urlTail);
+        File img = new File(getActivity().getExternalFilesDir(null) + File.separator + urlTail);
         if (img.exists()) {
             return true;
         }

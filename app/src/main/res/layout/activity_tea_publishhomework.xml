@@ -91,6 +91,7 @@
                         android:background="@null"
                         android:ems="15"
                         android:gravity="right"
+                        android:singleLine="true"
                         android:maxLength="20"
                         android:textCursorDrawable="@null"
                         android:textSize="18sp" />

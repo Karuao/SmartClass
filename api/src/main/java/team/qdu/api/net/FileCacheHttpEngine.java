@@ -1,6 +1,5 @@
 package team.qdu.api.net;
 
-import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -18,10 +17,10 @@ public class FileCacheHttpEngine {
 
     private final static String TAG = "FileCacheHttpEngine";
     //The development database
-    private final static String SERVER_URL = "http://10.0.2.2/";
+//    private final static String SERVER_URL = "http://10.0.2.2/";
     //    private final static String SERVER_URL = "http://47.94.7.159/";
     //The official database
-//    private final static String SERVER_URL = "http://140.143.134.146/";
+    private final static String SERVER_URL = "http://140.143.134.146/";
     private final static String REQUEST_METHOD = "GET";
     private final static String ENCODE_TYPE = "UTF-8";
     private final static int TIME_OUT = 4000;
@@ -35,7 +34,11 @@ public class FileCacheHttpEngine {
         return instance;
     }
 
-    public File cacheImg(String urlTail) throws IOException {
+    public File cacheImg(String urlTail, String localPath) throws IOException {
+        File file = new File(localPath);
+        if (file.exists()) {
+            return file;
+        }
         //打印出请求z
         Log.i(TAG, "request: " + urlTail);
         HttpURLConnection connection = getConnection(urlTail);
@@ -44,9 +47,8 @@ public class FileCacheHttpEngine {
             //获取相应的输入流对象
             InputStream inputStream = connection.getInputStream();
             //新建相应的文件
-            String filePath = Environment.getExternalStorageDirectory() + File.separator + urlTail;
-            new File(filePath.substring(0, filePath.lastIndexOf(File.separator))).mkdirs();
-            File file = new File(filePath);
+//            String filePath = Environment.getExternalStorageDirectory() + File.separator + urlTail;
+            new File(localPath.substring(0, localPath.lastIndexOf(File.separator))).mkdirs();
             //对应文件建立输出流
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             //新建缓存,用来存储,从网络读取数据,再写入文件

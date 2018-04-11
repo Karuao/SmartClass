@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -119,48 +118,26 @@ public class ImgUtil {
         return null;
     }
 
-    //获取图片压缩工具
-//    public static CompressHelper getCompressHelper(Context context) {
-//        return new CompressHelper.Builder(context)
-//                .setMaxWidth(1920)  // 默认最大宽度为720
-//                .setMaxHeight(1080) // 默认最大高度为960
-//                .setQuality(80)    // 默认压缩质量为80
-//                .setCompressFormat(Bitmap.CompressFormat.JPEG) // 设置默认压缩为jpg格式
-//                .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
-//                        Environment.DIRECTORY_PICTURES).getAbsolutePath())
-//                .build();
-//    }
-
     //初始化作业list
     public static void initHomeworkPhotoList(final Context context, final SBaseAdapter homeworkPhotoAdapter, String dirUrl, int photoNum) {
         for (int i = 0; i < photoNum; i++) {
             String urlTail = dirUrl + File.separator + i + ".jpeg";
-            File photo = new File(Environment.getExternalStorageDirectory() + File.separator + urlTail);
-            if (photo.exists()) {
-                //图片存在从本地获取
-                List<ImageItem> photoList = new ArrayList<>();
-                ImageItem imageItem = new ImageItem();
-                imageItem.path = photo.getPath();
-                photoList.add(imageItem);
-                homeworkPhotoAdapter.addItems(photoList);
-            } else {
-                //图片不存在从服务器获取
-                ((SBaseActivity) context).fileAppAction.cacheImg(urlTail, new ActionCallbackListener<File>() {
-                    @Override
-                    public void onSuccess(File data, String message) {
-                        List<ImageItem> photoList = new ArrayList<>();
-                        ImageItem imageItem = new ImageItem();
-                        imageItem.path = data.getPath();
-                        photoList.add(imageItem);
-                        homeworkPhotoAdapter.addItems(photoList);
-                    }
+            //图片不存在从服务器获取
+            ((SBaseActivity) context).fileAppAction.cacheImg(urlTail, context, new ActionCallbackListener<File>() {
+                @Override
+                public void onSuccess(File data, String message) {
+                    List<ImageItem> photoList = new ArrayList<>();
+                    ImageItem imageItem = new ImageItem();
+                    imageItem.path = data.getPath();
+                    photoList.add(imageItem);
+                    homeworkPhotoAdapter.addItems(photoList);
+                }
 
-                    @Override
-                    public void onFailure(String errorEvent, String message) {
-                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+                @Override
+                public void onFailure(String errorEvent, String message) {
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -188,7 +165,8 @@ public class ImgUtil {
 
     //响应点击HomeworkAddPhotoListItem
     public static void responseClickHomeworkAddPhotoListItem(final Context context, final HomeworkAddPhotoAdapter homeworkAddPhotoAdapter, AdapterView<?> parent, int position) {
-        if (position == parent.getChildCount() - 1 && position != maxImgCount - 1) {
+        if (homeworkAddPhotoAdapter.getItem(position) == null) {
+//        if (position == homeworkAddPhotoAdapter.getCount() - 1 && position != maxImgCount - 1) {
             List<String> names = new ArrayList<>();
             names.add("拍照");
             names.add("相册");
@@ -241,8 +219,7 @@ public class ImgUtil {
                 .setMaxHeight(192)
                 .setQuality(80)
                 .setCompressFormat(Bitmap.CompressFormat.JPEG)
-                .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                .setDestinationDirectoryPath(context.getExternalCacheDir().getAbsolutePath())
                 .build()
                 .compressToFile(oldFile);
     }
@@ -255,8 +232,7 @@ public class ImgUtil {
                     .setMaxHeight(1080)
                     .setQuality(80)
                     .setCompressFormat(Bitmap.CompressFormat.JPEG)
-                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                    .setDestinationDirectoryPath(context.getExternalCacheDir().getAbsolutePath())
                     .build()
                     .compressToFile(
                             new File(homeworkAddPhotoAdapter.getImages().get(i).path)));

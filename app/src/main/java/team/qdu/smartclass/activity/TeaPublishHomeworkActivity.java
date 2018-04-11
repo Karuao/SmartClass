@@ -11,6 +11,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -49,6 +50,7 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
         initView();
         initEvent();
         initDatePicker();
+        photoList = new ArrayList<>();
     }
 
     private void initView() {

@@ -1,5 +1,7 @@
 package team.qdu.core;
 
+import android.content.Context;
+
 import java.io.File;
 import java.util.Map;
 
@@ -10,10 +12,10 @@ import java.util.Map;
 public interface FileAppAction {
 
     //缓存图片
-    public void cacheImg(String urlTail, ActionCallbackListener<File> listener);
+    public void cacheImg(String urlTail, Context context, ActionCallbackListener<File> listener);
 
     //缓存文件
-    public void cacheFile(String urlTail,ActionCallbackListener<File> listener);
+    public void cacheFile(String urlTail, Context context, ActionCallbackListener<File> listener);
 
     //获取版本更新信息
     public void getVersionInfo(ActionCallbackListener<Map> listener);

@@ -9,9 +9,7 @@ import java.util.Map;
 
 public interface FileApi {
 
-    public File cacheImg(String urlTail);
-
-    public File cacheFile(String urlTail);
+    public File cacheFile(String urlTail, String localPath);
 
     public Map getVersionInfo();
 }

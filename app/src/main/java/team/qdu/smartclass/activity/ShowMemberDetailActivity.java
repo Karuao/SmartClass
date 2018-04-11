@@ -3,8 +3,6 @@ package team.qdu.smartclass.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,7 +14,6 @@ import com.bumptech.glide.Glide;
 import java.io.File;
 
 import team.qdu.core.ActionCallbackListener;
-import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.TeaClassMemberFragment;
 import team.qdu.smartclass.util.LoadingDialogUtil;
@@ -45,7 +42,7 @@ public class ShowMemberDetailActivity extends SBaseActivity {
         memName.setText(memberName);
         memSno.setText(memberSno);
         memExp.setText(memberExp);
-        this.fileAppAction.cacheImg(memberAvatar, new ActionCallbackListener<File>() {
+        this.fileAppAction.cacheImg(memberAvatar, context, new ActionCallbackListener<File>() {
             @Override
             public void onSuccess(File data, String message) {
                 Glide.with(context).load(data.getPath()).into(memImg);

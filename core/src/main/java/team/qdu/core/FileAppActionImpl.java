@@ -32,17 +32,12 @@ public class FileAppActionImpl implements FileAppAction {
     }
 
     @Override
-    public void cacheImg(final String urlTail, final ActionCallbackListener<File> listener) {
-        File img = new File(Environment.getExternalStorageDirectory() + File.separator + urlTail);
-        if (img.exists()) {
-            listener.onSuccess(img, "图片加载成功");
-            return;
-        }
+    public void cacheImg(final String urlTail, final Context context, final ActionCallbackListener<File> listener) {
         new AsyncTask<Void, Void, File>() {
 
             @Override
             protected File doInBackground(Void... params) {
-                return fileApi.cacheImg(urlTail);
+                return fileApi.cacheFile(urlTail, context.getExternalCacheDir() + File.separator + urlTail);
             }
 
             @Override
@@ -57,12 +52,12 @@ public class FileAppActionImpl implements FileAppAction {
     }
 
     @Override
-    public void cacheFile(final String urlTail, final ActionCallbackListener<File> listener) {
+    public void cacheFile(final String urlTail, final Context context, final ActionCallbackListener<File> listener) {
         new AsyncTask<Void, Void, File>() {
 
             @Override
             protected File doInBackground(Void... params) {
-                return fileApi.cacheFile(urlTail);
+                return fileApi.cacheFile(urlTail, context.getExternalFilesDir(null) + File.separator + urlTail);
             }
 
             @Override

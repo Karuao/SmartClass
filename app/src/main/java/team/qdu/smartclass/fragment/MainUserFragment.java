@@ -5,9 +5,6 @@ package team.qdu.smartclass.fragment;
  * Created by rjmgc on 2017/12/11.
  */
 
-import android.app.Activity;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -80,7 +77,7 @@ public class MainUserFragment extends SBaseFragment {
             public void onSuccess(User user, String message) {
                 if(user.getAvatar()!=null) {
                     //从服务器获取图片
-                    parentActivity.fileAppAction.cacheImg(user.getAvatar(), new ActionCallbackListener<File>() {
+                    parentActivity.fileAppAction.cacheImg(user.getAvatar(), getActivity(), new ActionCallbackListener<File>() {
                         @Override
                         public void onSuccess(File data, String message) {
                             Glide.with(getActivity()).load(data.getPath()).into(personAvatar);

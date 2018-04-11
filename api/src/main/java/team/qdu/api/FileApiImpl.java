@@ -30,22 +30,11 @@ public class FileApiImpl implements FileApi {
         httpEngine = HttpEngine.getInstance();
     }
 
-    //从网络缓存图片
+    //从网络缓存文件
     @Override
-    public File cacheImg(String urlTail) {
+    public File cacheFile(String urlTail, String localPath) {
         try {
-            return fileCacheHttpEngine.cacheImg(urlTail);
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.println(Log.DEBUG, "DEBUG", e.getMessage());
-            return null;
-        }
-    }
-
-    @Override
-    public File cacheFile(String urlTail) {
-        try {
-            return fileCacheHttpEngine.cacheImg(urlTail);
+            return fileCacheHttpEngine.cacheImg(urlTail, localPath);
         } catch (IOException e) {
             e.printStackTrace();
             Log.println(Log.DEBUG, "DEBUG", e.getMessage());
