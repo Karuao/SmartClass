@@ -247,7 +247,7 @@ public class PrepareClassActivity extends SBaseActivity {
         UCrop.of(uri, mDestinationUri)
                 .withAspectRatio(1, 1)
                 .withMaxResultSize(512, 512)
-                .withTargetActivity(CropActivity2.class)
+                .withTargetActivity(CropActivity.class)
                 .start(this);
     }
 
