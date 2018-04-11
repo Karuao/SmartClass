@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="3dp">
 
 
 
@@ -19,11 +20,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:text="x人已读"
+            android:text="?"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text_yellow"
+            android:textSize="20dp"
+            android:singleLine="true"/>/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="人已读"
             android:textColor="@color/classbottom"
             android:textSize="16sp" />
-
 
     </LinearLayout>
 
@@ -36,7 +46,7 @@
         android:singleLine="true"
         android:text="Text"
         android:textColor="#444"
-        android:textSize="19sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/tv_class_inform_time"
@@ -47,7 +57,7 @@
         android:layout_below="@+id/txt_commitstu_sno"
         android:text="发布时间"
         android:textColor="#898989"
-        android:textSize="17sp" />
+        android:textSize="12sp" />
     <TextView
         android:id="@+id/tv_inform_id"
         android:layout_width="wrap_content"

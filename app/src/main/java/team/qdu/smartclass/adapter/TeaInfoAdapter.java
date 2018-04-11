@@ -49,7 +49,7 @@ public class TeaInfoAdapter extends SBaseAdapter<Inform> {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         compo.idTxt.setText(Integer.toString(itemList.get(position).getInform_id()));
         compo.timeTxt.setText(sdf.format(itemList.get(position).getCreate_date_time()));
-        compo.numberTxt.setText(Integer.toString(itemList.get(position).getRead_num())+"人已读");
+        compo.numberTxt.setText(Integer.toString(itemList.get(position).getRead_num()));
         compo.informTxt.setText((String) itemList.get(position).getDetail());
         return convertView;
     }

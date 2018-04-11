@@ -56,7 +56,7 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
         String inform_id = getIntent().getStringExtra("informid");
         getUnreadNum(inform_id);
         tvDetial.setText(detail);
-        tvRead_number.setText(read_num);
+        tvRead_number.setText(read_num+ "人已读");
 
         tvTime.setText(time);
         LoutRead_number.setOnClickListener(this);

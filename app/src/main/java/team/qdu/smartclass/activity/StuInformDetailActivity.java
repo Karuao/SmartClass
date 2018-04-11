@@ -29,6 +29,4 @@ public class StuInformDetailActivity extends SBaseActivity {
     public void toBack(View view) {
         finish();
     }
-
-
 }
