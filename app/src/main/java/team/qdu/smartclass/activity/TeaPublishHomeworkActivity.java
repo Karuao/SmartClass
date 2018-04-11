@@ -1,22 +1,16 @@
 package team.qdu.smartclass.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lzy.imagepicker.bean.ImageItem;
-import com.nanchen.compresshelper.CompressHelper;
-
 import java.io.File;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +19,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.HomeworkAddPhotoAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
+import team.qdu.smartclass.util.FileUtil;
 import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.util.LoadingDialogUtil;
 import team.qdu.smartclass.view.CustomDatePicker;
@@ -44,7 +39,8 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
     private CustomDatePicker customDatePicker;
 
     private HomeworkAddPhotoAdapter homeworkAddPhotoAdapter;
-    ArrayList<ImageItem> images = null;
+    //存放压缩后的上传图片
+    List<File> photoList;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -81,20 +77,7 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
         String title = homeworkTitleEdt.getText().toString();
         String deadline = homeworkDeadlineTxt.getText().toString();
         String detail = homeworkDetailEdt.getText().toString();
-        List<File> photoList = new ArrayList<>();
-        for (int i = 0; i < homeworkAddPhotoAdapter.getImagesSize(); i++) {
-            photoList.add(new CompressHelper.Builder(context)
-                    .setMaxWidth(1920)  // 默认最大宽度为720
-                    .setMaxHeight(1080) // 默认最大高度为960
-                    .setQuality(80)    // 默认压缩质量为80
-                    .setCompressFormat(Bitmap.CompressFormat.JPEG) // 设置默认压缩为jpg格式
-                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
-                    .build()
-                    .compressToFile(
-                            new File(homeworkAddPhotoAdapter.getImages().get(i).path)));
-        }
-
+        ImgUtil.compressPhotoes(photoList, homeworkAddPhotoAdapter, this);
         homeworkAppAction.publishHomework(title, deadline, detail, photoList, getClassId(),
                 new ActionCallbackListener<Void>() {
                     @Override
@@ -102,6 +85,7 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
                         Toast.makeText(TeaPublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
                         TeaHomeworkUnderwayFragment.refreshFlag = true;
                         finish();
+                        FileUtil.deleteCompressFiles(photoList);
 //                        SApplication.clearActivity();//关闭加载中动画
                         LoadingDialogUtil.closeDialog();
                     }
@@ -110,6 +94,7 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
                     public void onFailure(String errorEvent, String message) {
                         Toast.makeText(TeaPublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
 //                        SApplication.clearActivity();//关闭加载中动画
+                        FileUtil.deleteCompressFiles(photoList);
                         LoadingDialogUtil.closeDialog();
                     }
                 });

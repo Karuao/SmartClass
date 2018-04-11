@@ -152,17 +152,17 @@ public class PrepareClassActivity extends SBaseActivity {
                         if ("create".equals(getIntent().getStringExtra("do"))) {
                             finish();
                             startActivity(new Intent(PrepareClassActivity.this, CreateClassActivity.class));
-                            LoadingDialogUtil.closeDialog();//关闭加载中动画
                         } else {
                             finish();
                             startActivity(new Intent(PrepareClassActivity.this, JoinClassActivity.class));
-                            LoadingDialogUtil.closeDialog();//关闭加载中动画
                         }
+                        LoadingDialogUtil.closeDialog();//关闭加载中动画
                     }
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                        LoadingDialogUtil.closeDialog();//关闭加载中动画
                     }
                 });
     }

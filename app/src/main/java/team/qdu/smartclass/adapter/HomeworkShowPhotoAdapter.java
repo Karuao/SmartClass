@@ -37,6 +37,7 @@ public class HomeworkShowPhotoAdapter extends SBaseAdapter<ImageItem> {
             compo = new Compo();
             convertView = layoutInflater.inflate(R.layout.itemlist_homework_showphoto, null);
             compo.homeworkPhotoImg = (ImageView) convertView.findViewById(R.id.img_homework_photo);
+            convertView.setTag(compo);
         } else {
             compo = (Compo) convertView.getTag();
         }

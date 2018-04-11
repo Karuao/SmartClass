@@ -20,7 +20,7 @@
             android:gravity="center"
             android:onClick="toBack">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/iv_class_top1_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
