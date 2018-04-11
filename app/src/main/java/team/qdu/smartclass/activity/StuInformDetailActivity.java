@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.fragment.StuClassInformFragment;
 
 /**
  * Created by n551 on 2018/2/2.
@@ -28,13 +27,8 @@ public class StuInformDetailActivity extends SBaseActivity {
     }
 
     public void toBack(View view) {
-        StuClassInformFragment.refreshFlag = true;
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        StuClassInformFragment.refreshFlag = true;
-        super.onBackPressed();
-    }
+
 }
