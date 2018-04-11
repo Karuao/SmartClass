@@ -1,9 +1,7 @@
 package team.qdu.smartclass.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,8 +9,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.nanchen.compresshelper.CompressHelper;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -122,18 +118,7 @@ public class TeaEvaluateHomworkActivity extends SBaseActivity implements Adapter
         String answerExp = answerExpEdt.getText().toString();
         String evaluateRemark = evaluateRemarkEdt.getText().toString();
         photoList = new ArrayList<>();
-        for (int i = 0; i < homeworkAddPhotoAdapter.getImagesSize(); i++) {
-            photoList.add(new CompressHelper.Builder(context)
-                    .setMaxWidth(1920)
-                    .setMaxHeight(1080)
-                    .setQuality(80)
-                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
-                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
-                    .build()
-                    .compressToFile(
-                            new File(homeworkAddPhotoAdapter.getImages().get(i).path)));
-        }
+        ImgUtil.compressPhotoes(photoList, homeworkAddPhotoAdapter, this);
         homeworkAppAction.commitHomeworkEvaluation(homeworkAnswerId, answerExp, evaluateRemark, photoList, delPhotoesUrl, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {

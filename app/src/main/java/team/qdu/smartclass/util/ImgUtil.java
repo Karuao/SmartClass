@@ -142,7 +142,7 @@ public class ImgUtil {
                 ImageItem imageItem = new ImageItem();
                 imageItem.path = photo.getPath();
                 photoList.add(imageItem);
-                homeworkPhotoAdapter.setItems(photoList);
+                homeworkPhotoAdapter.addItems(photoList);
             } else {
                 //图片不存在从服务器获取
                 ((SBaseActivity) context).fileAppAction.cacheImg(urlTail, new ActionCallbackListener<File>() {

@@ -128,6 +128,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         tabClassinfo.setOnClickListener(this);
         tabHomework.callOnClick();
         classVpager.setAdapter(stuClassFragmentPagerAdapter);
+        classVpager.setOffscreenPageLimit(4);
         classVpager.setCurrentItem(2);
         classVpager.addOnPageChangeListener(this);
         //初始化tab按钮颜色，作业为选中
@@ -162,7 +163,9 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
 
     //通知tab上的小红标数字减1
     public void decrementInformBadge() {
-        informBadgeView.decrementBadgeCount(1);
+        if (informBadgeView != null) {
+            informBadgeView.decrementBadgeCount(1);
+        }
     }
 
     @Override

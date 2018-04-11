@@ -70,7 +70,6 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_mainpage);
         teaClassFragmentPagerAdapter = new TeaClassFragmentPagerAdapter(getSupportFragmentManager());
-
         initView();
         initEvents();
     }
@@ -102,6 +101,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         imgClassinfo = (ImageView) findViewById(R.id.iv_class_classinfo);
 
         classVpager.setAdapter(teaClassFragmentPagerAdapter);
+        classVpager.setOffscreenPageLimit(4);
         classVpager.setCurrentItem(2);
         classVpager.addOnPageChangeListener(this);
 
