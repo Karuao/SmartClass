@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jauker.widget.BadgeView;
+
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
@@ -80,6 +82,8 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
         if ("否".equals(((TextView) view.findViewById(R.id.tv_if_read)).getText().toString())) {
             ((StuClassMainActivity) getActivity()).decrementInformBadge();
         }
+        BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView1");
+        ((ViewGroup) badgeView.getParent()).removeView(badgeView);
         final String detail = ((TextView) view.findViewById(R.id.txt_commitstu_sno)).getText().toString();
         final String time = ((TextView) view.findViewById(R.id.tv_class_inform_time)).getText().toString();
         final String inform_user_id = ((TextView) view.findViewById(R.id.tv_inform_user_id)).getText().toString();

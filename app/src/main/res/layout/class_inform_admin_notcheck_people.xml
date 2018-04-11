@@ -48,11 +48,12 @@
 
 
     </LinearLayout>
-    <include android:id="@+id/top" layout="@layout/class_inform_admin_people_listitem" />
     <ListView
         android:id="@+id/class_inform_unchecked_listView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:divider="	#8A8A8A"
+        android:dividerHeight="1px" >
     </ListView>
 
 </LinearLayout>

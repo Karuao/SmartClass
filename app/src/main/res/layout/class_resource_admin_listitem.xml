@@ -42,26 +42,6 @@
         android:textColor="#898989"
         android:textSize="15sp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:id="@+id/linearLayout">
-
-
-        <View
-            android:id="@+id/view_class_file"
-            android:layout_width="2dp"
-            android:layout_height="16dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="6dp"
-            android:background="#c4c4c4" />
-
-
-
-    </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -76,11 +56,11 @@
         android:id="@+id/deleteResource"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_toLeftOf="@+id/linearLayout"
-        android:layout_toStartOf="@+id/linearLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
         android:focusable="false"
         android:onClick="deleteMaterial"
         android:src="@drawable/resoursedelete" />
