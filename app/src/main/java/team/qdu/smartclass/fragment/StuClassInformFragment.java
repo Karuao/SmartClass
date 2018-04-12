@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
         titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
         parentActivity = (StuClassMainActivity) getActivity();
         listview = (ListView) view.findViewById(R.id.class_inform_listView);
+        listview.addFooterView(new ViewStub(getContext()));
         getInform();
         listview.setOnItemClickListener(this);
         return view;
@@ -82,6 +84,7 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
         if ("否".equals(((TextView) view.findViewById(R.id.tv_if_read)).getText().toString())) {
             BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView1");
             ((ViewGroup) badgeView.getParent()).removeView(badgeView);
+            ((TextView) view.findViewById(R.id.tv_if_read)).setText("是");
             ((StuClassMainActivity) getActivity()).decrementInformBadge();
         }
 

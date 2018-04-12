@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jauker.widget.BadgeView;
@@ -30,6 +31,7 @@ public class StuInfoAdapter extends SBaseAdapter<Inform_User> {
         public TextView informTxt;
         public TextView readTxt;
         public TextView idTxt;
+        public LinearLayout Layout_ifRead;
     }
 
     @Override
@@ -43,13 +45,14 @@ public class StuInfoAdapter extends SBaseAdapter<Inform_User> {
             compo.timeTxt = (TextView) convertView.findViewById(R.id.tv_class_inform_time);
             compo.informTxt = (TextView) convertView.findViewById(R.id.txt_commitstu_sno);
             compo.readTxt= (TextView) convertView.findViewById(R.id.tv_if_read);
+            compo.Layout_ifRead= (LinearLayout) convertView.findViewById(R.id.Layout_ifRead);
 
             if(itemList.get(position).getIf_read().equals("否")){
                 BadgeView badgeView = new BadgeView(context);
                 //btn是控件
-                badgeView.setTargetView(compo.readTxt);
+                badgeView.setTargetView(compo.Layout_ifRead);
                 //设置相对位置
-                badgeView.setBadgeMargin(15, 5, 0, 0);
+                badgeView.setBadgeMargin(0, 40, 0, 0);
                 //设置显示未读消息条数
                 badgeView.setText("2");
                 badgeView.setTag("badgeView1");

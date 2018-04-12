@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
     //标题栏班课名
     private TextView titleBarClassNameTxt;
     ListView listview;
+
     TeaClassMainActivity parentActivity;
     //刷新标志
     public static boolean refreshFlag;
@@ -39,9 +41,11 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         currentPage = inflater.inflate(R.layout.class_tab04_admin, container, false);
         parentActivity = (TeaClassMainActivity) getActivity();
+
         titleBarClassNameTxt = (TextView) currentPage.findViewById(R.id.txt_titlebar_classname);
         titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
         listview = (ListView) currentPage.findViewById(R.id.class_inform_listView);
+        listview.addFooterView(new ViewStub(getContext()));
         getInform();
         refreshFlag = false;
         listview.setOnItemClickListener(this);

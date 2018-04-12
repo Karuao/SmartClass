@@ -3,8 +3,16 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="3dp">
 
+
+    <LinearLayout
+        android:layout_height="60dp"
+        android:layout_width="300dp"
+        android:orientation="vertical"
+        android:id="@+id/Layout_ifRead"
+        >
     <TextView
         android:id="@+id/txt_commitstu_sno"
         android:layout_width="wrap_content"
@@ -16,18 +24,27 @@
         android:textColor="#444"
         android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/tv_class_inform_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txt_commitstu_sno"
-        android:layout_alignStart="@+id/txt_commitstu_sno"
-        android:layout_below="@+id/txt_commitstu_sno"
-        android:text="发布时间"
-        android:textColor="#898989"
-        android:textSize="12sp" />
-
-
+        <TextView
+            android:id="@+id/tv_inform_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txt_commitstu_sno"
+            android:layout_alignLeft="@+id/tv_class_inform_time"
+            android:layout_alignStart="@+id/tv_class_inform_time"
+            android:layout_marginLeft="80dp"
+            android:text="TextView"
+            android:visibility="invisible" />
+        <TextView
+            android:id="@+id/tv_class_inform_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_alignLeft="@+id/txt_commitstu_sno"
+            android:layout_alignStart="@+id/txt_commitstu_sno"
+            android:layout_below="@+id/txt_commitstu_sno"
+            android:text="发布时间"
+            android:textColor="#898989"
+            android:textSize="12sp" />
     <TextView
         android:id="@+id/tv_if_read"
         android:layout_width="wrap_content"
@@ -42,30 +59,10 @@
 
 
 
-    <TextView
-        android:id="@+id/tv_inform_user_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txt_commitstu_sno"
-        android:layout_alignLeft="@+id/tv_class_inform_time"
-        android:layout_alignStart="@+id/tv_class_inform_time"
-        android:layout_marginLeft="64dp"
-        android:layout_marginStart="64dp"
-        android:text="TextView"
-        android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tv_class_inform_time"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:width="500dp"
-        android:height="1dp"
-        android:background="@color/hint"
-        android:text="TextView" />
 
+
+</LinearLayout>
 
 
 </RelativeLayout>

@@ -46,7 +46,8 @@ public class TeaInfoAdapter extends SBaseAdapter<Inform> {
         } else {
             compo = (Compo) convertView.getTag();
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         compo.idTxt.setText(Integer.toString(itemList.get(position).getInform_id()));
         compo.timeTxt.setText(sdf.format(itemList.get(position).getCreate_date_time()));
         compo.numberTxt.setText(Integer.toString(itemList.get(position).getRead_num()));
