@@ -62,7 +62,7 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
     }
 
     public void getMaterial() {
-        parentActivity.materialAppAction.getTeaMaterial(parentActivity.getClassId(), new ActionCallbackListener<List<Material>>() {
+        parentActivity.materialAppAction.getTeaMaterial(parentActivity.getClassId(), this, new ActionCallbackListener<List<Material>>() {
 
             @Override
             public void onSuccess(List<Material> data, String message) {

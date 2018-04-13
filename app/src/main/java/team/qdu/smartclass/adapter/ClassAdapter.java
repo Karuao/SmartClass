@@ -68,13 +68,15 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
         compo.titleTxt.setText(itemList.get(position).getMy_class().getCourse());
         compo.classNameTxt.setText(itemList.get(position).getMy_class().getName());
         compo.teacherTxt.setText(itemList.get(position).getUser().getName());
+        //设置默认值，防止当班课未设置头像，调用convertView显示其它班课的头像
+        compo.classImg.setImageResource(R.mipmap.ic_classavatar_def);
         final Compo finalCompo = compo;
         if (!TextUtils.isEmpty(itemList.get(position).getMy_class().getAvatar())) {
             //从服务器获取图片绑定到班课封面上
             ((SBaseActivity) context).fileAppAction.cacheImg(itemList.get(position).getMy_class().getAvatar(), context, new ActionCallbackListener<File>() {
                 @Override
                 public void onSuccess(File data, String message) {
-                    Glide.with(context).load(data.getPath()).into(finalCompo.classImg);
+                        Glide.with(context).load(data.getPath()).into(finalCompo.classImg);
                     //取消已结束班课
                     //已结束班课班课封面在图片之上加一层灰色图层
 //                if ("已结束".equals(itemList.get(position).getIf_allow_to_join())) {
@@ -98,7 +100,7 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
             compo.badgeView.setMaxHeight(40);
             compo.badgeView.setMaxWidth(40);
             compo.badgeView.setBadgeMargin(0, 0, 5, 0);
-            compo.badgeView.setTextColor(Color.parseColor("#CCFF0000"));
+            compo.badgeView.setTextColor(Color.parseColor("#d3321b"));
             compo.badgeView.setText("1");
             compo.badgeView.setTargetView(compo.teacherTxt);
             compo.badgeView.setTag("badgeView");

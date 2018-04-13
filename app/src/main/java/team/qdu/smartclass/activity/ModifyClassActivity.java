@@ -88,7 +88,7 @@ public class ModifyClassActivity extends SBaseActivity{
                 examEdt.setText(data.getExam_shedule());
                 if(data.getAvatar()!=null) {
                     //从服务器获取图片
-                    ModifyClassActivity.this.fileAppAction.cacheImg(data.getAvatar(), context, new ActionCallbackListener<File>() {
+                    fileAppAction.cacheImg(data.getAvatar(), ModifyClassActivity.this, new ActionCallbackListener<File>() {
                         @Override
                         public void onSuccess(File data, String message) {
                             Glide.with(context).load(data.getPath()).into(AvatarImg);

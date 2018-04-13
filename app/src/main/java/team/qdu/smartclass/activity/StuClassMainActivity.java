@@ -91,7 +91,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
             materailBadgeView = new BadgeView(context);
             materailBadgeView.setMaxHeight(40);
             materailBadgeView.setMaxWidth(40);
-            materailBadgeView.setTextColor(Color.parseColor("#CCFF0000"));
+            materailBadgeView.setTextColor(Color.parseColor("#d3321b"));
             materailBadgeView.setBadgeMargin(0, 0, 24, 0);
             materailBadgeView.setText("1");
             materailBadgeView.setTargetView(tabResource);
@@ -100,7 +100,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
             homeworkBadgeView = new BadgeView(context);
             homeworkBadgeView.setMaxHeight(40);
             homeworkBadgeView.setMaxWidth(40);
-            homeworkBadgeView.setTextColor(Color.parseColor("#CCFF0000"));
+            homeworkBadgeView.setTextColor(Color.parseColor("#d3321b"));
             homeworkBadgeView.setBadgeMargin(0, 0, 24, 0);
             homeworkBadgeView.setText("1");
             homeworkBadgeView.setTargetView(tabHomework);

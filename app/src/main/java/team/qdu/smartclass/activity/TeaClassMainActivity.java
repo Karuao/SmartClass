@@ -55,8 +55,8 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     public static final int PAGE_FIVE = 4;
 
     //设置考试安排和学习目标是否单行显示
-    public boolean singleLine1=true;
-    public boolean singleLine2=true;
+    public boolean singleLine1 = true;
+    public boolean singleLine2 = true;
 
     TextView allow;
     TextView classDetail;
@@ -118,9 +118,9 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         hint2 = (View) findViewById(R.id.hint2);
     }
 
-    public void initView3(){
-        classDetail=(TextView)findViewById(R.id.tv_class_goal_details_admin);
-        classExam=(TextView)findViewById(R.id.tv_class_exam_details_admin);
+    public void initView3() {
+        classDetail = (TextView) findViewById(R.id.tv_class_goal_details_admin);
+        classExam = (TextView) findViewById(R.id.tv_class_exam_details_admin);
     }
 
     //切换图片颜色
@@ -133,13 +133,13 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     }
 
     public void toSignInforTeacher(View view) {
-        LoadingDialogUtil.createLoadingDialog(this,"加载中...");
+        LoadingDialogUtil.createLoadingDialog(this, "加载中...");
         this.memberAppAction.getAttendanceInfo(getClassId(), new ActionCallbackListener<List<Attendance>>() {
             @Override
             public void onSuccess(List<Attendance> data, String message) {
-                if(data.size()==0){
+                if (data.size() == 0) {
                     startActivity(new Intent(TeaClassMainActivity.this, TeaMemberSigninActivity.class));
-                }else {
+                } else {
                     if (data.get(0).getIf_open().equals("签到中")) {
                         Intent intent = new Intent(TeaClassMainActivity.this, TeaMemberSigniningActivity.class);
                         intent.putExtra("attendanceId", data.get(0).getAttendance_id().toString());
@@ -226,32 +226,32 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
     public void onPageScrollStateChanged(int i) {
     }
 
-    public void deleteMaterial(final View view){
+    public void deleteMaterial(final View view) {
 
         new AlertDialog.Builder(TeaClassMainActivity.this)
                 .setTitle("提示")
                 .setMessage("确定要删除此资源？")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String materialid = ((TextView) ((View) view.getParent()).findViewById(R.id.tv_materialid)).getText().toString();
+                        TeaClassMainActivity.this.materialAppAction.deleteMaterial(materialid, TeaClassMainActivity.this, new ActionCallbackListener<Void>() {
+
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String materialid= ((TextView)((View) view.getParent()).findViewById(R.id.tv_materialid)).getText().toString();
-                                TeaClassMainActivity.this.materialAppAction.deleteMaterial(materialid, new ActionCallbackListener<Void>() {
-
-                                    @Override
-                                    public void onSuccess(Void data, String message) {
-                                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                        TeaClassMaterialFragment.refreshFlag = true;
-                                        teaClassFragmentPagerAdapter.getTeaClassMaterialFragment().getMaterial();
+                            public void onSuccess(Void data, String message) {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                TeaClassMaterialFragment.refreshFlag = true;
+                                teaClassFragmentPagerAdapter.getTeaClassMaterialFragment().getMaterial();
 
 
-                                    }
-
-                                    @Override
-                                    public void onFailure(String errorEvent, String message) {
-                                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                    }
-                                });
                             }
+
+                            @Override
+                            public void onFailure(String errorEvent, String message) {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 })
                 .setNegativeButton("取消", null)
                 .show();
@@ -315,7 +315,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        LoadingDialogUtil.createLoadingDialog(TeaClassMainActivity.this,"加载中...");
+                        LoadingDialogUtil.createLoadingDialog(TeaClassMainActivity.this, "加载中...");
                         TeaClassMainActivity.this.classAppAction.deleteClass(getClassId(), TeaClassMainActivity.this, new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
@@ -426,23 +426,23 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         });
     }
 
-    public void seeMoreDetail(View view){
+    public void seeMoreDetail(View view) {
         initView3();
-        if(singleLine1==true){
+        if (singleLine1 == true) {
             classDetail.setSingleLine(false);
             singleLine1 = false;
-        }else {
+        } else {
             classDetail.setSingleLine(true);
             singleLine1 = true;
         }
     }
 
-    public void seeMoreExam(View view){
+    public void seeMoreExam(View view) {
         initView3();
-        if(singleLine2==true){
+        if (singleLine2 == true) {
             classExam.setSingleLine(false);
             singleLine2 = false;
-        }else {
+        } else {
             classExam.setSingleLine(true);
             singleLine2 = true;
         }

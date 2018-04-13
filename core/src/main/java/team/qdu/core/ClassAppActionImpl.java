@@ -1,7 +1,6 @@
 package team.qdu.core;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
@@ -83,32 +82,32 @@ public class ClassAppActionImpl implements ClassAppAction {
         }.execute();
     }
 
-    @Override
-    public void getBitmap(final String urlTail, final Lifeful lifeful, final ActionCallbackListener<Bitmap> listener) {
-        new AsyncTask<Void, Void, Bitmap>() {
-
-            @Override
-            protected Bitmap doInBackground(Void... params) {
-                if (!lifeful.isAlive()) {
-                    cancel(true);
-                    return null;
-                }
-                return classApi.getBitmap(urlTail);
-            }
-
-            @Override
-            protected void onPostExecute(Bitmap bitmap) {
-                if (!lifeful.isAlive()) {
-                    return;
-                }
-                if (bitmap != null) {
-                    listener.onSuccess(bitmap, "图片获取成功");
-                } else {
-                    listener.onFailure(null, "图片获取失败");
-                }
-            }
-        }.execute();
-    }
+//    @Override
+//    public void getBitmap(final String urlTail, final Lifeful lifeful, final ActionCallbackListener<Bitmap> listener) {
+//        new AsyncTask<Void, Void, Bitmap>() {
+//
+//            @Override
+//            protected Bitmap doInBackground(Void... params) {
+//                if (!lifeful.isAlive()) {
+//                    cancel(true);
+//                    return null;
+//                }
+//                return classApi.getBitmap(urlTail);
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Bitmap bitmap) {
+//                if (!lifeful.isAlive()) {
+//                    return;
+//                }
+//                if (bitmap != null) {
+//                    listener.onSuccess(bitmap, "图片获取成功");
+//                } else {
+//                    listener.onFailure(null, "图片获取失败");
+//                }
+//            }
+//        }.execute();
+//    }
 
     @Override
     public void notAllowToJoin(final String classId, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {

@@ -26,7 +26,7 @@ import team.qdu.smartclass.util.OpenFileUtil;
  * Created by rjmgc on 2018/1/17.
  */
 
-public class StuClassMaterialFragment extends SBaseFragment implements AdapterView.OnItemClickListener{
+public class StuClassMaterialFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
     ListView listview;
     StuClassMainActivity parentActivity;
     //刷新标志
@@ -51,19 +51,20 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
     public void onResume() {
         super.onResume();
         if (refreshFlag) {
-                getMaterial();
+            getMaterial();
             refreshFlag = false;
         }
     }
 
     public void initView() {
         titleBarClassNameTxt = (TextView) currentPage.findViewById(R.id.txt_titlebar_classname);
-        titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
+        titleBarClassNameTxt.setText(((SBaseActivity) getActivity()).getCourse());
     }
+
     private void getMaterial() {
         String classid = getClassId();
-        String userid=  getUserId();
-        parentActivity.materialAppAction.getStuMaterial(classid,userid,new ActionCallbackListener<List<Material_User>>() {
+        String userid = getUserId();
+        parentActivity.materialAppAction.getStuMaterial(classid, userid, this, new ActionCallbackListener<List<Material_User>>() {
 
             @Override
             public void onSuccess(List<Material_User> data, String message) {
@@ -81,50 +82,50 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
     public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
         final String name = ((TextView) view.findViewById(R.id.tv_class_filename)).getText().toString();
         final String url = ((TextView) view.findViewById(R.id.tv_materialurl)).getText().toString();
-        final String material_user_id=((TextView) view.findViewById(R.id.tv_material_user_id)).getText().toString();
+        final String material_user_id = ((TextView) view.findViewById(R.id.tv_material_user_id)).getText().toString();
         final String urltail = url;
-        final String classid=getClassId();
-        final String userid=getUserId();
+        final String classid = getClassId();
+        final String userid = getUserId();
 
         if (CheckIfFileExist(url) == false) {
-        new AlertDialog.Builder(getContext())
-                .setTitle("提示")
-                .setMessage("确定要下载此资源？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        final String url = ((TextView) view.findViewById(R.id.tv_materialurl)).getText().toString();
+            new AlertDialog.Builder(getContext())
+                    .setTitle("提示")
+                    .setMessage("确定要下载此资源？")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            final String url = ((TextView) view.findViewById(R.id.tv_materialurl)).getText().toString();
 
-                        String urltail = url;
+                            String urltail = url;
 
-        parentActivity.fileAppAction.cacheFile(urltail, getActivity(), new ActionCallbackListener<File>() {
-            @Override
-            public void onSuccess(File data, String message) {
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                DownloadMaterial(classid,userid,name,material_user_id);
-                OpenFileUtil openFileUtil=new OpenFileUtil();
-                openFileUtil.openFileByPath(getContext(),url);
+                            parentActivity.fileAppAction.cacheFile(urltail, getActivity(), new ActionCallbackListener<File>() {
+                                @Override
+                                public void onSuccess(File data, String message) {
+                                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                                    DownloadMaterial(classid, userid, name, material_user_id);
+                                    OpenFileUtil openFileUtil = new OpenFileUtil();
+                                    openFileUtil.openFileByPath(getContext(), url);
 
 
-            }
+                                }
 
-            @Override
-            public void onFailure(String errorEvent, String message) {
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-                })
-                .setNegativeButton("取消", null)
-                .show();
-    } else {
+                                @Override
+                                public void onFailure(String errorEvent, String message) {
+                                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    })
+                    .setNegativeButton("取消", null)
+                    .show();
+        } else {
             OpenFileUtil openFileUtil = new OpenFileUtil();
             openFileUtil.openFileByPath(getContext(), url);
         }
     }
 
-    private void DownloadMaterial(String classid,String userid,String name,String material_user_id) {
-        parentActivity.materialAppAction.downloadMaterial(classid,userid,name,material_user_id, new ActionCallbackListener<Void>() {
+    private void DownloadMaterial(String classid, String userid, String name, String material_user_id) {
+        parentActivity.materialAppAction.downloadMaterial(classid, userid, name, material_user_id, this, new ActionCallbackListener<Void>() {
 
             @Override
             public void onSuccess(Void data, String message) {
@@ -137,7 +138,8 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
             }
         });
     }
-    public boolean CheckIfFileExist(final String urlTail){
+
+    public boolean CheckIfFileExist(final String urlTail) {
         File img = new File(getActivity().getExternalFilesDir(null) + File.separator + urlTail);
         if (img.exists()) {
             return true;

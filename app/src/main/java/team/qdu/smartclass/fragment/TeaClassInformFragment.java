@@ -65,7 +65,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
 
     private void getInform() {
         String classid = getClassId();
-        parentActivity.informAppAction.getInform(classid, new ActionCallbackListener<List<Inform>>() {
+        parentActivity.informAppAction.getInform(classid, this, new ActionCallbackListener<List<Inform>>() {
 
             @Override
             public void onSuccess(List<Inform> data, String message) {
@@ -98,7 +98,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
     }
 
     private void getUnreadNum(String informid)  {
-        parentActivity.informAppAction.getUnreadNum(informid, new ActionCallbackListener<Void>() {
+        parentActivity.informAppAction.getUnreadNum(informid, this, new ActionCallbackListener<Void>() {
 
             @Override
             public void onSuccess(Void data, String message) {

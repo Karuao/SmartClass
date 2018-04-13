@@ -2,7 +2,6 @@ package team.qdu.smartclass.adapter;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
-import team.qdu.core.Lifeful;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.SBaseActivity;
@@ -63,10 +64,10 @@ public class HomeworkNotEvaluateAdapter extends SBaseAdapter<HomeworkAnswerWithB
         //从服务器获取图片绑定到班课封面上
         final Compo finalCompo = compo;
         if (!TextUtils.isEmpty(itemList.get(position).getUser().getAvatar())) {
-            ((SBaseActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), (Lifeful) context, new ActionCallbackListener<Bitmap>() {
+            ((SBaseActivity) context).fileAppAction.cacheImg(itemList.get(position).getUser().getAvatar(), context, new ActionCallbackListener<File>() {
                 @Override
-                public void onSuccess(Bitmap data, String message) {
-                    finalCompo.notEvaluateStuAvatarImg.setImageBitmap(data);
+                public void onSuccess(File data, String message) {
+                    Glide.with(context).load(data.getPath()).into(finalCompo.notEvaluateStuAvatarImg);
                 }
 
                 @Override

@@ -42,7 +42,7 @@ public class ShowMemberDetailActivity extends SBaseActivity {
         memName.setText(memberName);
         memSno.setText(memberSno);
         memExp.setText(memberExp);
-        this.fileAppAction.cacheImg(memberAvatar, context, new ActionCallbackListener<File>() {
+        this.fileAppAction.cacheImg(memberAvatar, this, new ActionCallbackListener<File>() {
             @Override
             public void onSuccess(File data, String message) {
                 Glide.with(context).load(data.getPath()).into(memImg);

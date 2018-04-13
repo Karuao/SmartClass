@@ -27,7 +27,7 @@ public class InformUnReadActivity extends SBaseActivity {
 
     private void getUnReadPeople()   {
         String informid = getIntent().getStringExtra("informid");
-        informAppAction.getUnReadPeople(informid, new ActionCallbackListener<List<User>>() {
+        informAppAction.getUnReadPeople(informid, this, new ActionCallbackListener<List<User>>() {
 
             @Override
             public void onSuccess(List<User> data, String message) {

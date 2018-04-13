@@ -1,12 +1,15 @@
 package team.qdu.smartclass.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
+import java.io.File;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
@@ -41,10 +44,10 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
         classnameTxt.setText(data.getName());
         courseTxt.setText(data.getCourse());
         teacherTxt.setText("老师：" + data.getTeacher());
-        classAppAction.getBitmap(data.getAvatar(), this, new ActionCallbackListener<Bitmap>() {
+        fileAppAction.cacheImg(data.getAvatar(), this, new ActionCallbackListener<File>() {
             @Override
-            public void onSuccess(Bitmap data, String message) {
-                avatarImg.setImageBitmap(data);
+            public void onSuccess(File data, String message) {
+                Glide.with(context).load(data.getPath()).into(avatarImg);
             }
 
             @Override

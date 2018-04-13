@@ -99,7 +99,7 @@ public class ChangeInfoActivity extends SBaseActivity {
                 modifyUserNumber.setText(user.getSno());
                 //从服务器获取图片
                 if(user.getAvatar()!=null) {
-                    ChangeInfoActivity.this.fileAppAction.cacheImg(user.getAvatar(), context, new ActionCallbackListener<File>() {
+                    ChangeInfoActivity.this.fileAppAction.cacheImg(user.getAvatar(), ChangeInfoActivity.this, new ActionCallbackListener<File>() {
                         @Override
                         public void onSuccess(File data, String message) {
                             Glide.with(context).load(data.getPath()).into(AvatarImg);

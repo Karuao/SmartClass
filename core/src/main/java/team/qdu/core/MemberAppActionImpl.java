@@ -49,25 +49,25 @@ public class MemberAppActionImpl implements MemberAppAction {
         }.execute();
     }
 
-    @Override
-    public void getBitmap(final String urlTail, final ActionCallbackListener<Bitmap> listener) {
-        new AsyncTask<Void, Void, Bitmap>() {
-
-            @Override
-            protected Bitmap doInBackground(Void... params) {
-                return memberApi.getBitmap(urlTail);
-            }
-
-            @Override
-            protected void onPostExecute(Bitmap bitmap) {
-                if (bitmap != null) {
-                    listener.onSuccess(bitmap, "图片获取成功");
-                } else {
-                    listener.onFailure(null, "图片获取失败");
-                }
-            }
-        }.execute();
-    }
+//    @Override
+//    public void getBitmap(final String urlTail, final ActionCallbackListener<Bitmap> listener) {
+//        new AsyncTask<Void, Void, Bitmap>() {
+//
+//            @Override
+//            protected Bitmap doInBackground(Void... params) {
+//                return memberApi.getBitmap(urlTail);
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Bitmap bitmap) {
+//                if (bitmap != null) {
+//                    listener.onSuccess(bitmap, "图片获取成功");
+//                } else {
+//                    listener.onFailure(null, "图片获取失败");
+//                }
+//            }
+//        }.execute();
+//    }
 
     //获取成员信息
     @Override

@@ -1,7 +1,5 @@
 package team.qdu.core;
 
-import android.graphics.Bitmap;
-
 import java.io.File;
 import java.util.List;
 
@@ -21,7 +19,7 @@ public interface ClassAppAction {
     public void jumpClass(String classId, String userId, Lifeful lifeful, ActionCallbackListener<ClassUser> listener);
 
     //获取图片
-    public void getBitmap(String urlTail, Lifeful lifeful, ActionCallbackListener<Bitmap> listener);
+//    public void getBitmap(String urlTail, Lifeful lifeful, ActionCallbackListener<Bitmap> listener);
 
     //不允许加入班课
     public void notAllowToJoin(String classId, Lifeful lifeful, ActionCallbackListener<Void> listener);

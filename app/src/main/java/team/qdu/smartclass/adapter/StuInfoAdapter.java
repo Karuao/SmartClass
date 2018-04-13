@@ -58,7 +58,7 @@ public class StuInfoAdapter extends SBaseAdapter<Inform_User> {
                 badgeView.setTag("badgeView1");
                 badgeView.setMaxHeight(40);
                 badgeView.setMaxWidth(40);
-                badgeView.setTextColor(Color.parseColor("#CCFF0000"));
+                badgeView.setTextColor(Color.parseColor("#d3321b"));
             }
             convertView.setTag(compo);
         } else {

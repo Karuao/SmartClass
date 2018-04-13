@@ -27,7 +27,7 @@ public class InformReadActivity extends SBaseActivity {
 
     private void getReadPeople()  {
         String informid = getIntent().getStringExtra("informid");
-        informAppAction.getReadPeople(informid, new ActionCallbackListener<List<User>>() {
+        informAppAction.getReadPeople(informid, this, new ActionCallbackListener<List<User>>() {
 
             @Override
             public void onSuccess(List<User> data, String message) {

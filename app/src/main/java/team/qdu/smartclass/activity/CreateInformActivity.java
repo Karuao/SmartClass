@@ -35,7 +35,7 @@ public class CreateInformActivity extends SBaseActivity {
         String classid = getClassId();
         String detail = detailEdt.getText().toString();
 
-        this.informAppAction.createInform(classid, detail, new ActionCallbackListener<Void>() {
+        this.informAppAction.createInform(classid, detail, this, new ActionCallbackListener<Void>() {
 
             @Override
             public void onSuccess(Void data, String message) {

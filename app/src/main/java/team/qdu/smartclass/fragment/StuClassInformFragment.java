@@ -64,7 +64,7 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
         String classid = getClassId();
         String userid = getUserId();
 
-        parentActivity.informAppAction.getUserInform(classid, userid, new ActionCallbackListener<List<Inform_User>>() {
+        parentActivity.informAppAction.getUserInform(classid, userid, this, new ActionCallbackListener<List<Inform_User>>() {
 
             @Override
             public void onSuccess(List<Inform_User> data, String message) {
@@ -93,7 +93,7 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
         final String inform_user_id = ((TextView) view.findViewById(R.id.tv_inform_user_id)).getText().toString();
         final String classid=getClassId();
         final String userid=getUserId();
-        parentActivity.informAppAction.ClickInform(inform_user_id,classid,userid, new ActionCallbackListener<Void>() {
+        parentActivity.informAppAction.ClickInform(inform_user_id,classid,userid, this, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 System.out.println(message);

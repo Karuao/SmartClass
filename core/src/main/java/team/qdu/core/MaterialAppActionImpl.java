@@ -25,16 +25,23 @@ public class MaterialAppActionImpl implements MaterialAppAction {
     }
 
     @Override
-    public void getTeaMaterial(final String classid, final ActionCallbackListener<List<Material>> listener) {
+    public void getTeaMaterial(final String classid, final Lifeful lifeful, final ActionCallbackListener<List<Material>> listener) {
         new AsyncTask<Void, Void, ApiResponse<List<Material>>>() {
 
             @Override
             protected ApiResponse<List<Material>> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return materialApi.getTeaMaterial(classid);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<List<Material>> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {
@@ -43,17 +50,25 @@ public class MaterialAppActionImpl implements MaterialAppAction {
             }
         }.execute();
     }
+
     @Override
-    public void getStuMaterial(final String classid,final String userid,  final ActionCallbackListener<List<Material_User>> listener) {
+    public void getStuMaterial(final String classid, final String userid, final Lifeful lifeful, final ActionCallbackListener<List<Material_User>> listener) {
         new AsyncTask<Void, Void, ApiResponse<List<Material_User>>>() {
 
             @Override
             protected ApiResponse<List<Material_User>> doInBackground(Void... params) {
-                return materialApi.getStuMaterial(classid,userid);
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
+                return materialApi.getStuMaterial(classid, userid);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<List<Material_User>> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {
@@ -62,17 +77,25 @@ public class MaterialAppActionImpl implements MaterialAppAction {
             }
         }.execute();
     }
+
     @Override
-    public void deleteMaterial(final String materialid, final ActionCallbackListener<Void> listener) {
+    public void deleteMaterial(final String materialid, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return materialApi.deleteMaterial(materialid);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {
@@ -84,16 +107,23 @@ public class MaterialAppActionImpl implements MaterialAppAction {
     }
 
     @Override
-    public void downloadMaterial(final String classid,final String userid,final String name, final String material_user_id, final ActionCallbackListener<Void> listener) {
+    public void downloadMaterial(final String classid, final String userid, final String name, final String material_user_id, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
-                return materialApi.downloadMaterial(classid,userid,name,material_user_id);
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
+                return materialApi.downloadMaterial(classid, userid, name, material_user_id);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {

@@ -10,9 +10,12 @@ import team.qdu.model.Material_User;
  */
 
 public interface MaterialAppAction {
-    public void getTeaMaterial (String classid,ActionCallbackListener<List<Material>> listener);
-    public void getStuMaterial (String classid,String userid,ActionCallbackListener<List<Material_User>> listener);
-    public void deleteMaterial(String materialid,ActionCallbackListener<Void> listener);
-    public void downloadMaterial(String classid,String userid,String name,String material_user_id,ActionCallbackListener<Void> listener);
+    public void getTeaMaterial(String classid, Lifeful lifeful, ActionCallbackListener<List<Material>> listener);
+
+    public void getStuMaterial(String classid, String userid, Lifeful lifeful, ActionCallbackListener<List<Material_User>> listener);
+
+    public void deleteMaterial(String materialid, Lifeful lifeful, ActionCallbackListener<Void> listener);
+
+    public void downloadMaterial(String classid, String userid, String name, String material_user_id, Lifeful lifeful, ActionCallbackListener<Void> listener);
 
 }

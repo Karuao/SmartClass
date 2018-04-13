@@ -73,7 +73,7 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
                     public void onClick(DialogInterface dialog, int which) {
                         LoadingDialogUtil.createLoadingDialog(TeaInformDetailActivity.this, "加载中...");
                         String inform_id = getIntent().getStringExtra("informid");
-                        TeaInformDetailActivity.this.informAppAction.deleteInform(inform_id, new ActionCallbackListener<Void>() {
+                        TeaInformDetailActivity.this.informAppAction.deleteInform(inform_id, TeaInformDetailActivity.this, new ActionCallbackListener<Void>() {
 
                             @Override
                             public void onSuccess(Void data, String message) {
@@ -113,7 +113,7 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
 
     private void getUnreadNum(String informid)throws URISyntaxException {
         LoadingDialogUtil.createLoadingDialog(this, "加载中...");
-        TeaInformDetailActivity.this.informAppAction.getUnreadNum(informid, new ActionCallbackListener<Void>() {
+        TeaInformDetailActivity.this.informAppAction.getUnreadNum(informid, this, new ActionCallbackListener<Void>() {
 
             @Override
             public void onSuccess(Void data, String message) {
