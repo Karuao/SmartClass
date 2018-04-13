@@ -84,7 +84,6 @@
         <activity android:name=".activity.StuShowHomeworkActivity"></activity>
         <activity android:name=".activity.TeaShowFinishedHomeworkListActivity"></activity>
         <activity android:name=".activity.TeaShowFinishedHomeworkActivity"></activity>
-        <activity android:name=".activity.CropActivity2"></activity>
         <activity android:name=".activity.ShowMemberDetailActivity"></activity>
         <activity android:name=".activity.LoadingActivity"></activity>
 
