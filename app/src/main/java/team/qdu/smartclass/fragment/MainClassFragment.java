@@ -86,7 +86,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
     //获取登录用户加入的班课列表
     private void getJoinedClasses() {
-        parentActivity.classAppAction.getJoinedClasses(getUserId(), new ActionCallbackListener<List<ClassUser>>() {
+        parentActivity.classAppAction.getJoinedClasses(getUserId(), this, new ActionCallbackListener<List<ClassUser>>() {
             @Override
             public void onSuccess(List<ClassUser> data, String message) {
                 //取消已结束班课

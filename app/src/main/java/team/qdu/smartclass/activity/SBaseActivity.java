@@ -4,6 +4,7 @@ package team.qdu.smartclass.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,9 +14,10 @@ import com.lzy.imagepicker.ImagePicker;
 import java.util.List;
 
 import team.qdu.core.ClassAppAction;
-import team.qdu.core.HomeworkAppAction;
 import team.qdu.core.FileAppAction;
+import team.qdu.core.HomeworkAppAction;
 import team.qdu.core.InformAppAction;
+import team.qdu.core.Lifeful;
 import team.qdu.core.MaterialAppAction;
 import team.qdu.core.MemberAppAction;
 import team.qdu.core.UserAppAction;
@@ -29,7 +31,7 @@ import team.qdu.smartclass.view.SelectDialog;
  * Created by Rock on 2017/4/23.
  */
 
-public abstract class SBaseActivity extends AppCompatActivity {
+public abstract class SBaseActivity extends AppCompatActivity implements Lifeful {
 
     //上下文实例
     public Context context;
@@ -157,5 +159,19 @@ public abstract class SBaseActivity extends AppCompatActivity {
 
     public void toBack(View view) {
         finish();
+    }
+
+    @Override
+    public boolean isAlive() {
+        return activityIsAlive();
+    }
+    public boolean activityIsAlive() {
+        Activity currentActivity = this;
+        if (currentActivity == null) return false;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return !(currentActivity.isDestroyed() || currentActivity.isFinishing());
+        } else {
+            return !currentActivity.isFinishing();
+        }
     }
 }

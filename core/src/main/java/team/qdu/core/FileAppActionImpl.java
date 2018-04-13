@@ -37,11 +37,18 @@ public class FileAppActionImpl implements FileAppAction {
 
             @Override
             protected File doInBackground(Void... params) {
+                if (!((Lifeful) context).isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return fileApi.cacheFile(urlTail, context.getExternalCacheDir() + File.separator + urlTail);
             }
 
             @Override
             protected void onPostExecute(File img) {
+                if (!((Lifeful) context).isAlive()) {
+                    return;
+                }
                 if (img != null) {
                     listener.onSuccess(img, "图片缓存成功");
                 } else {
@@ -57,11 +64,18 @@ public class FileAppActionImpl implements FileAppAction {
 
             @Override
             protected File doInBackground(Void... params) {
+                if (!((Lifeful) context).isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return fileApi.cacheFile(urlTail, context.getExternalFilesDir(null) + File.separator + urlTail);
             }
 
             @Override
             protected void onPostExecute(File img) {
+                if (!((Lifeful) context).isAlive()) {
+                    return;
+                }
                 if (img != null) {
                     listener.onSuccess(img, "文件下载成功");
                 } else {

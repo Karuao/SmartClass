@@ -3,13 +3,16 @@ package team.qdu.smartclass.fragment;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.v4.app.Fragment;
+
+import team.qdu.core.Lifeful;
 
 /**
  * Created by 11602 on 2017/10/19.
  */
 
-public abstract class SBaseFragment extends Fragment {
+public abstract class SBaseFragment extends Fragment implements Lifeful {
 
     //从SharedPreferences获取userId
     public String getUserId() {
@@ -69,5 +72,20 @@ public abstract class SBaseFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("classUserId", classUserId);
         editor.commit();
+    }
+
+    @Override
+    public boolean isAlive() {
+        return activityIsAlive();
+    }
+
+    public boolean activityIsAlive() {
+        Activity currentActivity = getActivity();
+        if (currentActivity == null) return false;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return !(currentActivity.isDestroyed() || currentActivity.isFinishing());
+        } else {
+            return !currentActivity.isFinishing();
+        }
     }
 }

@@ -30,21 +30,28 @@ public class ClassAppActionImpl implements ClassAppAction {
 
     //获取登录用户加入的班课列表
     @Override
-    public void getJoinedClasses(final String userId, final ActionCallbackListener<List<ClassUser>> listener) {
+    public void getJoinedClasses(final String userId, final Lifeful lifeful, final ActionCallbackListener<List<ClassUser>> listener) {
         new AsyncTask<Void, Void, ApiResponse<List<ClassUser>>>() {
 
             @Override
             protected ApiResponse<List<ClassUser>> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.getJoinedClasses(userId);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<List<ClassUser>> response) {
-                    if (response.isSuccess()) {
-                        listener.onSuccess(response.getObjList(), response.getMsg());
-                    } else {
-                        listener.onFailure(response.getEvent(), response.getMsg());
-                    }
+                if (!lifeful.isAlive()) {
+                    return;
+                }
+                if (response.isSuccess()) {
+                    listener.onSuccess(response.getObjList(), response.getMsg());
+                } else {
+                    listener.onFailure(response.getEvent(), response.getMsg());
+                }
             }
         }.execute();
     }
@@ -90,7 +97,7 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void notAllowToJoin(final String classId,final ActionCallbackListener<Void> listener){
+    public void notAllowToJoin(final String classId, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
@@ -110,7 +117,7 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void allowToJoin(final String classId,final ActionCallbackListener<Void> listener){
+    public void allowToJoin(final String classId, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
@@ -151,7 +158,7 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void finishClass(final String classId,final ActionCallbackListener<Void> listener){
+    public void finishClass(final String classId, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
@@ -171,7 +178,7 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void deleteClass(final String classId,final ActionCallbackListener<Void> listener){
+    public void deleteClass(final String classId, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
@@ -219,7 +226,7 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void compileClass(final String classId,final File avatar,final String className,final String course,final String university,final String department,final String goal,final String exam, final ActionCallbackListener<String> listener){
+    public void compileClass(final String classId, final File avatar, final String className, final String course, final String university, final String department, final String goal, final String exam, final ActionCallbackListener<String> listener) {
         if (TextUtils.isEmpty(className)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "班级不能为空");
             return;
@@ -232,7 +239,7 @@ public class ClassAppActionImpl implements ClassAppAction {
 
             @Override
             protected ApiResponse<String> doInBackground(Void... params) {
-                return classApi.modifyClass(classId,avatar,className,course,university,department,goal,exam);
+                return classApi.modifyClass(classId, avatar, className, course, university, department, goal, exam);
             }
 
             @Override
@@ -294,7 +301,7 @@ public class ClassAppActionImpl implements ClassAppAction {
         }.execute();
     }
 
-    public void quitClass(final String classId,final String userId,final ActionCallbackListener<Void> listener){
+    public void quitClass(final String classId, final String userId, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
