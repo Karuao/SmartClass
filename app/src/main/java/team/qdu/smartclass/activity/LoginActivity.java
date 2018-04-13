@@ -49,7 +49,7 @@ public class LoginActivity extends SBaseActivity {
         LoadingDialogUtil.createLoadingDialog(this, "登录中...");
         final String account = accountEdt.getText().toString();
         String password = passwordEdt.getText().toString();
-        this.userAppAction.login(account, password, new ActionCallbackListener<String>() {
+        this.userAppAction.login(account, password,this, new ActionCallbackListener<String>() {
             @Override
             public void onSuccess(String data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

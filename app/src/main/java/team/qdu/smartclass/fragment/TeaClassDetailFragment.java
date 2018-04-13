@@ -90,7 +90,7 @@ public class TeaClassDetailFragment extends SBaseFragment {
                     classExam.setText(cls.getExam_shedule());
                 }
                 String userId=cls.getUser_id().toString();
-                parentActivity.userAppAction.getUserInforById(userId, new ActionCallbackListener<User>() {
+                parentActivity.userAppAction.getUserInforById(userId,TeaClassDetailFragment.this, new ActionCallbackListener<User>() {
                     @Override
                     public void onSuccess(User user, String message) {
                         classTea.setText(user.getName());

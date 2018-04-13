@@ -35,7 +35,7 @@ public class RetrieveOneActivity extends SBaseActivity {
 
     public void toNext_one(View view) {
         final String account = accountEdt.getText().toString();
-        this.userAppAction.checkAccount(account,new ActionCallbackListener<User>(){
+        this.userAppAction.checkAccount(account,this,new ActionCallbackListener<User>(){
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

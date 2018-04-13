@@ -67,7 +67,7 @@ public class StuClassDetailFragment extends SBaseFragment {
                     stuClassExam.setText(data.getExam_shedule());
                 }
                 final String userId = data.getUser_id().toString();
-                parentActivity.userAppAction.getUserInforById(userId, new ActionCallbackListener<User>() {
+                parentActivity.userAppAction.getUserInforById(userId, StuClassDetailFragment.this,new ActionCallbackListener<User>() {
                     @Override
                     public void onSuccess(User user, String message) {
                         stuClassTeacher.setText(user.getName());

@@ -29,7 +29,7 @@ public class UserAppActionImpl implements UserAppAction {
     }
 
     @Override
-    public void login(final String account, final String password, final ActionCallbackListener<String> listener) {
+    public void login(final String account, final String password, final Lifeful lifeful, final ActionCallbackListener<String> listener) {
         //参数检查
         if (TextUtils.isEmpty(account)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "登录名为空");
@@ -53,6 +53,10 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected ApiResponse<String> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return userApi.loginByApp(account, password);
             }
 
@@ -68,7 +72,7 @@ public class UserAppActionImpl implements UserAppAction {
     }
 
     @Override
-    public void register(final String account, final String password, final String passwordConfirm, final String question, final String answer, final boolean check, final ActionCallbackListener<Void> listener) {
+    public void register(final String account, final String password, final String passwordConfirm, final String question, final String answer, final boolean check,final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         //参数检查
         if (TextUtils.isEmpty(account)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "登录名为空");
@@ -102,6 +106,10 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return userApi.registerByApp(account, password, question, answer);
             }
 
@@ -118,11 +126,15 @@ public class UserAppActionImpl implements UserAppAction {
 
     //获取头像
     @Override
-    public void getBitmap(final String urlTail, final ActionCallbackListener<Bitmap> listener) {
+    public void getBitmap(final String urlTail, final Lifeful lifeful,final ActionCallbackListener<Bitmap> listener) {
         new AsyncTask<Void, Void, Bitmap>() {
 
             @Override
             protected Bitmap doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return userApi.getBitmap(urlTail);
             }
 
@@ -140,7 +152,7 @@ public class UserAppActionImpl implements UserAppAction {
 
     //找回密码时判断该用户是否存在
     @Override
-    public void checkAccount(final String account, final ActionCallbackListener<User> listener) {
+    public void checkAccount(final String account,final Lifeful lifeful, final ActionCallbackListener<User> listener) {
         //判断是否为空
         if (TextUtils.isEmpty(account)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "用户名为空");
@@ -151,6 +163,10 @@ public class UserAppActionImpl implements UserAppAction {
         new AsyncTask<Void, Void, ApiResponse<User>>() {
             @Override
             protected ApiResponse<User> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return userApi.searchByAccount(account);
             }
 
@@ -167,7 +183,7 @@ public class UserAppActionImpl implements UserAppAction {
 
     //判断密保问题的答案是否正确
     @Override
-    public void checkSecurityAnswer(final String inputAnswer, final String answer, final ActionCallbackListener listener) {
+    public void checkSecurityAnswer(final String inputAnswer, final String answer,final Lifeful lifeful, final ActionCallbackListener listener) {
         //判断是否为空
         if (TextUtils.isEmpty(inputAnswer)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "请输入答案");
@@ -183,7 +199,7 @@ public class UserAppActionImpl implements UserAppAction {
 
     //找回密码时修改密码
     @Override
-    public void modifyPass(final String pass, final String passConfirm, final String account, final ActionCallbackListener<Void> listener) {
+    public void modifyPass(final String pass, final String passConfirm, final String account,final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         //判断是否为空
         if (TextUtils.isEmpty(pass)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "请输入新密码");
@@ -199,6 +215,10 @@ public class UserAppActionImpl implements UserAppAction {
                 new AsyncTask<Void, Void, ApiResponse<Void>>() {
                     @Override
                     protected ApiResponse<Void> doInBackground(Void... params) {
+                        if (!lifeful.isAlive()) {
+                            cancel(true);
+                            return null;
+                        }
                         return userApi.updatePassword(account, passConfirm);
                     }
 
@@ -219,11 +239,15 @@ public class UserAppActionImpl implements UserAppAction {
 
     //获取用户信息
     @Override
-    public User getUserInforByAccount(final String account, final ActionCallbackListener<User> listener) {
+    public User getUserInforByAccount(final String account,final Lifeful lifeful, final ActionCallbackListener<User> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<User>>() {
             @Override
             protected ApiResponse<User> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return userApi.searchByAccount(account);
             }
 
@@ -241,11 +265,15 @@ public class UserAppActionImpl implements UserAppAction {
 
     //获取用户信息
     @Override
-    public User getUserInforById(final String userId, final ActionCallbackListener<User> listener) {
+    public User getUserInforById(final String userId,final Lifeful lifeful, final ActionCallbackListener<User> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<User>>() {
             @Override
             protected ApiResponse<User> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return userApi.searchById(userId);
             }
 
@@ -264,7 +292,7 @@ public class UserAppActionImpl implements UserAppAction {
     //修改个人信息
     @Override
     public void modifyUserInformation(final File avatar,final String account, final String name, final String gender, final String sno,final String university,
-                                      final String department, final String motto, final ActionCallbackListener<Void> listener){
+                                      final String department, final String motto,final Lifeful lifeful, final ActionCallbackListener<Void> listener){
 
         if(TextUtils.isEmpty(name)){
             listener.onFailure(ErrorEvent.PARAM_NULL, "请输入姓名");
@@ -280,6 +308,10 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return userApi.updateUserInformation(avatar,account,name,gender,sno,university,department,motto);
             }
 

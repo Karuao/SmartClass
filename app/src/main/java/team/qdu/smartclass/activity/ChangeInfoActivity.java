@@ -90,7 +90,7 @@ public class ChangeInfoActivity extends SBaseActivity {
         initView();
         SharedPreferences sharedPreferences=this.getSharedPreferences("user", Activity.MODE_PRIVATE);
         String account=sharedPreferences.getString("account",null);
-        this.userAppAction.getUserInforByAccount(account,new ActionCallbackListener<User>() {
+        this.userAppAction.getUserInforByAccount(account,this,new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
                 modifyUserAccount.setText(user.getAccount());
@@ -153,7 +153,7 @@ public class ChangeInfoActivity extends SBaseActivity {
         String userMotto=modifyUserMotto.getText().toString();
         LoadingDialogUtil.createLoadingDialog(this,"加载中...");
         this.userAppAction.modifyUserInformation(userAvatar,userAccount,userName,userGender,userNumber,userUniversity,userDepartment
-        ,userMotto,new ActionCallbackListener<Void>() {
+        ,userMotto,this,new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

@@ -72,7 +72,7 @@ public class MainUserFragment extends SBaseFragment {
 
     private void initView() {
         final MainActivity parentActivity= (MainActivity) getActivity();
-        parentActivity.userAppAction.getUserInforById(getUserId(),new ActionCallbackListener<User>() {
+        parentActivity.userAppAction.getUserInforById(getUserId(),this,new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
                 if(user.getAvatar()!=null) {

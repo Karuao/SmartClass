@@ -57,7 +57,7 @@ public class RegisterActivity extends SBaseActivity {
         boolean check = checkEdt.isChecked();
         String answer = ansEdt.getText().toString();
 
-        this.userAppAction.register(account, password, passwordConfirm, question, answer, check, new ActionCallbackListener<Void>() {
+        this.userAppAction.register(account, password, passwordConfirm, question, answer, check, this,new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

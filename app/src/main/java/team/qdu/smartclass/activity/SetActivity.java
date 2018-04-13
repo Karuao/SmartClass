@@ -32,7 +32,7 @@ public class SetActivity extends SBaseActivity {
         initView();
         SharedPreferences sharedPreferences=this.getSharedPreferences("user", Activity.MODE_PRIVATE);
         String account=sharedPreferences.getString("account",null);
-        this.userAppAction.getUserInforByAccount(account,new ActionCallbackListener<User>() {
+        this.userAppAction.getUserInforByAccount(account,this,new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
                 setAccount.setText(user.getAccount());

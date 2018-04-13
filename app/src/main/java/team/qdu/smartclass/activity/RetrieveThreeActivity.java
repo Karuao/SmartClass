@@ -39,7 +39,7 @@ public class RetrieveThreeActivity extends SBaseActivity {
         SharedPreferences sharedPreferences = this.getSharedPreferences("user", Activity.MODE_PRIVATE);
         String account = sharedPreferences.getString("account", null);
         //修改用户密码
-        this.userAppAction.modifyPass(pass,passConfirm,account,new ActionCallbackListener<Void>(){
+        this.userAppAction.modifyPass(pass,passConfirm,account,this,new ActionCallbackListener<Void>(){
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
