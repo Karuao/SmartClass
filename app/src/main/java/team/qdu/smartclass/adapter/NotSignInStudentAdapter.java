@@ -39,11 +39,11 @@ public class NotSignInStudentAdapter extends SBaseAdapter<Attendance_user> {
         if (convertView == null) {
             compo = new Compo();
             //获得组件，实例化组件
-            convertView = layoutInflater.inflate(R.layout.class_signin_result_listitem, null);
-            compo.stuName = (TextView) convertView.findViewById(R.id.tv_class_sign_student_name);
-            compo.stuSno = (TextView) convertView.findViewById(R.id.tv_class_sign_student_sno);
-            compo.signInState = (TextView) convertView.findViewById(R.id.tv_class_sign_state2_student) ;
-            compo.attendanceUserId = (TextView)convertView.findViewById(R.id.tv_class_sign_attendanceUserId) ;
+            convertView = layoutInflater.inflate(R.layout.class_signin_result_listitem2, null);
+            compo.stuName = (TextView) convertView.findViewById(R.id.tv_class_sign_student_name2);
+            compo.stuSno = (TextView) convertView.findViewById(R.id.tv_class_sign_student_sno2);
+            compo.signInState = (TextView) convertView.findViewById(R.id.tv_class_sign_state2_student2) ;
+            compo.attendanceUserId = (TextView)convertView.findViewById(R.id.tv_class_sign_attendanceUserId2) ;
             convertView.setTag(compo);
         } else {
             compo = (NotSignInStudentAdapter.Compo) convertView.getTag();

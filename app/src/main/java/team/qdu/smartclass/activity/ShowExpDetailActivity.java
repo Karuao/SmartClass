@@ -62,7 +62,7 @@ public class ShowExpDetailActivity extends SBaseActivity implements AdapterView.
         Intent intent = getIntent();
         String classId = intent.getStringExtra("classId");
         String userId = intent.getStringExtra("userId");
-        this.memberAppAction.getExpDetail(classId, userId, new ActionCallbackListener<List<ClassUserExp>>() {
+        this.memberAppAction.getExpDetail(classId, userId, this,new ActionCallbackListener<List<ClassUserExp>>() {
             @Override
             public void onSuccess(List<ClassUserExp> data, String message) {
                 expDetailAdapter.setItems(data);

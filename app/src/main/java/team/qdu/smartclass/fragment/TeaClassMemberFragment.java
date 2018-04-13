@@ -110,7 +110,7 @@ public class TeaClassMemberFragment extends SBaseFragment implements AdapterView
 
     //获取登录用户的班课成员列表
     private void getClassMembers() {
-        parentActivity.memberAppAction.getClassMembers(getClassId(), new ActionCallbackListener<List<ClassUser>>() {
+        parentActivity.memberAppAction.getClassMembers(getClassId(),this, new ActionCallbackListener<List<ClassUser>>() {
             @Override
             public void onSuccess(List<ClassUser> data, String message) {
                 memberCount.setText(String.valueOf(data.size()));

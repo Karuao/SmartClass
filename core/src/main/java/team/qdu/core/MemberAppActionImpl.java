@@ -30,11 +30,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //获取加入班课成员列表
     @Override
-    public void getClassMembers(final String classId, final ActionCallbackListener<List<ClassUser>> listener) {
+    public void getClassMembers(final String classId,final Lifeful lifeful,final ActionCallbackListener<List<ClassUser>> listener) {
         new AsyncTask<Void, Void, ApiResponse<List<ClassUser>>>() {
 
             @Override
             protected ApiResponse<List<ClassUser>> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.getClassMembers(classId);
             }
 
@@ -71,11 +75,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //获取成员信息
     @Override
-    public ClassUser getMemberInfo(final String classUserId, final ActionCallbackListener<ClassUser> listener) {
+    public ClassUser getMemberInfo(final String classUserId, final Lifeful lifeful,final ActionCallbackListener<ClassUser> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<ClassUser>>() {
             @Override
             protected ApiResponse<ClassUser> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.searchByClassUserId(classUserId);
             }
 
@@ -93,11 +101,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //获取签到信息
     @Override
-    public void getAttendanceInfo(final String classId, final ActionCallbackListener<List<Attendance>> listener) {
+    public void getAttendanceInfo(final String classId, final Lifeful lifeful,final ActionCallbackListener<List<Attendance>> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<List<Attendance>>>() {
             @Override
             protected ApiResponse<List<Attendance>> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.getAttendanceInfo(classId);
             }
 
@@ -114,11 +126,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //获取经验值明细
     @Override
-    public void getExpDetail(final String classId, final String userId,final ActionCallbackListener<List<ClassUserExp>> listener) {
+    public void getExpDetail(final String classId, final String userId,final Lifeful lifeful,final ActionCallbackListener<List<ClassUserExp>> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<List<ClassUserExp>>>() {
             @Override
             protected ApiResponse<List<ClassUserExp>> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.getExpDetail(classId,userId);
             }
 
@@ -135,11 +151,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //获取学生签到信息
     @Override
-    public void getAttendanceUserInfo(final String attendanceId, final ActionCallbackListener<List<Attendance_user>> listener) {
+    public void getAttendanceUserInfo(final String attendanceId,final Lifeful lifeful, final ActionCallbackListener<List<Attendance_user>> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<List<Attendance_user>>>() {
             @Override
             protected ApiResponse<List<Attendance_user>> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.getAttendanceUserInfo(attendanceId);
             }
 
@@ -156,11 +176,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //学生获取签到历史
     @Override
-    public void getStudentSignInHistory(final String userId,final String classId, final ActionCallbackListener<List<Attendance_user>> listener) {
+    public void getStudentSignInHistory(final String userId,final String classId, final Lifeful lifeful,final ActionCallbackListener<List<Attendance_user>> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<List<Attendance_user>>>() {
             @Override
             protected ApiResponse<List<Attendance_user>> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.getStudentSignInHistory(userId,classId);
             }
 
@@ -177,11 +201,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //教师获取签到历史
     @Override
-    public void getTeacherSignInHistory(final String classId, final ActionCallbackListener<List<Attendance>> listener) {
+    public void getTeacherSignInHistory(final String classId,final Lifeful lifeful, final ActionCallbackListener<List<Attendance>> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<List<Attendance>>>() {
             @Override
             protected ApiResponse<List<Attendance>> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.getTeacherSignInHistory(classId);
             }
 
@@ -198,11 +226,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //移出班课
     @Override
-    public void shiftClass(final String classUserId, final ActionCallbackListener<Void> listener) {
+    public void shiftClass(final String classUserId, final Lifeful lifeful,final ActionCallbackListener<Void> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.shiftClass(classUserId);
             }
 
@@ -219,11 +251,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //教师端设置学生为已签到
     @Override
-    public void setStudentSignIn(final String attendanceUserId,final ActionCallbackListener<Void> listener) {
+    public void setStudentSignIn(final String attendanceUserId,final Lifeful lifeful,final ActionCallbackListener<Void> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.setStudentSignIn(attendanceUserId);
             }
 
@@ -240,11 +276,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //教师端设置学生为未签到
     @Override
-    public void setStudentNotSignIn(final String attendanceUserId,final ActionCallbackListener<Void> listener) {
+    public void setStudentNotSignIn(final String attendanceUserId,final Lifeful lifeful,final ActionCallbackListener<Void> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.setStudentNotSignIn(attendanceUserId);
             }
 
@@ -261,11 +301,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //学生签到
     @Override
-    public void beginSignInForStudent(final String userId,final String attendanceId,final String classUserId, final ActionCallbackListener<Attendance_user> listener) {
+    public void beginSignInForStudent(final String userId,final String attendanceId,final String classUserId,final Lifeful lifeful, final ActionCallbackListener<Attendance_user> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<Attendance_user>>() {
             @Override
             protected ApiResponse<Attendance_user> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.beginSignInForStudent(userId,attendanceId,classUserId);
             }
 
@@ -282,11 +326,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //教师端开始签到操作
     @Override
-    public void beginSignInForTeacher(final String classId, final ActionCallbackListener<Attendance> listener) {
+    public void beginSignInForTeacher(final String classId, final Lifeful lifeful,final ActionCallbackListener<Attendance> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<Attendance>>() {
             @Override
             protected ApiResponse<Attendance> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.beginSignInForTeacher(classId);
             }
 
@@ -303,11 +351,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //教师放弃本次签到
     @Override
-    public void giveUpSignIn(final String attendanceId, final ActionCallbackListener<Void> listener) {
+    public void giveUpSignIn(final String attendanceId,final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.giveUpSignIn(attendanceId);
             }
 
@@ -324,11 +376,15 @@ public class MemberAppActionImpl implements MemberAppAction {
 
     //教师结束本次签到
     @Override
-    public void endSignIn(final String attendanceId, final ActionCallbackListener<Void> listener) {
+    public void endSignIn(final String attendanceId, final Lifeful lifeful,final ActionCallbackListener<Void> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return memberApi.endSignIn(attendanceId);
             }
 

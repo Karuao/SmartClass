@@ -59,7 +59,7 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LoadingDialogUtil.createLoadingDialog(TeaMemberSigniningActivity.this,"加载中...");
-                        TeaMemberSigniningActivity.this.memberAppAction.giveUpSignIn(attendanceId, new ActionCallbackListener<Void>() {
+                        TeaMemberSigniningActivity.this.memberAppAction.giveUpSignIn(attendanceId, TeaMemberSigniningActivity.this,new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -91,7 +91,7 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LoadingDialogUtil.createLoadingDialog(TeaMemberSigniningActivity.this,"加载中...");
-                        TeaMemberSigniningActivity.this.memberAppAction.endSignIn(attendanceId, new ActionCallbackListener<Void>() {
+                        TeaMemberSigniningActivity.this.memberAppAction.endSignIn(attendanceId,TeaMemberSigniningActivity.this, new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -116,13 +116,13 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
     }
     
     public void getSignInStudent(){
-        this.memberAppAction.getAttendanceInfo(getClassId(), new ActionCallbackListener<List<Attendance>>() {
+        this.memberAppAction.getAttendanceInfo(getClassId(), this,new ActionCallbackListener<List<Attendance>>() {
             @Override
             public void onSuccess(List<Attendance> data, String message) {
                 classTotalMember.setText(data.get(0).getStu_num().toString());
                 signInStuNum.setText(data.get(0).getAttendance_stu_count().toString());
                 final String attendanceId = data.get(0).getAttendance_id().toString();
-                TeaMemberSigniningActivity.this.memberAppAction.getAttendanceUserInfo(attendanceId, new ActionCallbackListener<List<Attendance_user>>() {
+                TeaMemberSigniningActivity.this.memberAppAction.getAttendanceUserInfo(attendanceId, TeaMemberSigniningActivity.this,new ActionCallbackListener<List<Attendance_user>>() {
                     @Override
                     public void onSuccess(final List<Attendance_user> data, String message) {
                         List<Attendance_user> list= new ArrayList<>();
@@ -140,7 +140,7 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             LoadingDialogUtil.createLoadingDialog(TeaMemberSigniningActivity.this,"加载中...");
-                                            TeaMemberSigniningActivity.this.memberAppAction.endSignIn(attendanceId, new ActionCallbackListener<Void>() {
+                                            TeaMemberSigniningActivity.this.memberAppAction.endSignIn(attendanceId, TeaMemberSigniningActivity.this,new ActionCallbackListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void data, String message) {
                                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -192,7 +192,7 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 LoadingDialogUtil.createLoadingDialog(TeaMemberSigniningActivity.this,"加载中...");
-                                TeaMemberSigniningActivity.this.memberAppAction.giveUpSignIn(attendanceId, new ActionCallbackListener<Void>() {
+                                TeaMemberSigniningActivity.this.memberAppAction.giveUpSignIn(attendanceId,TeaMemberSigniningActivity.this, new ActionCallbackListener<Void>() {
                                     @Override
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

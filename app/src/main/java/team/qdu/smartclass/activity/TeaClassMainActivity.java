@@ -134,7 +134,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
     public void toSignInforTeacher(View view) {
         LoadingDialogUtil.createLoadingDialog(this, "加载中...");
-        this.memberAppAction.getAttendanceInfo(getClassId(), new ActionCallbackListener<List<Attendance>>() {
+        this.memberAppAction.getAttendanceInfo(getClassId(), this,new ActionCallbackListener<List<Attendance>>() {
             @Override
             public void onSuccess(List<Attendance> data, String message) {
                 if (data.size() == 0) {

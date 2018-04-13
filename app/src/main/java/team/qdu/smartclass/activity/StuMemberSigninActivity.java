@@ -80,7 +80,7 @@ public class StuMemberSigninActivity extends SBaseActivity {
 
     //学生签到
     public void signInforStudent(View view){
-        this.memberAppAction.getAttendanceInfo(getClassId(), new ActionCallbackListener<List<Attendance>>() {
+        this.memberAppAction.getAttendanceInfo(getClassId(), this,new ActionCallbackListener<List<Attendance>>() {
             @Override
             public void onSuccess(List<Attendance> data, String message) {
                 if(data.size()==0){
@@ -90,7 +90,7 @@ public class StuMemberSigninActivity extends SBaseActivity {
                         Toast.makeText(context,"未开始签到或签到已结束！",Toast.LENGTH_SHORT).show();
                     } else {
                         LoadingDialogUtil.createLoadingDialog(StuMemberSigninActivity.this,"加载中...");
-                        StuMemberSigninActivity.this.memberAppAction.beginSignInForStudent(getUserId(), data.get(0).getAttendance_id().toString(), getClassUserId(),new ActionCallbackListener<Attendance_user>() {
+                        StuMemberSigninActivity.this.memberAppAction.beginSignInForStudent(getUserId(), data.get(0).getAttendance_id().toString(), getClassUserId(),StuMemberSigninActivity.this,new ActionCallbackListener<Attendance_user>() {
                             @Override
                             public void onSuccess(Attendance_user data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -118,7 +118,7 @@ public class StuMemberSigninActivity extends SBaseActivity {
 
     //获取签到历史记录
     private void getStudentSignInHistory() {
-        this.memberAppAction.getStudentSignInHistory(getUserId(),getClassId(), new ActionCallbackListener<List<Attendance_user>>() {
+        this.memberAppAction.getStudentSignInHistory(getUserId(),getClassId(), this,new ActionCallbackListener<List<Attendance_user>>() {
             @Override
             public void onSuccess(List<Attendance_user> data, String message) {
                 double attendanceNum=0.0;

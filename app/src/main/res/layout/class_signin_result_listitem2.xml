@@ -5,13 +5,13 @@
     >
 
     <TextView
-        android:id="@+id/tv_class_sign_attendanceUserId"
+        android:id="@+id/tv_class_sign_attendanceUserId2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/tv_class_sign_student_name"
+        android:id="@+id/tv_class_sign_student_name2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
@@ -23,10 +23,10 @@
 
 
     <TextView
-        android:id="@+id/tv_class_sign_student_sno"
+        android:id="@+id/tv_class_sign_student_sno2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_class_sign_student_name"
+        android:layout_below="@+id/tv_class_sign_student_name2"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:text="学号"
@@ -40,12 +40,13 @@
         android:layout_alignParentRight="true">
 
         <TextView
-            android:id="@+id/tv_class_sign_state2_student"
+            android:id="@+id/tv_class_sign_state2_student2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:text="考勤状态"
+            android:textColor="@color/text_yellow"
             android:textSize="16sp"
             android:singleLine="true"/>
 

@@ -72,7 +72,7 @@ public class ShowMemberDetailActivity extends SBaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LoadingDialogUtil.createLoadingDialog(ShowMemberDetailActivity.this,"加载中");
-                        ShowMemberDetailActivity.this.memberAppAction.shiftClass(getClassUserId(), new ActionCallbackListener<Void>() {
+                        ShowMemberDetailActivity.this.memberAppAction.shiftClass(getClassUserId(), ShowMemberDetailActivity.this,new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

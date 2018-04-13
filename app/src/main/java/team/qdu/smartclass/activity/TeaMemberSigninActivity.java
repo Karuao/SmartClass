@@ -76,7 +76,7 @@ public class TeaMemberSigninActivity extends SBaseActivity{
 
     public void signInforTeacher(View view){
         LoadingDialogUtil.createLoadingDialog(this,"加载中...");
-        this.memberAppAction.beginSignInForTeacher(getClassId(), new ActionCallbackListener<Attendance>() {
+        this.memberAppAction.beginSignInForTeacher(getClassId(), TeaMemberSigninActivity.this,new ActionCallbackListener<Attendance>() {
             @Override
             public void onSuccess(Attendance data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -96,7 +96,7 @@ public class TeaMemberSigninActivity extends SBaseActivity{
 
     //获取签到历史记录
     private void getTeacherSignInHistory() {
-        this.memberAppAction.getTeacherSignInHistory(getClassId(), new ActionCallbackListener<List<Attendance>>() {
+        this.memberAppAction.getTeacherSignInHistory(getClassId(), this,new ActionCallbackListener<List<Attendance>>() {
             @Override
             public void onSuccess(final List<Attendance> data, String message) {
                 signInHistoryForTeacherAdapter.setItems(data);

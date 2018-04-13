@@ -88,7 +88,7 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
 
     //获取登录用户加入的班课成员列表
     private void getClassMembers() {
-        parentActivity.memberAppAction.getClassMembers(getClassId(), new ActionCallbackListener<List<ClassUser>>() {
+        parentActivity.memberAppAction.getClassMembers(getClassId(), this,new ActionCallbackListener<List<ClassUser>>() {
             @Override
             public void onSuccess(List<ClassUser> data, String message) {
                 memberCount.setText(String.valueOf(data.size()));
@@ -109,7 +109,7 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
                     }
                 }
                 rank.setText(String.valueOf(myRank));
-                parentActivity.memberAppAction.getMemberInfo(getClassUserId(), new ActionCallbackListener<ClassUser>() {
+                parentActivity.memberAppAction.getMemberInfo(getClassUserId(),StuClassMemberFragment.this,new ActionCallbackListener<ClassUser>() {
                     @Override
                     public void onSuccess(ClassUser data, String message) {
                         myExp.setText(data.getExp().toString());

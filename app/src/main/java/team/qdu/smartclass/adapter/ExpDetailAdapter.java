@@ -24,6 +24,7 @@ public class ExpDetailAdapter extends SBaseAdapter<ClassUserExp>{
         public TextView expDetail;
         public TextView expTime;
         public TextView exp;
+        public TextView exp_symbol;
     }
 
     @Override
@@ -36,6 +37,7 @@ public class ExpDetailAdapter extends SBaseAdapter<ClassUserExp>{
             compo.expDetail = (TextView) convertView.findViewById(R.id.tv_class_getExp_way);
             compo.expTime = (TextView) convertView.findViewById(R.id.tv_class_getExp_time);
             compo.exp = (TextView) convertView.findViewById(R.id.tv_class_getExp_exp) ;
+            compo.exp_symbol = (TextView)convertView.findViewById(R.id.exp_symbol);
             convertView.setTag(compo);
         } else {
             compo = (ExpDetailAdapter.Compo) convertView.getTag();
@@ -46,6 +48,13 @@ public class ExpDetailAdapter extends SBaseAdapter<ClassUserExp>{
         String date = sdf.format(itemList.get(position).getCreate_date_time());
         compo.expTime.setText(date);
         compo.exp.setText(itemList.get(position).getExp().toString());
+        if(itemList.get(position).getExp()>=0){
+            compo.exp_symbol.setText("+");
+            compo.exp_symbol.setTextColor((context).getResources().getColor(R.color.classbottom));
+        }else {
+            compo.exp_symbol.setText("-");
+            compo.exp_symbol.setTextColor((context).getResources().getColor(R.color.colorRank));
+        }
         return convertView;
     }
 }
