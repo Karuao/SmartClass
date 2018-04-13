@@ -260,7 +260,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
     //结束班课按钮
     public void finishClass(final View view) {
-        this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
+        this.classAppAction.getClassInfor(getClassId(), this, new ActionCallbackListener<Class>() {
             @Override
             public void onSuccess(Class data, String message) {
                 if (data.getIf_allow_to_join().equals("已结束")) {
@@ -278,7 +278,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     String classId = getClassId();
-                                    TeaClassMainActivity.this.classAppAction.finishClass(classId, new ActionCallbackListener<Void>() {
+                                    TeaClassMainActivity.this.classAppAction.finishClass(classId, TeaClassMainActivity.this, new ActionCallbackListener<Void>() {
                                         @Override
                                         public void onSuccess(Void data, String message) {
                                             allow.setVisibility(View.GONE);
@@ -316,7 +316,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LoadingDialogUtil.createLoadingDialog(TeaClassMainActivity.this,"加载中...");
-                        TeaClassMainActivity.this.classAppAction.deleteClass(getClassId(), new ActionCallbackListener<Void>() {
+                        TeaClassMainActivity.this.classAppAction.deleteClass(getClassId(), TeaClassMainActivity.this, new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -376,7 +376,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //查询未评价人数是0，然后再结束作业，否则不能结束作业
-                            homeworkAppAction.getNotEvaluateStuNum(homeworkId, new ActionCallbackListener<Integer>() {
+                            homeworkAppAction.getNotEvaluateStuNum(homeworkId, TeaClassMainActivity.this, new ActionCallbackListener<Integer>() {
                                 @Override
                                 public void onSuccess(Integer data, String message) {
                                     if (data == 0) {
@@ -407,7 +407,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
     //改变作业状态
     private void changeHomeworkStatus(String homeworkId, final String homeworkStatus, String homeworkTitle) {
-        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle, new ActionCallbackListener<Void>() {
+        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle, this, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 teaClassFragmentPagerAdapter.getTeaClassHomeworkFragment().getTeaHomeworkFragmentPagerAdapter().

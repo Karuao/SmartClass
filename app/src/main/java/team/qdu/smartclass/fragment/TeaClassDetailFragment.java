@@ -73,7 +73,7 @@ public class TeaClassDetailFragment extends SBaseFragment {
     public void initOrRefresh(){
         final String classId=getClassId();
         final TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
-        parentActivity.classAppAction.getClassInfor(classId,new ActionCallbackListener<Class>() {
+        parentActivity.classAppAction.getClassInfor(classId,this,new ActionCallbackListener<Class>() {
             @Override
             public void onSuccess(Class cls, String message) {
                 className.setText(cls.getCourse());
@@ -111,7 +111,7 @@ public class TeaClassDetailFragment extends SBaseFragment {
                             if(!isChecked){
                                 TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
                                 LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
-                                parentActivity.classAppAction.notAllowToJoin(classId,new ActionCallbackListener<Void>() {
+                                parentActivity.classAppAction.notAllowToJoin(classId, TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
                                     @Override
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -127,7 +127,7 @@ public class TeaClassDetailFragment extends SBaseFragment {
                             }else{
                                 TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
                                 LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
-                                parentActivity.classAppAction.allowToJoin(classId,new ActionCallbackListener<Void>() {
+                                parentActivity.classAppAction.allowToJoin(classId, TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
                                     @Override
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -151,7 +151,7 @@ public class TeaClassDetailFragment extends SBaseFragment {
                             if(!isChecked){
                                 TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
                                 LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
-                                parentActivity.classAppAction.notAllowToJoin(classId,new ActionCallbackListener<Void>() {
+                                parentActivity.classAppAction.notAllowToJoin(classId, TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
                                     @Override
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -167,7 +167,7 @@ public class TeaClassDetailFragment extends SBaseFragment {
                             }else{
                                 TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
                                 LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
-                                parentActivity.classAppAction.allowToJoin(classId,new ActionCallbackListener<Void>() {
+                                parentActivity.classAppAction.allowToJoin(classId,TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
                                     @Override
                                     public void onSuccess(Void data, String message) {
                                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();

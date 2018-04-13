@@ -51,7 +51,7 @@ public class StuClassDetailFragment extends SBaseFragment {
         stuClassDetail = (TextView) view.findViewById(R.id.tv_class_goal_details);
         stuClassExam = (TextView) view.findViewById(R.id.tv_class_exam_details);
         final StuClassMainActivity parentActivity = (StuClassMainActivity) getActivity();
-        parentActivity.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
+        parentActivity.classAppAction.getClassInfor(getClassId(), this, new ActionCallbackListener<Class>() {
             @Override
             public void onSuccess(Class data, String message) {
                 stuClassName.setText(data.getCourse());

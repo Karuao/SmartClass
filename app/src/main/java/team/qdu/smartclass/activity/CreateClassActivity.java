@@ -95,7 +95,7 @@ public class CreateClassActivity extends SBaseActivity {
         String name = classnameEdt.getText().toString();
         final String course = courseEdt.getText().toString();
         String userId = getUserId();
-        classAppAction.createClass(classAvatar, name, course, userId, new ActionCallbackListener<ClassUser>() {
+        classAppAction.createClass(classAvatar, name, course, userId, this, new ActionCallbackListener<ClassUser>() {
             @Override
             public void onSuccess(ClassUser data, String message) {
                 MainClassFragment.refreshFlag = true;

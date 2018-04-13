@@ -80,7 +80,7 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
         String deadline = homeworkDeadlineTxt.getText().toString();
         String detail = homeworkDetailEdt.getText().toString();
         ImgUtil.compressPhotoes(photoList, homeworkAddPhotoAdapter, this);
-        homeworkAppAction.publishHomework(title, deadline, detail, photoList, getClassId(),
+        homeworkAppAction.publishHomework(title, deadline, detail, photoList, getClassId(), this,
                 new ActionCallbackListener<Void>() {
                     @Override
                     public void onSuccess(Void data, String message) {

@@ -33,7 +33,7 @@ public class JoinClassActivity extends SBaseActivity {
     //输入邀请码后加入班课点击事件
     public void toJoinClass(View view) {
         LoadingDialogUtil.createLoadingDialog(this, "加载中...");//加载中动画，用来防止用户重复点击
-        classAppAction.joinClass(invitecodeEdt.getText().toString(), getUserId(), new ActionCallbackListener<Class>() {
+        classAppAction.joinClass(invitecodeEdt.getText().toString(), getUserId(), this, new ActionCallbackListener<Class>() {
             @Override
             public void onSuccess(Class data, String message) {
                 Intent intent = new Intent(JoinClassActivity.this, ConfirmJoinClassActivity.class);

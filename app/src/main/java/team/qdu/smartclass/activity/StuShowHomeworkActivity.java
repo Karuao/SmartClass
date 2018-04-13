@@ -66,7 +66,7 @@ public class StuShowHomeworkActivity extends SBaseActivity implements AdapterVie
 
     //给控件设置数据
     private void setData() {
-        homeworkAppAction.getStuHomeworkDetail(homeworkAnswerId, new ActionCallbackListener<HomeworkAnswerWithBLOBs>() {
+        homeworkAppAction.getStuHomeworkDetail(homeworkAnswerId, this, new ActionCallbackListener<HomeworkAnswerWithBLOBs>() {
             @Override
             public void onSuccess(HomeworkAnswerWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getHomework().getName());

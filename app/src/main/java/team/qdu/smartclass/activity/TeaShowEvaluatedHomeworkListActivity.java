@@ -97,7 +97,7 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
     //给页面组件设置数据
     private void setData() {
         //设置作业内容和图片
-        homeworkAppAction.getHomeworkDetail(homeworkId, new ActionCallbackListener<HomeworkWithBLOBs>() {
+        homeworkAppAction.getHomeworkDetail(homeworkId, this, new ActionCallbackListener<HomeworkWithBLOBs>() {
             @Override
             public void onSuccess(HomeworkWithBLOBs data, String message) {
                 homeworkTitle = data.getName();
@@ -116,7 +116,7 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
             }
         });
         //设置已评价、为评价和未提交人数和列表
-        homeworkAppAction.getHomeworkAnswerList(homeworkId, new ActionCallbackListener<List<HomeworkAnswerWithBLOBs>>() {
+        homeworkAppAction.getHomeworkAnswerList(homeworkId, this, new ActionCallbackListener<List<HomeworkAnswerWithBLOBs>>() {
             @Override
             public void onSuccess(List<HomeworkAnswerWithBLOBs> data, String message) {
                 List<HomeworkAnswerWithBLOBs> evaluateHomeworkAnswer = new ArrayList<>();
@@ -163,7 +163,7 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             LoadingDialogUtil.createLoadingDialog(TeaShowEvaluatedHomeworkListActivity.this, "加载中...");//加载中动画，用来防止用户重复点击
-                            homeworkAppAction.getNotEvaluateStuNum(homeworkId, new ActionCallbackListener<Integer>() {
+                            homeworkAppAction.getNotEvaluateStuNum(homeworkId, TeaShowEvaluatedHomeworkListActivity.this, new ActionCallbackListener<Integer>() {
                                 @Override
                                 public void onSuccess(Integer data, String message) {
                                     changeHomeworkStatus(homeworkId, "评价中");
@@ -192,7 +192,7 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
 
     //改变作业状态
     private void changeHomeworkStatus(String homeworkId, final String homeworkStatus) {
-        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle, new ActionCallbackListener<Void>() {
+        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle, this, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 TeaHomeworkUnderwayFragment.refreshFlag = true;

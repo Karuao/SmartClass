@@ -62,7 +62,7 @@ public class StuHomeworkUnderwayFragment extends SBaseFragment implements Adapte
     //homeworkList设置Adapter
     public void setHomeworkList() {
         mContext.homeworkAppAction.getHomeworkList(mContext.getClassId(), mContext.getUserId(),
-                mContext.getUserTitle(), "进行中", new ActionCallbackListener<List>() {
+                mContext.getUserTitle(), "进行中", this, new ActionCallbackListener<List>() {
                     @Override
                     public void onSuccess(List data, String message) {
                         homeworkList.setAdapter(new StuHomeworkUnderwayAdapter(mContext, data));

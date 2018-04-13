@@ -41,7 +41,7 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
         classnameTxt.setText(data.getName());
         courseTxt.setText(data.getCourse());
         teacherTxt.setText("老师：" + data.getTeacher());
-        classAppAction.getBitmap(data.getAvatar(), new ActionCallbackListener<Bitmap>() {
+        classAppAction.getBitmap(data.getAvatar(), this, new ActionCallbackListener<Bitmap>() {
             @Override
             public void onSuccess(Bitmap data, String message) {
                 avatarImg.setImageBitmap(data);
@@ -55,7 +55,7 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
 
     public void confirmJoinClass(View view) {
         LoadingDialogUtil.createLoadingDialog(this, "加载中...");//加载中动画，用来防止用户重复点击
-        classAppAction.confirmJoinClass(data.getClass_id().toString(), getUserId(), new ActionCallbackListener<Integer>() {
+        classAppAction.confirmJoinClass(data.getClass_id().toString(), getUserId(), this, new ActionCallbackListener<Integer>() {
             @Override
             public void onSuccess(Integer data1, String message) {
                 Toast.makeText(ConfirmJoinClassActivity.this, message, Toast.LENGTH_SHORT).show();

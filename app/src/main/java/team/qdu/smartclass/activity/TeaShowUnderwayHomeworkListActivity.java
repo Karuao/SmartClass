@@ -76,7 +76,7 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
     //给页面组件设置数据
     private void setData() {
         //设置作业内容和图片
-        homeworkAppAction.getHomeworkDetail(homeworkId, new ActionCallbackListener<HomeworkWithBLOBs>() {
+        homeworkAppAction.getHomeworkDetail(homeworkId, this, new ActionCallbackListener<HomeworkWithBLOBs>() {
             @Override
             public void onSuccess(HomeworkWithBLOBs data, String message) {
                 homeworkTitle = data.getName();
@@ -97,7 +97,7 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
             }
         });
         //设置已提交和未提交人数和列表
-        homeworkAppAction.getHomeworkAnswerList(homeworkId, new ActionCallbackListener<List<HomeworkAnswerWithBLOBs>>() {
+        homeworkAppAction.getHomeworkAnswerList(homeworkId, this, new ActionCallbackListener<List<HomeworkAnswerWithBLOBs>>() {
             @Override
             public void onSuccess(List<HomeworkAnswerWithBLOBs> data, String message) {
                 List<HomeworkAnswerWithBLOBs> commitHomeworkAnswer = new ArrayList<>();
@@ -162,7 +162,7 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
 
     //改变作业状态
     private void changeHomeworkStatus(final String homeworkId, final String homeworkStatus) {
-        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle, new ActionCallbackListener<Void>() {
+        homeworkAppAction.changeHomeworkStatus(homeworkId, homeworkStatus, homeworkTitle, this, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 TeaHomeworkUnderwayFragment.refreshFlag = true;

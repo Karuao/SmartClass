@@ -57,16 +57,23 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void jumpClass(final String classId, final String userId, final ActionCallbackListener<ClassUser> listener) {
+    public void jumpClass(final String classId, final String userId, final Lifeful lifeful, final ActionCallbackListener<ClassUser> listener) {
         new AsyncTask<Void, Void, ApiResponse<ClassUser>>() {
 
             @Override
             protected ApiResponse<ClassUser> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.jumpClass(classId, userId);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<ClassUser> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -77,16 +84,23 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void getBitmap(final String urlTail, final ActionCallbackListener<Bitmap> listener) {
+    public void getBitmap(final String urlTail, final Lifeful lifeful, final ActionCallbackListener<Bitmap> listener) {
         new AsyncTask<Void, Void, Bitmap>() {
 
             @Override
             protected Bitmap doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.getBitmap(urlTail);
             }
 
             @Override
             protected void onPostExecute(Bitmap bitmap) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (bitmap != null) {
                     listener.onSuccess(bitmap, "图片获取成功");
                 } else {
@@ -97,16 +111,23 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void notAllowToJoin(final String classId, final ActionCallbackListener<Void> listener) {
+    public void notAllowToJoin(final String classId, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.notAllowToJoin(classId);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {
@@ -117,16 +138,23 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void allowToJoin(final String classId, final ActionCallbackListener<Void> listener) {
+    public void allowToJoin(final String classId, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.allowToJoin(classId);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {
@@ -137,16 +165,23 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public Class getClassInfor(final String classId, final ActionCallbackListener<Class> listener) {
+    public Class getClassInfor(final String classId, final Lifeful lifeful, final ActionCallbackListener<Class> listener) {
         //请求Api
         new AsyncTask<Void, Void, ApiResponse<Class>>() {
             @Override
             protected ApiResponse<Class> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.searchByClassId(classId);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Class> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -158,16 +193,23 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void finishClass(final String classId, final ActionCallbackListener<Void> listener) {
+    public void finishClass(final String classId, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.finishClass(classId);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {
@@ -178,16 +220,23 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void deleteClass(final String classId, final ActionCallbackListener<Void> listener) {
+    public void deleteClass(final String classId, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.deleteClass(classId);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {
@@ -198,7 +247,7 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void createClass(final File avatar, final String name, final String course, final String userId, final ActionCallbackListener<ClassUser> listener) {
+    public void createClass(final File avatar, final String name, final String course, final String userId, final Lifeful lifeful, final ActionCallbackListener<ClassUser> listener) {
         if (TextUtils.isEmpty(name)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "班级不能为空");
             return;
@@ -211,11 +260,18 @@ public class ClassAppActionImpl implements ClassAppAction {
 
             @Override
             protected ApiResponse<ClassUser> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.createClass(avatar, name, course, userId);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<ClassUser> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -226,7 +282,7 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void compileClass(final String classId, final File avatar, final String className, final String course, final String university, final String department, final String goal, final String exam, final ActionCallbackListener<String> listener) {
+    public void compileClass(final String classId, final File avatar, final String className, final String course, final String university, final String department, final String goal, final String exam, final Lifeful lifeful, final ActionCallbackListener<String> listener) {
         if (TextUtils.isEmpty(className)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "班级不能为空");
             return;
@@ -239,11 +295,18 @@ public class ClassAppActionImpl implements ClassAppAction {
 
             @Override
             protected ApiResponse<String> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.modifyClass(classId, avatar, className, course, university, department, goal, exam);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<String> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -254,7 +317,7 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void joinClass(final String classId, final String userId, final ActionCallbackListener<Class> listener) {
+    public void joinClass(final String classId, final String userId, final Lifeful lifeful, final ActionCallbackListener<Class> listener) {
         if (TextUtils.isEmpty(classId) || classId.length() < 6) {
             listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "邀请码长度大于6位");
             return;
@@ -263,11 +326,18 @@ public class ClassAppActionImpl implements ClassAppAction {
 
             @Override
             protected ApiResponse<Class> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.joinClass(classId, userId);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Class> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -278,7 +348,7 @@ public class ClassAppActionImpl implements ClassAppAction {
     }
 
     @Override
-    public void confirmJoinClass(final String classId, final String userId, final ActionCallbackListener<Integer> listener) {
+    public void confirmJoinClass(final String classId, final String userId, final Lifeful lifeful, final ActionCallbackListener<Integer> listener) {
         if (TextUtils.isEmpty(classId) || classId.length() < 6) {
             listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "邀请码长度大于6位");
             return;
@@ -287,11 +357,18 @@ public class ClassAppActionImpl implements ClassAppAction {
 
             @Override
             protected ApiResponse<Integer> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.confirmJoinClass(classId, userId);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Integer> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -301,16 +378,24 @@ public class ClassAppActionImpl implements ClassAppAction {
         }.execute();
     }
 
-    public void quitClass(final String classId, final String userId, final ActionCallbackListener<Void> listener) {
+    @Override
+    public void quitClass(final String classId, final String userId, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
+                if (!lifeful.isAlive()) {
+                    cancel(true);
+                    return null;
+                }
                 return classApi.quitClass(classId, userId);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {

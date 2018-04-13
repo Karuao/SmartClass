@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
+import team.qdu.core.Lifeful;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.SBaseActivity;
@@ -61,7 +62,7 @@ public class HomeworkUncommitAdapter extends SBaseAdapter<HomeworkAnswerWithBLOB
         compo.uncommitStuSnoTxt.setText(itemList.get(position).getUser().getSno());
         final Compo finalCompo = compo;
         if (!TextUtils.isEmpty(itemList.get(position).getUser().getAvatar())) {
-            ((SBaseActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), new ActionCallbackListener<Bitmap>() {
+            ((SBaseActivity) context).classAppAction.getBitmap(itemList.get(position).getUser().getAvatar(), (Lifeful) this, new ActionCallbackListener<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap data, String message) {
                     finalCompo.uncommitStuAvatarImg.setImageBitmap(data);

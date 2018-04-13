@@ -18,40 +18,40 @@ public interface ClassAppAction {
     public void getJoinedClasses(String userId, Lifeful lifeful, ActionCallbackListener<List<ClassUser>> listener);
 
     //跳转老师班课/学生班课
-    public void jumpClass(String classId, String userId, ActionCallbackListener<ClassUser> listener);
+    public void jumpClass(String classId, String userId, Lifeful lifeful, ActionCallbackListener<ClassUser> listener);
 
     //获取图片
-    public void getBitmap(String urlTail, ActionCallbackListener<Bitmap> listener);
+    public void getBitmap(String urlTail, Lifeful lifeful, ActionCallbackListener<Bitmap> listener);
 
     //不允许加入班课
-    public void notAllowToJoin(String classId, ActionCallbackListener<Void> listener);
+    public void notAllowToJoin(String classId, Lifeful lifeful, ActionCallbackListener<Void> listener);
 
     //允许加入班课
-    public void allowToJoin(String classId, ActionCallbackListener<Void> listener);
+    public void allowToJoin(String classId, Lifeful lifeful, ActionCallbackListener<Void> listener);
 
     //获得课程信息
-    public Class getClassInfor(String classId, ActionCallbackListener<Class> listener);
+    public Class getClassInfor(String classId, Lifeful lifeful, ActionCallbackListener<Class> listener);
 
     //结束班课
-    public void finishClass(String classId, ActionCallbackListener<Void> listener);
+    public void finishClass(String classId, Lifeful lifeful, ActionCallbackListener<Void> listener);
 
     //删除班课
-    public void deleteClass(String classId, ActionCallbackListener<Void> listener);
+    public void deleteClass(String classId, Lifeful lifeful, ActionCallbackListener<Void> listener);
 
     //编辑班课
-    public void compileClass(String classId, File avatar, String className, String course, String university, String department, String goal, String exam, ActionCallbackListener<String> listener);
+    public void compileClass(String classId, File avatar, String className, String course, String university, String department, String goal, String exam, Lifeful lifeful, ActionCallbackListener<String> listener);
 
     //创建班课
-    public void createClass(File avatar, String name, String course, String userId, ActionCallbackListener<ClassUser> listener);
+    public void createClass(File avatar, String name, String course, String userId, Lifeful lifeful, ActionCallbackListener<ClassUser> listener);
 
     //加入班课
-    public void joinClass(String classId, String userId, ActionCallbackListener<Class> listener);
+    public void joinClass(String classId, String userId, Lifeful lifeful, ActionCallbackListener<Class> listener);
 
     //确认加入班课
-    public void confirmJoinClass(String classId, String userId, ActionCallbackListener<Integer> listener);
+    public void confirmJoinClass(String classId, String userId, Lifeful lifeful, ActionCallbackListener<Integer> listener);
 
     //退出班课
-    public void quitClass(String classId, String userId, ActionCallbackListener<Void> listener);
+    public void quitClass(String classId, String userId, Lifeful lifeful, ActionCallbackListener<Void> listener);
 
     //查看有新推送的页面后进行操作
     public void readNew(String classUserId, String whichPage);

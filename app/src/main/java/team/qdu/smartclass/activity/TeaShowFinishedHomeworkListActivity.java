@@ -84,7 +84,7 @@ public class TeaShowFinishedHomeworkListActivity extends SBaseActivity implement
     //给页面组件设置数据
     private void setData() {
         //设置作业内容和图片
-        homeworkAppAction.getHomeworkDetail(homeworkId, new ActionCallbackListener<HomeworkWithBLOBs>() {
+        homeworkAppAction.getHomeworkDetail(homeworkId, this, new ActionCallbackListener<HomeworkWithBLOBs>() {
             @Override
             public void onSuccess(HomeworkWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getName());
@@ -102,7 +102,7 @@ public class TeaShowFinishedHomeworkListActivity extends SBaseActivity implement
             }
         });
         //设置已评价、未评价和未提交人数和列表
-        homeworkAppAction.getHomeworkAnswerList(homeworkId, new ActionCallbackListener<List<HomeworkAnswerWithBLOBs>>() {
+        homeworkAppAction.getHomeworkAnswerList(homeworkId, this, new ActionCallbackListener<List<HomeworkAnswerWithBLOBs>>() {
             @Override
             public void onSuccess(List<HomeworkAnswerWithBLOBs> data, String message) {
                 List<HomeworkAnswerWithBLOBs> evaluateHomeworkAnswer = new ArrayList<>();

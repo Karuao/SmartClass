@@ -28,6 +28,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.kevin.crop.UCrop;
 
 import java.io.File;
@@ -94,10 +95,10 @@ public class PrepareClassActivity extends SBaseActivity {
                 modifyUserMotto.setText(user.getStatus_message());
                 modifyUserNumber.setText(user.getSno());
                 //从服务器获取图片
-                PrepareClassActivity.this.classAppAction.getBitmap(user.getAvatar(), new ActionCallbackListener<Bitmap>() {
+                PrepareClassActivity.this.fileAppAction.cacheImg(user.getAvatar(), PrepareClassActivity.this, new ActionCallbackListener<File>() {
                     @Override
-                    public void onSuccess(Bitmap data, String message) {
-                        AvatarImg.setImageBitmap(data);
+                    public void onSuccess(File data, String message) {
+                        Glide.with(context).load(data.getPath()).into(AvatarImg);
                     }
 
                     @Override

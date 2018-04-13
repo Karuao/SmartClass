@@ -118,7 +118,7 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
         LoadingDialogUtil.createLoadingDialog(getActivity(), "加载中...");//加载中动画，用来防止用户重复点击
         final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
-        parentActivity.classAppAction.jumpClass(classId, getUserId(), new ActionCallbackListener<ClassUser>() {
+        parentActivity.classAppAction.jumpClass(classId, getUserId(), this, new ActionCallbackListener<ClassUser>() {
             @Override
             public void onSuccess(ClassUser data, String message) {
                 Intent intent;

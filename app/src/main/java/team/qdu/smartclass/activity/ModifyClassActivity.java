@@ -79,7 +79,7 @@ public class ModifyClassActivity extends SBaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_tab05_admin_compileclass);
-        this.classAppAction.getClassInfor(getClassId(), new ActionCallbackListener<Class>() {
+        this.classAppAction.getClassInfor(getClassId(), this, new ActionCallbackListener<Class>() {
             @Override
             public void onSuccess(Class data, String message) {
                 classnameEdt.setText(data.getName());
@@ -143,7 +143,7 @@ public class ModifyClassActivity extends SBaseActivity{
         String goal = goalEdt.getText().toString();
         String exam = examEdt.getText().toString();
         LoadingDialogUtil.createLoadingDialog(this,"加载中...");
-        classAppAction.compileClass(classId,classAvatar, name, course, university,department,goal,exam, new ActionCallbackListener<String>() {
+        classAppAction.compileClass(classId,classAvatar, name, course, university,department,goal,exam, this, new ActionCallbackListener<String>() {
             @Override
             public void onSuccess(String data, String message) {
                 TeaClassDetailFragment.refreshFlag= true;

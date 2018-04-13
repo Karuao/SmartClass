@@ -83,7 +83,7 @@ public class StuCommitHomeworkActivity extends SBaseActivity implements AdapterV
 
     //给控件设置数据
     private void setData() {
-        homeworkAppAction.getStuHomeworkDetail(homeworkAnswerId, new ActionCallbackListener<HomeworkAnswerWithBLOBs>() {
+        homeworkAppAction.getStuHomeworkDetail(homeworkAnswerId, this, new ActionCallbackListener<HomeworkAnswerWithBLOBs>() {
             @Override
             public void onSuccess(HomeworkAnswerWithBLOBs data, String message) {
                 homeworkTitle = data.getHomework().getName();
@@ -121,7 +121,7 @@ public class StuCommitHomeworkActivity extends SBaseActivity implements AdapterV
         photoList = new ArrayList<>();
         ImgUtil.compressPhotoes(photoList, homeworkAddPhotoAdapter, this);
         homeworkAppAction.commitHomework(homeworkAnswerId, homeworkId, getClassId(), getUserId(),
-                ifSubmit, homeworkTitle, answerDetail, photoList, delPhotoesUrl, new ActionCallbackListener<Void>() {
+                ifSubmit, homeworkTitle, answerDetail, photoList, delPhotoesUrl, this, new ActionCallbackListener<Void>() {
                     @Override
                     public void onSuccess(Void data, String message) {
                         Toast.makeText(StuCommitHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();

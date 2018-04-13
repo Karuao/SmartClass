@@ -49,7 +49,7 @@ public class StuHomeworkFinishFragment extends SBaseFragment implements AdapterV
     //homeworkList设置Adapter
     public void setHomeworkList() {
         mContext.homeworkAppAction.getHomeworkList(mContext.getClassId(), mContext.getUserId(),
-                mContext.getUserTitle(), "已结束", new ActionCallbackListener<List>() {
+                mContext.getUserTitle(), "已结束", this, new ActionCallbackListener<List>() {
                     @Override
                     public void onSuccess(List data, String message) {
                         homeworkList.setAdapter(new StuHomeworkFinishAdapter(mContext, data));

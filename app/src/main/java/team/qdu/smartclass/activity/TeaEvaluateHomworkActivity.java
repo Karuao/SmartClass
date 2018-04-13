@@ -77,7 +77,7 @@ public class TeaEvaluateHomworkActivity extends SBaseActivity implements Adapter
 
     //组件设置数据
     private void setData() {
-        homeworkAppAction.getStuHomeworkDetail(homeworkAnswerId, new ActionCallbackListener<HomeworkAnswerWithBLOBs>() {
+        homeworkAppAction.getStuHomeworkDetail(homeworkAnswerId, this, new ActionCallbackListener<HomeworkAnswerWithBLOBs>() {
             @Override
             public void onSuccess(HomeworkAnswerWithBLOBs data, String message) {
                 homeworkTitleTxt.setText(data.getHomework().getName());
@@ -119,7 +119,7 @@ public class TeaEvaluateHomworkActivity extends SBaseActivity implements Adapter
         String evaluateRemark = evaluateRemarkEdt.getText().toString();
         photoList = new ArrayList<>();
         ImgUtil.compressPhotoes(photoList, homeworkAddPhotoAdapter, this);
-        homeworkAppAction.commitHomeworkEvaluation(homeworkAnswerId, answerExp, evaluateRemark, photoList, delPhotoesUrl, new ActionCallbackListener<Void>() {
+        homeworkAppAction.commitHomeworkEvaluation(homeworkAnswerId, answerExp, evaluateRemark, photoList, delPhotoesUrl, this, new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(TeaEvaluateHomworkActivity.this, message, Toast.LENGTH_SHORT).show();

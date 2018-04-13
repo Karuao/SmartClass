@@ -258,7 +258,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LoadingDialogUtil.createLoadingDialog(StuClassMainActivity.this,"加载中...");
-                        StuClassMainActivity.this.classAppAction.quitClass(classId, userId, new ActionCallbackListener<Void>() {
+                        StuClassMainActivity.this.classAppAction.quitClass(classId, userId, StuClassMainActivity.this, new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
                                 finish();
