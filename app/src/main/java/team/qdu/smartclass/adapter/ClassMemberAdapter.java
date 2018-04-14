@@ -71,6 +71,7 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
             compo = (Compo) convertView.getTag();
         }
         //绑定数据
+        compo.classMemberImg.setImageResource(R.mipmap.ic_useravatar_def);
         compo.userName.setText(itemList.get(position).getUser().getName());
         compo.userSno.setText(itemList.get(position).getUser().getSno());
         compo.userExp.setText(itemList.get(position).getExp().toString());

@@ -42,17 +42,21 @@ public class ShowMemberDetailActivity extends SBaseActivity {
         memName.setText(memberName);
         memSno.setText(memberSno);
         memExp.setText(memberExp);
-        this.fileAppAction.cacheImg(memberAvatar, this, new ActionCallbackListener<File>() {
-            @Override
-            public void onSuccess(File data, String message) {
-                Glide.with(context).load(data.getPath()).into(memImg);
-            }
+        if(memberAvatar.equals("")) {
+            memImg.setImageResource(R.mipmap.ic_useravatar_def);
+        }else {
+            this.fileAppAction.cacheImg(memberAvatar, this, new ActionCallbackListener<File>() {
+                @Override
+                public void onSuccess(File data, String message) {
+                    Glide.with(context).load(data.getPath()).into(memImg);
+                }
 
-            @Override
-            public void onFailure(String errorEvent, String message) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(String errorEvent, String message) {
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         memberImgTop.setText(memberName);
     }
 

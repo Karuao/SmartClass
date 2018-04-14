@@ -16,15 +16,15 @@
 
         <ImageView
             android:id="@+id/img_class"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:src="@mipmap/ic_classavatar_def" />
 
         <TextView
             android:id="@+id/tv_class_classname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/img_class"
             android:maxLength="20"
             android:singleLine="true"
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_class_classname"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/img_class"
             android:maxLength="20"
             android:singleLine="true"
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_class_classname"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/img_class"
             android:maxLength="20"

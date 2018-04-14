@@ -81,13 +81,11 @@ public class MainUserFragment extends SBaseFragment {
                         @Override
                         public void onSuccess(File data, String message) {
                             Glide.with(getActivity()).load(data.getPath()).into(personAvatar);
-                            swipeRefreshLayout.setRefreshing(false);
                         }
 
                         @Override
                         public void onFailure(String errorEvent, String message) {
                             Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                            swipeRefreshLayout.setRefreshing(false);
                         }
                     });
                 }
@@ -98,6 +96,7 @@ public class MainUserFragment extends SBaseFragment {
                 userUniversity.setText(user.getUniversity());
                 userDepartment.setText(user.getDepartment());
                 userMotto.setText(user.getStatus_message());
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override

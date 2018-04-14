@@ -76,6 +76,8 @@ public class ShowSignInResultActivity extends SBaseActivity implements AdapterVi
                 }
                     signInStudent.setAdapter(new SignInStudentAdapter(ShowSignInResultActivity.this, list1));
                     notSignInStudent.setAdapter(new NotSignInStudentAdapter(ShowSignInResultActivity.this, list2));
+                    signInStudent.setOnItemClickListener(ShowSignInResultActivity.this);
+                    notSignInStudent.setOnItemClickListener(ShowSignInResultActivity.this);
                     signInMember.setText(String.valueOf(list1.size()));
                     notSignInMember.setText(String.valueOf(list2.size()));
             }
@@ -120,30 +122,12 @@ public class ShowSignInResultActivity extends SBaseActivity implements AdapterVi
         if(parent.getId() == R.id.list_signin_signIn_student){
             final String attendanceUserId = ((TextView)view.findViewById(R.id.tv_class_sign_attendanceUserId)).getText().toString();
             List<String> names = new ArrayList<>();
-            names.add("设为已签到");
             names.add("设为未签到");
             showDialog(new SelectDialog.SelectDialogListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     switch (position) {
                         case 0:
-                            LoadingDialogUtil.createLoadingDialog(ShowSignInResultActivity.this,"加载中...");
-                            ShowSignInResultActivity.this.memberAppAction.setStudentSignIn(attendanceUserId,ShowSignInResultActivity.this, new ActionCallbackListener<Void>() {
-                                @Override
-                                public void onSuccess(Void data, String message) {
-                                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                    getList();
-                                    LoadingDialogUtil.closeDialog();
-                                }
-
-                                @Override
-                                public void onFailure(String errorEvent, String message) {
-                                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                    LoadingDialogUtil.closeDialog();
-                                }
-                            });
-                            break;
-                        case 1:
                             LoadingDialogUtil.createLoadingDialog(ShowSignInResultActivity.this,"加载中...");
                             ShowSignInResultActivity.this.memberAppAction.setStudentNotSignIn(attendanceUserId,ShowSignInResultActivity.this, new ActionCallbackListener<Void>() {
                                 @Override
@@ -170,7 +154,6 @@ public class ShowSignInResultActivity extends SBaseActivity implements AdapterVi
             final String attendanceUserId = ((TextView)view.findViewById(R.id.tv_class_sign_attendanceUserId2)).getText().toString();
             List<String> names = new ArrayList<>();
             names.add("设为已签到");
-            names.add("设为未签到");
             showDialog(new SelectDialog.SelectDialogListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -178,23 +161,6 @@ public class ShowSignInResultActivity extends SBaseActivity implements AdapterVi
                         case 0:
                             LoadingDialogUtil.createLoadingDialog(ShowSignInResultActivity.this,"加载中...");
                             ShowSignInResultActivity.this.memberAppAction.setStudentSignIn(attendanceUserId, ShowSignInResultActivity.this,new ActionCallbackListener<Void>() {
-                                @Override
-                                public void onSuccess(Void data, String message) {
-                                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                    getList();
-                                    LoadingDialogUtil.closeDialog();
-                                }
-
-                                @Override
-                                public void onFailure(String errorEvent, String message) {
-                                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                                    LoadingDialogUtil.closeDialog();
-                                }
-                            });
-                            break;
-                        case 1:
-                            LoadingDialogUtil.createLoadingDialog(ShowSignInResultActivity.this,"加载中...");
-                            ShowSignInResultActivity.this.memberAppAction.setStudentNotSignIn(attendanceUserId,ShowSignInResultActivity.this,new ActionCallbackListener<Void>() {
                                 @Override
                                 public void onSuccess(Void data, String message) {
                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

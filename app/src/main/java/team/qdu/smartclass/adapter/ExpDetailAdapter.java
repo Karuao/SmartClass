@@ -47,13 +47,15 @@ public class ExpDetailAdapter extends SBaseAdapter<ClassUserExp>{
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
         String date = sdf.format(itemList.get(position).getCreate_date_time());
         compo.expTime.setText(date);
-        compo.exp.setText(itemList.get(position).getExp().toString());
         if(itemList.get(position).getExp()>=0){
             compo.exp_symbol.setText("+");
+            compo.exp.setText(itemList.get(position).getExp().toString());
             compo.exp_symbol.setTextColor((context).getResources().getColor(R.color.classbottom));
         }else {
-            compo.exp_symbol.setText("-");
+            compo.exp_symbol.setText("—");
+            compo.exp.setText(String.valueOf(Math.abs(itemList.get(position).getExp())));
             compo.exp_symbol.setTextColor((context).getResources().getColor(R.color.colorRank));
+            compo.exp.setTextColor((context).getResources().getColor(R.color.colorRank));
         }
         return convertView;
     }
