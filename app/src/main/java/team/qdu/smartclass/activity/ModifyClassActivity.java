@@ -146,13 +146,13 @@ public class ModifyClassActivity extends SBaseActivity{
         classAppAction.compileClass(classId,classAvatar, name, course, university,department,goal,exam, this, new ActionCallbackListener<String>() {
             @Override
             public void onSuccess(String data, String message) {
-                TeaClassDetailFragment.refreshFlag= true;
-                setClassId(classId);
-                finish();
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 if(classAvatar!=null) {
                     classAvatar.delete();
                 }
+                TeaClassDetailFragment.refreshFlag = true;
+                setClassId(classId);
+                finish();
                 LoadingDialogUtil.closeDialog();
             }
 
