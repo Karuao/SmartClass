@@ -94,9 +94,9 @@ public class StuMemberSigninActivity extends SBaseActivity {
                             @Override
                             public void onSuccess(Attendance_user data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                LoadingDialogUtil.closeDialog();
                                 finish();
                                 startActivity(new Intent(StuMemberSigninActivity.this,StuMemberSigninActivity.class));
-                                LoadingDialogUtil.closeDialog();
                             }
 
                             @Override
