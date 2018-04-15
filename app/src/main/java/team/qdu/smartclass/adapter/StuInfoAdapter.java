@@ -52,7 +52,7 @@ public class StuInfoAdapter extends SBaseAdapter<Inform_User> {
                 //btn是控件
                 badgeView.setTargetView(compo.Layout_ifRead);
                 //设置相对位置
-                badgeView.setBadgeMargin(0, 40, 0, 0);
+                badgeView.setBadgeMargin(0, 40, 20, 0);
                 //设置显示未读消息条数
                 badgeView.setText("2");
                 badgeView.setTag("badgeView1");

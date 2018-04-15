@@ -2,7 +2,7 @@ package team.qdu.api.net;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
+import com.alibaba.fastjson.JSON;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -76,8 +76,7 @@ public class HttpEngine {
             final String result = new String(baos.toByteArray());
             //打印出结果
             Log.i(TAG, "response:" + result);
-            Gson gson = new Gson();
-            return gson.fromJson(result, typeofT);
+            return JSON.parseObject(result, typeofT);
         } else {
             connection.disconnect();
             return null;

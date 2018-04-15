@@ -15,6 +15,8 @@ public class ApiResponse<T> {
 //    private int maxCount;
 //    private int maxPage;
 
+    public ApiResponse(){}
+
     public ApiResponse(String event, String msg) {
         this.event = event;
         this.msg = msg;
