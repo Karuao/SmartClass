@@ -19,11 +19,12 @@
 
     <TextView
         android:id="@+id/txt_homework_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txt_homework_underway_exp"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/txt_homework_underway_exp"
+        android:layout_marginRight="20dp"
         android:singleLine="true"
         android:text="作业名"
         android:textColor="#444"
@@ -37,8 +38,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/iv_class_homework"
-        android:maxLines="2"
-        android:minLines="1"
+        android:singleLine="true"
         android:text="经验值"
         android:textColor="#898989"
         android:textSize="15sp" />
@@ -52,8 +52,7 @@
         android:layout_marginLeft="65dp"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/iv_class_homework"
-        android:maxLines="2"
-        android:minLines="1"
+        android:singleLine="true"
         android:text="参与人数"
         android:textColor="#898989"
         android:textSize="15sp" />
@@ -61,27 +60,28 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:onClick="toChangeStatus"
         android:orientation="horizontal"
-        android:layout_alignParentRight="true">
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/txt_homework_underway_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/txt_homework_underway_exp"
             android:text="进行中"
             android:textColor="@color/text_orange"
             android:textSize="17sp" />
 
         <ImageView
-            android:onClick="toChangeStatus"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="23dp"
-            android:src="@mipmap/btn_right"
             android:layout_width="16dp"
-            android:layout_height="16dp" />
+            android:layout_height="16dp"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/btn_right" />
 
     </LinearLayout>
 
