@@ -66,8 +66,14 @@ public class TeaClassDetailFragment extends SBaseFragment {
         teaClassDetailImg=(ImageView)view.findViewById(R.id.img_class);
         hint=(TextView)view.findViewById(R.id.hint);
         hint2=(View) view.findViewById(R.id.hint2);
-        initOrRefresh();
+//        initOrRefresh();
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstance) {
+        super.onActivityCreated(savedInstance);
+        initOrRefresh();
     }
 
     public void initOrRefresh(){
