@@ -109,6 +109,7 @@ public class TeaClassDetailFragment extends SBaseFragment {
                 }else if(cls.getIf_allow_to_join().equals("否")){
                     checkBox.setChecked(false);
                 }
+                //checkBox监听器
                 checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
