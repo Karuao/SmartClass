@@ -79,6 +79,8 @@ public class TeaClassDetailFragment extends SBaseFragment {
                 className.setText(cls.getCourse());
                 classNum.setText(cls.getName());
                 classCode.setText(classId);
+                classUniversity.setText(cls.getUniversity());
+                classDepartment.setText(cls.getDepartment());
                 if(TextUtils.isEmpty(cls.getDetail())) {
                     classDetail.setText("暂无内容");
                 }else {
@@ -94,8 +96,6 @@ public class TeaClassDetailFragment extends SBaseFragment {
                     @Override
                     public void onSuccess(User user, String message) {
                         classTea.setText(user.getName());
-                        classUniversity.setText(user.getUniversity());
-                        classDepartment.setText(user.getDepartment());
                     }
 
                     @Override
@@ -105,91 +105,47 @@ public class TeaClassDetailFragment extends SBaseFragment {
                 });
                 if(cls.getIf_allow_to_join().equals("是")){
                     checkBox.setChecked(true);
-                    checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if(!isChecked){
-                                TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
-                                LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
-                                parentActivity.classAppAction.notAllowToJoin(classId, TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void data, String message) {
-                                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                                        LoadingDialogUtil.closeDialog();
-                                    }
-
-                                    @Override
-                                    public void onFailure(String errorEvent, String message) {
-                                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                                        LoadingDialogUtil.closeDialog();
-                                    }
-                                });
-                            }else{
-                                TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
-                                LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
-                                parentActivity.classAppAction.allowToJoin(classId, TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void data, String message) {
-                                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                                        LoadingDialogUtil.closeDialog();
-                                    }
-
-                                    @Override
-                                    public void onFailure(String errorEvent, String message) {
-                                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                                        LoadingDialogUtil.closeDialog();
-                                    }
-                                });
-                            }
-                        }
-                    });
                 }else if(cls.getIf_allow_to_join().equals("否")){
                     checkBox.setChecked(false);
-                    checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if(!isChecked){
-                                TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
-                                LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
-                                parentActivity.classAppAction.notAllowToJoin(classId, TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void data, String message) {
-                                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                                        LoadingDialogUtil.closeDialog();
-                                    }
+                }
+                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(!isChecked){
+                            TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
+                            LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
+                            parentActivity.classAppAction.notAllowToJoin(classId, TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
+                                @Override
+                                public void onSuccess(Void data, String message) {
+                                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                    LoadingDialogUtil.closeDialog();
+                                }
 
-                                    @Override
-                                    public void onFailure(String errorEvent, String message) {
-                                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                                        LoadingDialogUtil.closeDialog();
-                                    }
-                                });
-                            }else{
-                                TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
-                                LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
-                                parentActivity.classAppAction.allowToJoin(classId,TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void data, String message) {
-                                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                                        LoadingDialogUtil.closeDialog();
-                                    }
+                                @Override
+                                public void onFailure(String errorEvent, String message) {
+                                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                    LoadingDialogUtil.closeDialog();
+                                }
+                            });
+                        }else{
+                            TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
+                            LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
+                            parentActivity.classAppAction.allowToJoin(classId,TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
+                                @Override
+                                public void onSuccess(Void data, String message) {
+                                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                    LoadingDialogUtil.closeDialog();
+                                }
 
-                                    @Override
-                                    public void onFailure(String errorEvent, String message) {
-                                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                                        LoadingDialogUtil.closeDialog();
-                                    }
-                                });
-                            }
+                                @Override
+                                public void onFailure(String errorEvent, String message) {
+                                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                    LoadingDialogUtil.closeDialog();
+                                }
+                            });
                         }
-                    });
-                }
-                else if(cls.getIf_allow_to_join().equals("已结束")){
-                    allow.setVisibility(View.GONE);
-                    checkBox.setVisibility(View.GONE);
-                    hint.setVisibility(View.GONE);
-                    hint2.setVisibility(View.GONE);
-                }
+                    }
+                });
                 //从服务器获取图片
                 if(cls.getAvatar()!=null) {
                     parentActivity.fileAppAction.cacheImg(cls.getAvatar(), getActivity(), new ActionCallbackListener<File>() {

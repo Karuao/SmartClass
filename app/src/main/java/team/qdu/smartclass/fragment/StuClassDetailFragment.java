@@ -56,6 +56,8 @@ public class StuClassDetailFragment extends SBaseFragment {
             public void onSuccess(Class data, String message) {
                 stuClassName.setText(data.getCourse());
                 stuClassNum.setText(data.getName());
+                stuClassUniversity.setText(data.getUniversity());
+                stuClassDepartment.setText(data.getDepartment());
                 if (TextUtils.isEmpty(data.getDetail())) {
                     stuClassDetail.setText("暂无内容");
                 } else {
@@ -71,8 +73,6 @@ public class StuClassDetailFragment extends SBaseFragment {
                     @Override
                     public void onSuccess(User user, String message) {
                         stuClassTeacher.setText(user.getName());
-                        stuClassUniversity.setText(user.getUniversity());
-                        stuClassDepartment.setText(user.getDepartment());
                     }
 
                     @Override
