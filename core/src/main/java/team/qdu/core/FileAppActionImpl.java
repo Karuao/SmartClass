@@ -2,7 +2,6 @@ package team.qdu.core;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.os.PowerManager;
 import android.util.Log;
 
@@ -105,7 +104,8 @@ public class FileAppActionImpl implements FileAppAction {
     }
 
     @Override
-    public void downloadApp(final String urlTail, final ActionCallbackListener<Object> listener) {
+    public void downloadApp(final String urlTail, final Context context, final ActionCallbackListener<Object> listener) {
+        final String localPath = context.getExternalFilesDir(null) + File.separator + urlTail;
         new AsyncTask<Void, Integer, File>() {
 
             private PowerManager.WakeLock mWakeLock;
@@ -123,7 +123,7 @@ public class FileAppActionImpl implements FileAppAction {
             @Override
             protected File doInBackground(Void... params) {
                 try {
-                    return cacheFile(urlTail);
+                    return cacheFile(urlTail, localPath);
                 } catch (IOException e) {
                     e.printStackTrace();
                     return null;
@@ -159,7 +159,11 @@ public class FileAppActionImpl implements FileAppAction {
                 }
             }
 
-            public File cacheFile(String urlTail) throws IOException {
+            public File cacheFile(String urlTail, String localPath) throws IOException {
+                File file = new File(localPath);
+                if (file.exists()) {
+                    return file;
+                }
                 //打印出请求z
                 Log.i(TAG, "request: " + urlTail);
                 HttpURLConnection connection = getConnection(urlTail);
@@ -170,9 +174,7 @@ public class FileAppActionImpl implements FileAppAction {
                     //获取文件长度
                     int fileLength = connection.getContentLength();
                     //新建相应的文件
-                    String filePath = Environment.getExternalStorageDirectory() + File.separator + urlTail;
-                    new File(filePath.substring(0, filePath.lastIndexOf(File.separator))).mkdirs();
-                    File file = new File(filePath);
+                    new File(localPath.substring(0, localPath.lastIndexOf(File.separator))).mkdirs();
                     //对应文件建立输出流
                     FileOutputStream fileOutputStream = new FileOutputStream(file);
                     //新建缓存,用来存储,从网络读取数据,再写入文件

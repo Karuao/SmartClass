@@ -99,7 +99,7 @@ public class InitialActivity extends SBaseActivity {
                         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                         progressDialog.setCancelable(false);
                         progressDialog.show();
-                        fileAppAction.downloadApp(url, new ActionCallbackListener<Object>() {
+                        fileAppAction.downloadApp(url, InitialActivity.this, new ActionCallbackListener<Object>() {
                             @Override
                             public void onSuccess(Object data, String message) {
                                 if ("update".equals(message)) {

@@ -21,5 +21,5 @@ public interface FileAppAction {
     public void getVersionInfo(ActionCallbackListener<Map> listener);
 
     //下载更新的App
-    public void downloadApp(final String urlTail, final ActionCallbackListener<Object> listener);
+    public void downloadApp(final String urlTail, Context context, final ActionCallbackListener<Object> listener);
 }
