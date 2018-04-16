@@ -128,10 +128,10 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         tabClassinfo.setOnClickListener(this);
         classVpager.setAdapter(stuClassFragmentPagerAdapter);
         classVpager.setOffscreenPageLimit(4);
-        classVpager.setCurrentItem(1);
+        classVpager.setCurrentItem(4);
         classVpager.addOnPageChangeListener(this);
         //初始点击成员界面
-        tabMember.callOnClick();
+        tabClassinfo.callOnClick();
     }
 
     //切换图片颜色
