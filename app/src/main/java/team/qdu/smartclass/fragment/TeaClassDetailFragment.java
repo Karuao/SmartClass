@@ -151,7 +151,6 @@ public class TeaClassDetailFragment extends SBaseFragment {
                     parentActivity.fileAppAction.cacheImg(cls.getAvatar(), getActivity(), new ActionCallbackListener<File>() {
                         @Override
                         public void onSuccess(File data, String message) {
-                            if (getActivity().isFinishing())
                             Glide.with(getActivity()).load(data.getPath()).into(teaClassDetailImg);
                         }
 
