@@ -103,7 +103,7 @@ public class TeaClassDetailFragment extends SBaseFragment {
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
-                //判断班课是否允许加入
+                //判断班课是否允许加入并设置checked
                 if(cls.getIf_allow_to_join().equals("是")){
                     checkBox.setChecked(true);
                 }else if(cls.getIf_allow_to_join().equals("否")){
