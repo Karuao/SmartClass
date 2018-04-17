@@ -17,10 +17,10 @@ public class FileCacheHttpEngine {
 
     private final static String TAG = "FileCacheHttpEngine";
     //The development database
-//    private final static String SERVER_URL = "http://10.0.2.2/";
+    private final static String SERVER_URL = "http://10.0.2.2/";
     //    private final static String SERVER_URL = "http://47.94.7.159/";
     //The official database
-    private final static String SERVER_URL = "http://140.143.134.146/";
+//    private final static String SERVER_URL = "http://140.143.134.146/";
     private final static String REQUEST_METHOD = "GET";
     private final static String ENCODE_TYPE = "UTF-8";
     private final static int TIME_OUT = 4000;

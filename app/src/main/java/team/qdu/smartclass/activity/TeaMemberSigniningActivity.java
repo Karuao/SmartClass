@@ -179,6 +179,37 @@ public class TeaMemberSigniningActivity  extends SBaseActivity{
         });
     }
 
+    public void toBack3(View view){
+        Intent intent = getIntent();
+        final String attendanceId = intent.getStringExtra("attendanceId");
+        new AlertDialog.Builder(TeaMemberSigniningActivity.this)
+                .setTitle("提示")
+                .setMessage("确定要放弃本次签到？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        LoadingDialogUtil.createLoadingDialog(TeaMemberSigniningActivity.this,"加载中...");
+                        TeaMemberSigniningActivity.this.memberAppAction.giveUpSignIn(attendanceId,TeaMemberSigniningActivity.this, new ActionCallbackListener<Void>() {
+                            @Override
+                            public void onSuccess(Void data, String message) {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                SApplication.clearActivity();
+                                finish();
+                                LoadingDialogUtil.closeDialog();
+                            }
+
+                            @Override
+                            public void onFailure(String errorEvent, String message) {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                LoadingDialogUtil.closeDialog();
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("取消",null)
+                .show();
+    }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {//点击的是返回键

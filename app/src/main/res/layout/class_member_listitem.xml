@@ -39,7 +39,7 @@
         android:layout_height="64dp"
         android:layout_toRightOf="@+id/tv_class_member_rank2"
         android:layout_marginLeft="10dp"
-        android:src="@mipmap/btn_add_class" />
+        android:src="@mipmap/ic_useravatar_def" />
 
     <TextView
         android:id="@+id/tv_class_membername2"
