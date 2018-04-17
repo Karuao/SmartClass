@@ -58,7 +58,7 @@
         android:background="@drawable/text_area"
         android:enabled="true"
         android:gravity="top"
-        android:maxLength="200"
+        android:maxLength="100"
         android:maxLines="10"
         android:minLines="8"
         android:scrollbars="vertical" />
