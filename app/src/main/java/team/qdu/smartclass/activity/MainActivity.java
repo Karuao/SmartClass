@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import cn.jpush.android.api.JPushInterface;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.MainFragmentPagerAdapter;
 
 /**
@@ -86,7 +87,7 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
 
     //设置点击事件
     public void toSet(View view) {
-        application.addActivity(MainActivity.this);
+        SApplication.addActivity(MainActivity.this);
         startActivity(new Intent(MainActivity.this, SetActivity.class));
     }
 
@@ -132,12 +133,9 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
         userGender = (TextView) findViewById(R.id.userGender);
         userUniversity = (TextView) findViewById(R.id.userUniversity);
         userDepartment = (TextView) findViewById(R.id.userDepartment);
-        if (TextUtils.isEmpty(userName.getText()) || TextUtils.isEmpty(userNumber.getText())
+        return TextUtils.isEmpty(userName.getText()) || TextUtils.isEmpty(userNumber.getText())
                 || TextUtils.isEmpty(userGender.getText()) || TextUtils.isEmpty(userGender.getText())
-                || TextUtils.isEmpty(userUniversity.toString())) {
-            return true;
-        }
-        return false;
+                || TextUtils.isEmpty(userUniversity.toString());
     }
 
     //底部tab键点击事件

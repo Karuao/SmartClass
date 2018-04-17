@@ -115,7 +115,7 @@ public class StuCommitHomeworkActivity extends SBaseActivity implements AdapterV
     }
 
     //提交作业点击事件
-    public void toSubmitHomework(View view) throws URISyntaxException {
+    public void toSubmitHomework(View view) {
         LoadingDialogUtil.createLoadingDialog(this, "上传中...");//加载中动画，用来防止用户重复点击
         String answerDetail = answerDetailEdt.getText().toString();
         photoList = new ArrayList<>();

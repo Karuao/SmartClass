@@ -104,7 +104,7 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
                                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                                     DownloadMaterial(classid, userid, name, material_user_id);
                                     OpenFileUtil openFileUtil = new OpenFileUtil();
-                                    openFileUtil.openFileByPath(getContext(), url);
+                                    OpenFileUtil.openFileByPath(getContext(), url);
 
 
                                 }
@@ -120,7 +120,7 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
                     .show();
         } else {
             OpenFileUtil openFileUtil = new OpenFileUtil();
-            openFileUtil.openFileByPath(getContext(), url);
+            OpenFileUtil.openFileByPath(getContext(), url);
         }
     }
 
@@ -141,9 +141,6 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
 
     public boolean CheckIfFileExist(final String urlTail) {
         File img = new File(getActivity().getExternalFilesDir(null) + File.separator + urlTail);
-        if (img.exists()) {
-            return true;
-        }
-        return false;
+        return img.exists();
     }
 }

@@ -113,7 +113,7 @@ public class TeaEvaluateHomworkActivity extends SBaseActivity implements Adapter
     }
 
     //提交评价点击事件
-    public void toSubmitEvaluation(View view) throws URISyntaxException {
+    public void toSubmitEvaluation(View view) {
         LoadingDialogUtil.createLoadingDialog(this, "上传中...");//加载中动画，用来防止用户重复点击
         String answerExp = answerExpEdt.getText().toString();
         String evaluateRemark = evaluateRemarkEdt.getText().toString();

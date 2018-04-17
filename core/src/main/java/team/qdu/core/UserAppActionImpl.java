@@ -124,32 +124,6 @@ public class UserAppActionImpl implements UserAppAction {
         }.execute();
     }
 
-    //获取头像
-    @Override
-    public void getBitmap(final String urlTail, final Lifeful lifeful,final ActionCallbackListener<Bitmap> listener) {
-        new AsyncTask<Void, Void, Bitmap>() {
-
-            @Override
-            protected Bitmap doInBackground(Void... params) {
-                if (!lifeful.isAlive()) {
-                    cancel(true);
-                    return null;
-                }
-                return userApi.getBitmap(urlTail);
-            }
-
-            @Override
-            protected void onPostExecute(Bitmap bitmap) {
-                if (bitmap != null) {
-                    listener.onSuccess(bitmap, "图片获取成功");
-                } else {
-                    listener.onFailure(null, "图片获取失败");
-                }
-            }
-        }.execute();
-    }
-
-
     //找回密码时判断该用户是否存在
     @Override
     public void checkAccount(final String account,final Lifeful lifeful, final ActionCallbackListener<User> listener) {

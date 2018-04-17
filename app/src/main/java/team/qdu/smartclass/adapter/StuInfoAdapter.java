@@ -68,11 +68,11 @@ public class StuInfoAdapter extends SBaseAdapter<Inform_User> {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         compo.idTxt.setText(Integer.toString(itemList.get(position).getInform_user_id()));
 
-        compo.readTxt.setText((String)itemList.get(position).getIf_read());
+        compo.readTxt.setText(itemList.get(position).getIf_read());
 
 
         compo.timeTxt.setText(sdf.format(itemList.get(position).getCreate_date_time()));
-        compo.informTxt.setText((String) itemList.get(position).getDetail());
+        compo.informTxt.setText(itemList.get(position).getDetail());
         return convertView;
     }
 }

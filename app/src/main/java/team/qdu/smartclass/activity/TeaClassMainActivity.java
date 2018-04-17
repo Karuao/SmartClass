@@ -117,7 +117,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         allow = (TextView) findViewById(R.id.tv_join);
         ifAllowTojoin = (CheckBox) findViewById(R.id.chk_join);
         hint = (TextView) findViewById(R.id.hint);
-        hint2 = (View) findViewById(R.id.hint2);
+        hint2 = findViewById(R.id.hint2);
     }
 
     public void initView3() {

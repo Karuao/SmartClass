@@ -11,7 +11,7 @@ public interface ActionCallbackListener<T> {
      *
      * @param data 返回的数据
      */
-    public void onSuccess(T data, String message);
+    void onSuccess(T data, String message);
 
     /**
      * 失败时调用
@@ -19,5 +19,5 @@ public interface ActionCallbackListener<T> {
      * @param errorEvent 错误码
      * @param message    错误信息
      */
-    public void onFailure(String errorEvent, String message);
+    void onFailure(String errorEvent, String message);
 }

@@ -9,6 +9,7 @@ import android.widget.Toast;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
@@ -38,7 +39,7 @@ public class JoinClassActivity extends SBaseActivity {
             public void onSuccess(Class data, String message) {
                 Intent intent = new Intent(JoinClassActivity.this, ConfirmJoinClassActivity.class);
                 intent.putExtra("data", data);
-                application.addActivity(JoinClassActivity.this);
+                SApplication.addActivity(JoinClassActivity.this);
                 startActivity(intent);
                 LoadingDialogUtil.closeDialog();//关闭加载中动画
             }

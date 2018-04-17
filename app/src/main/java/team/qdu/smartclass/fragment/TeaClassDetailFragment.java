@@ -49,31 +49,31 @@ public class TeaClassDetailFragment extends SBaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.class_tab05_admin, container, false);
-        refreshFlag=false;
+        View view = inflater.inflate(R.layout.class_tab05_admin, container, false);
+        refreshFlag = false;
         titleBarClassNameTxt = (TextView) view.findViewById(R.id.txt_titlebar_classname);
-        titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
-        checkBox=(CheckBox)view.findViewById(R.id.chk_join);
-        allow=(TextView)view.findViewById(R.id.tv_join);
-        className=(TextView)view.findViewById(R.id.tv_class_classname);
-        classNum=(TextView)view.findViewById(R.id.tv_class_classnum);
-        classTea=(TextView)view.findViewById(R.id.tv_class_teacher);
-        classUniversity=(TextView)view.findViewById(R.id.tv_class_university);
-        classDepartment=(TextView)view.findViewById(R.id.tv_class_department);
-        classCode=(TextView)view.findViewById(R.id.tv_class_code);
-        classDetail=(TextView)view.findViewById(R.id.tv_class_goal_details_admin);
-        classExam=(TextView)view.findViewById(R.id.tv_class_exam_details_admin);
-        teaClassDetailImg=(ImageView)view.findViewById(R.id.img_class);
-        hint=(TextView)view.findViewById(R.id.hint);
-        hint2= view.findViewById(R.id.hint2);
+        titleBarClassNameTxt.setText(((SBaseActivity) getActivity()).getCourse());
+        checkBox = (CheckBox) view.findViewById(R.id.chk_join);
+        allow = (TextView) view.findViewById(R.id.tv_join);
+        className = (TextView) view.findViewById(R.id.tv_class_classname);
+        classNum = (TextView) view.findViewById(R.id.tv_class_classnum);
+        classTea = (TextView) view.findViewById(R.id.tv_class_teacher);
+        classUniversity = (TextView) view.findViewById(R.id.tv_class_university);
+        classDepartment = (TextView) view.findViewById(R.id.tv_class_department);
+        classCode = (TextView) view.findViewById(R.id.tv_class_code);
+        classDetail = (TextView) view.findViewById(R.id.tv_class_goal_details_admin);
+        classExam = (TextView) view.findViewById(R.id.tv_class_exam_details_admin);
+        teaClassDetailImg = (ImageView) view.findViewById(R.id.img_class);
+        hint = (TextView) view.findViewById(R.id.hint);
+        hint2 = view.findViewById(R.id.hint2);
         initOrRefresh();
         return view;
     }
 
-    public void initOrRefresh(){
-        final String classId=getClassId();
-        final TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
-        parentActivity.classAppAction.getClassInfor(classId,this,new ActionCallbackListener<Class>() {
+    public void initOrRefresh() {
+        final String classId = getClassId();
+        final TeaClassMainActivity parentActivity = (TeaClassMainActivity) getActivity();
+        parentActivity.classAppAction.getClassInfor(classId, this, new ActionCallbackListener<Class>() {
             @Override
             public void onSuccess(Class cls, String message) {
                 className.setText(cls.getCourse());
@@ -81,18 +81,18 @@ public class TeaClassDetailFragment extends SBaseFragment {
                 classCode.setText(classId);
                 classUniversity.setText(cls.getUniversity());
                 classDepartment.setText(cls.getDepartment());
-                if(TextUtils.isEmpty(cls.getDetail())) {
+                if (TextUtils.isEmpty(cls.getDetail())) {
                     classDetail.setText("暂无内容");
-                }else {
+                } else {
                     classDetail.setText(cls.getDetail());
                 }
-                if(TextUtils.isEmpty(cls.getExam_shedule())){
+                if (TextUtils.isEmpty(cls.getExam_shedule())) {
                     classExam.setText("暂无内容");
-                }else {
+                } else {
                     classExam.setText(cls.getExam_shedule());
                 }
-                String userId=cls.getUser_id().toString();
-                parentActivity.userAppAction.getUserInforById(userId,TeaClassDetailFragment.this, new ActionCallbackListener<User>() {
+                String userId = cls.getUser_id().toString();
+                parentActivity.userAppAction.getUserInforById(userId, TeaClassDetailFragment.this, new ActionCallbackListener<User>() {
                     @Override
                     public void onSuccess(User user, String message) {
                         classTea.setText(user.getName());
@@ -104,19 +104,19 @@ public class TeaClassDetailFragment extends SBaseFragment {
                     }
                 });
                 //判断班课是否允许加入并设置checked
-                if(cls.getIf_allow_to_join().equals("是")){
+                if (cls.getIf_allow_to_join().equals("是")) {
                     checkBox.setChecked(true);
-                }else if(cls.getIf_allow_to_join().equals("否")){
+                } else if (cls.getIf_allow_to_join().equals("否")) {
                     checkBox.setChecked(false);
                 }
                 //checkBox监听器
                 checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if(!isChecked){
-                            TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
-                            LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
-                            parentActivity.classAppAction.notAllowToJoin(classId, TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
+                        if (!isChecked) {
+                            TeaClassMainActivity parentActivity = (TeaClassMainActivity) getActivity();
+                            LoadingDialogUtil.createLoadingDialog(getActivity(), "加载中...");
+                            parentActivity.classAppAction.notAllowToJoin(classId, TeaClassDetailFragment.this, new ActionCallbackListener<Void>() {
                                 @Override
                                 public void onSuccess(Void data, String message) {
                                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -129,10 +129,10 @@ public class TeaClassDetailFragment extends SBaseFragment {
                                     LoadingDialogUtil.closeDialog();
                                 }
                             });
-                        }else{
-                            TeaClassMainActivity parentActivity= (TeaClassMainActivity) getActivity();
-                            LoadingDialogUtil.createLoadingDialog(getActivity(),"加载中...");
-                            parentActivity.classAppAction.allowToJoin(classId,TeaClassDetailFragment.this,new ActionCallbackListener<Void>() {
+                        } else {
+                            TeaClassMainActivity parentActivity = (TeaClassMainActivity) getActivity();
+                            LoadingDialogUtil.createLoadingDialog(getActivity(), "加载中...");
+                            parentActivity.classAppAction.allowToJoin(classId, TeaClassDetailFragment.this, new ActionCallbackListener<Void>() {
                                 @Override
                                 public void onSuccess(Void data, String message) {
                                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -149,7 +149,7 @@ public class TeaClassDetailFragment extends SBaseFragment {
                     }
                 });
                 //从服务器获取图片
-                if(cls.getAvatar()!=null) {
+                if (cls.getAvatar() != null) {
                     parentActivity.fileAppAction.cacheImg(cls.getAvatar(), getActivity(), new ActionCallbackListener<File>() {
                         @Override
                         public void onSuccess(File data, String message) {

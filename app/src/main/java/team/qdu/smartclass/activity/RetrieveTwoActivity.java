@@ -12,6 +12,7 @@ import android.widget.Toast;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 
 
 /**
@@ -66,7 +67,7 @@ public class RetrieveTwoActivity extends SBaseActivity {
                     @Override
                     public void onSuccess(Void data, String message) {
                         Intent intent = new Intent(RetrieveTwoActivity.this,RetrieveThreeActivity.class);
-                        application.addActivity(RetrieveTwoActivity.this);
+                        SApplication.addActivity(RetrieveTwoActivity.this);
                         startActivity(intent);
                     }
                 });

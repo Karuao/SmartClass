@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface FileApi {
 
-    public File cacheFile(String urlTail, String localPath);
+    File cacheFile(String urlTail, String localPath);
 
-    public Map getVersionInfo();
+    Map getVersionInfo();
 }

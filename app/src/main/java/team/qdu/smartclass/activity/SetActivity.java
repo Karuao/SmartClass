@@ -13,6 +13,7 @@ import android.widget.Toast;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 
 
 /**
@@ -51,22 +52,22 @@ public class SetActivity extends SBaseActivity {
 
 
     public void toLogout(View view) {
-        application.addActivity(SetActivity.this);
+        SApplication.addActivity(SetActivity.this);
         setUserId(null);
-        application.clearActivity();
+        SApplication.clearActivity();
         startActivity(new Intent(SetActivity.this, LoginActivity.class));
     }
 
     public void toBack2(View view){
         finish();
-        application.removeMainActivity(application.activityList);
+        SApplication.removeMainActivity(SApplication.activityList);
     }
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {//点击的是返回键
             if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {//按键的按下事件
-                application.removeMainActivity(application.activityList);
+                SApplication.removeMainActivity(SApplication.activityList);
             }
         }
             return super.dispatchKeyEvent(event);

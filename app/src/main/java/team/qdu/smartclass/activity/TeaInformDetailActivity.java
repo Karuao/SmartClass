@@ -64,7 +64,7 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
 
     }
 
-    public void toDeleteInform(final View view)  throws URISyntaxException {
+    public void toDeleteInform(final View view) {
         new AlertDialog.Builder(TeaInformDetailActivity.this)
                 .setTitle("提示")
                 .setMessage("确定要删除此通知？")
@@ -111,7 +111,7 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
         }
     }
 
-    private void getUnreadNum(String informid)throws URISyntaxException {
+    private void getUnreadNum(String informid) {
         LoadingDialogUtil.createLoadingDialog(this, "加载中...");
         TeaInformDetailActivity.this.informAppAction.getUnreadNum(informid, this, new ActionCallbackListener<Void>() {
 

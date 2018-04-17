@@ -1,7 +1,5 @@
 package team.qdu.api;
 
-import android.graphics.Bitmap;
-
 import java.io.File;
 import java.util.List;
 
@@ -15,32 +13,30 @@ import team.qdu.model.ClassUser;
 
 public interface ClassApi {
 
-    public ApiResponse<List<ClassUser>> getJoinedClasses(String userId);
+    ApiResponse<List<ClassUser>> getJoinedClasses(String userId);
 
-    public ApiResponse<ClassUser> jumpClass(String classId, String userId);
+    ApiResponse<ClassUser> jumpClass(String classId, String userId);
 
-    public Bitmap getBitmap(String urlTail);
+    ApiResponse<ClassUser> createClass(File avatar, String name, String course, String userId);
 
-    public ApiResponse<ClassUser> createClass(File avatar, String name, String course, String userId);
+    ApiResponse<Class> joinClass(String classId, String userId);
 
-    public ApiResponse<Class> joinClass(String classId, String userId);
+    ApiResponse<Integer> confirmJoinClass(String classId, String userId);
 
-    public ApiResponse<Integer> confirmJoinClass(String classId, String userId);
+    ApiResponse<Void> notAllowToJoin(String classId);
 
-    public ApiResponse<Void> notAllowToJoin(String classId);
+    ApiResponse<Void> allowToJoin(String classId);
 
-    public ApiResponse<Void> allowToJoin(String classId);
+    ApiResponse<Class> searchByClassId(String classId);
 
-    public ApiResponse<Class> searchByClassId(String classId);
+    ApiResponse<Void> finishClass(String classId);
 
-    public ApiResponse<Void> finishClass(String classId);
+    ApiResponse<Void> deleteClass(String classId);
 
-    public ApiResponse<Void> deleteClass(String classId);
+    ApiResponse<String> modifyClass(String classId, File avatar, String className, String course, String university, String department, String goal, String exam);
 
-    public ApiResponse<String> modifyClass(String classId,File avatar,String className,String course,String university,String department,String goal,String exam);
+    ApiResponse<Void> quitClass(String classId, String userId);
 
-    public ApiResponse<Void> quitClass(String classId,String userId);
-
-    public Void readNew(String classUserId, String whichPage);
+    Void readNew(String classUserId, String whichPage);
 
 }

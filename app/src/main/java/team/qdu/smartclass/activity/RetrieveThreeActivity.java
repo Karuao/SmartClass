@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 
 
 /**
@@ -49,7 +50,7 @@ public class RetrieveThreeActivity extends SBaseActivity {
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 finish();
-                application.clearActivity();
+                SApplication.clearActivity();
             }
         });
     }

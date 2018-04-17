@@ -11,6 +11,7 @@ import android.widget.Toast;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 
 /**
  * 找回密码页面1
@@ -48,7 +49,7 @@ public class RetrieveOneActivity extends SBaseActivity {
                 b1.putString("account",user.getAccount());
                 intent.putExtras(b1);
                 storeAccount(user.getAccount());
-                application.addActivity(RetrieveOneActivity.this);
+                SApplication.addActivity(RetrieveOneActivity.this);
                 startActivity(intent);
             }
         });

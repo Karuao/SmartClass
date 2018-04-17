@@ -1,7 +1,5 @@
 package team.qdu.api;
 
-import android.graphics.Bitmap;
-
 import java.util.List;
 
 import team.qdu.model.ApiResponse;
@@ -16,33 +14,31 @@ import team.qdu.model.ClassUserExp;
 
 public interface MemberApi {
 
-    public ApiResponse<List<ClassUser>> getClassMembers(String classId);
+    ApiResponse<List<ClassUser>> getClassMembers(String classId);
 
-    public Bitmap getBitmap(String urlTail);
+    ApiResponse<ClassUser> searchByClassUserId(String classUserId);
 
-    public ApiResponse<ClassUser> searchByClassUserId(String classUserId);
+    ApiResponse<List<Attendance>> getAttendanceInfo(String classId);
 
-    public ApiResponse<List<Attendance>> getAttendanceInfo(String classId);
+    ApiResponse<List<Attendance_user>> getAttendanceUserInfo(String attendanceId);
 
-    public ApiResponse<List<Attendance_user>> getAttendanceUserInfo(String attendanceId);
+    ApiResponse<List<ClassUserExp>> getExpDetail(String classId, String userId);
 
-    public ApiResponse<List<ClassUserExp>> getExpDetail(String classId,String userId);
+    ApiResponse<Void> shiftClass(String classUserId);
 
-    public ApiResponse<Void> shiftClass(String classUserId);
+    ApiResponse<Void> setStudentSignIn(String attendanceUserId);
 
-    public ApiResponse<Void> setStudentSignIn(String attendanceUserId);
+    ApiResponse<Void> setStudentNotSignIn(String attendanceUserId);
 
-    public ApiResponse<Void> setStudentNotSignIn(String attendanceUserId);
+    ApiResponse<Attendance_user> beginSignInForStudent(String userId, String attendanceId, String classUserId);
 
-    public ApiResponse<Attendance_user> beginSignInForStudent(String userId, String attendanceId,String classUserId);
+    ApiResponse<Attendance> beginSignInForTeacher(String classId);
 
-    public ApiResponse<Attendance> beginSignInForTeacher(String classId);
+    ApiResponse<Void> giveUpSignIn(String attendanceId);
 
-    public ApiResponse<Void> giveUpSignIn(String attendanceId);
+    ApiResponse<Void> endSignIn(String attendanceId);
 
-    public ApiResponse<Void> endSignIn(String attendanceId);
+    ApiResponse<List<Attendance>> getTeacherSignInHistory(String classId);
 
-    public ApiResponse<List<Attendance>> getTeacherSignInHistory(String classId);
-
-    public ApiResponse<List<Attendance_user>> getStudentSignInHistory(String userId,String classId);
+    ApiResponse<List<Attendance_user>> getStudentSignInHistory(String userId, String classId);
 }

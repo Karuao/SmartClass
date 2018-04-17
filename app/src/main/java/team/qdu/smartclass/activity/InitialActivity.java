@@ -21,7 +21,7 @@ import java.util.Map;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.util.Tools;
+import team.qdu.smartclass.util.VersionUtil;
 import team.qdu.smartclass.view.CommonProgressDialog;
 
 import static com.lzy.imagepicker.ui.ImageGridActivity.REQUEST_PERMISSION_CAMERA;
@@ -51,7 +51,7 @@ public class InitialActivity extends SBaseActivity {
         fileAppAction.getVersionInfo(new ActionCallbackListener<Map>() {
             @Override
             public void onSuccess(Map data, String message) {
-                int currentVersion = Tools.getVersion(InitialActivity.this);
+                int currentVersion = VersionUtil.getVersion(InitialActivity.this);
                 int latestVersion = Integer.parseInt((String) data.get("version"));
                 String content = (String) data.get("content");
                 String url = (String) data.get("url");

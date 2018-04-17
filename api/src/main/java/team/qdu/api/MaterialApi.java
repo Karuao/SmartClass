@@ -11,8 +11,8 @@ import team.qdu.model.Material_User;
  */
 
 public interface MaterialApi {
-    public ApiResponse<List<Material>> getTeaMaterial(String classid);
-    public ApiResponse<List<Material_User>> getStuMaterial(String classid,String userid);
-    public ApiResponse<Void> deleteMaterial(String materialid);
-    public ApiResponse<Void> downloadMaterial(String classid,String userid,String name,String material_user_id);
+    ApiResponse<List<Material>> getTeaMaterial(String classid);
+    ApiResponse<List<Material_User>> getStuMaterial(String classid, String userid);
+    ApiResponse<Void> deleteMaterial(String materialid);
+    ApiResponse<Void> downloadMaterial(String classid, String userid, String name, String material_user_id);
 }

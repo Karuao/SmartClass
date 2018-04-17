@@ -13,7 +13,6 @@ import java.util.Map;
 
 import team.qdu.api.net.FileHttpEngine;
 import team.qdu.api.net.HttpEngine;
-import team.qdu.api.net.ImgHttpEngine;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.Homework;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
@@ -29,12 +28,10 @@ public class HomeworkApiImpl implements HomeworkApi {
     private final static String TIME_OUT_EVENT_MSG = "网络君似乎开小差了...";
 
     private HttpEngine httpEngine;
-    private ImgHttpEngine imgHttpEngine;
     private FileHttpEngine fileHttpEngine;
 
     public HomeworkApiImpl() {
         httpEngine = HttpEngine.getInstance();
-        imgHttpEngine = ImgHttpEngine.getInstance();
         fileHttpEngine = FileHttpEngine.getInstance();
     }
 

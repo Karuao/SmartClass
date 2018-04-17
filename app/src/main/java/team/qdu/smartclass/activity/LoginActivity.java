@@ -45,7 +45,7 @@ public class LoginActivity extends SBaseActivity {
         this.tbPasswordVisibility.setOnCheckedChangeListener(new ToggleButtonClick());
     }
 
-    public void toLogin(View view) throws URISyntaxException {
+    public void toLogin(View view) {
         LoadingDialogUtil.createLoadingDialog(this, "登录中...");
         final String account = accountEdt.getText().toString();
         String password = passwordEdt.getText().toString();

@@ -53,7 +53,7 @@ public class TeaInfoAdapter extends SBaseAdapter<Inform> {
         Date date=new Date(itemList.get(position).getCreate_date_time().getTime());
         compo.timeTxt.setText(sdf.format(date));
         compo.numberTxt.setText(Integer.toString(itemList.get(position).getRead_num()));
-        compo.informTxt.setText((String) itemList.get(position).getDetail());
+        compo.informTxt.setText(itemList.get(position).getDetail());
         return convertView;
     }
 }

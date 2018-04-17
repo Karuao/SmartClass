@@ -30,7 +30,7 @@ public class CreateInformActivity extends SBaseActivity {
         detailEdt = (EditText) findViewById(R.id.Inform_Detail);
     }
 
-    public void toPush(View view) throws URISyntaxException {
+    public void toPush(View view) {
         LoadingDialogUtil.createLoadingDialog(this, "上传中...");
         String classid = getClassId();
         String detail = detailEdt.getText().toString();

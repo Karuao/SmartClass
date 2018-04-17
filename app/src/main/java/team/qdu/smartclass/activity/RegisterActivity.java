@@ -48,7 +48,7 @@ public class RegisterActivity extends SBaseActivity {
     }
 
 
-    public void toRegister(View view) throws URISyntaxException {
+    public void toRegister(View view) {
         LoadingDialogUtil.createLoadingDialog(this, "注册中...");
         String account = accountEdt.getText().toString();
         String password = passwordEdt.getText().toString();

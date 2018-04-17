@@ -73,7 +73,7 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
     }
 
     //发布作业点击事件
-    public void toPublish(View view) throws URISyntaxException {
+    public void toPublish(View view) {
 //        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
         LoadingDialogUtil.createLoadingDialog(this, "上传中...");//加载中动画，用来防止用户重复点击
         String title = homeworkTitleEdt.getText().toString();

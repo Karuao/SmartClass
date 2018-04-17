@@ -13,12 +13,12 @@ import team.qdu.model.User;
 
 public interface InformApi {
 
-    public ApiResponse<List<Inform>> getInform(String classid);
-    public ApiResponse<Void> createInform(String classid,String detail);
-    public ApiResponse<List<Inform_User>> getUserInform(String classid, String userid);
-    public ApiResponse<Void> ClickInform(String inform_user_id,String classid,String userid);
-    public ApiResponse<Void> deleteInform(String inform_id);
-    public ApiResponse<List<User>> getReadPeople(String inform_id);
-    public ApiResponse<List<User>> getUnReadPeople(String inform_id);
-    public ApiResponse<Void> getUnreadNum(String informid);
+    ApiResponse<List<Inform>> getInform(String classid);
+    ApiResponse<Void> createInform(String classid, String detail);
+    ApiResponse<List<Inform_User>> getUserInform(String classid, String userid);
+    ApiResponse<Void> ClickInform(String inform_user_id, String classid, String userid);
+    ApiResponse<Void> deleteInform(String inform_id);
+    ApiResponse<List<User>> getReadPeople(String inform_id);
+    ApiResponse<List<User>> getUnReadPeople(String inform_id);
+    ApiResponse<Void> getUnreadNum(String informid);
 }

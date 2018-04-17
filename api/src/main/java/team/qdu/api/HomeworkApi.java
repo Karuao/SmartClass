@@ -13,21 +13,21 @@ import team.qdu.model.HomeworkWithBLOBs;
 
 public interface HomeworkApi {
 
-    public ApiResponse<Void> publishHomework(String title, String deadline, String detail, List<File> photoList, String classId);
+    ApiResponse<Void> publishHomework(String title, String deadline, String detail, List<File> photoList, String classId);
 
-    public ApiResponse<List> getHomeworkList(String classId, String userId, String userTitle, String requestStatus);
+    ApiResponse<List> getHomeworkList(String classId, String userId, String userTitle, String requestStatus);
 
-    public ApiResponse<Void> changeHomeworkStatus(String homeworkId, String homeworkStatus, String homeworkTitle);
+    ApiResponse<Void> changeHomeworkStatus(String homeworkId, String homeworkStatus, String homeworkTitle);
 
-    public ApiResponse<HomeworkAnswerWithBLOBs> getStuHomeworkDetail(String homeworkAnswerId);
+    ApiResponse<HomeworkAnswerWithBLOBs> getStuHomeworkDetail(String homeworkAnswerId);
 
-    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String homeworkTitle, String detail, List<File> photoList, String delPhotoesUrl);
+    ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String homeworkTitle, String detail, List<File> photoList, String delPhotoesUrl);
 
-    public ApiResponse<HomeworkWithBLOBs> getHomeworkDetail(String homeworkId);
+    ApiResponse<HomeworkWithBLOBs> getHomeworkDetail(String homeworkId);
 
-    public ApiResponse<List<HomeworkAnswerWithBLOBs>> getHomeworkAnswerList(String homeworkId);
+    ApiResponse<List<HomeworkAnswerWithBLOBs>> getHomeworkAnswerList(String homeworkId);
 
-    public ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, List<File> photoList, String delPhotoesUrl);
+    ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, List<File> photoList, String delPhotoesUrl);
 
-    public ApiResponse<Integer> getNotEvaluateStuNum(String homeworkId);
+    ApiResponse<Integer> getNotEvaluateStuNum(String homeworkId);
 }

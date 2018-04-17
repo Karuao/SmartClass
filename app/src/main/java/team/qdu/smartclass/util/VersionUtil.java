@@ -8,7 +8,7 @@ import android.os.Environment;
 /**
  * Created by huagnshuyuan on 2017/3/16.
  */
-public class Tools {
+public class VersionUtil {
     /**
      * 检查是否存在SDCard
      *
@@ -16,11 +16,7 @@ public class Tools {
      */
     public static boolean hasSdcard() {
         String state = Environment.getExternalStorageState();
-        if (state.equals(Environment.MEDIA_MOUNTED)) {
-            return true;
-        } else {
-            return false;
-        }
+        return state.equals(Environment.MEDIA_MOUNTED);
     }
 
     /**

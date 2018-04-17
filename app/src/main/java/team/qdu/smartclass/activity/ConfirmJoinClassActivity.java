@@ -14,6 +14,7 @@ import java.io.File;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Class;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.fragment.MainClassFragment;
 import team.qdu.smartclass.util.LoadingDialogUtil;
 
@@ -67,7 +68,7 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
                 setClassUserId(data1.toString());
                 setCourse(data.getCourse());
                 MainClassFragment.refreshFlag = true;
-                application.clearActivity();
+                SApplication.clearActivity();
                 finish();
                 startActivity(new Intent(ConfirmJoinClassActivity.this, StuClassMainActivity.class));
                 LoadingDialogUtil.closeDialog();//关闭加载中动画

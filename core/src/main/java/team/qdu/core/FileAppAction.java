@@ -12,14 +12,14 @@ import java.util.Map;
 public interface FileAppAction {
 
     //缓存图片
-    public void cacheImg(String urlTail, Context context, ActionCallbackListener<File> listener);
+    void cacheImg(String urlTail, Context context, ActionCallbackListener<File> listener);
 
     //缓存文件
-    public void cacheFile(String urlTail, Context context, ActionCallbackListener<File> listener);
+    void cacheFile(String urlTail, Context context, ActionCallbackListener<File> listener);
 
     //获取版本更新信息
-    public void getVersionInfo(ActionCallbackListener<Map> listener);
+    void getVersionInfo(ActionCallbackListener<Map> listener);
 
     //下载更新的App
-    public void downloadApp(final String urlTail, Context context, final ActionCallbackListener<Object> listener);
+    void downloadApp(final String urlTail, Context context, final ActionCallbackListener<Object> listener);
 }

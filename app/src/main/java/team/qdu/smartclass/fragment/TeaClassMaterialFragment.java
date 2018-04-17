@@ -95,7 +95,7 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
                                 public void onSuccess(File data, String message) {
                                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                                     OpenFileUtil openFileUtil = new OpenFileUtil();
-                                    openFileUtil.openFileByPath(getContext(), url);
+                                    OpenFileUtil.openFileByPath(getContext(), url);
                                 }
 
                                 @Override
@@ -110,17 +110,14 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
         }
         else {
             OpenFileUtil openFileUtil = new OpenFileUtil();
-            openFileUtil.openFileByPath(getContext(), url);
+            OpenFileUtil.openFileByPath(getContext(), url);
         }
     }
 
 
     public boolean CheckIfFileExist(final String urlTail){
         File img = new File(getActivity().getExternalFilesDir(null) + File.separator + urlTail);
-        if (img.exists()) {
-            return true;
-        }
-        return false;
+        return img.exists();
     }
 
 }
