@@ -105,7 +105,16 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
                             lastExp = cu.getExp();
                         }
                     }else {
-                        break;
+                         if(myRank==1) {
+                             break;
+                         }else {
+                             if(lastExp==cu.getExp()) {
+                                 myRank--;
+                                 break;
+                             }else {
+                                 break;
+                             }
+                         }
                     }
                 }
                 rank.setText(String.valueOf(myRank));
