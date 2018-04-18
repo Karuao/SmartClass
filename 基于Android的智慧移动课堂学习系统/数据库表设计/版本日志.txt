@@ -32,3 +32,6 @@
 
 班课数据库表设计v1.7
 1.新增表material_user表
+2.class_user_exp表删除字段class_user_id
+3.class_user_exp表添加字段class_id、user_id
+4.数据库tinytext全部改为text
