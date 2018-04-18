@@ -56,7 +56,7 @@ public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnCl
         tvFinish = (TextView) currentPage.findViewById(R.id.tv_class_homework_finish);
         teaHomeworkFragmentPagerAdapter = new TeaHomeworkFragmentPagerAdapter(getChildFragmentManager());
         //设置tab颜色为进行中作业tab为选中状态
-        tvFinish.setTextColor(getActivity().getColor(R.color.hinter));
+        tvFinish.setTextColor(getResources().getColor(R.color.hinter));
     }
 
     private void initEvents() {
@@ -68,8 +68,8 @@ public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnCl
 
     //切换字体颜色
     private void resetImg() {
-        tvUnderway.setTextColor(getActivity().getColor(R.color.hinter));
-        tvFinish.setTextColor(getActivity().getColor(R.color.hinter));
+        tvUnderway.setTextColor(getResources().getColor(R.color.hinter));
+        tvFinish.setTextColor(getResources().getColor(R.color.hinter));
     }
 
     @Override
@@ -77,11 +77,11 @@ public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnCl
         resetImg();
         switch (view.getId()) {
             case R.id.ll_class_homework_underway:
-                tvUnderway.setTextColor(getActivity().getColor(R.color.classbottom));
+                tvUnderway.setTextColor(getResources().getColor(R.color.classbottom));
                 teaHomeworkVpager.setCurrentItem(0);
                 break;
             case R.id.ll_class_homework_finish:
-                tvFinish.setTextColor(getActivity().getColor(R.color.classbottom));
+                tvFinish.setTextColor(getResources().getColor(R.color.classbottom));
                 teaHomeworkVpager.setCurrentItem(1);
                 break;
 
@@ -98,10 +98,10 @@ public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnCl
         resetImg();
         switch (currentItem) {
             case 0:
-                tvUnderway.setTextColor(getActivity().getColor(R.color.classbottom));
+                tvUnderway.setTextColor(getResources().getColor(R.color.classbottom));
                 break;
             case 1:
-                tvFinish.setTextColor(getActivity().getColor(R.color.classbottom));
+                tvFinish.setTextColor(getResources().getColor(R.color.classbottom));
                 break;
         }
     }
