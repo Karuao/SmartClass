@@ -244,8 +244,6 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                 TeaClassMaterialFragment.refreshFlag = true;
                                 teaClassFragmentPagerAdapter.getTeaClassMaterialFragment().getMaterial();
-
-
                             }
 
                             @Override

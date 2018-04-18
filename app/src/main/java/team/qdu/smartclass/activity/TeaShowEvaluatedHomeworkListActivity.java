@@ -75,7 +75,7 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
     public void onResume() {
         super.onResume();
         if (refreshFlag) {
-            setData();
+            setStudentCommitStatus();
             refreshFlag = false;
         }
     }
@@ -110,7 +110,12 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
 
     //给页面组件设置数据
     private void setData() {
-        //设置作业内容和图片
+        setHomeworkInfo();
+        setStudentCommitStatus();
+    }
+
+    //设置作业内容和图片
+    private void setHomeworkInfo() {
         homeworkAppAction.getHomeworkDetail(homeworkId, this, new ActionCallbackListener<HomeworkWithBLOBs>() {
             @Override
             public void onSuccess(HomeworkWithBLOBs data, String message) {
@@ -129,7 +134,10 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
                 Toast.makeText(TeaShowEvaluatedHomeworkListActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
-        //设置已评价、为评价和未提交人数和列表
+    }
+
+    //设置已评价、为评价和未提交人数和列表
+    private void setStudentCommitStatus() {
         homeworkAppAction.getHomeworkAnswerList(homeworkId, this, new ActionCallbackListener<List<HomeworkAnswerWithBLOBs>>() {
             @Override
             public void onSuccess(List<HomeworkAnswerWithBLOBs> data, String message) {

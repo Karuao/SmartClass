@@ -22,6 +22,7 @@ import team.qdu.smartclass.adapter.HomeworkEvaluateAdapter;
 import team.qdu.smartclass.adapter.HomeworkShowPhotoAdapter;
 import team.qdu.smartclass.adapter.HomeworkUncommitAdapter;
 import team.qdu.smartclass.util.ImgUtil;
+import team.qdu.smartclass.util.ListViewUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
@@ -129,6 +130,8 @@ public class TeaShowFinishedHomeworkListActivity extends SBaseActivity implement
                         TeaShowFinishedHomeworkListActivity.this, commitHomeworkAnswer));
                 uncommitHomeworkList.setAdapter(new HomeworkUncommitAdapter(
                         TeaShowFinishedHomeworkListActivity.this, uncommitHomeworkAnswer));
+                ListViewUtil.setListViewHeightBasedOnChildren(commitHomeworkList);
+                ListViewUtil.setListViewHeightBasedOnChildren(uncommitHomeworkList);
             }
 
             @Override

@@ -92,7 +92,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
             materailBadgeView.setMaxHeight(40);
             materailBadgeView.setMaxWidth(40);
             materailBadgeView.setTextColor(Color.parseColor("#d3321b"));
-            materailBadgeView.setBadgeMargin(0, 0, 24, 0);
+            materailBadgeView.setBadgeMargin(0, 0, 18, 0);
             materailBadgeView.setText("1");
             materailBadgeView.setTargetView(tabResource);
         }
@@ -101,14 +101,14 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
             homeworkBadgeView.setMaxHeight(40);
             homeworkBadgeView.setMaxWidth(40);
             homeworkBadgeView.setTextColor(Color.parseColor("#d3321b"));
-            homeworkBadgeView.setBadgeMargin(0, 0, 24, 0);
+            homeworkBadgeView.setBadgeMargin(0, 0, 18, 0);
             homeworkBadgeView.setText("1");
             homeworkBadgeView.setTargetView(tabHomework);
         }
         if (getIntent().getSerializableExtra("unreadInformationNum") != null
                 && ((int) getIntent().getSerializableExtra("unreadInformationNum")) > 0) {
             informBadgeView = new BadgeView(context);
-            informBadgeView.setBadgeMargin(0, 0, 24, 0);
+            informBadgeView.setBadgeMargin(0, 0, 18, 0);
             informBadgeView.setText(getIntent().getSerializableExtra("unreadInformationNum").toString());
             informBadgeView.setTargetView(tabInform);
         }
