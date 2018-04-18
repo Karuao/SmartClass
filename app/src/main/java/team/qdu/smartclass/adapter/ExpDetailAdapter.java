@@ -52,7 +52,7 @@ public class ExpDetailAdapter extends SBaseAdapter<ClassUserExp>{
             compo.exp.setText(itemList.get(position).getExp().toString());
             compo.exp_symbol.setTextColor((context).getResources().getColor(R.color.classbottom));
         }else {
-            compo.exp_symbol.setText("—");
+            compo.exp_symbol.setText("-");
             compo.exp.setText(String.valueOf(Math.abs(itemList.get(position).getExp())));
             compo.exp_symbol.setTextColor((context).getResources().getColor(R.color.colorRank));
             compo.exp.setTextColor((context).getResources().getColor(R.color.colorRank));

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.jpush.android.api.JPushInterface;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
@@ -55,13 +56,10 @@ public class SetActivity extends SBaseActivity {
         SApplication.addActivity(SetActivity.this);
         setUserId(null);
         SApplication.clearActivity();
+        JPushInterface.setAlias(context,1,"abc");
         startActivity(new Intent(SetActivity.this, LoginActivity.class));
     }
 
-    public void toBack2(View view){
-        finish();
-        SApplication.removeMainActivity(SApplication.activityList);
-    }
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
