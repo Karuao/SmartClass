@@ -107,8 +107,10 @@
             android:background="#d6d6d6" />
 
         <RelativeLayout
+            android:id="@+id/rlayout_commit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="foldListView"
             android:orientation="vertical">
 
             <TextView
@@ -118,12 +120,33 @@
                 android:text="已提交" />
 
             <TextView
-                android:id="@+id/txt_evaluatestu_num"
+                android:id="@+id/txt_commitstu_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="32dp"
                 android:text="人" />
+
+            <ImageView
+                android:id="@+id/img_commit_folded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/folding"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/img_commit_unfolded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/unfolding" />
 
         </RelativeLayout>
 
@@ -133,7 +156,7 @@
             android:background="#d6d6d6" />
 
         <ListView
-            android:id="@+id/list_evaluatehomework"
+            android:id="@+id/list_commithomework"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></ListView>
 
@@ -143,8 +166,10 @@
             android:background="#d6d6d6" />
 
         <RelativeLayout
+            android:id="@+id/rlayout_uncommit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="foldListView"
             android:orientation="vertical">
 
             <TextView
@@ -158,9 +183,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="32dp"
                 android:text="人" />
 
+            <ImageView
+                android:id="@+id/img_uncommit_folded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/folding"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/img_uncommit_unfolded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/unfolding" />
 
         </RelativeLayout>
 

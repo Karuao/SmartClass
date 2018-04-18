@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,13 +33,17 @@ public class TeaShowFinishedHomeworkListActivity extends SBaseActivity implement
 
     private TextView homeworkTitleTxt;
     private TextView homeworkDetailTxt;
-    private TextView evaluateStuNumTxt;
+    private TextView commitStuNumTxt;
     private TextView uncommitStuNumTxt;
     private HorizontalListView homeworkShowPhotoList;
     private HomeworkShowPhotoAdapter homeworkShowPhotoAdapter;
     private RelativeLayout homeworkPhotoRlayout;
-    private ListView evaluateHomeworkList;
+    private ListView commitHomeworkList;
     private ListView uncommitHomeworkList;
+    private ImageView commitFoldedImg;
+    private ImageView commitUnFoldedImg;
+    private ImageView unCommitFoldedImg;
+    private ImageView unCommitUnFoldedImg;
     private String homeworkId;
     //刷新标志
     public static boolean refreshFlag;
@@ -65,12 +70,16 @@ public class TeaShowFinishedHomeworkListActivity extends SBaseActivity implement
     private void initView() {
         homeworkTitleTxt = (TextView) findViewById(R.id.txt_homework_name);
         homeworkDetailTxt = (TextView) findViewById(R.id.txt_homework_detail);
-        evaluateStuNumTxt = (TextView) findViewById(R.id.txt_evaluatestu_num);
+        commitStuNumTxt = (TextView) findViewById(R.id.txt_commitstu_num);
         uncommitStuNumTxt = (TextView) findViewById(R.id.txt_uncommitstu_num);
         homeworkShowPhotoList = (HorizontalListView) findViewById(R.id.list_homework_showphoto);
         homeworkPhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_homework_photo);
-        evaluateHomeworkList = (ListView) findViewById(R.id.list_evaluatehomework);
+        commitHomeworkList = (ListView) findViewById(R.id.list_commithomework);
         uncommitHomeworkList = (ListView) findViewById(R.id.list_uncommithomework);
+        commitFoldedImg = (ImageView) findViewById(R.id.img_commit_folded);
+        commitUnFoldedImg = (ImageView) findViewById(R.id.img_commit_unfolded);
+        unCommitFoldedImg = (ImageView) findViewById(R.id.img_uncommit_folded);
+        unCommitUnFoldedImg = (ImageView) findViewById(R.id.img_uncommit_unfolded);
         setData();
     }
 
@@ -78,7 +87,7 @@ public class TeaShowFinishedHomeworkListActivity extends SBaseActivity implement
         homeworkShowPhotoAdapter = new HomeworkShowPhotoAdapter(this);
         homeworkShowPhotoList.setAdapter(homeworkShowPhotoAdapter);
         homeworkShowPhotoList.setOnItemClickListener(this);
-        evaluateHomeworkList.setOnItemClickListener(this);
+        commitHomeworkList.setOnItemClickListener(this);
     }
 
     //给页面组件设置数据
@@ -105,19 +114,19 @@ public class TeaShowFinishedHomeworkListActivity extends SBaseActivity implement
         homeworkAppAction.getHomeworkAnswerList(homeworkId, this, new ActionCallbackListener<List<HomeworkAnswerWithBLOBs>>() {
             @Override
             public void onSuccess(List<HomeworkAnswerWithBLOBs> data, String message) {
-                List<HomeworkAnswerWithBLOBs> evaluateHomeworkAnswer = new ArrayList<>();
+                List<HomeworkAnswerWithBLOBs> commitHomeworkAnswer = new ArrayList<>();
                 List<HomeworkAnswerWithBLOBs> uncommitHomeworkAnswer = new ArrayList<>();
                 for (HomeworkAnswerWithBLOBs homeworkAnswer : data) {
                     if ("是".equals(homeworkAnswer.getIf_submit())) {
-                        evaluateHomeworkAnswer.add(homeworkAnswer);
+                        commitHomeworkAnswer.add(homeworkAnswer);
                     } else {
                         uncommitHomeworkAnswer.add(homeworkAnswer);
                     }
                 }
-                evaluateStuNumTxt.setText(evaluateHomeworkAnswer.size() + "人");
+                commitStuNumTxt.setText(commitHomeworkAnswer.size() + "人");
                 uncommitStuNumTxt.setText(uncommitHomeworkAnswer.size() + "人");
-                evaluateHomeworkList.setAdapter(new HomeworkEvaluateAdapter(
-                        TeaShowFinishedHomeworkListActivity.this, evaluateHomeworkAnswer));
+                commitHomeworkList.setAdapter(new HomeworkEvaluateAdapter(
+                        TeaShowFinishedHomeworkListActivity.this, commitHomeworkAnswer));
                 uncommitHomeworkList.setAdapter(new HomeworkUncommitAdapter(
                         TeaShowFinishedHomeworkListActivity.this, uncommitHomeworkAnswer));
             }
@@ -126,6 +135,34 @@ public class TeaShowFinishedHomeworkListActivity extends SBaseActivity implement
             public void onFailure(String errorEvent, String message) {
             }
         });
+    }
+
+    //折叠/展开学生ListView点击事件
+    public void foldListView(View view) {
+        switch (view.getId()) {
+            case R.id.rlayout_commit:
+                if (commitHomeworkList.getVisibility() == View.VISIBLE) {
+                    commitHomeworkList.setVisibility(View.GONE);
+                    commitFoldedImg.setVisibility(View.VISIBLE);
+                    commitUnFoldedImg.setVisibility(View.INVISIBLE);
+                } else {
+                    commitHomeworkList.setVisibility(View.VISIBLE);
+                    commitFoldedImg.setVisibility(View.INVISIBLE);
+                    commitUnFoldedImg.setVisibility(View.VISIBLE);
+                }
+                break;
+            default:
+                if (uncommitHomeworkList.getVisibility() == View.VISIBLE) {
+                    uncommitHomeworkList.setVisibility(View.GONE);
+                    unCommitFoldedImg.setVisibility(View.VISIBLE);
+                    unCommitUnFoldedImg.setVisibility(View.INVISIBLE);
+                } else {
+                    uncommitHomeworkList.setVisibility(View.VISIBLE);
+                    unCommitFoldedImg.setVisibility(View.INVISIBLE);
+                    unCommitUnFoldedImg.setVisibility(View.VISIBLE);
+                }
+                break;
+        }
     }
 
     @Override

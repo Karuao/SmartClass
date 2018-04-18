@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import team.qdu.smartclass.adapter.HomeworkUncommitAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkFinishFragment;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
 import team.qdu.smartclass.util.ImgUtil;
+import team.qdu.smartclass.util.ListViewUtil;
 import team.qdu.smartclass.util.LoadingDialogUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
@@ -47,6 +49,12 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
     private ListView evaluateHomeworkList;
     private ListView notEvaluateHomeworkList;
     private ListView uncommitHomeworkList;
+    private ImageView evaluateFoldedImg;
+    private ImageView evaluateUnFoldedImg;
+    private ImageView notEvaluateFoldedImg;
+    private ImageView notEvaluateUnFoldedImg;
+    private ImageView unCommitFoldedImg;
+    private ImageView unCommitUnFoldedImg;
     private String homeworkId;
     //作业标题
     private String homeworkTitle;
@@ -83,6 +91,12 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
         evaluateHomeworkList = (ListView) findViewById(R.id.list_evaluatehomework);
         notEvaluateHomeworkList = (ListView) findViewById(R.id.list_notevaluatehomework);
         uncommitHomeworkList = (ListView) findViewById(R.id.list_uncommithomework);
+        evaluateFoldedImg = (ImageView) findViewById(R.id.img_evaluate_folded);
+        evaluateUnFoldedImg = (ImageView) findViewById(R.id.img_evaluate_unfolded);
+        notEvaluateFoldedImg = (ImageView) findViewById(R.id.img_notevaluate_folded);
+        notEvaluateUnFoldedImg = (ImageView) findViewById(R.id.img_notevaluate_unfolded);
+        unCommitFoldedImg = (ImageView) findViewById(R.id.img_uncommit_folded);
+        unCommitUnFoldedImg = (ImageView) findViewById(R.id.img_uncommit_unfolded);
         setData();
     }
 
@@ -142,6 +156,9 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
                         TeaShowEvaluatedHomeworkListActivity.this, notEvaluateHomeworkAnswer));
                 uncommitHomeworkList.setAdapter(new HomeworkUncommitAdapter(
                         TeaShowEvaluatedHomeworkListActivity.this, uncommitHomeworkAnswer));
+                ListViewUtil.setListViewHeightBasedOnChildren(evaluateHomeworkList);
+                ListViewUtil.setListViewHeightBasedOnChildren(notEvaluateHomeworkList);
+                ListViewUtil.setListViewHeightBasedOnChildren(uncommitHomeworkList);
             }
 
             @Override
@@ -187,6 +204,45 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
             //取消操作并提示n人作业未评价
             Toast.makeText(TeaShowEvaluatedHomeworkListActivity.this, "仍有" + notEvaluateStuNum
                     + "作业未评价,请评价后再结束作业", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //折叠/展开学生ListView点击事件
+    public void foldListView(View view) {
+        switch (view.getId()) {
+            case R.id.rlayout_evaluate:
+                if (evaluateHomeworkList.getVisibility() == View.VISIBLE) {
+                    evaluateHomeworkList.setVisibility(View.GONE);
+                    evaluateFoldedImg.setVisibility(View.VISIBLE);
+                    evaluateUnFoldedImg.setVisibility(View.INVISIBLE);
+                } else {
+                    evaluateHomeworkList.setVisibility(View.VISIBLE);
+                    evaluateFoldedImg.setVisibility(View.INVISIBLE);
+                    evaluateUnFoldedImg.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.rlayout_notevaluate:
+                if (notEvaluateHomeworkList.getVisibility() == View.VISIBLE) {
+                    notEvaluateHomeworkList.setVisibility(View.GONE);
+                    notEvaluateFoldedImg.setVisibility(View.VISIBLE);
+                    notEvaluateUnFoldedImg.setVisibility(View.INVISIBLE);
+                } else {
+                    notEvaluateHomeworkList.setVisibility(View.VISIBLE);
+                    notEvaluateFoldedImg.setVisibility(View.INVISIBLE);
+                    notEvaluateUnFoldedImg.setVisibility(View.VISIBLE);
+                }
+                break;
+            default:
+                if (uncommitHomeworkList.getVisibility() == View.VISIBLE) {
+                    uncommitHomeworkList.setVisibility(View.GONE);
+                    unCommitFoldedImg.setVisibility(View.VISIBLE);
+                    unCommitUnFoldedImg.setVisibility(View.INVISIBLE);
+                } else {
+                    uncommitHomeworkList.setVisibility(View.VISIBLE);
+                    unCommitFoldedImg.setVisibility(View.INVISIBLE);
+                    unCommitUnFoldedImg.setVisibility(View.VISIBLE);
+                }
+                break;
         }
     }
 

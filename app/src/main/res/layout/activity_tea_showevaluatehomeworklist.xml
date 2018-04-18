@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?><!--点击一个正在评价中的作业后进入的页面-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -104,8 +104,10 @@
             android:background="#d6d6d6" />
 
         <RelativeLayout
+            android:id="@+id/rlayout_evaluate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="foldListView"
             android:orientation="vertical">
 
             <TextView
@@ -119,8 +121,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="32dp"
                 android:text="人" />
+
+            <ImageView
+                android:id="@+id/img_evaluate_folded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/folding"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/img_evaluate_unfolded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/unfolding" />
+
         </RelativeLayout>
 
         <View
@@ -139,8 +163,10 @@
             android:background="#d6d6d6" />
 
         <RelativeLayout
+            android:id="@+id/rlayout_notevaluate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="foldListView"
             android:orientation="vertical">
 
             <TextView
@@ -154,9 +180,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="32dp"
                 android:text="人" />
 
+            <ImageView
+                android:id="@+id/img_notevaluate_folded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/folding"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/img_notevaluate_unfolded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/unfolding" />
 
         </RelativeLayout>
 
@@ -176,8 +222,10 @@
             android:background="#d6d6d6" />
 
         <RelativeLayout
+            android:id="@+id/rlayout_uncommit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="foldListView"
             android:orientation="vertical">
 
             <TextView
@@ -191,8 +239,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="32dp"
                 android:text="人" />
+
+            <ImageView
+                android:id="@+id/img_uncommit_folded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/folding"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/img_uncommit_unfolded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/unfolding" />
 
         </RelativeLayout>
 

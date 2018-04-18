@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import team.qdu.smartclass.adapter.HomeworkShowPhotoAdapter;
 import team.qdu.smartclass.adapter.HomeworkUncommitAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
 import team.qdu.smartclass.util.ImgUtil;
+import team.qdu.smartclass.util.ListViewUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
@@ -41,6 +43,10 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
     private RelativeLayout homeworkPhotoRlayout;
     private ListView commitHomeworkList;
     private ListView uncommitHomeworkList;
+    private ImageView commitFoldedImg;
+    private ImageView commitUnFoldedImg;
+    private ImageView unCommitFoldedImg;
+    private ImageView unCommitUnFoldedImg;
     private HomeworkShowPhotoAdapter homeworkShowPhotoAdapter;
     private String homeworkId;
     //作业标题
@@ -63,6 +69,10 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
         homeworkPhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_homework_photo);
         commitHomeworkList = (ListView) findViewById(R.id.list_commithomework);
         uncommitHomeworkList = (ListView) findViewById(R.id.list_uncommithomework);
+        commitFoldedImg = (ImageView) findViewById(R.id.img_commit_folded);
+        commitUnFoldedImg = (ImageView) findViewById(R.id.img_commit_unfolded);
+        unCommitFoldedImg = (ImageView) findViewById(R.id.img_uncommit_folded);
+        unCommitUnFoldedImg = (ImageView) findViewById(R.id.img_uncommit_unfolded);
         setData();
     }
 
@@ -115,6 +125,8 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
                         TeaShowUnderwayHomeworkListActivity.this, commitHomeworkAnswer));
                 uncommitHomeworkList.setAdapter(new HomeworkUncommitAdapter(
                         TeaShowUnderwayHomeworkListActivity.this, uncommitHomeworkAnswer));
+                ListViewUtil.setListViewHeightBasedOnChildren(commitHomeworkList);
+                ListViewUtil.setListViewHeightBasedOnChildren(uncommitHomeworkList);
             }
 
             @Override
@@ -158,6 +170,34 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
                     }).create();
         }
         alert.show();
+    }
+
+    //折叠/展开学生ListView点击事件
+    public void foldListView(View view) {
+        switch (view.getId()) {
+            case R.id.rlayout_commit:
+                if (commitHomeworkList.getVisibility() == View.VISIBLE) {
+                    commitHomeworkList.setVisibility(View.GONE);
+                    commitFoldedImg.setVisibility(View.VISIBLE);
+                    commitUnFoldedImg.setVisibility(View.INVISIBLE);
+                } else {
+                    commitHomeworkList.setVisibility(View.VISIBLE);
+                    commitFoldedImg.setVisibility(View.INVISIBLE);
+                    commitUnFoldedImg.setVisibility(View.VISIBLE);
+                }
+                break;
+            default:
+                if (uncommitHomeworkList.getVisibility() == View.VISIBLE) {
+                    uncommitHomeworkList.setVisibility(View.GONE);
+                    unCommitFoldedImg.setVisibility(View.VISIBLE);
+                    unCommitUnFoldedImg.setVisibility(View.INVISIBLE);
+                } else {
+                    uncommitHomeworkList.setVisibility(View.VISIBLE);
+                    unCommitFoldedImg.setVisibility(View.INVISIBLE);
+                    unCommitUnFoldedImg.setVisibility(View.VISIBLE);
+                }
+                break;
+        }
     }
 
     //改变作业状态
