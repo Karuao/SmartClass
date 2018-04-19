@@ -98,10 +98,10 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
     }
 
     private void getUnreadNum(String informid)  {
-        parentActivity.informAppAction.getUnreadNum(informid, this, new ActionCallbackListener<Void>() {
+        parentActivity.informAppAction.getUnreadNum(informid, this, new ActionCallbackListener<Inform>() {
 
             @Override
-            public void onSuccess(Void data, String message) {
+            public void onSuccess(Inform data, String message) {
             }
 
             @Override

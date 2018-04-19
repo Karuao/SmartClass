@@ -55,11 +55,11 @@ public class InformAppActionImpl implements InformAppAction {
     }
 
     @Override
-    public void getUnreadNum(final String informid, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
-        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+    public void getUnreadNum(final String informid, final Lifeful lifeful, final ActionCallbackListener<Inform> listener) {
+        new AsyncTask<Void, Void, ApiResponse<Inform>>() {
 
             @Override
-            protected ApiResponse<Void> doInBackground(Void... params) {
+            protected ApiResponse<Inform> doInBackground(Void... params) {
                 if (!lifeful.isAlive()) {
                     cancel(true);
                     return null;
@@ -68,12 +68,12 @@ public class InformAppActionImpl implements InformAppAction {
             }
 
             @Override
-            protected void onPostExecute(ApiResponse<Void> response) {
+            protected void onPostExecute(ApiResponse<Inform> response) {
                 if (!lifeful.isAlive()) {
                     return;
                 }
                 if (response.isSuccess()) {
-                    listener.onSuccess(null, response.getMsg());
+                    listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
                     listener.onFailure(response.getEvent(), response.getMsg());
                 }

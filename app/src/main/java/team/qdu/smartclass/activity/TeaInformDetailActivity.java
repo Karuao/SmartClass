@@ -12,6 +12,7 @@ import android.widget.Toast;
 import java.net.URISyntaxException;
 
 import team.qdu.core.ActionCallbackListener;
+import team.qdu.model.Inform;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.TeaClassInformFragment;
 import team.qdu.smartclass.util.LoadingDialogUtil;
@@ -50,13 +51,11 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
         LoutUnRead_number = (LinearLayout) findViewById(R.id.ll_class_inform_unreadnumber);
         String detail = getIntent().getStringExtra("detail");
         String time = getIntent().getStringExtra("time");
-        String read_num = getIntent().getStringExtra("read_num");
 
 
         String inform_id = getIntent().getStringExtra("informid");
         getUnreadNum(inform_id);
         tvDetial.setText(detail);
-        tvRead_number.setText(read_num+ "人已读");
 
         tvTime.setText(time);
         LoutRead_number.setOnClickListener(this);
@@ -113,10 +112,11 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
 
     private void getUnreadNum(String informid) {
         LoadingDialogUtil.createLoadingDialog(this, "加载中...");
-        TeaInformDetailActivity.this.informAppAction.getUnreadNum(informid, this, new ActionCallbackListener<Void>() {
+        TeaInformDetailActivity.this.informAppAction.getUnreadNum(informid, this, new ActionCallbackListener<Inform>() {
 
             @Override
-            public void onSuccess(Void data, String message) {
+            public void onSuccess(Inform data, String message) {
+                tvRead_number.setText(Integer.toString(data.getRead_num())+ "人已读");
                 tvUnRead_number.setText(message + "人未读");
                 LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
@@ -126,5 +126,10 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
                 LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
+    }
+    @Override
+    public void toBack(View view) {
+        TeaClassInformFragment.refreshFlag = true;
+        finish();
     }
 }

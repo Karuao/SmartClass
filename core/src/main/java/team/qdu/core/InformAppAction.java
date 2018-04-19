@@ -24,7 +24,7 @@ public interface InformAppAction {
 
     void getReadPeople(String inform_id, Lifeful lifeful, ActionCallbackListener<List<User>> listener);
 
-    void getUnreadNum(String inform_id, Lifeful lifeful, ActionCallbackListener<Void> listener);
+    void getUnreadNum(String inform_id, Lifeful lifeful, ActionCallbackListener<Inform> listener);
 
     void getUnReadPeople(String inform_id, Lifeful lifeful, ActionCallbackListener<List<User>> listener);
 }

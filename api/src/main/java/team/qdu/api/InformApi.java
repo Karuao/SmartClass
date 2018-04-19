@@ -20,5 +20,5 @@ public interface InformApi {
     ApiResponse<Void> deleteInform(String inform_id);
     ApiResponse<List<User>> getReadPeople(String inform_id);
     ApiResponse<List<User>> getUnReadPeople(String inform_id);
-    ApiResponse<Void> getUnreadNum(String informid);
+    ApiResponse<Inform> getUnreadNum(String informid);
 }

@@ -46,10 +46,10 @@ public class InformApiImpl implements InformApi {
     }
 
     @Override
-    public ApiResponse<Void> getUnreadNum(String informid) {
+    public ApiResponse<Inform> getUnreadNum(String informid) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("informId", informid);
-        Type type = new TypeToken<ApiResponse<Void>>() {
+        Type type = new TypeToken<ApiResponse<Inform>>() {
         }.getType();
         try {
             return httpEngine.postHandle(paramMap, type, "/getUnReadNum");
