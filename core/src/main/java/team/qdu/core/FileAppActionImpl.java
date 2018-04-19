@@ -15,6 +15,7 @@ import java.util.Map;
 
 import team.qdu.api.FileApi;
 import team.qdu.api.FileApiImpl;
+import team.qdu.api.util.FileUtil;
 
 /**
  * Created by 11602 on 2018/3/16.
@@ -161,9 +162,6 @@ public class FileAppActionImpl implements FileAppAction {
 
             public File cacheFile(String urlTail, String localPath) throws IOException {
                 File file = new File(localPath);
-                if (file.exists()) {
-                    return file;
-                }
                 //打印出请求z
                 Log.i(TAG, "request: " + urlTail);
                 HttpURLConnection connection = getConnection(urlTail);
@@ -173,8 +171,10 @@ public class FileAppActionImpl implements FileAppAction {
                     InputStream inputStream = connection.getInputStream();
                     //获取文件长度
                     int fileLength = connection.getContentLength();
-                    //新建相应的文件
-                    new File(localPath.substring(0, localPath.lastIndexOf(File.separator))).mkdirs();
+                    //新建相应的文件夹
+                    File directory = new File(localPath.substring(0, localPath.lastIndexOf(File.separator)));
+                    FileUtil.deleteDir(directory);
+                    directory.mkdirs();
                     //对应文件建立输出流
                     FileOutputStream fileOutputStream = new FileOutputStream(file);
                     //新建缓存,用来存储,从网络读取数据,再写入文件
