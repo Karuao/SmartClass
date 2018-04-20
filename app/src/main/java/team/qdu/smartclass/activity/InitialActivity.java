@@ -55,8 +55,9 @@ public class InitialActivity extends SBaseActivity {
                 int latestVersion = Integer.parseInt((String) data.get("version"));
                 String content = (String) data.get("content");
                 String url = (String) data.get("url");
+                String size = (String) data.get("size");
                 if (latestVersion > currentVersion) {
-                    showDialog(content, url);
+                    showDialog(content, url, size);
                 } else {
                     startAndFinishActivity();
                 }
@@ -82,10 +83,10 @@ public class InitialActivity extends SBaseActivity {
     }
 
     //显示更新进度Dialog
-    private void showDialog(final String content, final String url) {
+    private void showDialog(final String content, final String url, String size) {
         new android.app.AlertDialog.Builder(this)
                 .setTitle("版本更新")
-                .setMessage(content)
+                .setMessage(content + "\n\n大小：" + size)
                 .setPositiveButton("更新", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
