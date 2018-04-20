@@ -35,6 +35,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.MainClassFragment;
+import team.qdu.smartclass.util.ConstantUtil;
 import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.util.LoadingDialogUtil;
 
@@ -101,7 +102,7 @@ public class CreateClassActivity extends SBaseActivity {
                 MainClassFragment.refreshFlag = true;
                 setClassId(data.getClass_id().toString());
                 setClassUserId(data.getClass_user_id().toString());
-                setUserTitle("teacher");
+                setUserTitle(ConstantUtil.TEACHER_USER_TITLE);
                 setCourse(course);
                 Intent intent = new Intent(CreateClassActivity.this, ShowInviteCodeActivity.class);
                 intent.putExtra("avatarUrl", data.getMy_class().getAvatar());

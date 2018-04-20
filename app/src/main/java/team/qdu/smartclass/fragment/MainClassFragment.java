@@ -141,8 +141,9 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                 if (badgeView != null) {
                     ((ViewGroup) badgeView.getParent()).removeView(badgeView);
 //                    badgeView.decrementBadgeCount(1);
-                    parentActivity.classAppAction.readNew(getClassUserId(), "classList");
                 }
+                //无论进入有红点的班课还是应该有红点但是没刷新列表的班课，都了解了班课内的推送，下次将不再显示红点
+                parentActivity.classAppAction.readNew(getClassUserId(), "classList");
                 LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 

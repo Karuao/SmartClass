@@ -16,6 +16,7 @@ import team.qdu.model.Class;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.fragment.MainClassFragment;
+import team.qdu.smartclass.util.ConstantUtil;
 import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
@@ -64,7 +65,7 @@ public class ConfirmJoinClassActivity extends SBaseActivity {
             public void onSuccess(Integer data1, String message) {
                 Toast.makeText(ConfirmJoinClassActivity.this, message, Toast.LENGTH_SHORT).show();
                 setClassId(data.getClass_id().toString());
-                setUserTitle("student");
+                setUserTitle(ConstantUtil.STUDENT_USER_TITLE);
                 setClassUserId(data1.toString());
                 setCourse(data.getCourse());
                 MainClassFragment.refreshFlag = true;

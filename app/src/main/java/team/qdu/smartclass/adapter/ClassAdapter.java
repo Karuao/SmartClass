@@ -95,6 +95,11 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
             });
         }
 
+        //清空BadgeView，防止当班课未设置红点，调用convertView显示其它班课的红点
+        BadgeView badgeView = (BadgeView) convertView.findViewWithTag("badgeView");
+        if (badgeView != null) {
+            ((ViewGroup) badgeView.getParent()).removeView(badgeView);
+        }
         //设置红点
         if ("是".equals(itemList.get(position).getIf_new_class_thing())) {
             compo.badgeView.setMaxHeight(40);

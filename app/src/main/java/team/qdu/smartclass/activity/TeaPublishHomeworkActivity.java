@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -74,7 +73,6 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
 
     //发布作业点击事件
     public void toPublish(View view) {
-//        startActivity(new Intent(this, LoadingActivity.class));//加载中动画，用来防止用户重复点击
         LoadingDialogUtil.createLoadingDialog(this, "上传中...");//加载中动画，用来防止用户重复点击
         String title = homeworkTitleEdt.getText().toString();
         String deadline = homeworkDeadlineTxt.getText().toString();
@@ -88,14 +86,12 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
                         TeaHomeworkUnderwayFragment.refreshFlag = true;
                         finish();
                         FileUtil.deleteCompressFiles(photoList);
-//                        SApplication.clearActivity();//关闭加载中动画
                         LoadingDialogUtil.closeDialog();
                     }
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
                         Toast.makeText(TeaPublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-//                        SApplication.clearActivity();//关闭加载中动画
                         FileUtil.deleteCompressFiles(photoList);
                         LoadingDialogUtil.closeDialog();
                     }

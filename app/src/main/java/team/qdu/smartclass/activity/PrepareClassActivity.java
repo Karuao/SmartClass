@@ -41,6 +41,7 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.User;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.MainUserFragment;
+import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
@@ -50,17 +51,18 @@ import team.qdu.smartclass.util.LoadingDialogUtil;
 
 public class PrepareClassActivity extends SBaseActivity {
 
-    TextView modifyUserAccount;
-    TextView modifyUserName;
-    TextView modifyUserNumber;
-    AppCompatSpinner modifyUserGender;
-    AppCompatSpinner modifyUserUniversity;
-    AppCompatSpinner modifyUserDepartment;
-    TextView modifyUserMotto;
+    private TextView modifyUserAccount;
+    private TextView modifyUserName;
+    private TextView modifyUserNumber;
+    private AppCompatSpinner modifyUserGender;
+    private AppCompatSpinner modifyUserUniversity;
+    private AppCompatSpinner modifyUserDepartment;
+    private TextView modifyUserMotto;
+    private File userAvatar;
     Button btn;
 
-    ImageView AvatarImg;
-    PopupWindow selectphotoPopup;
+    private ImageView AvatarImg;
+    private PopupWindow selectphotoPopup;
 
     //权限
     public static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 102;
@@ -95,19 +97,22 @@ public class PrepareClassActivity extends SBaseActivity {
                 modifyUserMotto.setText(user.getStatus_message());
                 modifyUserNumber.setText(user.getSno());
                 //从服务器获取图片
-                PrepareClassActivity.this.fileAppAction.cacheImg(user.getAvatar(), PrepareClassActivity.this, new ActionCallbackListener<File>() {
-                    @Override
-                    public void onSuccess(File data, String message) {
-                        Glide.with(context).load(data.getPath()).into(AvatarImg);
-                    }
+                if(user.getAvatar()!=null) {
+                    PrepareClassActivity.this.fileAppAction.cacheImg(user.getAvatar(), PrepareClassActivity.this, new ActionCallbackListener<File>() {
+                        @Override
+                        public void onSuccess(File data, String message) {
+                            Glide.with(context).load(data.getPath()).into(AvatarImg);
+                        }
 
-                    @Override
-                    public void onFailure(String errorEvent, String message) {
-                    }
-                });
-                setSpinnerItemSelectedByValue(modifyUserGender, user.getGender());
-                setSpinnerItemSelectedByValue(modifyUserUniversity, user.getUniversity());
-                setSpinnerItemSelectedByValue(modifyUserDepartment, user.getDepartment());
+                        @Override
+                        public void onFailure(String errorEvent, String message) {
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                setSpinnerItemSelectedByValue(modifyUserGender,user.getGender());
+                setSpinnerItemSelectedByValue(modifyUserUniversity,user.getUniversity());
+                setSpinnerItemSelectedByValue(modifyUserDepartment,user.getDepartment());
             }
 
             @Override
@@ -130,11 +135,15 @@ public class PrepareClassActivity extends SBaseActivity {
     }
 
     public void confirmClick(View view) throws URISyntaxException {
-        LoadingDialogUtil.createLoadingDialog(this, "上传中...");//加载中动画，用来防止用户重复点击
-        File file = null;
         if (!isDefaultAvatar) {
-            file = new File(new URI(mDestinationUri.toString()));
+            userAvatar = new File(new URI(mDestinationUri.toString()));
+        }else {
+            userAvatar = null;
         }
+        if(userAvatar!=null) {
+            userAvatar = ImgUtil.compressAvatarPhoto(this, userAvatar);
+        }
+        final
         String userAccount = modifyUserAccount.getText().toString();
         String userName = modifyUserName.getText().toString();
         String userGender = modifyUserGender.getSelectedItem().toString();
@@ -142,14 +151,15 @@ public class PrepareClassActivity extends SBaseActivity {
         String userUniversity = modifyUserUniversity.getSelectedItem().toString();
         String userDepartment = modifyUserDepartment.getSelectedItem().toString();
         String userMotto = modifyUserMotto.getText().toString();
-        this.userAppAction.modifyUserInformation(file, userAccount, userName, userGender, userNumber, userUniversity, userDepartment
+        LoadingDialogUtil.createLoadingDialog(this,"加载中...");
+        this.userAppAction.modifyUserInformation(userAvatar, userAccount, userName, userGender, userNumber, userUniversity, userDepartment
                 , userMotto, this,new ActionCallbackListener<Void>() {
                     @Override
                     public void onSuccess(Void data, String message) {
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                        finish();
                         //MainUserFragment的刷新标志设为true，下次进入该页面将刷新
                         MainUserFragment.refreshFlag = true;
+                        finish();
                         if ("create".equals(getIntent().getStringExtra("do"))) {
                             finish();
                             startActivity(new Intent(PrepareClassActivity.this, CreateClassActivity.class));
@@ -160,12 +170,15 @@ public class PrepareClassActivity extends SBaseActivity {
                         LoadingDialogUtil.closeDialog();//关闭加载中动画
                     }
 
-                    @Override
-                    public void onFailure(String errorEvent, String message) {
-                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                        LoadingDialogUtil.closeDialog();//关闭加载中动画
-                    }
-                });
+            @Override
+            public void onFailure(String errorEvent, String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                if(userAvatar!=null) {
+                    userAvatar.delete();
+                }
+                LoadingDialogUtil.closeDialog();
+            }
+        });
     }
 
     public void setSpinnerItemSelectedByValue(AppCompatSpinner spinner, String value) {
