@@ -132,4 +132,9 @@ public class TeaInformDetailActivity extends SBaseActivity implements View.OnCli
         TeaClassInformFragment.refreshFlag = true;
         finish();
     }
+    @Override
+    public void onBackPressed() {
+        TeaClassInformFragment.refreshFlag = true;
+        super.onBackPressed();
+    }
 }
