@@ -23,10 +23,10 @@ public class FileHttpEngine {
 
     private final static String TAG = "FileHttpEngine";
     //The development database
-    private final static String SERVER_URL = "http://10.0.2.2";
+//    private final static String SERVER_URL = "http://10.0.2.2";
 //    private final static String SERVER_URL = "http://47.94.7.159";
     //The official database
-   // private final static String SERVER_URL = "http://140.143.134.146";
+    private final static String SERVER_URL = "http://140.143.134.146";
     private final static String REQUEST_METHOD = "POST";
     private final static String ENCODE_TYPE = "UTF-8";
     private final static int TIME_OUT = 8000;
