@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.jauker.widget.BadgeView;
 
+import java.util.Date;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
@@ -40,6 +41,8 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
     private SwipeRefreshLayout swipeRefreshLayout;
     private ClassAdapter classAdapter;
     public static boolean refreshFlag = false;
+    //是否可以跳转班课，用来防止快速点击进入两个班课
+    private Date lastClickTime = new Date();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -115,6 +118,12 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position, long id) {
+        Date currentClickTime = new Date();
+        if (currentClickTime.getTime() - lastClickTime.getTime() < 1000) {
+            lastClickTime = currentClickTime;
+            return;
+        }
+        lastClickTime = currentClickTime;
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
         LoadingDialogUtil.createLoadingDialog(getActivity(), "加载中...");//加载中动画，用来防止用户重复点击
         final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
