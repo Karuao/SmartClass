@@ -10,6 +10,9 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import team.qdu.smartclass.R;
 
 /**
@@ -21,7 +24,7 @@ import team.qdu.smartclass.R;
 
 public class LoadingDialogUtil {
 
-    private static Dialog loadingDialog;
+    private static List<Dialog> loadingDialogList = new ArrayList<>();
 
     public static void createLoadingDialog(Context context, String msg) {
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -31,7 +34,7 @@ public class LoadingDialogUtil {
         TextView tipTextView = (TextView) v.findViewById(R.id.tipTextView);// 提示文字
         tipTextView.setText(msg);// 设置加载信息
 
-        loadingDialog = new Dialog(context, R.style.MyDialogStyle);// 创建自定义样式dialog
+        Dialog loadingDialog = new Dialog(context, R.style.MyDialogStyle);// 创建自定义样式dialog
         loadingDialog.setCancelable(true); // 是否可以按“返回键”消失
         loadingDialog.setCanceledOnTouchOutside(false); // 点击加载框以外的区域
         loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(
@@ -48,6 +51,7 @@ public class LoadingDialogUtil {
         window.setAttributes(lp);
         window.setWindowAnimations(R.style.PopWindowAnimStyle);
         loadingDialog.show();
+        loadingDialogList.add(loadingDialog);
     }
 
     /**
@@ -58,8 +62,10 @@ public class LoadingDialogUtil {
      *
      */
     public static void closeDialog() {
-        if (loadingDialog != null && loadingDialog.isShowing()) {
-            loadingDialog.dismiss();
+        for (Dialog loadingDialog : loadingDialogList) {
+            if (loadingDialog != null && loadingDialog.isShowing()) {
+                loadingDialog.dismiss();
+            }
         }
     }
 

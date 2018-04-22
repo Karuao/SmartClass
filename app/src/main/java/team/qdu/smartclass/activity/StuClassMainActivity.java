@@ -77,6 +77,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
     @Override
     protected void onDestroy() {
         SApplication.clearActivity();
+        MainClassFragment.refreshFlag = true;
         super.onDestroy();
     }
 
@@ -135,7 +136,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         tabInform.setOnClickListener(this);
         tabClassinfo.setOnClickListener(this);
         classVpager.setAdapter(stuClassFragmentPagerAdapter);
-        classVpager.setOffscreenPageLimit(4);
+//        classVpager.setOffscreenPageLimit(0);
         classVpager.setCurrentItem(4);
         classVpager.addOnPageChangeListener(this);
         //初始点击成员界面

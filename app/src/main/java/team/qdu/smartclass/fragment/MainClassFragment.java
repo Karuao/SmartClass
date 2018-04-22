@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.jauker.widget.BadgeView;
 
+import java.util.Date;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
@@ -40,6 +41,8 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
     private SwipeRefreshLayout swipeRefreshLayout;
     private ClassAdapter classAdapter;
     public static boolean refreshFlag = false;
+    //是否可以跳转班课，用来防止快速点击进入两个班课
+    private Date lastClickTime = new Date();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -115,35 +118,47 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position, long id) {
+        Date currentClickTime = new Date();
+        if (currentClickTime.getTime() - lastClickTime.getTime() < 1000) {
+            lastClickTime = currentClickTime;
+            return;
+        }
+        lastClickTime = currentClickTime;
         //跳转班课内部界面，根据classId和userId判断身份，跳转老师或学生界面
         LoadingDialogUtil.createLoadingDialog(getActivity(), "加载中...");//加载中动画，用来防止用户重复点击
         final String classId = ((TextView) view.findViewById(R.id.txt_classId)).getText().toString();
         parentActivity.classAppAction.jumpClass(classId, getUserId(), this, new ActionCallbackListener<ClassUser>() {
             @Override
             public void onSuccess(ClassUser data, String message) {
-                Intent intent;
-                if ("老师".equals(data.getTitle())) {
-                    intent = new Intent(getContext(), TeaClassMainActivity.class);
+                if ("否".equals(data.getIf_in_class())) {
+                    //已经不再班课中则刷新班课列表并提示
+                    getJoinedClasses();
+                    Toast.makeText(getActivity(), "您已被移出该班课", Toast.LENGTH_SHORT).show();
                 } else {
-                    intent = new Intent(getContext(), StuClassMainActivity.class);
-                }
-                setUserTitle(data.getTitle());
-                setClassId(classId);
-                setClassUserId(data.getClass_user_id().toString());
-                ((SBaseActivity) getActivity()).setCourse(data.getMy_class().getCourse());
-                intent.putExtra("ifNewMaterial", data.getIf_new_material());
-                intent.putExtra("ifNewHomework", data.getIf_new_homework());
-                intent.putExtra("unreadInformationNum", data.getUnread_information_num());
-                startActivity(intent);
-                //取消红点显示
-                BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView");
+                    Intent intent;
+                    if ("老师".equals(data.getTitle())) {
+                        intent = new Intent(getContext(), TeaClassMainActivity.class);
+                    } else {
+                        intent = new Intent(getContext(), StuClassMainActivity.class);
+                    }
+                    setUserTitle(data.getTitle());
+                    setClassId(classId);
+                    setClassUserId(data.getClass_user_id().toString());
+                    ((SBaseActivity) getActivity()).setCourse(data.getMy_class().getCourse());
+                    intent.putExtra("ifNewMaterial", data.getIf_new_material());
+                    intent.putExtra("ifNewHomework", data.getIf_new_homework());
+                    intent.putExtra("unreadInformationNum", data.getUnread_information_num());
+                    startActivity(intent);
+                    //取消红点显示
+                    BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView");
 //                if ("是".equals(classAdapter.getItem(position).getIf_new_class_thing())) {
-                if (badgeView != null) {
-                    ((ViewGroup) badgeView.getParent()).removeView(badgeView);
+                    if (badgeView != null) {
+                        ((ViewGroup) badgeView.getParent()).removeView(badgeView);
 //                    badgeView.decrementBadgeCount(1);
+                    }
+                    //无论进入有红点的班课还是应该有红点但是没刷新列表的班课，都了解了班课内的推送，下次将不再显示红点
+                    parentActivity.classAppAction.readNew(getClassUserId(), "classList");
                 }
-                //无论进入有红点的班课还是应该有红点但是没刷新列表的班课，都了解了班课内的推送，下次将不再显示红点
-                parentActivity.classAppAction.readNew(getClassUserId(), "classList");
                 LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 

@@ -24,6 +24,7 @@ import team.qdu.smartclass.adapter.TeaHomeworkFinishAdapter;
 
 public class TeaHomeworkFinishFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
 
+    private boolean isPrepared;
     private View currentPage;
     private ListView homeworkList;
     private TeaClassMainActivity mContext;
@@ -35,9 +36,18 @@ public class TeaHomeworkFinishFragment extends SBaseFragment implements AdapterV
         currentPage = inflater.inflate(R.layout.class_tab03_admin_finish, container, false);
         mContext = (TeaClassMainActivity) getParentFragment().getActivity();
         initView();
-        setHomeworkList();
         initEvent();
+        isPrepared = true;
+        lazyLoad();
         return currentPage;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        setHomeworkList();
     }
 
     //页面从后台返回到前台运行

@@ -102,7 +102,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         imgClassinfo = (ImageView) findViewById(R.id.iv_class_classinfo);
 
         classVpager.setAdapter(teaClassFragmentPagerAdapter);
-        classVpager.setOffscreenPageLimit(4);
+//        classVpager.setOffscreenPageLimit(0);
         classVpager.setCurrentItem(4);
         classVpager.addOnPageChangeListener(this);
 

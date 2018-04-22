@@ -24,6 +24,7 @@ import team.qdu.smartclass.adapter.StuHomeworkFinishAdapter;
 
 public class StuHomeworkFinishFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
 
+    private boolean isPrepared;
     private View currentPage;
     private ListView homeworkList;
     private StuClassMainActivity mContext;
@@ -33,9 +34,18 @@ public class StuHomeworkFinishFragment extends SBaseFragment implements AdapterV
         currentPage = inflater.inflate(R.layout.class_tab03_finish, container, false);
         mContext = (StuClassMainActivity) getParentFragment().getActivity();
         initView();
-        setHomeworkList();
         initEvent();
+//        setHomeworkList();
+        isPrepared = true;
         return currentPage;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        setHomeworkList();
     }
 
     private void initView() {
