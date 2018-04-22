@@ -1,18 +1,13 @@
 package team.qdu.smartclass.adapter;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.util.List;
-
 import cn.jpush.android.api.JPushInterface;
 import team.qdu.smartclass.SApplication;
-import team.qdu.smartclass.activity.SBaseActivity;
-import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.activity.TeaMemberSigniningActivity;
 
 import static android.content.ContentValues.TAG;
@@ -33,8 +28,10 @@ public class TeaSignInReceiver extends BroadcastReceiver {
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             System.out.println("收到了自定义消息："+bundle.getString(JPushInterface.EXTRA_MESSAGE));
             // 自定义消息不会展示在通知栏，完全要开发者写代码去处理
-            ((TeaMemberSigniningActivity) SApplication.getActivityList().get(0)).getSignInStudent();
-            ((TeaMemberSigniningActivity) SApplication.getActivityList().get(0)).signInStuNum.setText(bundle.getString(JPushInterface.EXTRA_MESSAGE));
+            ((TeaMemberSigniningActivity) SApplication.getActivity(TeaMemberSigniningActivity.class)).getSignInStudent();
+            ((TeaMemberSigniningActivity) SApplication.getActivity(TeaMemberSigniningActivity.class)).signInStuNum.setText(bundle.getString(JPushInterface.EXTRA_MESSAGE));
+//            ((TeaMemberSigniningActivity) SApplication.getActivityList().get(0)).getSignInStudent();
+//            ((TeaMemberSigniningActivity) SApplication.getActivityList().get(0)).signInStuNum.setText(bundle.getString(JPushInterface.EXTRA_MESSAGE));
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             System.out.println("收到了通知");
             // 在这里可以做些统计，或者做些其他工作

@@ -1,6 +1,5 @@
 package team.qdu.smartclass;
 
-import android.app.Activity;
 import android.app.Application;
 import android.os.StrictMode;
 
@@ -12,10 +11,10 @@ import java.util.List;
 import cn.jpush.android.api.JPushInterface;
 import team.qdu.core.ClassAppAction;
 import team.qdu.core.ClassAppActionImpl;
-import team.qdu.core.HomeworkAppAction;
-import team.qdu.core.HomeworkAppActionImpl;
 import team.qdu.core.FileAppAction;
 import team.qdu.core.FileAppActionImpl;
+import team.qdu.core.HomeworkAppAction;
+import team.qdu.core.HomeworkAppActionImpl;
 import team.qdu.core.InformAppAction;
 import team.qdu.core.InformAppActionImpl;
 import team.qdu.core.MaterialAppAction;
@@ -24,7 +23,7 @@ import team.qdu.core.MemberAppAction;
 import team.qdu.core.MemberAppActionImpl;
 import team.qdu.core.UserAppAction;
 import team.qdu.core.UserAppActionImpl;
-import team.qdu.smartclass.activity.MainActivity;
+import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.util.GlideImageLoader;
 
 /**
@@ -49,7 +48,7 @@ public class SApplication extends Application {
 
     private FileAppAction fileAppAction;
 
-    public static List<Activity> activityList = new ArrayList<>();
+    public static List<SBaseActivity> activityList = new ArrayList<>();
 
     private ImagePicker imagePicker;
 
@@ -114,31 +113,42 @@ public class SApplication extends Application {
     }
 
     //向list中添加Activity
-    public static void addActivity(Activity activity) {
+    public static void addActivity(SBaseActivity activity) {
         activityList.add(activity);
     }
 
-
-    public static void removeMainActivity(List<Activity> list){
-        list.remove(0);
+    //从activityList中删除Activity
+    public static void removeActivity(Class type){
+        for (int i = 0; i < activityList.size(); i++) {
+            if (activityList.get(i).getClass() == type) {
+                activityList.remove(i);
+            }
+        }
     }
-//    public static void removeActivity(ArrayList<Activity> list, Activity target){
-//        for(int i=0;i<list.size();i++){
-//            Activity activity = list.get(i);
-//            if(activity.equals(target)){
-//                list.remove(activity);
-//            }
-//        }
-//    }
 
-    public static List<Activity> getActivityList() {
-        return activityList;
+    //检测activityList是否含有type类型的Activity
+    public static boolean hasActivity(Class type) {
+        for (SBaseActivity activity : activityList) {
+            if (activity.getClass() == type) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static SBaseActivity getActivity(Class type) {
+        for (SBaseActivity activity : activityList) {
+            if (activity.getClass() == type) {
+                return activity;
+            }
+        }
+        return null;
     }
 
     //finish list中的所有的Activity
     public static void clearActivity() {
         if (activityList != null) {
-            for (Activity activity : activityList) {
+            for (SBaseActivity activity : activityList) {
                 activity.finish();
             }
             activityList.clear();

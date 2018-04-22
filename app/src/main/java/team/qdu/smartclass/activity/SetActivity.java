@@ -65,7 +65,7 @@ public class SetActivity extends SBaseActivity {
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {//点击的是返回键
             if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {//按键的按下事件
-                SApplication.removeMainActivity(SApplication.activityList);
+                SApplication.removeActivity(MainActivity.class);
             }
         }
             return super.dispatchKeyEvent(event);
