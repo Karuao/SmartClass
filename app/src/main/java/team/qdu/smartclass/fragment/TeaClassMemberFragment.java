@@ -34,6 +34,7 @@ import team.qdu.smartclass.util.LoadingDialogUtil;
 
 public class TeaClassMemberFragment extends SBaseFragment implements AdapterView.OnItemClickListener{
 
+    private boolean isPrepared;
     private View currentPage;
     //标题栏班课名
     private TextView titleBarClassNameTxt;
@@ -50,8 +51,17 @@ public class TeaClassMemberFragment extends SBaseFragment implements AdapterView
         currentPage = inflater.inflate(R.layout.class_tab02_admin, container, false);
         initView();
         initEvent();
-        getClassMembers();
+        isPrepared = true;
+        lazyLoad();
         return currentPage;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        getClassMembers();
     }
 
     public void initView() {

@@ -26,6 +26,7 @@ import team.qdu.smartclass.activity.StuClassMainActivity;
 
 public class StuClassDetailFragment extends SBaseFragment {
 
+    private boolean isPrepared;
     //标题栏班课名
     TextView titleBarClassNameTxt;
     ImageView stuClassDetailImg;
@@ -50,6 +51,20 @@ public class StuClassDetailFragment extends SBaseFragment {
         stuClassDepartment = (TextView) view.findViewById(R.id.tv_class_department);
         stuClassDetail = (TextView) view.findViewById(R.id.tv_class_goal_details);
         stuClassExam = (TextView) view.findViewById(R.id.tv_class_exam_details);
+        isPrepared = true;
+        lazyLoad();
+        return view;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        getClassInfo();
+    }
+
+    public void getClassInfo(){
         final StuClassMainActivity parentActivity = (StuClassMainActivity) getActivity();
         parentActivity.classAppAction.getClassInfor(getClassId(), this, new ActionCallbackListener<Class>() {
             @Override
@@ -101,6 +116,5 @@ public class StuClassDetailFragment extends SBaseFragment {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             }
         });
-        return view;
     }
 }

@@ -29,6 +29,7 @@ import team.qdu.smartclass.util.LoadingDialogUtil;
 
 public class TeaClassDetailFragment extends SBaseFragment {
 
+    private boolean isPrepared;
     //标题栏班课名
     TextView titleBarClassNameTxt;
     CheckBox checkBox;
@@ -66,8 +67,17 @@ public class TeaClassDetailFragment extends SBaseFragment {
         teaClassDetailImg = (ImageView) view.findViewById(R.id.img_class);
         hint = (TextView) view.findViewById(R.id.hint);
         hint2 = view.findViewById(R.id.hint2);
-        initOrRefresh();
+        isPrepared = true;
+        lazyLoad();
         return view;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        initOrRefresh();
     }
 
     public void initOrRefresh() {
