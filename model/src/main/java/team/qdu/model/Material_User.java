@@ -14,6 +14,8 @@ public class Material_User implements Serializable {
 
     private String if_download;
 
+    private String if_browse;
+
     private Integer class_id;
 
     private Integer user_id;
@@ -62,6 +64,13 @@ public class Material_User implements Serializable {
 
     public void setIf_download(String if_download) {
         this.if_download = if_download == null ? null : if_download.trim();
+    }
+    public String getIf_browse() {
+        return if_browse;
+    }
+
+    public void setIf_browse(String if_browse) {
+        this.if_browse = if_browse;
     }
 
     public Integer getClass_id() {
