@@ -17,6 +17,7 @@ import com.jauker.widget.BadgeView;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.StuClassFragmentPagerAdapter;
 import team.qdu.smartclass.fragment.MainClassFragment;
 import team.qdu.smartclass.util.LoadingDialogUtil;
@@ -57,8 +58,8 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
     public static final int PAGE_FIVE = 4;
 
     //设置考试安排和学习目标是否单行显示
-    public boolean singleLine1=true;
-    public boolean singleLine2=true;
+    public boolean singleLine1 = true;
+    public boolean singleLine2 = true;
 
     TextView stuClassDetail;
     TextView stuClassExam;
@@ -66,10 +67,17 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SApplication.addActivity(this);
         setContentView(R.layout.class_mainpage);
         stuClassFragmentPagerAdapter = new StuClassFragmentPagerAdapter(getSupportFragmentManager());
         initView();
         initEvents();
+    }
+
+    @Override
+    protected void onDestroy() {
+        SApplication.clearActivity();
+        super.onDestroy();
     }
 
     //初始化View
@@ -114,9 +122,9 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         }
     }
 
-    public void initView2(){
-        stuClassDetail = (TextView)findViewById(R.id.tv_class_goal_details);
-        stuClassExam = (TextView)findViewById(R.id.tv_class_exam_details);
+    public void initView2() {
+        stuClassDetail = (TextView) findViewById(R.id.tv_class_goal_details);
+        stuClassExam = (TextView) findViewById(R.id.tv_class_exam_details);
     }
 
     private void initEvents() {
@@ -147,10 +155,10 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         startActivity(new Intent(StuClassMainActivity.this, StuMemberSigninActivity.class));
     }
 
-    public void checkExpDetail(View view){
-        Intent intent = new Intent(new Intent(StuClassMainActivity.this,ShowExpDetailActivity.class));
-        intent.putExtra("classId",getClassId());
-        intent.putExtra("userId",getUserId());
+    public void checkExpDetail(View view) {
+        Intent intent = new Intent(new Intent(StuClassMainActivity.this, ShowExpDetailActivity.class));
+        intent.putExtra("classId", getClassId());
+        intent.putExtra("userId", getUserId());
         startActivity(intent);
     }
 
@@ -257,7 +265,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        LoadingDialogUtil.createLoadingDialog(StuClassMainActivity.this,"加载中...");
+                        LoadingDialogUtil.createLoadingDialog(StuClassMainActivity.this, "加载中...");
                         StuClassMainActivity.this.classAppAction.quitClass(classId, userId, StuClassMainActivity.this, new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
@@ -279,23 +287,23 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                 .show();
     }
 
-    public void seeMoreDetailForStu(View view){
+    public void seeMoreDetailForStu(View view) {
         initView2();
-        if(singleLine1==true){
+        if (singleLine1 == true) {
             stuClassDetail.setSingleLine(false);
             singleLine1 = false;
-        }else {
+        } else {
             stuClassDetail.setSingleLine(true);
             singleLine1 = true;
         }
     }
 
-    public void seeMoreExamForStu(View view){
+    public void seeMoreExamForStu(View view) {
         initView2();
-        if(singleLine2==true){
+        if (singleLine2 == true) {
             stuClassExam.setSingleLine(false);
             singleLine2 = false;
-        }else {
+        } else {
             stuClassExam.setSingleLine(true);
             singleLine2 = true;
         }
