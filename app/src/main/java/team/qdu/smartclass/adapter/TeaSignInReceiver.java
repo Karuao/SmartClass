@@ -1,14 +1,18 @@
 package team.qdu.smartclass.adapter;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import cn.jpush.android.api.JPushInterface;
 import team.qdu.smartclass.SApplication;
+import team.qdu.smartclass.activity.StuClassMainActivity;
 import team.qdu.smartclass.activity.TeaMemberSigniningActivity;
+import team.qdu.smartclass.fragment.MainClassFragment;
 
 import static android.content.ContentValues.TAG;
 
@@ -28,8 +32,27 @@ public class TeaSignInReceiver extends BroadcastReceiver {
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             System.out.println("收到了自定义消息："+bundle.getString(JPushInterface.EXTRA_MESSAGE));
             // 自定义消息不会展示在通知栏，完全要开发者写代码去处理
-            ((TeaMemberSigniningActivity) SApplication.getActivity(TeaMemberSigniningActivity.class)).getSignInStudent();
-            ((TeaMemberSigniningActivity) SApplication.getActivity(TeaMemberSigniningActivity.class)).signInStuNum.setText(bundle.getString(JPushInterface.EXTRA_MESSAGE));
+            if(bundle.getString(JPushInterface.EXTRA_MESSAGE).equals("哈哈")){
+                boolean result = SApplication.hasActivity(StuClassMainActivity.class);
+                if(result){
+//                    System.out.println("hsihidhi"+SApplication.activityList.get(0).isFinishing());
+                    StuClassMainActivity stuClassMainActivity = (StuClassMainActivity) SApplication.getActivity(StuClassMainActivity.class);
+                    new AlertDialog.Builder(stuClassMainActivity)
+                        .setTitle("提示")
+                        .setMessage("您已被移除班课！")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                MainClassFragment.refreshFlag = true;
+                                SApplication.clearActivity();
+                            }
+                        })
+                        .show();
+            }
+            }else {
+                ((TeaMemberSigniningActivity) SApplication.getActivity(TeaMemberSigniningActivity.class)).getSignInStudent();
+                ((TeaMemberSigniningActivity) SApplication.getActivity(TeaMemberSigniningActivity.class)).signInStuNum.setText(bundle.getString(JPushInterface.EXTRA_MESSAGE));
+            }
 //            ((TeaMemberSigniningActivity) SApplication.getActivityList().get(0)).getSignInStudent();
 //            ((TeaMemberSigniningActivity) SApplication.getActivityList().get(0)).signInStuNum.setText(bundle.getString(JPushInterface.EXTRA_MESSAGE));
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
