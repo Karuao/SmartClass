@@ -31,7 +31,7 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
     //标题栏班课名
     private TextView titleBarClassNameTxt;
     ListView listview;
-
+    private boolean isPrepared;
     TeaClassMainActivity parentActivity;
     //刷新标志
     public static boolean refreshFlag;
@@ -46,13 +46,21 @@ public class TeaClassInformFragment extends SBaseFragment implements AdapterView
         titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
         listview = (ListView) currentPage.findViewById(R.id.class_inform_listView);
         listview.addFooterView(new ViewStub(getContext()));
-        getInform();
+        isPrepared = true;
+        lazyLoad();
         refreshFlag = false;
         listview.setOnItemClickListener(this);
         return currentPage;
 
     }
 
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        getInform();
+    }
     //页面从后台返回到前台运行
     @Override
     public void onResume() {
