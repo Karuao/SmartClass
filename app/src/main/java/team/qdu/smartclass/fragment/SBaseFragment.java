@@ -14,6 +14,29 @@ import team.qdu.core.Lifeful;
 
 public abstract class SBaseFragment extends Fragment implements Lifeful {
 
+    protected boolean isVisible;
+
+    //禁用懒加载
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()) {
+            isVisible = true;
+            onVisible();
+        } else {
+            isVisible = false;
+            onInvisible();
+        }
+    }
+
+    protected void onVisible(){
+        lazyLoad();
+    }
+
+    protected  void lazyLoad(){};
+
+    protected void onInvisible(){};
+
     //从SharedPreferences获取userId
     public String getUserId() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user",

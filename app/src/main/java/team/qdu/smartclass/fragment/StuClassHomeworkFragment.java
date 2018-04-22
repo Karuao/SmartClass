@@ -19,6 +19,7 @@ import team.qdu.smartclass.adapter.StuHomeworkFragmentPagerAdapter;
 public class StuClassHomeworkFragment extends SBaseFragment implements View.OnClickListener,
         ViewPager.OnPageChangeListener {
 
+//    private boolean isPrepared;
     //该页面
     private View currentPage;
 
@@ -42,8 +43,17 @@ public class StuClassHomeworkFragment extends SBaseFragment implements View.OnCl
         currentPage = inflater.inflate(R.layout.class_tab03, container, false);
         initView();
         initEvents();
+//        isPrepared = true;
         return currentPage;
     }
+
+//    @Override
+//    protected void lazyLoad() {
+//        if(!isPrepared || !isVisible) {
+//            return;
+//        }
+//        initEvents();
+//    }
 
     //初始化View
     private void initView() {

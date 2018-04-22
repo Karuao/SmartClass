@@ -12,7 +12,6 @@ import cn.jpush.android.api.JPushInterface;
 import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.activity.StuClassMainActivity;
 import team.qdu.smartclass.activity.TeaMemberSigniningActivity;
-import team.qdu.smartclass.fragment.MainClassFragment;
 
 import static android.content.ContentValues.TAG;
 
@@ -43,7 +42,6 @@ public class TeaSignInReceiver extends BroadcastReceiver {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                MainClassFragment.refreshFlag = true;
                                 SApplication.clearActivity();
                             }
                         })

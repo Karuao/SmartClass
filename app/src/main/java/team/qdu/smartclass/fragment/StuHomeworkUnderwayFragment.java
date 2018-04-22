@@ -25,6 +25,7 @@ import team.qdu.smartclass.adapter.StuHomeworkUnderwayAdapter;
 
 public class StuHomeworkUnderwayFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
 
+    private boolean isPrepared;
     private View currentPage;
     private ListView homeworkList;
     private StuClassMainActivity mContext;
@@ -36,9 +37,18 @@ public class StuHomeworkUnderwayFragment extends SBaseFragment implements Adapte
         currentPage = inflater.inflate(R.layout.class_tab03_underway, container, false);
         mContext = (StuClassMainActivity) getParentFragment().getActivity();
         initView();
-        setHomeworkList();
         initEvent();
+        isPrepared = true;
+        lazyLoad();
         return currentPage;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        setHomeworkList();
     }
 
     //页面从后台返回到前台运行
