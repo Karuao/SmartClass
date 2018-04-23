@@ -78,6 +78,13 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
             @Override
             public void onSuccess(List<Inform_User> data, String message) {
                 listview.setAdapter(new StuInfoAdapter(getActivity(), data));
+                int unreadInformationNum = 0;
+                for (Inform_User informUser : data) {
+                    if ("否".equals(informUser.getIf_read())) {
+                        unreadInformationNum++;
+                    }
+                }
+                ((StuClassMainActivity) getActivity()).setInformBadge(unreadInformationNum);
             }
 
             @Override
