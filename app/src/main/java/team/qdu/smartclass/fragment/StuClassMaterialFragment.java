@@ -54,7 +54,7 @@ public class StuClassMaterialFragment extends SBaseFragment implements AdapterVi
         if(!isPrepared || !isVisible) {
             return;
         }
-        getMaterial();
+         getMaterial();
     }
     @Override
     public void onResume() {
