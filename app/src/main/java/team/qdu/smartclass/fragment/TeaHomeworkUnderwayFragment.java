@@ -38,14 +38,37 @@ public class TeaHomeworkUnderwayFragment extends SBaseFragment implements Adapte
         mContext = (TeaClassMainActivity) getParentFragment().getActivity();
         initView();
         initEvent();
+//        setHomeworkList();
         isPrepared = true;
         lazyLoad();
         return currentPage;
     }
 
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if(getUserVisibleHint()) {
+//            isVisible = true;
+//            onVisible();
+//        } else {
+//            isVisible = false;
+//            onInvisible();
+//        }
+//    }
+
+    @Override
+    protected void onVisible() {
+    }
+
+    //第一次加载之后该页面一直处于isVisible状态
+//    成员 	false false
+//    成员到作业	true  true 无
+//    资源到作业	true  true 有
+//    资源到成员	false false
+//    成员到作业	false false无
     @Override
     protected void lazyLoad() {
-        if(!isPrepared || !isVisible) {
+        if(!isPrepared || !((TeaClassHomeworkFragment)getParentFragment()).isVisible) {
             return;
         }
         setHomeworkList();

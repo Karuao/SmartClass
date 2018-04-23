@@ -44,6 +44,10 @@ public class StuHomeworkUnderwayFragment extends SBaseFragment implements Adapte
     }
 
     @Override
+    protected void onVisible() {
+    }
+
+    @Override
     protected void lazyLoad() {
         if(!isPrepared || !isVisible) {
             return;

@@ -37,14 +37,20 @@ public class TeaHomeworkFinishFragment extends SBaseFragment implements AdapterV
         mContext = (TeaClassMainActivity) getParentFragment().getActivity();
         initView();
         initEvent();
+//        setHomeworkList();
         isPrepared = true;
         lazyLoad();
         return currentPage;
     }
 
     @Override
+    protected void onVisible() {
+    }
+
+    //第一次加载之后该页面一直处于isVisible状态
+    @Override
     protected void lazyLoad() {
-        if(!isPrepared || !isVisible) {
+        if(!isPrepared || !((TeaClassHomeworkFragment)getParentFragment()).isVisible) {
             return;
         }
         setHomeworkList();

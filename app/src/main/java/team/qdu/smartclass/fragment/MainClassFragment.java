@@ -16,8 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jauker.widget.BadgeView;
-
 import java.util.Date;
 import java.util.List;
 
@@ -140,24 +138,25 @@ public class MainClassFragment extends SBaseFragment implements AdapterView.OnIt
                         intent = new Intent(getContext(), TeaClassMainActivity.class);
                     } else {
                         intent = new Intent(getContext(), StuClassMainActivity.class);
+//                        intent.putExtra("ifNewMaterial", data.getIf_new_material());
+                        intent.putExtra("unbrowseMaterailNum", data.getUnbrowse_material_num());
+                        intent.putExtra("ifNewHomework", data.getIf_new_homework());
+                        intent.putExtra("unreadInformationNum", data.getUnread_information_num());
                     }
                     setUserTitle(data.getTitle());
                     setClassId(classId);
                     setClassUserId(data.getClass_user_id().toString());
                     ((SBaseActivity) getActivity()).setCourse(data.getMy_class().getCourse());
-                    intent.putExtra("ifNewMaterial", data.getIf_new_material());
-                    intent.putExtra("ifNewHomework", data.getIf_new_homework());
-                    intent.putExtra("unreadInformationNum", data.getUnread_information_num());
                     startActivity(intent);
                     //取消红点显示
-                    BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView");
+//                    BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView");
 //                if ("是".equals(classAdapter.getItem(position).getIf_new_class_thing())) {
-                    if (badgeView != null) {
-                        ((ViewGroup) badgeView.getParent()).removeView(badgeView);
-//                    badgeView.decrementBadgeCount(1);
-                    }
+//                    if (badgeView != null) {
+//                        ((ViewGroup) badgeView.getParent()).removeView(badgeView);
+////                    badgeView.decrementBadgeCount(1);
+//                    }
                     //无论进入有红点的班课还是应该有红点但是没刷新列表的班课，都了解了班课内的推送，下次将不再显示红点
-                    parentActivity.classAppAction.readNew(getClassUserId(), "classList");
+//                    parentActivity.classAppAction.readNew(getClassUserId(), "classList");
                 }
                 LoadingDialogUtil.closeDialog();//关闭加载中动画
             }

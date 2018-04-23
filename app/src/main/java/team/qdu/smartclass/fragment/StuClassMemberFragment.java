@@ -18,7 +18,6 @@ import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
 import team.qdu.smartclass.adapter.ClassMemberAdapter;
-import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -26,6 +25,7 @@ import team.qdu.smartclass.util.LoadingDialogUtil;
 
 public class StuClassMemberFragment extends SBaseFragment  implements AdapterView.OnItemClickListener{
 
+    private boolean isPrepared;
     private View currentPage;
     //标题栏班课名
     private TextView titleBarClassNameTxt;
@@ -43,8 +43,17 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
         currentPage = inflater.inflate(R.layout.class_tab02, container, false);
         initView();
         initEvent();
-        getClassMembers();
+        isPrepared = true;
+        lazyLoad();
         return currentPage;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        getClassMembers();
     }
 
     public void initView() {
@@ -97,7 +106,7 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
                 int myRank=1;
                 int lastExp=0;
                 for (ClassUser cu:data) {
-                     if(classUserId!=cu.getClass_user_id()){
+                    if(classUserId!=cu.getClass_user_id()){
                         if(lastExp!=cu.getExp()) {
                             myRank++;
                             lastExp = cu.getExp();
@@ -105,16 +114,16 @@ public class StuClassMemberFragment extends SBaseFragment  implements AdapterVie
                             lastExp = cu.getExp();
                         }
                     }else {
-                         if(myRank==1) {
-                             break;
-                         }else {
-                             if(lastExp==cu.getExp()) {
-                                 myRank--;
-                                 break;
-                             }else {
-                                 break;
-                             }
-                         }
+                        if(myRank==1) {
+                            break;
+                        }else {
+                            if(lastExp==cu.getExp()) {
+                                myRank--;
+                                break;
+                            }else {
+                                break;
+                            }
+                        }
                     }
                 }
                 rank.setText(String.valueOf(myRank));

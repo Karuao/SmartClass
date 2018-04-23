@@ -81,7 +81,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
         tabHomework.setOnClickListener(this);
         tabInform.setOnClickListener(this);
         tabClassinfo.setOnClickListener(this);
-        tabClassinfo.callOnClick();
+        tabMember.callOnClick();
     }
 
     //初始化View
@@ -103,7 +103,7 @@ public class TeaClassMainActivity extends SBaseActivity implements View.OnClickL
 
         classVpager.setAdapter(teaClassFragmentPagerAdapter);
 //        classVpager.setOffscreenPageLimit(0);
-        classVpager.setCurrentItem(4);
+        classVpager.setCurrentItem(1);
         classVpager.addOnPageChangeListener(this);
 
         //初始化tab按钮颜色，作业为选中

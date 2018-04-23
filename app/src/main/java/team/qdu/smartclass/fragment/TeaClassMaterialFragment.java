@@ -33,6 +33,7 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
     public static boolean refreshFlag;
     private View currentPage;
     //标题栏班课名
+    private boolean isPrepared;
     private TextView titleBarClassNameTxt;
 
     @Override
@@ -42,16 +43,23 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
         listview = (ListView) currentPage.findViewById(R.id.class_material_listView);
         refreshFlag = false;
         initView();
-        getMaterial();
+        isPrepared = true;
+        lazyLoad();
         listview.setOnItemClickListener(this);
         return currentPage;
     }
-
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        getMaterial();
+    }
     @Override
     public void onResume() {
         super.onResume();
         if (refreshFlag) {
-                getMaterial();
+            getMaterial();
             refreshFlag = false;
         }
     }
@@ -121,10 +129,3 @@ public class TeaClassMaterialFragment extends SBaseFragment implements AdapterVi
     }
 
 }
-
-
-
-
-
-
-

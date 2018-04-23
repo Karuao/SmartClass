@@ -41,6 +41,10 @@ public class StuHomeworkFinishFragment extends SBaseFragment implements AdapterV
     }
 
     @Override
+    protected void onVisible() {
+    }
+
+    @Override
     protected void lazyLoad() {
         if(!isPrepared || !isVisible) {
             return;

@@ -96,7 +96,9 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         imgInform = (ImageView) findViewById(R.id.iv_class_inform);
         imgClassinfo = (ImageView) findViewById(R.id.iv_class_classinfo);
         //设置红点
-        if ("是".equals(getIntent().getStringExtra("ifNewMaterial"))) {
+//        if ("是".equals(getIntent().getStringExtra("ifNewMaterial"))) {
+        if (getIntent().getSerializableExtra("unbrowseMaterailNum") != null
+                && ((int) getIntent().getSerializableExtra("unbrowseMaterailNum")) > 0) {
             materailBadgeView = new BadgeView(context);
             materailBadgeView.setMaxHeight(40);
             materailBadgeView.setMaxWidth(40);
@@ -137,10 +139,10 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         tabClassinfo.setOnClickListener(this);
         classVpager.setAdapter(stuClassFragmentPagerAdapter);
 //        classVpager.setOffscreenPageLimit(0);
-        classVpager.setCurrentItem(4);
+        classVpager.setCurrentItem(1);
         classVpager.addOnPageChangeListener(this);
         //初始点击成员界面
-        tabClassinfo.callOnClick();
+        tabMember.callOnClick();
     }
 
     //切换图片颜色
@@ -175,6 +177,12 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         }
     }
 
+    public void setInformBadge(int unreadInformationNum) {
+        if (informBadgeView != null) {
+            informBadgeView.setText(String.valueOf(unreadInformationNum));
+        }
+    }
+
     @Override
     public void onClick(View view) {
         resetImg();
@@ -182,11 +190,13 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
             case R.id.ll_class_resource:
                 imgResource.setImageResource(R.drawable.class_resource_select);
                 classVpager.setCurrentItem(0);
-                if ("是".equals(getIntent().getStringExtra("ifNewMaterial"))) {
-                    getIntent().putExtra("ifNewMaterial", "否");
+                if (getIntent().getSerializableExtra("unbrowseMaterailNum") != null
+                        && ((int) getIntent().getSerializableExtra("unbrowseMaterailNum")) > 0) {
+//                    getIntent().putExtra("ifNewMaterial", "否");
+                    getIntent().putExtra("unbrowseMaterailNum", 0);
                     ((ViewGroup) materailBadgeView.getParent()).removeView(materailBadgeView);
 //                    materailBadgeView.decrementBadgeCount(1);
-                    readNew("material");
+//                    readNew("material");
                 }
                 break;
             case R.id.ll_class_member:
@@ -200,7 +210,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                     getIntent().putExtra("ifNewHomework", "否");
                     ((ViewGroup) homeworkBadgeView.getParent()).removeView(homeworkBadgeView);
 //                    homeworkBadgeView.decrementBadgeCount(1);
-                    readNew("homework");
+//                    readNew("homework");
                 }
                 break;
             case R.id.ll_class_inform:
@@ -225,11 +235,13 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
         switch (currentItem) {
             case 0:
                 imgResource.setImageResource(R.drawable.class_resource_select);
-                if ("是".equals(getIntent().getStringExtra("ifNewMaterial"))) {
-                    getIntent().putExtra("ifNewMaterial", "否");
+                if (getIntent().getSerializableExtra("unbrowseMaterailNum") != null
+                        && ((int) getIntent().getSerializableExtra("unbrowseMaterailNum")) > 0) {
+//                    getIntent().putExtra("ifNewMaterial", "否");
+                    getIntent().putExtra("unbrowseMaterailNum", 0);
                     ((ViewGroup) materailBadgeView.getParent()).removeView(materailBadgeView);
 //                    materailBadgeView.decrementBadgeCount(1);
-                    readNew("material");
+//                    readNew("material");
                 }
                 break;
             case 1:
@@ -241,7 +253,7 @@ public class StuClassMainActivity extends SBaseActivity implements View.OnClickL
                     getIntent().putExtra("ifNewHomework", "否");
                     ((ViewGroup) homeworkBadgeView.getParent()).removeView(homeworkBadgeView);
 //                    homeworkBadgeView.decrementBadgeCount(1);
-                    readNew("homework");
+//                    readNew("homework");
                 }
                 break;
             case 3:

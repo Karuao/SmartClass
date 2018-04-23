@@ -19,6 +19,7 @@ import team.qdu.smartclass.adapter.TeaHomeworkFragmentPagerAdapter;
 public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnClickListener,
         ViewPager.OnPageChangeListener {
 
+    private boolean isPrepared;
     //该页面
     View currentPage;
 
@@ -42,7 +43,48 @@ public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnCl
         currentPage = inflater.inflate(R.layout.class_tab03_admin, container, false);
         initView();
         initEvents();
+        isPrepared = true;
+        lazyLoad();
         return currentPage;
+    }
+
+    @Override
+    public void onDestroyView() {
+        teaHomeworkVpager.setAdapter(null);
+        super.onDestroyView();
+    }
+
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if(getUserVisibleHint()) {
+//            isVisible = true;
+//            onVisible();
+//        } else {
+//            isVisible = false;
+//            onInvisible();
+//        }
+//    }
+
+    //写这里的时候出现了一个机制，该Fragment因为滑动被销毁的时候，他里面的ViewPager控制的Fragment还会自动加载，留待以后理解
+    //若每次都重设Adapter，从资源一个个过来会请求两遍数据，但设置失败，从资源直接跳过来，会请求三遍数据，设置成功
+    //调到资源假销毁，调到成员伪加载，再到作业重设Adapter会失败，onDestoryView中setAdapter(null)替换掉修复成功
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        teaHomeworkFragmentPagerAdapter = new TeaHomeworkFragmentPagerAdapter(getChildFragmentManager());
+        teaHomeworkVpager.setAdapter(teaHomeworkFragmentPagerAdapter);
+//        teaHomeworkVpager.setAdapter(null);
+//        teaHomeworkFragmentPagerAdapter.getTeaHomeworkUnderwayFragment();
+//        if (teaHomeworkFragmentPagerAdapter.getTeaHomeworkUnderwayFragment().isVisible == true) {
+//            teaHomeworkFragmentPagerAdapter.getTeaHomeworkUnderwayFragment().setHomeworkList();
+//        }
+//        teaHomeworkFragmentPagerAdapter = new TeaHomeworkFragmentPagerAdapter(getChildFragmentManager());
+//        teaHomeworkVpager.setAdapter(teaHomeworkFragmentPagerAdapter);
+//        teaHomeworkFragmentPagerAdapter.getTeaHomeworkUnderwayFragment().setHomeworkList();
+//        teaHomeworkFragmentPagerAdapter.getTeaHomeworkFinishFragment().setHomeworkList();
     }
 
     //初始化View
@@ -54,13 +96,13 @@ public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnCl
         tabFinish = (LinearLayout) currentPage.findViewById(R.id.ll_class_homework_finish);
         tvUnderway = (TextView) currentPage.findViewById(R.id.tv_class_homework_underway);
         tvFinish = (TextView) currentPage.findViewById(R.id.tv_class_homework_finish);
-        teaHomeworkFragmentPagerAdapter = new TeaHomeworkFragmentPagerAdapter(getChildFragmentManager());
+//        teaHomeworkFragmentPagerAdapter = new TeaHomeworkFragmentPagerAdapter(getChildFragmentManager());
         //设置tab颜色为进行中作业tab为选中状态
         tvFinish.setTextColor(getResources().getColor(R.color.hinter));
     }
 
     private void initEvents() {
-        teaHomeworkVpager.setAdapter(teaHomeworkFragmentPagerAdapter);
+//        teaHomeworkVpager.setAdapter(teaHomeworkFragmentPagerAdapter);
         teaHomeworkVpager.addOnPageChangeListener(this);
         tabUnderway.setOnClickListener(this);
         tabFinish.setOnClickListener(this);

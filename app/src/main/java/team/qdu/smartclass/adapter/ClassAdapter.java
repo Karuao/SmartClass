@@ -101,7 +101,9 @@ public class ClassAdapter extends SBaseAdapter<ClassUser> {
             ((ViewGroup) badgeView.getParent()).removeView(badgeView);
         }
         //设置红点
-        if ("是".equals(itemList.get(position).getIf_new_class_thing())) {
+        if ("是".equals(itemList.get(position).getIf_new_homework())
+                || itemList.get(position).getUnread_information_num() > 0
+                || itemList.get(position).getUnbrowse_material_num() > 0) {
             compo.badgeView.setMaxHeight(40);
             compo.badgeView.setMaxWidth(40);
             compo.badgeView.setBadgeMargin(0, 0, 5, 0);

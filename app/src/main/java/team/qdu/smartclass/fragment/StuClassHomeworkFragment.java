@@ -19,7 +19,7 @@ import team.qdu.smartclass.adapter.StuHomeworkFragmentPagerAdapter;
 public class StuClassHomeworkFragment extends SBaseFragment implements View.OnClickListener,
         ViewPager.OnPageChangeListener {
 
-//    private boolean isPrepared;
+    private boolean isPrepared;
     //该页面
     private View currentPage;
 
@@ -43,17 +43,24 @@ public class StuClassHomeworkFragment extends SBaseFragment implements View.OnCl
         currentPage = inflater.inflate(R.layout.class_tab03, container, false);
         initView();
         initEvents();
-//        isPrepared = true;
+        isPrepared = true;
         return currentPage;
     }
 
-//    @Override
-//    protected void lazyLoad() {
-//        if(!isPrepared || !isVisible) {
-//            return;
-//        }
-//        initEvents();
-//    }
+    @Override
+    public void onDestroyView() {
+        stuHomeworkVpager.setAdapter(null);
+        super.onDestroyView();
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        stuHomeworkFragmentPagerAdapter = new StuHomeworkFragmentPagerAdapter(getChildFragmentManager());
+        stuHomeworkVpager.setAdapter(stuHomeworkFragmentPagerAdapter);
+    }
 
     //初始化View
     private void initView() {
@@ -64,14 +71,14 @@ public class StuClassHomeworkFragment extends SBaseFragment implements View.OnCl
         tabFinish = (LinearLayout) currentPage.findViewById(R.id.ll_class_homework_finish);
         tvUnderway = (TextView) currentPage.findViewById(R.id.tv_class_homework_underway);
         tvFinish = (TextView) currentPage.findViewById(R.id.tv_class_homework_finish);
-        stuHomeworkFragmentPagerAdapter = new StuHomeworkFragmentPagerAdapter(getChildFragmentManager());
+//        stuHomeworkFragmentPagerAdapter = new StuHomeworkFragmentPagerAdapter(getChildFragmentManager());
         //设置tab颜色为进行中作业tab为选中状态
         tvFinish.setTextColor(getResources().getColor(R.color.hinter));
         tvFinish.setTextColor(getResources().getColor(R.color.hinter));
     }
 
     private void initEvents() {
-        stuHomeworkVpager.setAdapter(stuHomeworkFragmentPagerAdapter);
+//        stuHomeworkVpager.setAdapter(stuHomeworkFragmentPagerAdapter);
         stuHomeworkVpager.addOnPageChangeListener(this);
         tabUnderway.setOnClickListener(this);
         tabFinish.setOnClickListener(this);

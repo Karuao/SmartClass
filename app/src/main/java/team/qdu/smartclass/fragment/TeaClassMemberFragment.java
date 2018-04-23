@@ -1,32 +1,25 @@
 package team.qdu.smartclass.fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.activity.SBaseActivity;
-import team.qdu.smartclass.activity.ShowExpDetailActivity;
 import team.qdu.smartclass.activity.ShowMemberDetailActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
 import team.qdu.smartclass.adapter.ClassMemberAdapter;
-import team.qdu.smartclass.adapter.SignInHistoryForTeacherAdapter;
-import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -34,6 +27,7 @@ import team.qdu.smartclass.util.LoadingDialogUtil;
 
 public class TeaClassMemberFragment extends SBaseFragment implements AdapterView.OnItemClickListener{
 
+    private boolean isPrepared;
     private View currentPage;
     //标题栏班课名
     private TextView titleBarClassNameTxt;
@@ -50,8 +44,17 @@ public class TeaClassMemberFragment extends SBaseFragment implements AdapterView
         currentPage = inflater.inflate(R.layout.class_tab02_admin, container, false);
         initView();
         initEvent();
-        getClassMembers();
+        isPrepared = true;
+        lazyLoad();
         return currentPage;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        getClassMembers();
     }
 
     public void initView() {

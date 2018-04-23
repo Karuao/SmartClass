@@ -30,6 +30,7 @@ import team.qdu.smartclass.adapter.StuInfoAdapter;
 public class StuClassInformFragment extends SBaseFragment implements AdapterView.OnItemClickListener {
 
     //标题栏班课名
+    private boolean isPrepared;
     TextView titleBarClassNameTxt;
     ListView listview;
     StuClassMainActivity parentActivity;
@@ -44,12 +45,20 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
         parentActivity = (StuClassMainActivity) getActivity();
         listview = (ListView) view.findViewById(R.id.class_inform_listView);
         listview.addFooterView(new ViewStub(getContext()));
-        getInform();
+        isPrepared = true;
+        lazyLoad();
+
         listview.setOnItemClickListener(this);
         return view;
 
     }
-
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared || !isVisible) {
+            return;
+        }
+        getInform();
+    }
     @Override
     public void onResume() {
         super.onResume();
@@ -69,6 +78,13 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
             @Override
             public void onSuccess(List<Inform_User> data, String message) {
                 listview.setAdapter(new StuInfoAdapter(getActivity(), data));
+                int unreadInformationNum = 0;
+                for (Inform_User informUser : data) {
+                    if ("否".equals(informUser.getIf_read())) {
+                        unreadInformationNum++;
+                    }
+                }
+                ((StuClassMainActivity) getActivity()).setInformBadge(unreadInformationNum);
             }
 
             @Override
