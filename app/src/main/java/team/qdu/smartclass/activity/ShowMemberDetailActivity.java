@@ -69,6 +69,8 @@ public class ShowMemberDetailActivity extends SBaseActivity {
     }
 
     public void shiftClass(View view){
+        Intent intent = getIntent();
+        final String classUserId = intent.getStringExtra("classUserId");
         new AlertDialog.Builder(ShowMemberDetailActivity.this)
                 .setTitle("提示")
                 .setMessage("确定将此学生移出班课？")
@@ -76,7 +78,7 @@ public class ShowMemberDetailActivity extends SBaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LoadingDialogUtil.createLoadingDialog(ShowMemberDetailActivity.this,"加载中");
-                        ShowMemberDetailActivity.this.memberAppAction.shiftClass(getClassUserId(), ShowMemberDetailActivity.this,new ActionCallbackListener<Void>() {
+                        ShowMemberDetailActivity.this.memberAppAction.shiftClass(classUserId, ShowMemberDetailActivity.this,new ActionCallbackListener<Void>() {
                             @Override
                             public void onSuccess(Void data, String message) {
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

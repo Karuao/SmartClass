@@ -103,7 +103,6 @@ public class TeaClassMemberFragment extends SBaseFragment implements AdapterView
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String classUserId = ((TextView)view.findViewById(R.id.member_classUserId)).getText().toString();
-        setClassUserId(classUserId);
         String memberName = ((TextView) view.findViewById(R.id.tv_class_membername2)).getText().toString();
         String memberSno = ((TextView) view.findViewById(R.id.tv_class_membernum2)).getText().toString();
         String memberExp = ((TextView) view.findViewById(R.id.tv_class_memberexp2)).getText().toString();
@@ -115,6 +114,7 @@ public class TeaClassMemberFragment extends SBaseFragment implements AdapterView
         intent.putExtra("memberExp",memberExp);
         intent.putExtra("memberAvatar", memberAvatar);
         intent.putExtra("memberId",memberId);
+        intent.putExtra("classUserId",classUserId);
         startActivity(intent);
     }
 
