@@ -1,7 +1,6 @@
 package team.qdu.core;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
@@ -62,6 +61,9 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<String> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                     if (response.isSuccess()) {
                         listener.onSuccess(response.getObj(), response.getMsg());
                     } else {
@@ -115,6 +117,9 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                     if (response.isSuccess()) {
                         listener.onSuccess(null, response.getMsg());
                     } else {
@@ -146,6 +151,9 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<User> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                     if (response.isSuccess()) {
                         listener.onSuccess(response.getObj(), response.getMsg());
                     } else {
@@ -198,6 +206,9 @@ public class UserAppActionImpl implements UserAppAction {
 
                     @Override
                     protected void onPostExecute(ApiResponse<Void> response) {
+                        if (!lifeful.isAlive()) {
+                            return;
+                        }
                         if (response.isSuccess()) {
                             listener.onSuccess(null, response.getMsg());
                         } else {
@@ -227,6 +238,9 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<User> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -253,6 +267,9 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<User> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -291,6 +308,9 @@ public class UserAppActionImpl implements UserAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {

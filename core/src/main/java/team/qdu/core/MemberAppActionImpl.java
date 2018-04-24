@@ -1,7 +1,6 @@
 package team.qdu.core;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import java.util.List;
@@ -44,6 +43,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<List<ClassUser>> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {
@@ -89,6 +91,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<ClassUser> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -115,6 +120,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<List<Attendance>> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {
@@ -140,6 +148,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<List<ClassUserExp>> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {
@@ -165,6 +176,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<List<Attendance_user>> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {
@@ -190,6 +204,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<List<Attendance_user>> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {
@@ -215,6 +232,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<List<Attendance>> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObjList(), response.getMsg());
                 } else {
@@ -240,6 +260,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {
@@ -265,6 +288,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {
@@ -290,6 +316,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {
@@ -315,6 +344,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Attendance_user> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -340,6 +372,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Attendance> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(response.getObj(), response.getMsg());
                 } else {
@@ -365,6 +400,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {
@@ -390,6 +428,9 @@ public class MemberAppActionImpl implements MemberAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                if (!lifeful.isAlive()) {
+                    return;
+                }
                 if (response.isSuccess()) {
                     listener.onSuccess(null, response.getMsg());
                 } else {

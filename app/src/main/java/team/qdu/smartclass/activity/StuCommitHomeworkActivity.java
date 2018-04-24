@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +37,7 @@ public class StuCommitHomeworkActivity extends SBaseActivity implements AdapterV
     private TextView homeworkDetailTxt;
     private RelativeLayout homeworkPhotoRlayout;
     private EditText answerDetailEdt;
+    private Button homeworkCommitBtn;
     private HorizontalListView homeworkShowPhotoList;
     private HorizontalListView homeworkAddPhotoList;
     private HomeworkShowPhotoAdapter homeworkShowPhotoAdapter;
@@ -68,6 +69,7 @@ public class StuCommitHomeworkActivity extends SBaseActivity implements AdapterV
         homeworkShowPhotoList = (HorizontalListView) findViewById(R.id.list_homework_showphoto);
         homeworkPhotoRlayout = (RelativeLayout) findViewById(R.id.rlayout_homework_photo);
         answerDetailEdt = (EditText) findViewById(R.id.edt_answer_detail);
+        homeworkCommitBtn = (Button) findViewById(R.id.btn_homwork_commit);
         homeworkAddPhotoList = (HorizontalListView) findViewById(R.id.list_homework_addphoto);
         setData();
     }
@@ -105,6 +107,8 @@ public class StuCommitHomeworkActivity extends SBaseActivity implements AdapterV
                 }
                 homeworkId = data.getHomework_id().toString();
                 ifSubmit = data.getIf_submit();
+                //加载完数据取消提交作业按钮的禁用
+                homeworkCommitBtn.setEnabled(true);
             }
 
             @Override
