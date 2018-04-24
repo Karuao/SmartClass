@@ -30,11 +30,11 @@ public class SetActivity extends SBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set);
-        logout= (Button) findViewById(R.id.logout);
+        logout = (Button) findViewById(R.id.logout);
         initView();
-        SharedPreferences sharedPreferences=this.getSharedPreferences("user", Activity.MODE_PRIVATE);
-        String account=sharedPreferences.getString("account",null);
-        this.userAppAction.getUserInforByAccount(account,this,new ActionCallbackListener<User>() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("user", Activity.MODE_PRIVATE);
+        String account = sharedPreferences.getString("account", null);
+        this.userAppAction.getUserInforByAccount(account, this, new ActionCallbackListener<User>() {
             @Override
             public void onSuccess(User user, String message) {
                 setAccount.setText(user.getAccount());
@@ -47,8 +47,8 @@ public class SetActivity extends SBaseActivity {
         });
     }
 
-    public void initView(){
-        setAccount=(TextView) findViewById(R.id.set_userAccount);
+    public void initView() {
+        setAccount = (TextView) findViewById(R.id.set_userAccount);
     }
 
 
@@ -56,18 +56,29 @@ public class SetActivity extends SBaseActivity {
         SApplication.addActivity(SetActivity.this);
         setUserId(null);
         SApplication.clearActivity();
-        JPushInterface.setAlias(context,1,"abc");
+        JPushInterface.setAlias(context, 1, "abc");
         startActivity(new Intent(SetActivity.this, LoginActivity.class));
     }
 
 
+//    @Override
+//    public boolean dispatchKeyEvent(KeyEvent event) {
+//        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {//点击的是返回键
+//            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {//按键的按下事件
+//                SApplication.removeActivity(MainActivity.class);
+//            }
+//        }
+//        return super.dispatchKeyEvent(event);
+//    }
+
     @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {//点击的是返回键
-            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {//按键的按下事件
-                SApplication.removeActivity(MainActivity.class);
-            }
-        }
-            return super.dispatchKeyEvent(event);
-        }
+    public void onBackPressed() {
+        SApplication.removeActivity(MainActivity.class);
+    }
+
+    @Override
+    public void toBack(View view) {
+        super.toBack(view);
+        SApplication.removeActivity(MainActivity.class);
+    }
 }
