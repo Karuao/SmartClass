@@ -44,6 +44,7 @@ public class StuClassHomeworkFragment extends SBaseFragment implements View.OnCl
         initView();
         initEvents();
         isPrepared = true;
+        lazyLoad();
         return currentPage;
     }
 
@@ -58,8 +59,10 @@ public class StuClassHomeworkFragment extends SBaseFragment implements View.OnCl
         if(!isPrepared || !isVisible) {
             return;
         }
-        stuHomeworkFragmentPagerAdapter = new StuHomeworkFragmentPagerAdapter(getChildFragmentManager());
-        stuHomeworkVpager.setAdapter(stuHomeworkFragmentPagerAdapter);
+        if (stuHomeworkVpager.getAdapter() == null) {
+            stuHomeworkFragmentPagerAdapter = new StuHomeworkFragmentPagerAdapter(getChildFragmentManager());
+            stuHomeworkVpager.setAdapter(stuHomeworkFragmentPagerAdapter);
+        }
     }
 
     //初始化View

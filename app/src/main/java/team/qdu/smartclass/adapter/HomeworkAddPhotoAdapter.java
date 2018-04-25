@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team.qdu.smartclass.R;
+import team.qdu.smartclass.activity.HomeworkPhotoesUploadActivity;
+import team.qdu.smartclass.activity.TeaPublishHomeworkActivity;
 
 /**
  * Created by 11602 on 2018/3/13.
@@ -34,7 +36,7 @@ public class HomeworkAddPhotoAdapter extends SBaseAdapter<ImageItem> {
     }
 
     public List<ImageItem> getImages() {
-        if (itemList.size() == maxImgCount) {
+        if (itemList.get(itemList.size() - 1) != null) {
             return itemList;
         }
         return new ArrayList(itemList.subList(0, itemList.size() - 1));
@@ -89,9 +91,33 @@ public class HomeworkAddPhotoAdapter extends SBaseAdapter<ImageItem> {
                 @Override
                 public void onClick(View v) {
                     itemList.remove(position);
+                    //删除图片设置改变了图片，之后提交会重传
+                    if (context instanceof HomeworkPhotoesUploadActivity) {
+                        ((HomeworkPhotoesUploadActivity) context).ifChangePhotoes = true;
+                        ((HomeworkPhotoesUploadActivity) context).ifAllowItemEvent = false;
+                    } else {
+                        ((TeaPublishHomeworkActivity) context).ifAllowItemEvent = false;
+                    }
                     notifyDataSetChanged();
                 }
             });
+//            compo.homeworkDelPhotoImg.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    if (event.getAction() == MotionEvent.ACTION_UP) {
+//                        itemList.remove(position);
+//                        //删除图片设置改变了图片，之后提交会重传
+//                        if (context instanceof HomeworkPhotoesUploadActivity) {
+//                            ((HomeworkPhotoesUploadActivity) context).ifChangePhotoes = true;
+//                        }
+//                        notifyDataSetChanged();
+//                    } else {
+//
+//                    }
+//
+//                    return true;
+//                }
+//            });
         }
 
         return convertView;

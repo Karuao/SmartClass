@@ -154,7 +154,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btn_homwork_commit"
+                android:id="@+id/btn_homework_commit"
                 android:layout_width="221dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"

@@ -46,7 +46,7 @@ public class StuHomeworkFinishFragment extends SBaseFragment implements AdapterV
 
     @Override
     protected void lazyLoad() {
-        if(!isPrepared || !isVisible) {
+        if(!isPrepared || !((StuClassHomeworkFragment)getParentFragment()).isVisible) {
             return;
         }
         setHomeworkList();

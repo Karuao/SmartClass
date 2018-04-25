@@ -8,7 +8,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
+import com.lzy.imagepicker.bean.ImageItem;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,7 +20,6 @@ import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.adapter.HomeworkAddPhotoAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
-import team.qdu.smartclass.util.FileUtil;
 import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.util.LoadingDialogUtil;
 import team.qdu.smartclass.view.CustomDatePicker;
@@ -39,8 +39,8 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
     private CustomDatePicker customDatePicker;
 
     private HomeworkAddPhotoAdapter homeworkAddPhotoAdapter;
-    //存放压缩后的上传图片
-    List<File> photoList;
+    //是否触发Item事件,因为使用的HorizantalListView不能屏蔽父控件事件，用这个变量控制是否触发事件
+    public boolean ifAllowItemEvent = true;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -49,7 +49,7 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
         initView();
         initEvent();
         initDatePicker();
-        photoList = new ArrayList<>();
+//        photoList = new ArrayList<>();
     }
 
     private void initView() {
@@ -61,7 +61,7 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
     }
 
     private void initEvent() {
-        homeworkAddPhotoAdapter = new HomeworkAddPhotoAdapter(context, ImgUtil.maxImgCount);
+        homeworkAddPhotoAdapter = new HomeworkAddPhotoAdapter(this, ImgUtil.maxImgCount);
         homeworkAddPhotoList.setAdapter(homeworkAddPhotoAdapter);
         homeworkAddPhotoList.setOnItemClickListener(this);
     }
@@ -77,22 +77,26 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
         String title = homeworkTitleEdt.getText().toString();
         String deadline = homeworkDeadlineTxt.getText().toString();
         String detail = homeworkDetailEdt.getText().toString();
-        ImgUtil.compressPhotoes(photoList, homeworkAddPhotoAdapter, this);
-        homeworkAppAction.publishHomework(title, deadline, detail, photoList, getClassId(), this,
+        List<String> imgPathList = new ArrayList<>();
+        for (ImageItem imageItem : homeworkAddPhotoAdapter.getImages()) {
+            imgPathList.add(imageItem.path);
+        }
+//        ImgUtil.compressPhotoes(photoList, homeworkAddPhotoAdapter, this);
+        homeworkAppAction.publishHomework(title, deadline, detail, imgPathList, getClassId(), this,
                 new ActionCallbackListener<Void>() {
                     @Override
                     public void onSuccess(Void data, String message) {
                         Toast.makeText(TeaPublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
                         TeaHomeworkUnderwayFragment.refreshFlag = true;
                         finish();
-                        FileUtil.deleteCompressFiles(photoList);
+//                        FileUtil.deleteCompressFiles(photoList);
                         LoadingDialogUtil.closeDialog();
                     }
 
                     @Override
                     public void onFailure(String errorEvent, String message) {
                         Toast.makeText(TeaPublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
-                        FileUtil.deleteCompressFiles(photoList);
+//                        FileUtil.deleteCompressFiles(photoList);
                         LoadingDialogUtil.closeDialog();
                     }
                 });
@@ -130,6 +134,10 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (!ifAllowItemEvent) {
+            ifAllowItemEvent = true;
+            return;
+        }
         ImgUtil.responseClickHomeworkAddPhotoListItem(this, homeworkAddPhotoAdapter, parent, position);
     }
 

@@ -21,13 +21,13 @@ public interface HomeworkApi {
 
     ApiResponse<HomeworkAnswerWithBLOBs> getStuHomeworkDetail(String homeworkAnswerId);
 
-    ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String homeworkTitle, String detail, List<File> photoList, String delPhotoesUrl);
+    ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String homeworkTitle, String detail, List<File> photoList, String delPhotoesUrl, String ifChangePhotoes);
 
     ApiResponse<HomeworkWithBLOBs> getHomeworkDetail(String homeworkId);
 
     ApiResponse<List<HomeworkAnswerWithBLOBs>> getHomeworkAnswerList(String homeworkId);
 
-    ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, List<File> photoList, String delPhotoesUrl);
+    ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, List<File> photoList, String delPhotoesUrl, String ifChangePhotoes);
 
     ApiResponse<Integer> getNotEvaluateStuNum(String homeworkId);
 }

@@ -215,10 +215,12 @@
             android:layout_marginTop="15dp">
 
             <Button
+                android:id="@+id/btn_homework_evaluate"
                 android:layout_width="221dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/shape_button"
+                android:enabled="false"
                 android:gravity="center"
                 android:onClick="toSubmitEvaluation"
                 android:padding="10dp"

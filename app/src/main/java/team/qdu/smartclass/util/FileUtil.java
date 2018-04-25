@@ -1,7 +1,5 @@
 package team.qdu.smartclass.util;
 
-import android.os.Environment;
-
 import java.io.File;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class FileUtil {
 
     public static void deleteCacheFiles(String delPhotoesUrl) {
         if (delPhotoesUrl != null) {
-            FileUtil.deleteDir(new File(Environment.getExternalStorageDirectory() + "/" + delPhotoesUrl));
+            FileUtil.deleteDir(new File(delPhotoesUrl));
         }
     }
 }

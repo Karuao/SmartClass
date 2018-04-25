@@ -12,6 +12,8 @@ import java.util.List;
 
 import team.qdu.api.HomeworkApi;
 import team.qdu.api.HomeworkApiImpl;
+import team.qdu.core.util.FileUtil;
+import team.qdu.core.util.ImgUtil;
 import team.qdu.model.ApiResponse;
 import team.qdu.model.HomeworkAnswerWithBLOBs;
 import team.qdu.model.HomeworkWithBLOBs;
@@ -38,14 +40,65 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
         this.context = context;
     }
 
+//    @Override
+//    public void publishHomework(final String title, final String deadline, final String detail,
+//                                final List<File> photoList, final String classId, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
+//        if (TextUtils.isEmpty(title)) {
+//            listener.onFailure(ErrorEvent.PARAM_NULL, "标题不能为空");
+//            return;
+//        }
+//        if (TextUtils.isEmpty(detail) && photoList.size() == 0) {
+//            listener.onFailure(ErrorEvent.PARAM_NULL, "作业内容和上传图片不能全为空");
+//            return;
+//        }
+//        //截至日期不能小于等于当前时间
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//        Date deadlineDate = new Date();
+//        Date currentDate = new Date();
+//        try {
+//            deadlineDate = sdf.parse(deadline);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//            listener.onFailure(ErrorEvent.PROGRESS_EXCEPTION, "发布作业失败，请稍后再试");
+//        }
+//        if ((currentDate.getTime() - currentDate.getTime() % 60) >= deadlineDate.getTime()) {
+//            listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "截至日期不能小于等于当前时间");
+//            return;
+//        }
+//
+//        new AsyncTask<Void, Void, ApiResponse<Void>>() {
+//
+//            @Override
+//            protected ApiResponse<Void> doInBackground(Void... params) {
+//                if (!lifeful.isAlive()) {
+//                    cancel(true);
+//                    return null;
+//                }
+//                return homeworkApi.publishHomework(title, deadline, detail, photoList, classId);
+//            }
+//
+//            @Override
+//            protected void onPostExecute(ApiResponse<Void> response) {
+//                if (!lifeful.isAlive()) {
+//                    return;
+//                }
+//                if (response.isSuccess()) {
+//                    listener.onSuccess(null, response.getMsg());
+//                } else {
+//                    listener.onFailure(response.getEvent(), response.getMsg());
+//                }
+//            }
+//        }.execute();
+//    }
+
     @Override
     public void publishHomework(final String title, final String deadline, final String detail,
-                                final List<File> photoList, final String classId, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
+                                List<String> imgPathList, final String classId, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         if (TextUtils.isEmpty(title)) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "标题不能为空");
             return;
         }
-        if (TextUtils.isEmpty(detail) && photoList.size() == 0) {
+        if (TextUtils.isEmpty(detail) && imgPathList.size() == 0) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "作业内容和上传图片不能全为空");
             return;
         }
@@ -63,12 +116,16 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
             listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "截至日期不能小于等于当前时间");
             return;
         }
+        //压缩图片
+        final List<File> photoList = ImgUtil.compressPhotoes(imgPathList, (Context) lifeful);
+
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
                 if (!lifeful.isAlive()) {
                     cancel(true);
+                    FileUtil.deleteCompressFiles(photoList);
                     return null;
                 }
                 return homeworkApi.publishHomework(title, deadline, detail, photoList, classId);
@@ -76,6 +133,7 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                FileUtil.deleteCompressFiles(photoList);
                 if (!lifeful.isAlive()) {
                     return;
                 }
@@ -171,11 +229,13 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
 
 
     @Override
-    public void commitHomework(final String homeworkAnswerId, final String homeworkId, final String classId, final String userId, final String ifSubmit, final String homeworkTitle, final String detail, final List<File> photoList, final String delPhotoesUrl, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
-        if (TextUtils.isEmpty(detail) && photoList.size() == 0) {
+    public void commitHomework(final String homeworkAnswerId, final String homeworkId, final String classId, final String userId, final String ifSubmit, final String homeworkTitle, final String detail, List<String> imgPathList, final String delPhotoesUrl, final String ifChangePhotoes, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
+        if (TextUtils.isEmpty(detail) && imgPathList.size() == 0) {
             listener.onFailure(ErrorEvent.PARAM_NULL, "提交的文字和图片不能全为空");
             return;
         }
+        //压缩图片
+        final List<File> photoList = ImgUtil.compressPhotoes(imgPathList, (Context) lifeful);
 
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
@@ -183,13 +243,15 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
             protected ApiResponse<Void> doInBackground(Void... params) {
                 if (!lifeful.isAlive()) {
                     cancel(true);
+                    FileUtil.deleteCompressFiles(photoList);
                     return null;
                 }
-                return homeworkApi.commitHomework(homeworkAnswerId, homeworkId, classId, userId, ifSubmit, homeworkTitle, detail, photoList, delPhotoesUrl);
+                return homeworkApi.commitHomework(homeworkAnswerId, homeworkId, classId, userId, ifSubmit, homeworkTitle, detail, photoList, delPhotoesUrl, ifChangePhotoes);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                FileUtil.deleteCompressFiles(photoList);
                 if (!lifeful.isAlive()) {
                     return;
                 }
@@ -257,24 +319,29 @@ public class HomeworkAppActionImpl implements HomeworkAppAction {
     }
 
     @Override
-    public void commitHomeworkEvaluation(final String homeworkAnswerId, final String exp, final String remark, final List<File> photoList, final String delPhotoesUrl, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
+    public void commitHomeworkEvaluation(final String homeworkAnswerId, final String exp, final String remark, final List<String> imgPathList, final String delPhotoesUrl, final String ifChangePhotoes, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
         if (TextUtils.isEmpty(exp) || Integer.parseInt(exp) < 0 || Integer.parseInt(exp) > 10) {
             listener.onFailure(ErrorEvent.PARAM_ILLEGAL, "评分应在0-10分之间");
             return;
         }
+        //压缩图片
+        final List<File> photoList = ImgUtil.compressPhotoes(imgPathList, ((Context) lifeful));
+
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
             protected ApiResponse<Void> doInBackground(Void... params) {
                 if (!lifeful.isAlive()) {
                     cancel(true);
+                    FileUtil.deleteCompressFiles(photoList);
                     return null;
                 }
-                return homeworkApi.commitHomeworkEvaluation(homeworkAnswerId, exp, remark, photoList, delPhotoesUrl);
+                return homeworkApi.commitHomeworkEvaluation(homeworkAnswerId, exp, remark, photoList, delPhotoesUrl, ifChangePhotoes);
             }
 
             @Override
             protected void onPostExecute(ApiResponse<Void> response) {
+                FileUtil.deleteCompressFiles(photoList);
                 if (!lifeful.isAlive()) {
                     return;
                 }

@@ -71,11 +71,14 @@ public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnCl
     //调到资源假销毁，调到成员伪加载，再到作业重设Adapter会失败，onDestoryView中setAdapter(null)替换掉修复成功
     @Override
     protected void lazyLoad() {
-        if(!isPrepared || !isVisible) {
+        if (!isPrepared || !isVisible) {
             return;
         }
-        teaHomeworkFragmentPagerAdapter = new TeaHomeworkFragmentPagerAdapter(getChildFragmentManager());
-        teaHomeworkVpager.setAdapter(teaHomeworkFragmentPagerAdapter);
+        //只在移出后重加载
+        if (teaHomeworkVpager.getAdapter() == null) {
+            teaHomeworkFragmentPagerAdapter = new TeaHomeworkFragmentPagerAdapter(getChildFragmentManager());
+            teaHomeworkVpager.setAdapter(teaHomeworkFragmentPagerAdapter);
+        }
 //        teaHomeworkVpager.setAdapter(null);
 //        teaHomeworkFragmentPagerAdapter.getTeaHomeworkUnderwayFragment();
 //        if (teaHomeworkFragmentPagerAdapter.getTeaHomeworkUnderwayFragment().isVisible == true) {
@@ -90,7 +93,7 @@ public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnCl
     //初始化View
     private void initView() {
         titleBarClassNameTxt = (TextView) currentPage.findViewById(R.id.txt_titlebar_classname);
-        titleBarClassNameTxt.setText(((SBaseActivity)getActivity()).getCourse());
+        titleBarClassNameTxt.setText(((SBaseActivity) getActivity()).getCourse());
         teaHomeworkVpager = (ViewPager) currentPage.findViewById(R.id.class_tab03_admin_viewpager);
         tabUnderway = (LinearLayout) currentPage.findViewById(R.id.ll_class_homework_underway);
         tabFinish = (LinearLayout) currentPage.findViewById(R.id.ll_class_homework_finish);

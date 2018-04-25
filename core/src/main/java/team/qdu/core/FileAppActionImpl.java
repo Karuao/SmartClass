@@ -15,7 +15,7 @@ import java.util.Map;
 
 import team.qdu.api.FileApi;
 import team.qdu.api.FileApiImpl;
-import team.qdu.api.util.FileUtil;
+import team.qdu.core.util.FileUtil;
 
 /**
  * Created by 11602 on 2018/3/16.

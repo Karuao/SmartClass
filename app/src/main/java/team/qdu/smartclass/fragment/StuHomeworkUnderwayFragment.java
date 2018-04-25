@@ -49,7 +49,7 @@ public class StuHomeworkUnderwayFragment extends SBaseFragment implements Adapte
 
     @Override
     protected void lazyLoad() {
-        if(!isPrepared || !isVisible) {
+        if(!isPrepared || !((StuClassHomeworkFragment)getParentFragment()).isVisible) {
             return;
         }
         setHomeworkList();

@@ -218,7 +218,8 @@
         <ListView
             android:id="@+id/list_uncommithomework"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></ListView>
+            android:layout_height="wrap_content"
+            android:listSelector="@color/bg_gray"></ListView>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -142,7 +142,8 @@ public class ImgUtil {
     }
 
     //点击HomeworkAddList选完图片后回调设置图片
-    public static void setHomeworkAddList(HomeworkAddPhotoAdapter homeworkAddPhotoAdapter, int requestCode, int resultCode, Intent data) {
+    //返回是否修改图片
+    public static boolean setHomeworkAddList(HomeworkAddPhotoAdapter homeworkAddPhotoAdapter, int requestCode, int resultCode, Intent data) {
         ArrayList<ImageItem> images;
         if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
             //添加图片返回
@@ -150,6 +151,7 @@ public class ImgUtil {
                 images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (images != null) {
                     homeworkAddPhotoAdapter.addItems(images);
+                    return true;
                 }
             }
         } else if (resultCode == ImagePicker.RESULT_CODE_BACK) {
@@ -158,9 +160,11 @@ public class ImgUtil {
                 images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_IMAGE_ITEMS);
                 if (images != null) {
                     homeworkAddPhotoAdapter.setItems(images);
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     //响应点击HomeworkAddPhotoListItem
@@ -236,6 +240,20 @@ public class ImgUtil {
                     .build()
                     .compressToFile(
                             new File(homeworkAddPhotoAdapter.getImages().get(i).path)));
+        }
+    }
+
+    public static void compressPhotoes(List photoList, List<String> imgPathList, Context context) {
+        for (int i = 0; i < imgPathList.size(); i++) {
+            photoList.add(new CompressHelper.Builder(context)
+                    .setMaxWidth(1920)
+                    .setMaxHeight(1080)
+                    .setQuality(80)
+                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                    .setDestinationDirectoryPath(context.getExternalCacheDir().getAbsolutePath())
+                    .build()
+                    .compressToFile(
+                            new File(imgPathList.get(i))));
         }
     }
 }

@@ -1,6 +1,5 @@
 package team.qdu.smartclass.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +16,6 @@ import java.util.List;
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.Attendance;
 import team.qdu.model.Attendance_user;
-import team.qdu.model.ClassUser;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.adapter.SignInStudentAdapter;
@@ -249,6 +247,7 @@ public class TeaMemberSigniningActivity extends SBaseActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         Intent intent = getIntent();
         final String attendanceId = intent.getStringExtra("attendanceId");
         new AlertDialog.Builder(TeaMemberSigniningActivity.this)

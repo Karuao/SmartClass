@@ -126,7 +126,7 @@ public class HomeworkApiImpl implements HomeworkApi {
     }
 
     @Override
-    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String homeworkTitle, String detail, List<File> photoList, String delPhotoesUrl) {
+    public ApiResponse<Void> commitHomework(String homeworkAnswerId, String homeworkId, String classId, String userId, String ifSubmit, String homeworkTitle, String detail, List<File> photoList, String delPhotoesUrl, String ifChangePhotoes) {
         Map<String, String> paramMap = new HashMap<>();
         Map<String, File> fileMap = null;
         paramMap.put("homeworkAnswerId", homeworkAnswerId);
@@ -137,6 +137,7 @@ public class HomeworkApiImpl implements HomeworkApi {
         paramMap.put("homeworkTitle", homeworkTitle);
         paramMap.put("detail", detail);
         paramMap.put("delPhotoesUrl", delPhotoesUrl);
+        paramMap.put("ifChangePhotoes", ifChangePhotoes);
         if (photoList != null) {
             fileMap = new HashMap<>();
             for (Integer i = 0; i < photoList.size(); i++) {
@@ -191,13 +192,14 @@ public class HomeworkApiImpl implements HomeworkApi {
     }
 
     @Override
-    public ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, List<File> photoList, String delPhotoesUrl) {
+    public ApiResponse<Void> commitHomeworkEvaluation(String homeworkAnswerId, String exp, String remark, List<File> photoList, String delPhotoesUrl, String ifChangePhotoes) {
         Map<String, String> paramMap = new HashMap<>();
         Map<String, File> fileMap = null;
         paramMap.put("homeworkAnswerId", homeworkAnswerId);
         paramMap.put("exp", exp);
         paramMap.put("remark", remark);
         paramMap.put("delPhotoesUrl", delPhotoesUrl);
+        paramMap.put("ifChangePhotoes", ifChangePhotoes);
         if (photoList.size() != 0) {
             fileMap = new HashMap<>();
             for (Integer i = 0; i < photoList.size(); i++) {
