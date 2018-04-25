@@ -22,6 +22,7 @@ import team.qdu.smartclass.activity.SBaseActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
 import team.qdu.smartclass.activity.StuInformDetailActivity;
 import team.qdu.smartclass.adapter.StuInfoAdapter;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 
 /**
  * Created by rjmgc on 2018/1/17.
@@ -96,6 +97,7 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        LoadingDialogUtil.createLoadingDialog(this.getContext(), "加载中...");
         //若未读小红标数字减1
         if ("否".equals(((TextView) view.findViewById(R.id.tv_if_read)).getText().toString())) {
             BadgeView badgeView = (BadgeView) view.findViewWithTag("badgeView1");
@@ -117,11 +119,13 @@ public class StuClassInformFragment extends SBaseFragment implements AdapterView
                 intent.putExtra("detail", detail);
                 intent.putExtra("time", time);
                 startActivity(intent);
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
 
             @Override
             public void onFailure(String errorEvent, String message) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                LoadingDialogUtil.closeDialog();//关闭加载中动画
             }
         });
 

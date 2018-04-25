@@ -2,6 +2,7 @@ package team.qdu.core;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 
 import java.util.List;
 
@@ -222,6 +223,10 @@ public class InformAppActionImpl implements InformAppAction {
 
     @Override
     public void createInform(final String classid, final String detail, final Lifeful lifeful, final ActionCallbackListener<Void> listener) {
+        if (TextUtils.isEmpty(detail)) {
+            listener.onFailure(ErrorEvent.PARAM_NULL, "通知不能为空");
+            return;
+        }
         new AsyncTask<Void, Void, ApiResponse<Void>>() {
 
             @Override
