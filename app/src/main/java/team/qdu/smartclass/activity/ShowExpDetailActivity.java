@@ -20,7 +20,7 @@ import team.qdu.smartclass.util.LoadingDialogUtil;
  * Created by asus on 2018/4/5.
  */
 
-public class ShowExpDetailActivity extends SBaseActivity implements AdapterView.OnItemClickListener{
+public class ShowExpDetailActivity extends SBaseActivity{
 
     private ExpDetailAdapter expDetailAdapter;
     private ListView expDetail;
@@ -43,7 +43,6 @@ public class ShowExpDetailActivity extends SBaseActivity implements AdapterView.
     private void initEvent() {
         expDetailAdapter = new ExpDetailAdapter(context);
         expDetail.setAdapter(expDetailAdapter);
-        expDetail.setOnItemClickListener(this);
         // 设置下拉进度的主题颜色
         swipeRefreshLayout.setColorSchemeResources(R.color.colorSecondary);
         // 下拉时触发SwipeRefreshLayout的下拉动画，动画完毕之后就会回调这个方法
@@ -75,10 +74,5 @@ public class ShowExpDetailActivity extends SBaseActivity implements AdapterView.
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
     }
 }
