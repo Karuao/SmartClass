@@ -19,7 +19,7 @@ import static android.content.ContentValues.TAG;
  * Created by asus on 2018/3/25.
  */
 
-public class TeaSignInReceiver extends BroadcastReceiver {
+public class JPushReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
