@@ -59,9 +59,20 @@ public class StuClassHomeworkFragment extends SBaseFragment implements View.OnCl
         if(!isPrepared || !isVisible) {
             return;
         }
-        if (stuHomeworkVpager.getAdapter() == null) {
-            stuHomeworkFragmentPagerAdapter = new StuHomeworkFragmentPagerAdapter(getChildFragmentManager());
-            stuHomeworkVpager.setAdapter(stuHomeworkFragmentPagerAdapter);
+//        if (stuHomeworkVpager.getAdapter() == null) {
+////            stuHomeworkFragmentPagerAdapter = new StuHomeworkFragmentPagerAdapter(getChildFragmentManager());
+//            stuHomeworkVpager.setAdapter(stuHomeworkFragmentPagerAdapter);
+//        } else {
+////            stuHomeworkVpager.setAdapter(stuHomeworkFragmentPagerAdapter);
+//            //调用的时候会出现mContext null
+////            stuHomeworkFragmentPagerAdapter.getStuHomeworkUnderwayFragment().setHomeworkList();
+////            stuHomeworkFragmentPagerAdapter.getStuHomeworkFinishFragment().setHomeworkList();
+//        }
+        stuHomeworkVpager.setAdapter(stuHomeworkFragmentPagerAdapter);
+        if (stuHomeworkVpager.getAdapter() != null) {
+            if (tvFinish.getCurrentTextColor() == getResources().getColor(R.color.classbottom)) {
+                tabFinish.callOnClick();
+            }
         }
     }
 
@@ -74,9 +85,8 @@ public class StuClassHomeworkFragment extends SBaseFragment implements View.OnCl
         tabFinish = (LinearLayout) currentPage.findViewById(R.id.ll_class_homework_finish);
         tvUnderway = (TextView) currentPage.findViewById(R.id.tv_class_homework_underway);
         tvFinish = (TextView) currentPage.findViewById(R.id.tv_class_homework_finish);
-//        stuHomeworkFragmentPagerAdapter = new StuHomeworkFragmentPagerAdapter(getChildFragmentManager());
+        stuHomeworkFragmentPagerAdapter = new StuHomeworkFragmentPagerAdapter(getChildFragmentManager());
         //设置tab颜色为进行中作业tab为选中状态
-        tvFinish.setTextColor(getResources().getColor(R.color.hinter));
         tvFinish.setTextColor(getResources().getColor(R.color.hinter));
     }
 

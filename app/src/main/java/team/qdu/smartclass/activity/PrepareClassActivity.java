@@ -159,15 +159,13 @@ public class PrepareClassActivity extends SBaseActivity {
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                         //MainUserFragment的刷新标志设为true，下次进入该页面将刷新
                         MainUserFragment.refreshFlag = true;
-                        finish();
                         if ("create".equals(getIntent().getStringExtra("do"))) {
-                            finish();
                             startActivity(new Intent(PrepareClassActivity.this, CreateClassActivity.class));
                         } else {
-                            finish();
                             startActivity(new Intent(PrepareClassActivity.this, JoinClassActivity.class));
                         }
                         LoadingDialogUtil.closeDialog();//关闭加载中动画
+                        finish();
                     }
 
             @Override

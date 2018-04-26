@@ -11,8 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import team.qdu.core.Lifeful;
 import team.qdu.smartclass.R;
 
 /**
@@ -24,9 +26,20 @@ import team.qdu.smartclass.R;
 
 public class LoadingDialogUtil {
 
-    private static List<Dialog> loadingDialogList = new ArrayList<>();
+    private static class DialogEnvironment {
+        private Dialog loadingDialog;
+        private Context context;
+
+        public DialogEnvironment(Dialog loadingDialog, Context context) {
+            this.loadingDialog = loadingDialog;
+            this.context = context;
+        }
+    }
+
+    private static List<DialogEnvironment> dialogEnvironmentList = new ArrayList<>();
 
     public static void createLoadingDialog(Context context, String msg) {
+        Date date = new Date();
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.dialog_loading, null);// 得到加载view
         LinearLayout layout = (LinearLayout) v
@@ -51,21 +64,28 @@ public class LoadingDialogUtil {
         window.setAttributes(lp);
         window.setWindowAnimations(R.style.PopWindowAnimStyle);
         loadingDialog.show();
-        loadingDialogList.add(loadingDialog);
+        System.out.println(new Date().getTime() - date.getTime());
+        dialogEnvironmentList.add(new DialogEnvironment(loadingDialog, context));
     }
 
     /**
      * 关闭dialog
      *
      * http://blog.csdn.net/qq_21376985
-     *
-     *
+     *note:Rock
+     *也可以用((ContextWrapper)dialog.getContext()).getBaseContext()获取Activity
      */
     public static void closeDialog() {
-        for (Dialog loadingDialog : loadingDialogList) {
-            if (loadingDialog != null && loadingDialog.isShowing()) {
-                loadingDialog.dismiss();
+//        for (DialogEnvironment dialogEnvironment : dialogEnvironmentList) {
+//            if (((Lifeful) dialogEnvironment.context).isAlive() && dialogEnvironment.loadingDialog != null && dialogEnvironment.loadingDialog.isShowing()) {
+//                dialogEnvironment.loadingDialog.dismiss();
+//            }
+//        }
+        for (int i = 0; i < dialogEnvironmentList.size(); i++) {
+            if (((Lifeful) dialogEnvironmentList.get(i).context).isAlive() && dialogEnvironmentList.get(i).loadingDialog != null && dialogEnvironmentList.get(i).loadingDialog.isShowing()) {
+                dialogEnvironmentList.get(i).loadingDialog.dismiss();
             }
+            dialogEnvironmentList.remove(i);
         }
     }
 

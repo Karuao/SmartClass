@@ -23,69 +23,134 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
-        <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name=".activity.StuClassMainActivity"></activity>
-        <activity android:name=".activity.TeaClassMainActivity"></activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.StuClassMainActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.TeaClassMainActivity"
+            android:launchMode="singleTop"></activity>
         <activity
             android:name=".activity.RegisterActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity
             android:name=".activity.RetrieveOneActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity
             android:name=".activity.RetrieveThreeActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity
             android:name=".activity.RetrieveTwoActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity
             android:name=".activity.ChangeInfoActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
-        <activity android:name=".activity.SetActivity"></activity>
+        <activity
+            android:name=".activity.SetActivity"
+            android:launchMode="singleTop"></activity>
         <activity
             android:name=".activity.CreateClassActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
-        <activity android:name=".activity.StuMemberSigninActivity"></activity>
-        <activity android:name=".activity.TeaMemberSigninActivity"></activity>
-        <activity android:name=".activity.TeaMemberSigniningActivity"></activity>
-        <activity android:name=".activity.TeaInformDetailActivity"></activity>
-        <activity android:name=".activity.StuInformDetailActivity"></activity>
+        <activity
+            android:name=".activity.StuMemberSigninActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.TeaMemberSigninActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.TeaMemberSigniningActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.TeaInformDetailActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.StuInformDetailActivity"
+            android:launchMode="singleTop"></activity>
         <activity
             android:name=".activity.CreateInformActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity
             android:name=".activity.JoinClassActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity
             android:name=".activity.PrepareClassActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
-        <activity android:name=".activity.CropActivity"></activity>
-        <activity android:name=".activity.ShowInviteCodeActivity"></activity>
-        <activity android:name=".activity.ShowSignInResultActivity"></activity>
-        <activity android:name=".activity.ShowExpDetailActivity"></activity>
-        <activity android:name=".activity.InformReadActivity"></activity>
-        <activity android:name=".activity.InformUnReadActivity"></activity>
-        <activity android:name=".activity.ConfirmJoinClassActivity"></activity>
+        <activity
+            android:name=".activity.CropActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.ShowInviteCodeActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.ShowSignInResultActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.ShowExpDetailActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.InformReadActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.InformUnReadActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.ConfirmJoinClassActivity"
+            android:launchMode="singleTop"></activity>
         <activity
             android:name=".activity.TeaPublishHomeworkActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
-        <activity android:name=".activity.ModifyClassActivity"></activity>
+        <activity
+            android:name=".activity.ModifyClassActivity"
+            android:launchMode="singleTop"></activity>
         <activity
             android:name=".activity.StuCommitHomeworkActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
-        <activity android:name=".activity.ShowPhotoActivity"></activity>
-        <activity android:name=".activity.TeaShowUnderwayHomeworkListActivity"></activity>
-        <activity android:name=".activity.TeaShowUnderwayHomeworkActivity"></activity>
-        <activity android:name=".activity.TeaShowEvaluatedHomeworkListActivity"></activity>
+        <activity
+            android:name=".activity.ShowPhotoActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.TeaShowUnderwayHomeworkListActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.TeaShowUnderwayHomeworkActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.TeaShowEvaluatedHomeworkListActivity"
+            android:launchMode="singleTop"></activity>
         <activity
             android:name=".activity.TeaEvaluateHomworkActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
-        <activity android:name=".activity.StuShowHomeworkActivity"></activity>
-        <activity android:name=".activity.TeaShowFinishedHomeworkListActivity"></activity>
-        <activity android:name=".activity.TeaShowFinishedHomeworkActivity"></activity>
-        <activity android:name=".activity.ShowMemberDetailActivity"></activity>
-        <activity android:name=".activity.LoadingActivity"></activity>
+        <activity
+            android:name=".activity.StuShowHomeworkActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.TeaShowFinishedHomeworkListActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.TeaShowFinishedHomeworkActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.ShowMemberDetailActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.LoadingActivity"
+            android:launchMode="singleTop"></activity>
 
         <receiver
             android:name=".adapter.JPushReceiver"
@@ -101,7 +166,7 @@
                 <category android:name="team.qdu.smartclass" />
             </intent-filter>
         </receiver>
-    </application>
 
+    </application>
 
 </manifest>

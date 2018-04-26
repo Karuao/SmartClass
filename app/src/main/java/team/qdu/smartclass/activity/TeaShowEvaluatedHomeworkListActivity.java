@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -55,6 +56,7 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
     private ImageView notEvaluateUnFoldedImg;
     private ImageView unCommitFoldedImg;
     private ImageView unCommitUnFoldedImg;
+    private Button finishHomeworkBtn;
     private String homeworkId;
     //作业标题
     private String homeworkTitle;
@@ -97,6 +99,7 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
         notEvaluateUnFoldedImg = (ImageView) findViewById(R.id.img_notevaluate_unfolded);
         unCommitFoldedImg = (ImageView) findViewById(R.id.img_uncommit_folded);
         unCommitUnFoldedImg = (ImageView) findViewById(R.id.img_uncommit_unfolded);
+        finishHomeworkBtn = (Button) findViewById(R.id.btn_homwork_finish);
         setData();
     }
 
@@ -167,6 +170,7 @@ public class TeaShowEvaluatedHomeworkListActivity extends SBaseActivity implemen
                 ListViewUtil.setListViewHeightBasedOnChildren(evaluateHomeworkList);
                 ListViewUtil.setListViewHeightBasedOnChildren(notEvaluateHomeworkList);
                 ListViewUtil.setListViewHeightBasedOnChildren(uncommitHomeworkList);
+                finishHomeworkBtn.setEnabled(true);
             }
 
             @Override

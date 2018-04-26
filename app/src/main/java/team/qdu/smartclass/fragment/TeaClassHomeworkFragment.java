@@ -74,11 +74,20 @@ public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnCl
         if (!isPrepared || !isVisible) {
             return;
         }
-        //只在移出后重加载
-        if (teaHomeworkVpager.getAdapter() == null) {
-            teaHomeworkFragmentPagerAdapter = new TeaHomeworkFragmentPagerAdapter(getChildFragmentManager());
-            teaHomeworkVpager.setAdapter(teaHomeworkFragmentPagerAdapter);
+        teaHomeworkVpager.setAdapter(teaHomeworkFragmentPagerAdapter);
+        if (teaHomeworkVpager.getAdapter() != null) {
+            if (tvFinish.getCurrentTextColor() == getResources().getColor(R.color.classbottom)) {
+                tabFinish.callOnClick();
+            }
         }
+        //只在移出后重加载
+//        if (teaHomeworkVpager.getAdapter() == null) {
+//            teaHomeworkFragmentPagerAdapter = new TeaHomeworkFragmentPagerAdapter(getChildFragmentManager());
+//            teaHomeworkVpager.setAdapter(teaHomeworkFragmentPagerAdapter);
+//        } else {
+////            teaHomeworkFragmentPagerAdapter.getTeaHomeworkUnderwayFragment().setHomeworkList();
+//            teaHomeworkFragmentPagerAdapter.getTeaHomeworkFinishFragment().setHomeworkList();
+//        }
 //        teaHomeworkVpager.setAdapter(null);
 //        teaHomeworkFragmentPagerAdapter.getTeaHomeworkUnderwayFragment();
 //        if (teaHomeworkFragmentPagerAdapter.getTeaHomeworkUnderwayFragment().isVisible == true) {
@@ -99,7 +108,7 @@ public class TeaClassHomeworkFragment extends SBaseFragment implements View.OnCl
         tabFinish = (LinearLayout) currentPage.findViewById(R.id.ll_class_homework_finish);
         tvUnderway = (TextView) currentPage.findViewById(R.id.tv_class_homework_underway);
         tvFinish = (TextView) currentPage.findViewById(R.id.tv_class_homework_finish);
-//        teaHomeworkFragmentPagerAdapter = new TeaHomeworkFragmentPagerAdapter(getChildFragmentManager());
+        teaHomeworkFragmentPagerAdapter = new TeaHomeworkFragmentPagerAdapter(getChildFragmentManager());
         //设置tab颜色为进行中作业tab为选中状态
         tvFinish.setTextColor(getResources().getColor(R.color.hinter));
     }

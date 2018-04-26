@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -47,6 +48,7 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
     private ImageView commitUnFoldedImg;
     private ImageView unCommitFoldedImg;
     private ImageView unCommitUnFoldedImg;
+    private Button homeworkToevaluateBtn;
     private HomeworkShowPhotoAdapter homeworkShowPhotoAdapter;
     private String homeworkId;
     //作业标题
@@ -73,6 +75,7 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
         commitUnFoldedImg = (ImageView) findViewById(R.id.img_commit_unfolded);
         unCommitFoldedImg = (ImageView) findViewById(R.id.img_uncommit_folded);
         unCommitUnFoldedImg = (ImageView) findViewById(R.id.img_uncommit_unfolded);
+        homeworkToevaluateBtn = (Button) findViewById(R.id.btn_homework_toevaluate);
         setData();
     }
 
@@ -99,6 +102,7 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
                 } else {
                     homeworkPhotoRlayout.setVisibility(View.GONE);
                 }
+                homeworkToevaluateBtn.setEnabled(true);
             }
 
             @Override

@@ -1,6 +1,7 @@
 package team.qdu.smartclass.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -93,9 +94,13 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener,
 
     //点击右上角加号显示或隐藏创建加入班课按钮
     public void toCreateList(View view) {
-        View contentView = LayoutInflater.from(MainActivity.this).inflate(R.layout.popup_addclass, null);
-        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        if (popupWindow == null) {
+            View contentView = LayoutInflater.from(MainActivity.this).inflate(R.layout.popup_addclass, null);
+            popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT, true);
+            popupWindow.setOutsideTouchable(true);
+            popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        }
         popupWindow.showAsDropDown(findViewById(R.id.llayout_addibtn));
     }
 

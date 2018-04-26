@@ -14,8 +14,6 @@ public class ClassUser implements Serializable {
 
     private String if_in_class;
 
-    private String if_new_material;
-
     private Integer unbrowse_material_num;
 
     private String if_new_homework;
@@ -75,20 +73,13 @@ public class ClassUser implements Serializable {
     public void setIf_in_class(String if_in_class) {
         this.if_in_class = if_in_class == null ? null : if_in_class.trim();
     }
+
     public Integer getUnbrowse_material_num() {
         return unbrowse_material_num;
     }
 
     public void setUnbrowse_material_num(Integer unbrowse_material_num) {
         this.unbrowse_material_num = unbrowse_material_num;
-    }
-
-    public String getIf_new_material() {
-        return if_new_material;
-    }
-
-    public void setIf_new_material(String if_new_material) {
-        this.if_new_material = if_new_material;
     }
 
     public String getIf_new_homework() {

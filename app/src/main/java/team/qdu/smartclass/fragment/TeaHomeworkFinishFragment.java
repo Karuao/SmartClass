@@ -14,8 +14,8 @@ import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.TeaShowFinishedHomeworkListActivity;
 import team.qdu.smartclass.activity.TeaClassMainActivity;
+import team.qdu.smartclass.activity.TeaShowFinishedHomeworkListActivity;
 import team.qdu.smartclass.adapter.TeaHomeworkFinishAdapter;
 
 /**

@@ -43,4 +43,12 @@ public class StuHomeworkFragmentPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return PAGER_COUNT;
     }
+
+    public StuHomeworkUnderwayFragment getStuHomeworkUnderwayFragment() {
+        return stuHomeworkUnderwayFragment;
+    }
+
+    public StuHomeworkFinishFragment getStuHomeworkFinishFragment() {
+        return stuHomeworkFinishFragment;
+    }
 }

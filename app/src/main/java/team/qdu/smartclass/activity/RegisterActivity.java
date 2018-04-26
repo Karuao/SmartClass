@@ -8,8 +8,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.net.URISyntaxException;
-
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.util.LoadingDialogUtil;
@@ -61,8 +59,8 @@ public class RegisterActivity extends SBaseActivity {
             @Override
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                finish();
                 LoadingDialogUtil.closeDialog();//关闭加载中动画
+                finish();
             }
 
             @Override

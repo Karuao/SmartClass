@@ -14,8 +14,8 @@ import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
-import team.qdu.smartclass.activity.TeaShowFinishedHomeworkActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
+import team.qdu.smartclass.activity.TeaShowFinishedHomeworkActivity;
 import team.qdu.smartclass.adapter.StuHomeworkFinishAdapter;
 
 /**
@@ -37,6 +37,7 @@ public class StuHomeworkFinishFragment extends SBaseFragment implements AdapterV
         initEvent();
 //        setHomeworkList();
         isPrepared = true;
+        lazyLoad();
         return currentPage;
     }
 

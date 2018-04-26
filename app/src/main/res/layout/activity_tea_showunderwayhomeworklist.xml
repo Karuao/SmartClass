@@ -228,11 +228,13 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/btn_homework_toevaluate"
                 android:layout_width="221dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:background="@drawable/shape_button"
+                android:enabled="false"
                 android:gravity="center"
                 android:onClick="toEvaluate"
                 android:padding="10dp"

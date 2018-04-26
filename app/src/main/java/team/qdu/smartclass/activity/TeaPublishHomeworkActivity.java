@@ -88,9 +88,9 @@ public class TeaPublishHomeworkActivity extends SBaseActivity implements Adapter
                     public void onSuccess(Void data, String message) {
                         Toast.makeText(TeaPublishHomeworkActivity.this, message, Toast.LENGTH_SHORT).show();
                         TeaHomeworkUnderwayFragment.refreshFlag = true;
-                        finish();
 //                        FileUtil.deleteCompressFiles(photoList);
                         LoadingDialogUtil.closeDialog();
+                        finish();
                     }
 
                     @Override

@@ -5,8 +5,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.net.URISyntaxException;
-
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.smartclass.R;
 import team.qdu.smartclass.fragment.TeaClassInformFragment;
@@ -41,8 +39,8 @@ public class CreateInformActivity extends SBaseActivity {
             public void onSuccess(Void data, String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 TeaClassInformFragment.refreshFlag = true;
-                finish();
                 LoadingDialogUtil.closeDialog();
+                finish();
             }
 
             @Override
