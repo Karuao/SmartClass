@@ -79,6 +79,10 @@ public class StuHomeworkFinishFragment extends SBaseFragment implements AdapterV
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if ("否".equals(((TextView) view.findViewById(R.id.txt_homeworkanswer_if_submit)).getText().toString())) {
+            Toast.makeText(getActivity(), "您未提交该作业", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String homeworkAnswerId = ((TextView) view.findViewById(R.id.txt_homework_finish_id)).getText().toString();
         Intent intent = new Intent(getParentFragment().getActivity(), TeaShowFinishedHomeworkActivity.class);
         intent.putExtra("homeworkAnswerId", homeworkAnswerId);

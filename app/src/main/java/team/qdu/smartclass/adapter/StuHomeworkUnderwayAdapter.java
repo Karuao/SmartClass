@@ -24,6 +24,7 @@ public class StuHomeworkUnderwayAdapter extends SBaseAdapter<HomeworkAnswerWithB
     //组合集合，对应listitem中的控件
     public final class Compo {
         public TextView homeworkAnswerIdTxt;
+        public TextView homeworkAnswerIfSubmitTxt;
         public TextView homeworkNameTxt;
         public TextView homeworkExpTxt;
         public TextView homeworkSubmitNumTxt;
@@ -38,6 +39,7 @@ public class StuHomeworkUnderwayAdapter extends SBaseAdapter<HomeworkAnswerWithB
             //获得组件，实例化组件
             convertView = layoutInflater.inflate(R.layout.class_homework_underway_listitem, null);
             compo.homeworkAnswerIdTxt = (TextView) convertView.findViewById(R.id.txt_homeworkanswer_underway_id);
+            compo.homeworkAnswerIfSubmitTxt = (TextView) convertView.findViewById(R.id.txt_homeworkanswer_if_submit);
             compo.homeworkNameTxt = (TextView) convertView.findViewById(R.id.txt_homework_title);
             compo.homeworkExpTxt = (TextView) convertView.findViewById(R.id.txt_homework_underway_exp);
             compo.homeworkSubmitNumTxt = (TextView) convertView.findViewById(R.id.txt_homework_underway_submitnum);
@@ -48,6 +50,7 @@ public class StuHomeworkUnderwayAdapter extends SBaseAdapter<HomeworkAnswerWithB
         }
         //绑定数据
         compo.homeworkAnswerIdTxt.setText(String.valueOf(itemList.get(position).getHomework_answer_id()));
+        compo.homeworkAnswerIfSubmitTxt.setText(itemList.get(position).getIf_submit());
         compo.homeworkNameTxt.setText(itemList.get(position).getHomework().getName());
         compo.homeworkExpTxt.setText(Integer.toString(itemList.get(position).getHomework().getExp()) + "经验");
         compo.homeworkSubmitNumTxt.setText(Integer.toString(itemList.get(position).getHomework().getSubmit_num()) + "人参与");

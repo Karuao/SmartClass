@@ -97,6 +97,10 @@ public class StuHomeworkUnderwayFragment extends SBaseFragment implements Adapte
         if ("进行中".equals(homeworkStatus)) {
             intent = new Intent(getParentFragment().getActivity(), StuCommitHomeworkActivity.class);
         } else {
+            if ("否".equals(((TextView) view.findViewById(R.id.txt_homeworkanswer_if_submit)).getText().toString())) {
+                Toast.makeText(getActivity(), "您未提交该作业", Toast.LENGTH_SHORT).show();
+                return;
+            }
             intent = new Intent(getParentFragment().getActivity(), StuShowHomeworkActivity.class);
         }
         intent.putExtra("homeworkAnswerId", homeworkAnswerId);

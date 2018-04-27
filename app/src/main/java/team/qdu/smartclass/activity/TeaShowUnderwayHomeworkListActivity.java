@@ -27,6 +27,7 @@ import team.qdu.smartclass.adapter.HomeworkUncommitAdapter;
 import team.qdu.smartclass.fragment.TeaHomeworkUnderwayFragment;
 import team.qdu.smartclass.util.ImgUtil;
 import team.qdu.smartclass.util.ListViewUtil;
+import team.qdu.smartclass.util.LoadingDialogUtil;
 import team.qdu.smartclass.view.HorizontalListView;
 
 /**
@@ -141,6 +142,7 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
 
     //开始评价点击事件
     public void toEvaluate(View view) {
+        LoadingDialogUtil.createLoadingDialog(this, "加载中...");
         AlertDialog alert;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         int uncommitStuNum = Integer.parseInt(uncommitStuNumTxt.getText().toString().substring(0, 1));
@@ -174,6 +176,7 @@ public class TeaShowUnderwayHomeworkListActivity extends SBaseActivity implement
                     }).create();
         }
         alert.show();
+        LoadingDialogUtil.closeDialog();
     }
 
     //折叠/展开学生ListView点击事件
