@@ -76,8 +76,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:paddingBottom="10dp"
-            android:text="反馈BUG请加群：\n        649561970"
-            android:textColor="@color/hinter"
+            android:text="反馈BUG请加QQ群：\n        649561970"
+            android:textColor="@color/text_black"
             android:textSize="13sp" />
 
     </RelativeLayout>

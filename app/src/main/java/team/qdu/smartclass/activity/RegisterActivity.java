@@ -77,12 +77,12 @@ public class RegisterActivity extends SBaseActivity {
     private void showProtocolDialog(){
         new AlertDialog.Builder(this)
                 .setTitle("用户注册协议")
-                .setMessage("1.在使用本系统的所有功能之前,请您务必仔细阅读并透彻理解本声明。您可以选择不使用本 系统,但如果您使用本系统,您的使用行为将被视为对本声明全部内容的认可。\n" +
+                .setMessage("1.感谢您使用学堂小助手APP\n如果发现bug请加QQ群6495619701.\n" +
                         "\n" +
-                        "2.关于隐私权:访问者在本系统注册时提供的一些个人资料,本系统除您本人同意外不 会将用户的任何资料以任何方式泄露给第三方。当政府部门、司法机关等依照法定程序要求 本系统披露个人资料时,本系统将根据执法单位之要求或为公共安全之目的提供个人资料, 在此情况下的披露,本系统不承担任何责任。\n"+
+                        "2.在使用本系统的所有功能之前,请您务必仔细阅读并透彻理解本声明。您可以选择不使用本 系统,但如果您使用本系统,您的使用行为将被视为对本声明全部内容的认可。\n"+
                         "\n"+
-                        "3.感谢您帮助我们测试学堂小助手APP\n如果发现bug请加群649561970")
-                .setNeutralButton("已同意",  new DialogInterface.OnClickListener(){
+                        "3.关于隐私权:访问者在本系统注册时提供的一些个人资料,本系统除您本人同意外不 会将用户的任何资料以任何方式泄露给第三方。当政府部门、司法机关等依照法定程序要求 本系统披露个人资料时,本系统将根据执法单位之要求或为公共安全之目的提供个人资料, 在此情况下的披露,本系统不承担任何责任。")
+                .setPositiveButton("已同意",  new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         checkEdt.setChecked(true);
