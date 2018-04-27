@@ -76,7 +76,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:paddingBottom="10dp"
-            android:text="联系我们：\n13744564464@qq.com"
+            android:text="反馈BUG请加群：\n        649561970"
             android:textColor="@color/hinter"
             android:textSize="13sp" />
 
