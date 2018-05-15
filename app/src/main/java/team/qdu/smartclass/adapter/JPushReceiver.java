@@ -10,6 +10,7 @@ import android.util.Log;
 
 import cn.jpush.android.api.JPushInterface;
 import team.qdu.smartclass.SApplication;
+import team.qdu.smartclass.activity.InitialActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
 import team.qdu.smartclass.activity.TeaMemberSigniningActivity;
 
@@ -59,8 +60,10 @@ public class JPushReceiver extends BroadcastReceiver {
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             System.out.println("用户点击打开了通知");
             // 在这里可以自己写代码去定义用户点击后的行为
-            Intent i = new Intent(context, TeaMemberSigniningActivity.class);  //自定义打开的界面
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent i = new Intent(context, InitialActivity.class);  //自定义打开的界面
+            i.addCategory(Intent.CATEGORY_LAUNCHER);
+            i.setAction(Intent.ACTION_MAIN);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
             context.startActivity(i);
         } else {
             Log.d(TAG, "Unhandled intent - " + intent.getAction());
