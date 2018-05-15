@@ -63,7 +63,7 @@ public class JPushReceiver extends BroadcastReceiver {
             Intent i = new Intent(context, InitialActivity.class);  //自定义打开的界面
             i.addCategory(Intent.CATEGORY_LAUNCHER);
             i.setAction(Intent.ACTION_MAIN);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
             context.startActivity(i);
         } else {
             Log.d(TAG, "Unhandled intent - " + intent.getAction());
