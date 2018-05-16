@@ -1,14 +1,21 @@
 package team.qdu.smartclass.adapter;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import cn.jpush.android.api.JPushInterface;
+import team.qdu.smartclass.R;
 import team.qdu.smartclass.SApplication;
 import team.qdu.smartclass.activity.InitialActivity;
 import team.qdu.smartclass.activity.StuClassMainActivity;
@@ -60,6 +67,19 @@ public class JPushReceiver extends BroadcastReceiver {
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             System.out.println("用户点击打开了通知");
             // 在这里可以自己写代码去定义用户点击后的行为
+//            Intent i = new Intent(Intent.ACTION_MAIN);
+//            i.addCategory(Intent.CATEGORY_LAUNCHER);
+//            i.setComponent(new ComponentName(context,InitialActivity.class));//用ComponentName得到class对象
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+//            PendingIntent contentIntent = PendingIntent.getActivity(context,0,i,0);//将经过设置了的Intent绑定给PendingIntent
+//            Notification notification = new Notification(R.drawable.ic_default_image,"hah",System.currentTimeMillis());
+//            notification.contentIntent = contentIntent;
+//            notification.flags = Notification.FLAG_AUTO_CANCEL;
+//            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+//            int NOTIFY_ID = (int)System.currentTimeMillis();
+//            notificationManager.notify(NOTIFY_ID,notification);
+
+
             Intent i = new Intent(context, InitialActivity.class);  //自定义打开的界面
             i.addCategory(Intent.CATEGORY_LAUNCHER);
             i.setAction(Intent.ACTION_MAIN);
