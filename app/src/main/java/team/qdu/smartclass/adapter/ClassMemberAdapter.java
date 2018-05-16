@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import team.qdu.core.ActionCallbackListener;
 import team.qdu.model.ClassUser;
@@ -24,14 +26,32 @@ import team.qdu.smartclass.activity.SBaseActivity;
 
 public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
 
-    int rank=1;
+    int rank = 1;
     int lastExp;
+    private List rankList = new ArrayList();
 
 
     public ClassMemberAdapter(Context context) {
         super(context);
     }
 
+    @Override
+    public void setItems(List<ClassUser> itemList){
+        for(int i = 0 ;i < itemList.size();i++ ){
+            if(i > 0) {
+                lastExp = itemList.get(i - 1).getExp();
+                if (itemList.get(i).getExp() == lastExp) {
+                    rankList.add(i,rank);
+                } else {
+                    rank++;
+                    rankList.add(i,rank);
+                }
+            }else if(i == 0){
+                rankList.add(i,rank);
+            }
+        }
+        super.setItems(itemList);
+    }
     /**
      * 组件集合，对应list.xml中的控件
      *
@@ -71,6 +91,7 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
             compo = (Compo) convertView.getTag();
         }
         //绑定数据
+        compo.userRank.setText(rankList.get(position).toString());
         compo.classMemberImg.setImageResource(R.mipmap.ic_useravatar_def);
         compo.userName.setText(itemList.get(position).getUser().getName());
         compo.userSno.setText(itemList.get(position).getUser().getSno());
@@ -78,17 +99,6 @@ public class ClassMemberAdapter extends SBaseAdapter<ClassUser> {
         compo.classUserId.setText(Integer.toString(itemList.get(position).getClass_user_id()));
         compo.memberAvatar.setText(itemList.get(position).getUser().getAvatar());
         compo.memberId.setText(itemList.get(position).getUser().getUser_id().toString());
-        if(position>0) {
-            lastExp = itemList.get(position - 1).getExp();
-            if (itemList.get(position).getExp() == lastExp) {
-                compo.userRank.setText(String.valueOf(rank));
-            } else {
-                rank++;
-                compo.userRank.setText(String.valueOf(rank));
-            }
-        }else if(position==0){
-            compo.userRank.setText(String.valueOf(rank));
-        }
         final Compo finalCompo = compo;
         //从服务器获取图片绑定到班课成员封面上
         if (!TextUtils.isEmpty(itemList.get(position).getUser().getAvatar())) {
